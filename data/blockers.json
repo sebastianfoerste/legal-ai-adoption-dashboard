@@ -78,5 +78,25 @@
     "affectedGroups": ["Litigation", "Corporate"],
     "reEngagementAction": "Run a mandatory 90-minute associate hands-on across both groups.",
     "workshopFollowUp": "Re-baseline with the adoption questionnaire after four weeks."
+  },
+  {
+    "id": "blk-009",
+    "accountId": "acct-004",
+    "category": "workflow_fit",
+    "severity": "low",
+    "status": "resolved",
+    "affectedGroups": ["Employment"],
+    "reEngagementAction": "Template the recurring employment-policy review as a saved workflow.",
+    "workshopFollowUp": "Confirm the saved workflow is in weekly use."
+  },
+  {
+    "id": "blk-010",
+    "accountId": "acct-005",
+    "category": "training_gap",
+    "severity": "low",
+    "status": "open",
+    "affectedGroups": ["Corporate"],
+    "reEngagementAction": "Offer a 60-minute refresher for the in-house Corporate team.",
+    "workshopFollowUp": "Re-check prompt usage two weeks after the refresher."
   }
 ]

@@ -88,5 +88,55 @@
     "productArea": "review",
     "severity": "low",
     "status": "shared_with_product"
+  },
+  {
+    "id": "fb-010",
+    "accountId": "acct-004",
+    "sourcePersona": "Innovation Lead",
+    "text": "Rolling out to the full litigation team next quarter; a usage-analytics export would help us plan it.",
+    "theme": "Adoption analytics",
+    "productArea": "admin",
+    "severity": "low",
+    "status": "shared_with_product"
+  },
+  {
+    "id": "fb-011",
+    "accountId": "acct-004",
+    "sourcePersona": "Associate",
+    "text": "Clause comparison across versions is what we use most; a redline export would close the loop.",
+    "theme": "Drafting workflow",
+    "productArea": "drafting",
+    "severity": "medium",
+    "status": "shared_with_product"
+  },
+  {
+    "id": "fb-012",
+    "accountId": "acct-004",
+    "sourcePersona": "Partner",
+    "text": "Confident enough in the grounded citations to use the output in front of clients now.",
+    "theme": "Trust and grounding",
+    "productArea": "review",
+    "severity": "low",
+    "status": "shared_with_product"
+  },
+  {
+    "id": "fb-013",
+    "accountId": "acct-005",
+    "sourcePersona": "In-house Counsel",
+    "text": "Needs German-language summaries by default, not English.",
+    "theme": "Localization",
+    "productArea": "drafting",
+    "severity": "medium",
+    "status": "triaged"
+  },
+  {
+    "id": "fb-014",
+    "accountId": "acct-005",
+    "sourcePersona": "Innovation Lead",
+    "text": "Integration with our document-management system would unlock daily use.",
+    "theme": "Integration depth",
+    "productArea": "integrations",
+    "severity": "high",
+    "status": "shared_with_product"
   }
 ]

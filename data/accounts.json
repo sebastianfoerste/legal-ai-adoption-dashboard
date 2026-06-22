@@ -55,5 +55,43 @@
       { "role": "PSL", "count": 3, "adoptionRate": 0.4 },
       { "role": "Innovation Lead", "count": 2, "adoptionRate": 0.5 }
     ]
+  },
+  {
+    "id": "acct-004",
+    "name": "Brightmoor & Associates LLP",
+    "type": "law_firm",
+    "seats": 60,
+    "activeUsers": 56,
+    "weeklyActiveUsers": [38, 44, 49, 53, 56],
+    "practiceGroups": [
+      { "name": "Corporate", "seats": 24, "activeUsers": 23, "weeklyActiveUsers": [16, 18, 20, 22, 23], "queriesPerWeek": 560 },
+      { "name": "Litigation", "seats": 20, "activeUsers": 19, "weeklyActiveUsers": [13, 15, 16, 18, 19], "queriesPerWeek": 410 },
+      { "name": "Employment", "seats": 16, "activeUsers": 14, "weeklyActiveUsers": [9, 11, 12, 13, 14], "queriesPerWeek": 230 }
+    ],
+    "personas": [
+      { "role": "Partner", "count": 12, "adoptionRate": 0.8 },
+      { "role": "Associate", "count": 40, "adoptionRate": 0.95 },
+      { "role": "PSL", "count": 6, "adoptionRate": 0.85 },
+      { "role": "Innovation Lead", "count": 2, "adoptionRate": 1.0 }
+    ]
+  },
+  {
+    "id": "acct-005",
+    "name": "Stadtwerke Aurich — Recht",
+    "type": "in_house",
+    "seats": 24,
+    "activeUsers": 16,
+    "weeklyActiveUsers": [11, 12, 13, 14, 16],
+    "practiceGroups": [
+      { "name": "Corporate", "seats": 10, "activeUsers": 7, "weeklyActiveUsers": [5, 5, 6, 6, 7], "queriesPerWeek": 90 },
+      { "name": "Employment", "seats": 8, "activeUsers": 5, "weeklyActiveUsers": [3, 4, 4, 5, 5], "queriesPerWeek": 60 },
+      { "name": "Litigation", "seats": 6, "activeUsers": 4, "weeklyActiveUsers": [3, 3, 3, 4, 4], "queriesPerWeek": 40 }
+    ],
+    "personas": [
+      { "role": "In-house Counsel", "count": 16, "adoptionRate": 0.6 },
+      { "role": "Innovation Lead", "count": 1, "adoptionRate": 1.0 },
+      { "role": "PSL", "count": 2, "adoptionRate": 0.5 },
+      { "role": "Associate", "count": 5, "adoptionRate": 0.6 }
+    ]
   }
 ]
