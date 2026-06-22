@@ -1,5 +1,7 @@
 import { getAccounts, getFeedback } from "@/lib/data";
 import { SeverityTag } from "@/components/SeverityTag";
+import { PageHeader } from "@/components/PageHeader";
+import { Card } from "@/components/Card";
 import type { FeedbackItem } from "@/lib/schema";
 
 const areaLabel: Record<FeedbackItem["productArea"], string> = {
@@ -55,12 +57,10 @@ export default function FeedbackPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-10">
-      <header className="mb-8">
-        <h1 className="text-2xl font-semibold tracking-tight">Product Feedback Queue</h1>
-        <p className="mt-1 text-sm text-gray-600">
-          User friction captured during adoption, routed to product areas — the view you hand to
-          Product and Engineering.
-        </p>
+      <PageHeader
+        title="Product Feedback Queue"
+        subtitle="User friction captured during adoption, routed to product areas — the view you hand to Product and Engineering."
+      >
         <div className="mt-4 flex flex-wrap gap-3 text-sm">
           {statusCounts.map(({ status, count }) => (
             <span key={status} className="rounded-lg border border-gray-200 px-3 py-1.5">
@@ -69,11 +69,11 @@ export default function FeedbackPage() {
             </span>
           ))}
         </div>
-      </header>
+      </PageHeader>
 
       <div className="space-y-6">
         {[...byArea.entries()].map(([area, items]) => (
-          <section key={area} className="rounded-xl border border-gray-200 p-6">
+          <Card key={area}>
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold">{areaLabel[area]}</h2>
               <span className="text-xs text-gray-400">{items.length} item(s)</span>
@@ -99,7 +99,7 @@ export default function FeedbackPage() {
                 </li>
               ))}
             </ul>
-          </section>
+          </Card>
         ))}
       </div>
     </main>

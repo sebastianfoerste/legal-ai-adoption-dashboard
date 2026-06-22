@@ -2,6 +2,8 @@ import { getAccounts, getBlockers } from "@/lib/data";
 import { accountHealth } from "@/lib/aggregate";
 import { HealthBadge } from "@/components/HealthBadge";
 import { SeverityTag } from "@/components/SeverityTag";
+import { PageHeader } from "@/components/PageHeader";
+import { Card } from "@/components/Card";
 import type { Blocker, Severity } from "@/lib/schema";
 
 const severityWeight: Record<Severity, number> = { low: 1, medium: 2, high: 3 };
@@ -39,13 +41,10 @@ export default function BlockersPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-10">
-      <header className="mb-8">
-        <h1 className="text-2xl font-semibold tracking-tight">Adoption Blockers</h1>
-        <p className="mt-1 text-sm text-gray-600">
-          Open blockers grouped by category, worst first, each with a re-engagement action and a
-          workshop follow-up.
-        </p>
-      </header>
+      <PageHeader
+        title="Adoption Blockers"
+        subtitle="Open blockers grouped by category, worst first, each with a re-engagement action and a workshop follow-up."
+      />
 
       {atRisk.length > 0 && (
         <section className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-5">
@@ -63,7 +62,7 @@ export default function BlockersPage() {
 
       <div className="space-y-6">
         {categories.map(([category, blockers]) => (
-          <section key={category} className="rounded-xl border border-gray-200 p-6">
+          <Card key={category}>
             <h2 className="text-lg font-semibold">{categoryLabel[category]}</h2>
             <ul className="mt-4 space-y-4">
               {blockers.map((b) => (
@@ -94,7 +93,7 @@ export default function BlockersPage() {
                 </li>
               ))}
             </ul>
-          </section>
+          </Card>
         ))}
       </div>
     </main>

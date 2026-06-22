@@ -4,6 +4,8 @@ import { portfolioSummary } from "@/lib/portfolio";
 import { computeHealth } from "@/lib/health";
 import { HealthBadge } from "@/components/HealthBadge";
 import { TrendBar } from "@/components/TrendBar";
+import { PageHeader } from "@/components/PageHeader";
+import { Card } from "@/components/Card";
 
 const pct = (n: number) => `${Math.round(n * 100)}%`;
 
@@ -31,12 +33,10 @@ export default function AccountHealthPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-10">
-      <header className="mb-10">
-        <h1 className="text-2xl font-semibold tracking-tight">Account Health</h1>
-        <p className="mt-1 text-sm text-gray-600">
-          Adoption, utilization, and expansion readiness across the legal-AI account portfolio.
-          All data is synthetic.
-        </p>
+      <PageHeader
+        title="Account Health"
+        subtitle="Adoption, utilization, and expansion readiness across the legal-AI account portfolio. All data is synthetic."
+      >
         <dl className="mt-6 grid gap-3 rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm sm:grid-cols-2">
           {prompts.map((p) => (
             <div key={p.q}>
@@ -45,7 +45,7 @@ export default function AccountHealthPage() {
             </div>
           ))}
         </dl>
-      </header>
+      </PageHeader>
 
       <section
         className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7"
@@ -64,7 +64,7 @@ export default function AccountHealthPage() {
           const health = accountHealth(account.id);
           const utilization = account.seats > 0 ? account.activeUsers / account.seats : 0;
           return (
-            <section key={account.id} className="rounded-xl border border-gray-200 p-6">
+            <Card key={account.id}>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h2 className="text-lg font-semibold">{account.name}</h2>
@@ -131,7 +131,7 @@ export default function AccountHealthPage() {
                   </tbody>
                 </table>
               </div>
-            </section>
+            </Card>
           );
         })}
       </div>
