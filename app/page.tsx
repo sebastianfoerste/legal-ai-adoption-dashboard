@@ -113,6 +113,7 @@ export default function AccountHealthPage() {
               <div className="mt-6">
                 <h3 className="text-sm font-medium text-gray-900">Persona adoption</h3>
                 <table className="mt-2 w-full text-sm">
+                  <caption className="sr-only">Persona adoption for {account.name}</caption>
                   <thead>
                     <tr className="text-left text-xs uppercase tracking-wide text-gray-400">
                       <th className="py-1 font-medium">Role</th>
