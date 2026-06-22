@@ -9,10 +9,17 @@ export interface HealthInput {
   feedbackTotal: number;
 }
 export type HealthBand = "at_risk" | "needs_attention" | "steady" | "healthy";
+export interface HealthBreakdown {
+  utilizationPts: number; // 0..50
+  trendPts: number; // 0..30
+  engagementPts: number; // 0..20
+  penalty: number; // 0..40
+}
 export interface HealthResult {
   score: number;
   band: HealthBand;
   expansionReady: boolean;
+  breakdown: HealthBreakdown;
 }
 
 const clamp = (x: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, x));
@@ -30,7 +37,10 @@ export function computeHealth(input: HealthInput): HealthResult {
       ? clamp(input.feedbackSharedWithProduct / input.feedbackTotal, 0, 1)
       : 0;
 
-  const base = 100 * (0.5 * utilization + 0.3 * trendNorm + 0.2 * engagement);
+  const utilizationPts = 100 * 0.5 * utilization;
+  const trendPts = 100 * 0.3 * trendNorm;
+  const engagementPts = 100 * 0.2 * engagement;
+  const base = utilizationPts + trendPts + engagementPts;
 
   const penalty = Math.min(
     40,
@@ -47,5 +57,10 @@ export function computeHealth(input: HealthInput): HealthResult {
 
   const expansionReady = band === "healthy" && utilization > 0.7 && rawTrend > 0;
 
-  return { score, band, expansionReady };
+  return {
+    score,
+    band,
+    expansionReady,
+    breakdown: { utilizationPts, trendPts, engagementPts, penalty },
+  };
 }

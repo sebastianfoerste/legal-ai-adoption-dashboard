@@ -42,4 +42,18 @@ describe("computeHealth", () => {
     expect(r.score).toBeGreaterThanOrEqual(0);
     expect(r.expansionReady).toBe(false);
   });
+
+  it("returns a component breakdown that reconstructs the score", () => {
+    const r = computeHealth({
+      seats: 50,
+      activeUsers: 45,
+      weeklyActiveUsers: [30, 32, 35, 40, 45],
+      openBlockers: [],
+      feedbackSharedWithProduct: 8,
+      feedbackTotal: 10,
+    });
+    const { utilizationPts, trendPts, engagementPts, penalty } = r.breakdown;
+    expect(Math.round(utilizationPts + trendPts + engagementPts - penalty)).toBe(r.score);
+    expect(utilizationPts).toBeCloseTo(45, 1); // 100 * 0.5 * 0.9
+  });
 });

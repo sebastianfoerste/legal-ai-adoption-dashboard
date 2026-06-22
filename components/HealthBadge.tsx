@@ -1,4 +1,4 @@
-import type { HealthResult } from "@/lib/health";
+import type { HealthBreakdown, HealthResult } from "@/lib/health";
 
 const bandStyles: Record<HealthResult["band"], string> = {
   at_risk: "bg-red-100 text-red-800 ring-red-300",
@@ -14,19 +14,33 @@ const bandLabel: Record<HealthResult["band"], string> = {
   healthy: "Healthy",
 };
 
-export function HealthBadge({ health }: { health: HealthResult }) {
+function caption(b: HealthBreakdown): string {
+  const r = Math.round;
+  return `util ${r(b.utilizationPts)} · trend ${r(b.trendPts)} · feedback ${r(b.engagementPts)} · −${r(b.penalty)} blockers`;
+}
+
+export function HealthBadge({
+  health,
+  breakdown,
+}: {
+  health: HealthResult;
+  breakdown?: HealthBreakdown;
+}) {
   return (
-    <span className="inline-flex items-center gap-2">
-      <span
-        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-sm font-medium ring-1 ring-inset ${bandStyles[health.band]}`}
-      >
-        {bandLabel[health.band]} · {health.score}
-      </span>
-      {health.expansionReady && (
-        <span className="inline-flex items-center rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-800 ring-1 ring-inset ring-violet-300">
-          Expansion-ready
+    <div className="flex flex-col items-end gap-1">
+      <span className="inline-flex items-center gap-2">
+        <span
+          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-sm font-medium ring-1 ring-inset ${bandStyles[health.band]}`}
+        >
+          {bandLabel[health.band]} · {health.score}
         </span>
-      )}
-    </span>
+        {health.expansionReady && (
+          <span className="inline-flex items-center rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-800 ring-1 ring-inset ring-violet-300">
+            Expansion-ready
+          </span>
+        )}
+      </span>
+      {breakdown && <span className="text-xs text-gray-400">{caption(breakdown)}</span>}
+    </div>
   );
 }

@@ -73,7 +73,7 @@ export default function AccountHealthPage() {
                     {account.activeUsers}/{account.seats} seats active ({pct(utilization)})
                   </p>
                 </div>
-                <HealthBadge health={health} />
+                <HealthBadge health={health} breakdown={health.breakdown} />
               </div>
 
               <div className="mt-4 flex items-center gap-6">
