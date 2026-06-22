@@ -1,5 +1,6 @@
 import { getAccounts } from "@/lib/data";
 import { accountHealth } from "@/lib/aggregate";
+import { portfolioSummary } from "@/lib/portfolio";
 import { computeHealth } from "@/lib/health";
 import { HealthBadge } from "@/components/HealthBadge";
 import { TrendBar } from "@/components/TrendBar";
@@ -16,6 +17,17 @@ const prompts: { q: string; a: string }[] = [
 
 export default function AccountHealthPage() {
   const accounts = getAccounts();
+  const summary = portfolioSummary();
+
+  const stats: { label: string; value: number; tone: string }[] = [
+    { label: "Accounts", value: summary.total, tone: "text-gray-900" },
+    { label: "At risk", value: summary.byBand.at_risk, tone: "text-red-700" },
+    { label: "Needs attention", value: summary.byBand.needs_attention, tone: "text-amber-700" },
+    { label: "Steady", value: summary.byBand.steady, tone: "text-sky-700" },
+    { label: "Healthy", value: summary.byBand.healthy, tone: "text-emerald-700" },
+    { label: "Expansion-ready", value: summary.expansionReady, tone: "text-violet-700" },
+    { label: "Open high-sev blockers", value: summary.openHighSeverityBlockers, tone: "text-red-700" },
+  ];
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-10">
@@ -34,6 +46,18 @@ export default function AccountHealthPage() {
           ))}
         </dl>
       </header>
+
+      <section
+        className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7"
+        aria-label="Portfolio overview"
+      >
+        {stats.map((s) => (
+          <div key={s.label} className="rounded-lg border border-gray-200 p-3 text-center">
+            <div className={`text-2xl font-semibold ${s.tone}`}>{s.value}</div>
+            <div className="mt-0.5 text-xs text-gray-500">{s.label}</div>
+          </div>
+        ))}
+      </section>
 
       <div className="space-y-8">
         {accounts.map((account) => {
