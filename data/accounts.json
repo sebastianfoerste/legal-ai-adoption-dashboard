@@ -1,0 +1,59 @@
+[
+  {
+    "id": "acct-001",
+    "name": "Meridian & Cole LLP",
+    "type": "law_firm",
+    "seats": 50,
+    "activeUsers": 45,
+    "weeklyActiveUsers": [30, 32, 35, 40, 45],
+    "practiceGroups": [
+      { "name": "Corporate", "seats": 18, "activeUsers": 17, "weeklyActiveUsers": [10, 12, 14, 16, 17], "queriesPerWeek": 420 },
+      { "name": "Finance", "seats": 14, "activeUsers": 12, "weeklyActiveUsers": [8, 9, 10, 11, 12], "queriesPerWeek": 260 },
+      { "name": "Litigation", "seats": 18, "activeUsers": 16, "weeklyActiveUsers": [12, 13, 14, 15, 16], "queriesPerWeek": 300 }
+    ],
+    "personas": [
+      { "role": "Partner", "count": 8, "adoptionRate": 0.5 },
+      { "role": "Associate", "count": 30, "adoptionRate": 0.9 },
+      { "role": "PSL", "count": 4, "adoptionRate": 0.75 },
+      { "role": "Innovation Lead", "count": 1, "adoptionRate": 1.0 }
+    ]
+  },
+  {
+    "id": "acct-002",
+    "name": "Hanseatic Industries — Legal",
+    "type": "in_house",
+    "seats": 30,
+    "activeUsers": 17,
+    "weeklyActiveUsers": [12, 14, 15, 16, 17],
+    "practiceGroups": [
+      { "name": "Corporate", "seats": 12, "activeUsers": 7, "weeklyActiveUsers": [5, 6, 6, 7, 7], "queriesPerWeek": 120 },
+      { "name": "Employment", "seats": 10, "activeUsers": 6, "weeklyActiveUsers": [4, 5, 5, 6, 6], "queriesPerWeek": 90 },
+      { "name": "Finance", "seats": 8, "activeUsers": 4, "weeklyActiveUsers": [3, 3, 4, 4, 4], "queriesPerWeek": 50 }
+    ],
+    "personas": [
+      { "role": "In-house Counsel", "count": 20, "adoptionRate": 0.6 },
+      { "role": "Innovation Lead", "count": 2, "adoptionRate": 0.8 },
+      { "role": "PSL", "count": 3, "adoptionRate": 0.5 },
+      { "role": "Associate", "count": 5, "adoptionRate": 0.7 }
+    ]
+  },
+  {
+    "id": "acct-003",
+    "name": "Ardent & Roe LLP",
+    "type": "law_firm",
+    "seats": 40,
+    "activeUsers": 8,
+    "weeklyActiveUsers": [20, 15, 12, 10, 8],
+    "practiceGroups": [
+      { "name": "Litigation", "seats": 20, "activeUsers": 5, "weeklyActiveUsers": [12, 9, 7, 6, 5], "queriesPerWeek": 80 },
+      { "name": "Corporate", "seats": 12, "activeUsers": 2, "weeklyActiveUsers": [6, 4, 3, 2, 2], "queriesPerWeek": 30 },
+      { "name": "Employment", "seats": 8, "activeUsers": 1, "weeklyActiveUsers": [2, 2, 1, 1, 1], "queriesPerWeek": 10 }
+    ],
+    "personas": [
+      { "role": "Partner", "count": 10, "adoptionRate": 0.2 },
+      { "role": "Associate", "count": 25, "adoptionRate": 0.3 },
+      { "role": "PSL", "count": 3, "adoptionRate": 0.4 },
+      { "role": "Innovation Lead", "count": 2, "adoptionRate": 0.5 }
+    ]
+  }
+]

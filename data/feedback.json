@@ -1,0 +1,92 @@
+[
+  {
+    "id": "fb-001",
+    "accountId": "acct-001",
+    "sourcePersona": "Associate",
+    "text": "Clause extraction misses cross-referenced definitions in long SPAs.",
+    "theme": "Citation and context handling",
+    "productArea": "review",
+    "severity": "high",
+    "status": "shared_with_product"
+  },
+  {
+    "id": "fb-002",
+    "accountId": "acct-001",
+    "sourcePersona": "PSL",
+    "text": "Would like the firm's own precedent library surfaced inline during drafting.",
+    "theme": "Knowledge reuse",
+    "productArea": "knowledge",
+    "severity": "medium",
+    "status": "triaged"
+  },
+  {
+    "id": "fb-003",
+    "accountId": "acct-001",
+    "sourcePersona": "Innovation Lead",
+    "text": "A usage-analytics export would make our quarterly business reviews far easier.",
+    "theme": "Adoption analytics",
+    "productArea": "admin",
+    "severity": "low",
+    "status": "shared_with_product"
+  },
+  {
+    "id": "fb-004",
+    "accountId": "acct-002",
+    "sourcePersona": "In-house Counsel",
+    "text": "DPA review needs to be tuned to GDPR, not US privacy frameworks.",
+    "theme": "Jurisdiction fit",
+    "productArea": "review",
+    "severity": "high",
+    "status": "triaged"
+  },
+  {
+    "id": "fb-005",
+    "accountId": "acct-002",
+    "sourcePersona": "In-house Counsel",
+    "text": "Drafting tone is too US-style for German-law contracts.",
+    "theme": "Localization",
+    "productArea": "drafting",
+    "severity": "medium",
+    "status": "new"
+  },
+  {
+    "id": "fb-006",
+    "accountId": "acct-002",
+    "sourcePersona": "Innovation Lead",
+    "text": "The document-management integration is the blocker to daily use.",
+    "theme": "Integration depth",
+    "productArea": "integrations",
+    "severity": "high",
+    "status": "shared_with_product"
+  },
+  {
+    "id": "fb-007",
+    "accountId": "acct-003",
+    "sourcePersona": "Partner",
+    "text": "I will not rely on output unless I can see the source it came from.",
+    "theme": "Trust and grounding",
+    "productArea": "review",
+    "severity": "high",
+    "status": "triaged"
+  },
+  {
+    "id": "fb-008",
+    "accountId": "acct-003",
+    "sourcePersona": "Associate",
+    "text": "Research answers need pinpoint citations to be usable in a memo.",
+    "theme": "Research grounding",
+    "productArea": "research",
+    "severity": "high",
+    "status": "new"
+  },
+  {
+    "id": "fb-009",
+    "accountId": "acct-001",
+    "sourcePersona": "Associate",
+    "text": "Faster turnaround on a first-pass NDA review would save real time.",
+    "theme": "Speed to first draft",
+    "productArea": "review",
+    "severity": "low",
+    "status": "shared_with_product"
+  }
+]

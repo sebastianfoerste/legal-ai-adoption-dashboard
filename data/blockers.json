@@ -1,0 +1,82 @@
+[
+  {
+    "id": "blk-001",
+    "accountId": "acct-001",
+    "category": "training_gap",
+    "severity": "medium",
+    "status": "open",
+    "affectedGroups": ["Corporate"],
+    "reEngagementAction": "Schedule a 90-minute associate hands-on session for the Corporate group.",
+    "workshopFollowUp": "Re-check prompt-library adoption two weeks after the session."
+  },
+  {
+    "id": "blk-002",
+    "accountId": "acct-001",
+    "category": "workflow_fit",
+    "severity": "low",
+    "status": "resolved",
+    "affectedGroups": ["Finance"],
+    "reEngagementAction": "Map the recurring credit-agreement review into a saved workflow.",
+    "workshopFollowUp": "Confirm the saved workflow is in weekly use."
+  },
+  {
+    "id": "blk-003",
+    "accountId": "acct-002",
+    "category": "trust_in_output",
+    "severity": "high",
+    "status": "open",
+    "affectedGroups": ["Corporate", "Employment"],
+    "reEngagementAction": "Run a citation-verification clinic with the practice leads.",
+    "workshopFollowUp": "Share the hallucination-check results from the associate session."
+  },
+  {
+    "id": "blk-004",
+    "accountId": "acct-002",
+    "category": "integration",
+    "severity": "medium",
+    "status": "in_progress",
+    "affectedGroups": ["Finance"],
+    "reEngagementAction": "Prioritize the document-management connector pilot.",
+    "workshopFollowUp": "Demo document-context retrieval in the next session."
+  },
+  {
+    "id": "blk-005",
+    "accountId": "acct-002",
+    "category": "change_management",
+    "severity": "medium",
+    "status": "open",
+    "affectedGroups": ["Corporate"],
+    "reEngagementAction": "Secure a senior sponsor to mandate the rollout.",
+    "workshopFollowUp": "Deliver a leadership briefing on leverage economics."
+  },
+  {
+    "id": "blk-006",
+    "accountId": "acct-003",
+    "category": "trust_in_output",
+    "severity": "high",
+    "status": "open",
+    "affectedGroups": ["Litigation"],
+    "reEngagementAction": "Pair skeptical partners with the Innovation Lead for supervised use.",
+    "workshopFollowUp": "Re-run the 30-minute partner briefing focused on review gates."
+  },
+  {
+    "id": "blk-007",
+    "accountId": "acct-003",
+    "category": "pricing_value",
+    "severity": "high",
+    "status": "open",
+    "affectedGroups": ["Corporate", "Employment"],
+    "reEngagementAction": "Build a utilization-versus-cost view for the managing partner.",
+    "workshopFollowUp": "Workshop mapping high-frequency tasks to concrete use cases."
+  },
+  {
+    "id": "blk-008",
+    "accountId": "acct-003",
+    "category": "training_gap",
+    "severity": "medium",
+    "status": "open",
+    "affectedGroups": ["Litigation", "Corporate"],
+    "reEngagementAction": "Run a mandatory 90-minute associate hands-on across both groups.",
+    "workshopFollowUp": "Re-baseline with the adoption questionnaire after four weeks."
+  }
+]
