@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Legal AI Adoption Dashboard
 
-## Getting Started
+A mock dashboard for steering legal-AI adoption inside a law firm or in-house team.
+It shows how a Customer Success Manager, Legal Engineer, or Innovation lead watches
+adoption, catches accounts before they stall, and turns user friction into product
+feedback. All data is synthetic.
 
-First, run the development server:
+> **What workflow does this improve?** Post-sales adoption of legal AI across a firm or in-house team.
+> **Who is the user?** CSMs, Legal Engineers, and Innovation leads steering an account.
+> **Where does human review happen?** The product gates every output behind a named lawyer. This dashboard tracks adoption, not output.
+> **What is blocked until approval?** Expansion and renewal moves are surfaced as signals, never auto-actioned.
+> **What would I tell Product?** See the Product Feedback Queue — friction routed to product areas.
+
+## Problem
+
+A legal-AI rollout does not fail at the demo. It fails three months later, when two
+practice groups quietly stop logging in and nobody notices until renewal. The work of
+adoption — spotting the dip, naming the blocker, scheduling the right workshop, routing
+the right feedback to Product — has no home. This dashboard is that home.
+
+## Target user
+
+A Legal Engineer or CSM who owns a portfolio of firm and in-house accounts and is
+measured on utilization, expansion, and renewal — not on shipping code.
+
+## What this proves
+
+- I model adoption as data: a health score over utilization, trend, blockers, and feedback engagement.
+- I think in re-engagement, not dashboards for their own sake: every blocker carries an action and a workshop follow-up.
+- I translate user friction into product requirements: the feedback queue is the artifact you hand to Product and Engineering.
+- I keep the human-review gate explicit: this tracks adoption of a reviewed product, never autonomous legal advice.
+
+## Demo path
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # http://localhost:3000
+pnpm test         # the adoption health score and data layer are unit-tested
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Three pages:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Account Health** (`/`) — health score per account and practice group, persona adoption, weekly-active trend.
+2. **Adoption Blockers** (`/blockers`) — open blockers by category, worst first, each with a re-engagement action and a workshop follow-up.
+3. **Product Feedback Queue** (`/feedback`) — user friction routed to product areas, with a triage pipeline.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Screenshots
 
-## Learn More
+**Account Health**
 
-To learn more about Next.js, take a look at the following resources:
+![Account Health](docs/screenshots/account-health.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Adoption Blockers**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![Adoption Blockers](docs/screenshots/blockers.png)
 
-## Deploy on Vercel
+**Product Feedback Queue**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Product Feedback Queue](docs/screenshots/feedback.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Synthetic data statement
+
+Every record in `data/` is synthetic and exists only for demonstration. No real client,
+firm, or in-house team is represented; account names are invented. No personal data.
+See [`data/README.md`](data/README.md).
+
+## How a Legal Engineer would use this in a customer meeting
+
+Open Account Health at the start of a quarterly review. The account sits at "Steady · 77"
+with one open training-gap blocker in Corporate. You pull up Adoption Blockers, point to
+the re-engagement action already attached — a 90-minute associate hands-on — and book it
+on the spot. Then you open the Feedback Queue, show the partner that their associates'
+complaint about cross-referenced definitions is already "Shared with Product," and use
+that to make the renewal conversation about momentum instead of price.
+
+## Limitations
+
+- The health score is a deliberately simple, transparent formula (see `lib/health.ts`), not a tuned model.
+- Practice-group health uses utilization and trend only; it has no group-level feedback signal, so a group never reads "healthy."
+- Data is static JSON. There is no persistence, auth, or multi-tenancy — this is an MVP that demonstrates the workflow, not a product.
+
+## Stack
+
+Next.js (App Router, Server Components), TypeScript (strict), Tailwind, Zod for data
+validation, Vitest for the logic tests.
