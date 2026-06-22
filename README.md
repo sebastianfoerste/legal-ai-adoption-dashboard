@@ -28,6 +28,7 @@ measured on utilization, expansion, and renewal — not on shipping code.
 - I model adoption as data: a health score over utilization, trend, blockers, and feedback engagement.
 - I think in re-engagement, not dashboards for their own sake: every blocker carries an action and a workshop follow-up.
 - I translate user friction into product requirements: the feedback queue is the artifact you hand to Product and Engineering.
+- I make health legible: a portfolio overview strip for triage, and a per-account breakdown showing exactly what drives each score.
 - I keep the human-review gate explicit: this tracks adoption of a reviewed product, never autonomous legal advice.
 
 ## Demo path
@@ -40,7 +41,7 @@ pnpm test         # the adoption health score and data layer are unit-tested
 
 Three pages:
 
-1. **Account Health** (`/`) — health score per account and practice group, persona adoption, weekly-active trend.
+1. **Account Health** (`/`) — a portfolio overview strip (accounts by band, expansion-ready, open high-severity blockers), then per-account health with a score breakdown, practice groups, persona adoption, and the weekly-active trend.
 2. **Adoption Blockers** (`/blockers`) — open blockers by category, worst first, each with a re-engagement action and a workshop follow-up.
 3. **Product Feedback Queue** (`/feedback`) — user friction routed to product areas, with a triage pipeline.
 
@@ -71,7 +72,9 @@ with one open training-gap blocker in Corporate. You pull up Adoption Blockers, 
 the re-engagement action already attached — a 90-minute associate hands-on — and book it
 on the spot. Then you open the Feedback Queue, show the partner that their associates'
 complaint about cross-referenced definitions is already "Shared with Product," and use
-that to make the renewal conversation about momentum instead of price.
+that to make the renewal conversation about momentum instead of price. The overview strip
+up top flags that one account in the book is already expansion-ready — that is the one you
+build the upsell around this quarter.
 
 ## Limitations
 
