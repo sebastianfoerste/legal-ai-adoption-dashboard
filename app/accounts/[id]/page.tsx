@@ -173,7 +173,7 @@ export default async function AccountDetailPage({ params }: { params: Promise<{ 
                       <SeverityTag severity={f.severity} />
                     </div>
                     <blockquote className="mt-2 border-l-2 border-gray-200 pl-3 italic text-sm text-gray-600">
-                      "{f.text}"
+                      &ldquo;{f.text}&rdquo;
                     </blockquote>
                     <div className="mt-3 flex items-center justify-between text-xs text-gray-400">
                       <span>Product Area: <span className="capitalize">{f.productArea}</span></span>
