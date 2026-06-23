@@ -1,53 +1,27 @@
-# Case Study: Legal AI Adoption Dashboard
+# Case study — legal-ai-adoption-dashboard
 
-## Legal problem
+> Legal AI succeeds or fails on adoption after the demo, not on the demo. Synthetic data only; not legal advice.
 
-Legal AI rollouts often lose momentum after the first demo. Legal teams need visibility into usage patterns, blockers, feedback and workflow fit.
+## Problem
+Most legal AI rollouts die quietly. The pilot demos well, a few enthusiasts use it, and three months later usage has decayed and no one can say why. The gap is not the model — it is the absence of an adoption feedback loop: who is using it, which practice groups have stalled, which accounts are at renewal risk, and what users actually asked for.
 
-## Product problem
+## Users
+A customer success lead, innovation partner, or legal-AI vendor's post-sales team who owns the question: *are sophisticated lawyers actually using this every week?*
 
-A product team needs to know whether users are applying the tool in real legal workflows, where they stop and what support would make the product more useful.
+## Workflow
+1. Usage and engagement signals are ingested (synthetic) per account and practice group.
+2. The dashboard surfaces **account health**, **practice-group usage**, **low-usage warnings**, and **renewal-risk** signals.
+3. A **product-feedback loop** classifies what users asked for by severity and revenue impact.
+4. The output is a weekly **customer-success memo** and a prioritised product-feedback list.
 
-## Workflow design
+## Controls
+Adoption is measured by *reviewer-accepted* and *active-use* signals, not raw logins — usage that doesn't reflect real value is flagged, not celebrated. Feedback is mapped from user pain to a product requirement so the loop is traceable.
 
-The dashboard tracks synthetic usage, adoption blockers, feedback, follow up actions and product signals.
+## Evaluation
+The bundled view turns a set of synthetic accounts into a ranked **adoption-risk** list, a renewal-risk memo, and a "what we heard / what we changed" product note — i.e. a demo turned into a weekly operating rhythm.
 
-The intended workflow is:
+## Limitations
+Data is synthetic and the signal model is illustrative; it is not wired to a real product-analytics backend, and the thresholds for "at risk" should be calibrated against real cohorts.
 
-1. Review usage and blocker signals
-2. Identify matters or teams that need follow up
-3. Capture feedback themes
-4. Prioritise enablement or product improvements
-5. Revisit whether the workflow actually fits legal practice
-
-## AI risk addressed
-
-The project focuses on adoption risk and trust risk:
-
-1. Low use after rollout
-2. Unclear workflow fit
-3. Hidden user objections
-4. Missing feedback loops
-5. Over reliance on demos instead of sustained enablement
-
-## Human review model
-
-The dashboard helps humans decide where to intervene. It does not decide legal outcomes and it does not replace legal judgment.
-
-## Evaluation or quality control
-
-Quality is measured by whether signals are structured enough to guide useful action: follow up, training, workflow redesign or product improvement.
-
-## What I would improve next
-
-1. Add screenshots to the README
-2. Add a short demo GIF
-3. Add more synthetic adoption scenarios
-4. Add feedback categorisation
-5. Add a practical re engagement playbook
-
-## Relevance for Legal Engineer / Product Specialist roles
-
-This project demonstrates product thinking around legal AI implementation, not only technical implementation.
-
-It is relevant for roles that combine legal expertise, product adoption, customer conversations, workflow design and feedback loops.
+## Next steps
+Connect to real usage telemetry; add cohort baselines and time-to-habit metrics; close the loop by pushing classified feedback into a product backlog and tracking what shipped.

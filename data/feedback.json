@@ -138,5 +138,25 @@
     "productArea": "integrations",
     "severity": "high",
     "status": "shared_with_product"
+  },
+  {
+    "id": "fb-gen-20260623_003235-1",
+    "accountId": "acct-001",
+    "sourcePersona": "Associate",
+    "text": "The contract review model draft for the NDA review generated 1 ungrounded citation(s) and had a citation grounding rate of 80%. Manual verification effort was significant.",
+    "theme": "Citation Grounding & Hallucination Gate",
+    "productArea": "review",
+    "severity": "high",
+    "status": "new"
+  },
+  {
+    "id": "fb-gen-20260623_003235-2",
+    "accountId": "acct-002",
+    "sourcePersona": "Associate",
+    "text": "The contract review model draft for the SAAS review generated 1 ungrounded citation(s) and had a citation grounding rate of 80%. Manual verification effort was significant.",
+    "theme": "Citation Grounding & Hallucination Gate",
+    "productArea": "review",
+    "severity": "high",
+    "status": "new"
   }
 ]

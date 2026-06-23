@@ -56,4 +56,35 @@ describe("computeHealth", () => {
     expect(Math.round(utilizationPts + trendPts + engagementPts - penalty)).toBe(r.score);
     expect(utilizationPts).toBeCloseTo(45, 1); // 100 * 0.5 * 0.9
   });
+
+  it("applies custom configuration weights and penalties correctly", () => {
+    const customConfig = {
+      weights: {
+        utilization: 1.0,
+        trend: 0.0,
+        engagement: 0.0
+      },
+      penalties: {
+        highBlocker: 5,
+        mediumBlocker: 2,
+        lowBlocker: 0,
+        maxPenalty: 10
+      }
+    };
+    const r = computeHealth({
+      seats: 50,
+      activeUsers: 45, // 90% utilization
+      weeklyActiveUsers: [30, 20], // downward trend, but trend weight is 0
+      openBlockers: ["high", "medium"], // high (5) + medium (2) = 7 penalty
+      feedbackSharedWithProduct: 0,
+      feedbackTotal: 0
+    }, customConfig);
+
+    // 100 * 1.0 * 0.9 = 90 base score
+    // 90 - 7 = 83 final score
+    expect(r.score).toBe(83);
+    expect(r.breakdown.utilizationPts).toBe(90);
+    expect(r.breakdown.trendPts).toBe(0);
+    expect(r.breakdown.penalty).toBe(7);
+  });
 });

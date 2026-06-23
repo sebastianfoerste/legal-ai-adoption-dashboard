@@ -1,0 +1,13 @@
+{
+  "weights": {
+    "utilization": 0.50,
+    "trend": 0.30,
+    "engagement": 0.20
+  },
+  "penalties": {
+    "highBlocker": 12,
+    "mediumBlocker": 6,
+    "lowBlocker": 2,
+    "maxPenalty": 40
+  }
+}

@@ -28,6 +28,8 @@ export const accountSchema = z.object({
   weeklyActiveUsers: z.array(z.number().int().nonnegative()).min(2),
   practiceGroups: z.array(practiceGroupSchema),
   personas: z.array(personaSchema),
+  renewalDate: z.string(),
+  previousHealthScore: z.number().int().min(0).max(100),
 });
 export type Account = z.infer<typeof accountSchema>;
 

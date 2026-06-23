@@ -1,9 +1,14 @@
 # Legal AI Adoption Dashboard
 
+See [CASE_STUDY.md](CASE_STUDY.md) for the problem, controls, and limitations.
+
 A mock dashboard for steering legal-AI adoption inside a law firm or in-house team.
 It shows how a Customer Success Manager, Legal Engineer, or Innovation lead watches
 adoption, catches accounts before they stall, and turns user friction into product
 feedback. All data is synthetic.
+
+**Live Application:** [legal-ai-adoption-dashboard.vercel.app](https://legal-ai-adoption-dashboard.vercel.app)
+
 
 > **What workflow does this improve?** Post-sales adoption of legal AI across a firm or in-house team.
 > **Who is the user?** CSMs, Legal Engineers, and Innovation leads steering an account.

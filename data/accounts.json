@@ -16,7 +16,9 @@
       { "role": "Associate", "count": 30, "adoptionRate": 0.9 },
       { "role": "PSL", "count": 4, "adoptionRate": 0.75 },
       { "role": "Innovation Lead", "count": 1, "adoptionRate": 1.0 }
-    ]
+    ],
+    "renewalDate": "2027-02-15",
+    "previousHealthScore": 80
   },
   {
     "id": "acct-002",
@@ -35,7 +37,9 @@
       { "role": "Innovation Lead", "count": 2, "adoptionRate": 0.8 },
       { "role": "PSL", "count": 3, "adoptionRate": 0.5 },
       { "role": "Associate", "count": 5, "adoptionRate": 0.7 }
-    ]
+    ],
+    "renewalDate": "2026-11-01",
+    "previousHealthScore": 58
   },
   {
     "id": "acct-003",
@@ -54,7 +58,9 @@
       { "role": "Associate", "count": 25, "adoptionRate": 0.3 },
       { "role": "PSL", "count": 3, "adoptionRate": 0.4 },
       { "role": "Innovation Lead", "count": 2, "adoptionRate": 0.5 }
-    ]
+    ],
+    "renewalDate": "2026-08-30",
+    "previousHealthScore": 25
   },
   {
     "id": "acct-004",
@@ -73,7 +79,9 @@
       { "role": "Associate", "count": 40, "adoptionRate": 0.95 },
       { "role": "PSL", "count": 6, "adoptionRate": 0.85 },
       { "role": "Innovation Lead", "count": 2, "adoptionRate": 1.0 }
-    ]
+    ],
+    "renewalDate": "2027-04-10",
+    "previousHealthScore": 90
   },
   {
     "id": "acct-005",
@@ -92,6 +100,8 @@
       { "role": "Innovation Lead", "count": 1, "adoptionRate": 1.0 },
       { "role": "PSL", "count": 2, "adoptionRate": 0.5 },
       { "role": "Associate", "count": 5, "adoptionRate": 0.6 }
-    ]
+    ],
+    "renewalDate": "2026-12-15",
+    "previousHealthScore": 71
   }
 ]

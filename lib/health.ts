@@ -1,4 +1,5 @@
 import type { Severity } from "./schema";
+import healthConfig from "../data/health-config.json";
 
 export interface HealthInput {
   seats: number;
@@ -10,10 +11,10 @@ export interface HealthInput {
 }
 export type HealthBand = "at_risk" | "needs_attention" | "steady" | "healthy";
 export interface HealthBreakdown {
-  utilizationPts: number; // 0..50
-  trendPts: number; // 0..30
-  engagementPts: number; // 0..20
-  penalty: number; // 0..40
+  utilizationPts: number; // 0..100 * weight
+  trendPts: number; // 0..100 * weight
+  engagementPts: number; // 0..100 * weight
+  penalty: number; // 0..maxPenalty
 }
 export interface HealthResult {
   score: number;
@@ -24,7 +25,7 @@ export interface HealthResult {
 
 const clamp = (x: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, x));
 
-export function computeHealth(input: HealthInput): HealthResult {
+export function computeHealth(input: HealthInput, config = healthConfig): HealthResult {
   const utilization = input.seats > 0 ? clamp(input.activeUsers / input.seats, 0, 1) : 0;
 
   const first = input.weeklyActiveUsers[0] ?? 0;
@@ -37,15 +38,18 @@ export function computeHealth(input: HealthInput): HealthResult {
       ? clamp(input.feedbackSharedWithProduct / input.feedbackTotal, 0, 1)
       : 0;
 
-  const utilizationPts = 100 * 0.5 * utilization;
-  const trendPts = 100 * 0.3 * trendNorm;
-  const engagementPts = 100 * 0.2 * engagement;
+  const w = config.weights;
+  const utilizationPts = 100 * w.utilization * utilization;
+  const trendPts = 100 * w.trend * trendNorm;
+  const engagementPts = 100 * w.engagement * engagement;
   const base = utilizationPts + trendPts + engagementPts;
 
+  const p = config.penalties;
   const penalty = Math.min(
-    40,
+    p.maxPenalty,
     input.openBlockers.reduce(
-      (sum, s) => sum + (s === "high" ? 12 : s === "medium" ? 6 : 2),
+      (sum, s) =>
+        sum + (s === "high" ? p.highBlocker : s === "medium" ? p.mediumBlocker : p.lowBlocker),
       0,
     ),
   );
