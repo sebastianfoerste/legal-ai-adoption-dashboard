@@ -2,6 +2,8 @@
 
 See [CASE_STUDY.md](CASE_STUDY.md) for the problem, controls, and limitations.
 
+![demo](docs/demo.png)
+
 A mock dashboard for steering legal-AI adoption inside a law firm or in-house team.
 It shows how a Customer Success Manager, Legal Engineer, or Innovation lead watches
 adoption, catches accounts before they stall, and turns user friction into product
