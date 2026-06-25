@@ -9,7 +9,9 @@ It shows how a Customer Success Manager, Legal Engineer, or Innovation lead watc
 adoption, catches accounts before they stall, and turns user friction into product
 feedback. All data is synthetic.
 
-**Run locally:** `pnpm install && pnpm dev`. This is a local-first MVP with no hosted deployment.
+**Live app:** https://legal-ai-adoption-dashboard.vercel.app
+
+**Run locally:** `pnpm install && pnpm dev`.
 
 
 > **What workflow does this improve?** Post-sales adoption of legal AI across a firm or in-house team.
