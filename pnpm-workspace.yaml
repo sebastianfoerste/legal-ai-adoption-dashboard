@@ -4,5 +4,14 @@
 packages:
   - "."
 
+# sharp and unrs-resolver ship prebuilt binaries; their postinstall scripts are not needed.
+# allowBuilds is the pnpm 11 form; ignoredBuiltDependencies keeps older installs quiet.
+allowBuilds:
+  sharp: false
+  unrs-resolver: false
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
+
 overrides:
   postcss: '>=8.5.10'

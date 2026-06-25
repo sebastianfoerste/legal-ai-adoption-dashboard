@@ -1,5 +1,9 @@
 # Legal AI Adoption Dashboard
 
+[![CI](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml)
+
+CI: passing. Deterministic test suite: 14 checks.
+
 See [CASE_STUDY.md](CASE_STUDY.md) for the problem, controls, and limitations.
 
 ![demo](docs/demo.png)
@@ -9,7 +13,7 @@ It shows how a Customer Success Manager, Legal Engineer, or Innovation lead watc
 adoption, catches accounts before they stall, and turns user friction into product
 feedback. All data is synthetic.
 
-**Live app:** https://legal-ai-adoption-dashboard.vercel.app
+**Live demo:** https://legal-ai-adoption-dashboard.vercel.app
 
 **Run locally:** `pnpm install && pnpm dev`.
 
