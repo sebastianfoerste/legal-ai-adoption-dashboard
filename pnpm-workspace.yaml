@@ -1,0 +1,5 @@
+# pnpm 10+ reads overrides here, not from the package.json "pnpm" field.
+# postcss <8.5.10 has a moderate XSS advisory (GHSA-qx2v-qp2m-jg93), pulled in
+# transitively via next; pin it to the patched line.
+overrides:
+  postcss: '>=8.5.10'
