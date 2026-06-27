@@ -2,7 +2,9 @@
 
 See [CASE_STUDY.md](CASE_STUDY.md) for the problem, controls, and limitations, and [TEAM_PLAYBOOK.md](TEAM_PLAYBOOK.md) for the team operating guidelines.
 
-Enablement materials for legal AI — partner briefings, associate hands-on, adoption questionnaires, workflow discovery. Not legal advice; data is synthetic.
+Enablement materials for legal AI: partner briefings, associate hands-on, adoption questionnaires, workflow discovery. Not legal advice; data is synthetic.
+
+**Public-safety posture:** synthetic workshop materials only, source provenance for assumptions and feedback, explicit lawyer review gates, and no legal advice.
 
 > **If you don't code:** scroll to [What the demo produces](#what-the-demo-produces). This repo ships a sample output you can read in the browser. The point isn't the code; it's whether the legal work is structured, cited, reviewable, and testable.
 
@@ -23,7 +25,7 @@ Runs end to end, offline and deterministically.
 The demo scores candidate workflows through the prioritization matrix and outputs the recommended first pilot based on impact, frequency, AI fit, and review feasibility. You can read the committed sample output: [`examples/workshop-outcome.md`](examples/workshop-outcome.md).
 
 ```markdown
-# Sample output — prioritization result
+# Sample output: prioritization result
 
 | Candidate workflow | Impact | Frequency | AI fit | Review feasibility | Total |
 |---|---:|---:|---:|---:|---:|
@@ -33,6 +35,16 @@ The demo scores candidate workflows through the prioritization matrix and output
 ```
 
 In the sample run, the matrix turns a demo into a prioritised adoption plan, not a one-off session.
+
+## Pilot-to-adoption path
+
+This is the Harvey / Legora reviewer path:
+
+1. **Onboarding:** scope the team with the adoption questionnaire and workflow discovery template.
+2. **Blocker diagnosis:** use the prioritization matrix to separate high-value workflows from low-review-feasibility demos.
+3. **Workshop follow-up:** run the partner briefing, 60-minute workshop, or 90-minute associate hands-on based on the blocker.
+4. **Product feedback:** convert observed friction into a structured product-feedback note for Engineering and Product.
+5. **Usage trend:** re-baseline adoption with the maturity model and first 90 days deployment plan.
 
 ## What it checks / does
 
@@ -44,7 +56,7 @@ In the sample run, the matrix turns a demo into a prioritised adoption plan, not
 
 ---
 
-> **What workflow does this improve?** Onboarding and enablement — getting partners, associates, and in-house counsel actually using legal AI after the contract is signed.
+> **What workflow does this improve?** Onboarding and enablement: getting partners, associates, and in-house counsel actually using legal AI after the contract is signed.
 > **Who is the user?** A Legal Engineer, CSM, or Innovation lead running the rollout.
 > **Where does human review happen?** Every agenda and template keeps the rule explicit: AI produces a first pass, a named lawyer signs off before reliance.
 > **What is blocked until approval?** Nothing ships to a court or client on AI output alone. The kit teaches the review gate, it does not remove it.
@@ -60,7 +72,7 @@ in what order, with whom, and what to do with what you learn.
 ## Who runs this
 
 A Legal Engineer or CSM owning the rollout. The kit assumes you are not the lawyer of
-record and not the engineer — you are the person who makes the tool stick.
+record and not the engineer; you are the person who makes the tool stick.
 
 ## What's inside
 
