@@ -1,6 +1,6 @@
 # Legal AI Workshop Kit — Unified Playbook
 
-*This is a single unified file compiling all discovery tools, workshop agendas, and post-sales playbooks in the Harvey Workshop Kit.*
+*This is a single unified file compiling all discovery tools, workshop agendas, and post-sales playbooks in the Legal AI Workshop Kit.*
 
 ---
 

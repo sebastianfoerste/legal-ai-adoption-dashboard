@@ -262,7 +262,7 @@ def parse_markdown_to_html(md_text, slug_map, file_slug):
     return "\n".join(html_out)
 
 def compile_kit():
-    print("Compiling Harvey Legal AI Workshop Kit...")
+    print("Compiling Legal AI Workshop Kit...")
     
     # 1. Create slug map
     slug_map = {f: slugify_path(f) for f in FILES}
@@ -270,7 +270,7 @@ def compile_kit():
     # 2. Build Unified Markdown
     unified_md_content = []
     unified_md_content.append("# Legal AI Workshop Kit — Unified Playbook")
-    unified_md_content.append("\n*This is a single unified file compiling all discovery tools, workshop agendas, and post-sales playbooks in the Harvey Workshop Kit.*")
+    unified_md_content.append("\n*This is a single unified file compiling all discovery tools, workshop agendas, and post-sales playbooks in the Legal AI Workshop Kit.*")
     unified_md_content.append("\n---\n")
     
     toc_md = ["## Table of Contents\n"]
@@ -733,7 +733,7 @@ def compile_kit():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harvey Legal AI Workshop Kit Playbook</title>
+    <title>Legal AI Workshop Kit Playbook</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
@@ -743,7 +743,7 @@ def compile_kit():
 </head>
 <body>
     <aside>
-        <div class="sidebar-title">Harvey Legal AI</div>
+        <div class="sidebar-title">Legal AI</div>
         <div class="sidebar-subtitle">Workshop Kit Playbook</div>
         <nav>
             <ul>
