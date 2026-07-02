@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getAccounts, getBlockers, getFeedback } from "./data";
+import { getAccounts, getBlockers, getFeedback, getWorkflowUsage } from "./data";
 
 describe("data layer", () => {
   it("loads and validates accounts", () => {
@@ -16,5 +16,10 @@ describe("data layer", () => {
   it("every feedback item references a known account", () => {
     const ids = new Set(getAccounts().map((a) => a.id));
     expect(getFeedback().every((f) => ids.has(f.accountId))).toBe(true);
+  });
+
+  it("every workflow usage row references a known account", () => {
+    const ids = new Set(getAccounts().map((a) => a.id));
+    expect(getWorkflowUsage().every((workflow) => ids.has(workflow.accountId))).toBe(true);
   });
 });

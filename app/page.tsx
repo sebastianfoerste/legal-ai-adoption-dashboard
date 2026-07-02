@@ -4,6 +4,7 @@ import { accountHealth } from "@/lib/aggregate";
 import { portfolioSummary } from "@/lib/portfolio";
 import { computeHealth } from "@/lib/health";
 import { recommendAction } from "@/lib/actions";
+import { commandCenterReport } from "@/lib/command-center";
 import { HealthBadge } from "@/components/HealthBadge";
 import { TrendBar } from "@/components/TrendBar";
 import { PageHeader } from "@/components/PageHeader";
@@ -49,6 +50,7 @@ export default async function AccountHealthPage({
   const accounts = getAccounts();
   const blockers = getBlockers();
   const summary = portfolioSummary();
+  const commandCenter = commandCenterReport();
 
   const stats: { label: string; value: number; tone: string }[] = [
     { label: "Accounts", value: summary.total, tone: "text-gray-900" },
@@ -186,6 +188,321 @@ export default async function AccountHealthPage({
         ))}
       </section>
 
+      <section className="mb-10 rounded-lg border border-gray-200 bg-white p-5" aria-labelledby="command-center-heading">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-violet-600">Command Center</p>
+            <h2 id="command-center-heading" className="mt-1 text-lg font-semibold text-gray-900">
+              Legal AI adoption intelligence
+            </h2>
+            <p className="mt-1 max-w-3xl text-sm text-gray-600">
+              Synthetic aggregate view across assistant, workflow agents, review tables, knowledge, Outlook and writing-style usage. External action remains blocked by review policy.
+            </p>
+          </div>
+          <span className="rounded border border-gray-200 bg-gray-50 px-2 py-1 font-mono text-xs text-gray-600">
+            {commandCenter.schema}
+          </span>
+        </div>
+
+        <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-6">
+          <CommandMetric label="Active users" value={commandCenter.activeUsers} />
+          <CommandMetric label="Workflow runs" value={commandCenter.workflowRuns} />
+          <CommandMetric label="Review tables" value={commandCenter.reviewTables} />
+          <CommandMetric label="Draft outputs" value={commandCenter.draftOutputs} />
+          <CommandMetric label="Verified outputs" value={commandCenter.verifiedOutputs} />
+          <CommandMetric label="Blocked outputs" value={commandCenter.blockedOutputs} tone="text-red-700" />
+        </div>
+
+        <div className="mt-6 overflow-hidden rounded-lg border border-gray-100">
+          <div className="flex flex-wrap items-start justify-between gap-3 border-b border-gray-100 bg-gray-50 px-3 py-2">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900">aOS adoption profile</h3>
+              <p className="mt-1 text-xs text-gray-600">{commandCenter.aosProfile.reviewNotice}</p>
+            </div>
+            <div className="flex flex-wrap gap-2 text-xs">
+              <span className="rounded border border-gray-200 bg-white px-2 py-1 font-mono text-gray-600">
+                {commandCenter.aosProfile.schema}
+              </span>
+              <span className="rounded border border-red-100 bg-red-50 px-2 py-1 font-semibold text-red-700">
+                {commandCenter.aosProfile.externalActionAllowed ? "external allowed" : "external blocked"}
+              </span>
+            </div>
+          </div>
+          <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="border-b border-gray-100 p-3 lg:border-b-0 lg:border-r">
+              <dl className="grid grid-cols-2 gap-3 text-xs text-gray-600">
+                <div>
+                  <dt className="font-semibold text-gray-900">Source mode</dt>
+                  <dd>{commandCenter.aosProfile.sourceMode}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-gray-900">Deck package</dt>
+                  <dd>{commandCenter.aosProfile.adoptionSignals.deckPackageReady ? "ready" : "pending"}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-gray-900">Power groups</dt>
+                  <dd>{commandCenter.aosProfile.adoptionSignals.powerUserGroups}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-gray-900">Review gates</dt>
+                  <dd>{commandCenter.aosProfile.adoptionSignals.reviewGatesTracked}</dd>
+                </div>
+              </dl>
+              <p className="mt-3 text-xs text-gray-600">
+                Sources: {commandCenter.aosProfile.generatedFrom.join(", ")}
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[720px] text-sm">
+                <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+                  <tr>
+                    <th className="px-3 py-2 font-medium">Surface</th>
+                    <th className="px-3 py-2 font-medium">Status</th>
+                    <th className="px-3 py-2 font-medium">Usage signal</th>
+                    <th className="px-3 py-2 font-medium">Gate</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {commandCenter.aosProfile.productSurfaceCoverage.map((surface) => (
+                    <tr key={surface.surface}>
+                      <td className="px-3 py-3 font-medium text-gray-900">{surface.surface}</td>
+                      <td className="px-3 py-3">
+                        <span className={`rounded border px-2 py-1 text-xs ${commandStatusClass(surface.status)}`}>
+                          {surface.status.replace("_", " ")}
+                        </span>
+                      </td>
+                      <td className="px-3 py-3 font-mono text-gray-700">{surface.usageSignal}</td>
+                      <td className="px-3 py-3 text-gray-600">{surface.reviewGate}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+          <div className="overflow-x-auto rounded-lg border border-gray-100">
+            <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
+              <h3 className="text-sm font-semibold text-gray-900">Synthetic peer benchmarks</h3>
+            </div>
+            <table className="w-full min-w-[720px] text-sm">
+              <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+                <tr>
+                  <th className="px-3 py-2 font-medium">Metric</th>
+                  <th className="px-3 py-2 font-medium">Firm</th>
+                  <th className="px-3 py-2 font-medium">Peer median</th>
+                  <th className="px-3 py-2 font-medium">Status</th>
+                  <th className="px-3 py-2 font-medium">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {commandCenter.benchmarks.map((benchmark) => (
+                  <tr key={benchmark.metric}>
+                    <td className="px-3 py-3 font-medium text-gray-900">{benchmark.metric}</td>
+                    <td className="px-3 py-3 font-mono text-gray-700">{benchmark.firmValue}</td>
+                    <td className="px-3 py-3 font-mono text-gray-700">{benchmark.peerMedian}</td>
+                    <td className="px-3 py-3">
+                      <span className={`rounded border px-2 py-1 text-xs ${commandStatusClass(benchmark.status)}`}>
+                        {benchmark.status.replace("_", " ")}
+                      </span>
+                    </td>
+                    <td className="px-3 py-3 text-gray-600">{benchmark.action}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-gray-100">
+            <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
+              <h3 className="text-sm font-semibold text-gray-900">Release and access actions</h3>
+            </div>
+            <table className="w-full min-w-[720px] text-sm">
+              <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+                <tr>
+                  <th className="px-3 py-2 font-medium">Release</th>
+                  <th className="px-3 py-2 font-medium">Status</th>
+                  <th className="px-3 py-2 font-medium">Users</th>
+                  <th className="px-3 py-2 font-medium">Next action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {commandCenter.releaseActions.map((release) => (
+                  <tr key={release.release}>
+                    <td className="px-3 py-3 font-medium text-gray-900">{release.release}</td>
+                    <td className="px-3 py-3">
+                      <span className={`rounded border px-2 py-1 text-xs ${commandStatusClass(release.status)}`}>
+                        {release.status.replace("_", " ")}
+                      </span>
+                    </td>
+                    <td className="px-3 py-3 font-mono text-gray-700">{release.eligibleUsers}</td>
+                    <td className="px-3 py-3 text-gray-600">{release.recommendedAction}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="border-t border-gray-100 px-3 py-2 text-xs text-gray-600">
+              {commandCenter.releaseActions[0]?.gate}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="space-y-5">
+            <div className="overflow-x-auto rounded-lg border border-gray-100">
+              <table className="w-full min-w-[760px] text-sm">
+                <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+                  <tr>
+                    <th className="px-3 py-2 font-medium">Product</th>
+                    <th className="px-3 py-2 font-medium">Runs</th>
+                    <th className="px-3 py-2 font-medium">Active users</th>
+                    <th className="px-3 py-2 font-medium">Review tables</th>
+                    <th className="px-3 py-2 font-medium">Verified</th>
+                    <th className="px-3 py-2 font-medium">Blocked</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {commandCenter.productUsage.map((product) => (
+                    <tr key={product.product}>
+                      <td className="px-3 py-3 font-medium text-gray-900">{product.product.replace("_", " ")}</td>
+                      <td className="px-3 py-3 text-gray-600">{product.runs}</td>
+                      <td className="px-3 py-3 text-gray-600">{product.activeUsers}</td>
+                      <td className="px-3 py-3 text-gray-600">{product.reviewTables}</td>
+                      <td className="px-3 py-3 text-gray-600">{product.verifiedOutputs}</td>
+                      <td className="px-3 py-3 text-red-700">{product.blockedOutputs}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="overflow-x-auto rounded-lg border border-gray-100">
+              <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
+                <h3 className="text-sm font-semibold text-gray-900">Practice group usage</h3>
+              </div>
+              <table className="w-full min-w-[760px] text-sm">
+                <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+                  <tr>
+                    <th className="px-3 py-2 font-medium">Practice</th>
+                    <th className="px-3 py-2 font-medium">Users</th>
+                    <th className="px-3 py-2 font-medium">Runs</th>
+                    <th className="px-3 py-2 font-medium">Tables</th>
+                    <th className="px-3 py-2 font-medium">Verified</th>
+                    <th className="px-3 py-2 font-medium">Blocked</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {commandCenter.practiceGroupUsage.map((group) => (
+                    <tr key={group.practiceGroup}>
+                      <td className="px-3 py-3 font-medium text-gray-900">{group.practiceGroup}</td>
+                      <td className="px-3 py-3 text-gray-600">{group.activeUsers}</td>
+                      <td className="px-3 py-3 text-gray-600">{group.workflowRuns}</td>
+                      <td className="px-3 py-3 text-gray-600">{group.reviewTables}</td>
+                      <td className="px-3 py-3 text-gray-600">{group.verifiedOutputs}</td>
+                      <td className="px-3 py-3 text-red-700">{group.blockedOutputs}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-violet-100 bg-violet-50/50 p-4">
+            <h3 className="text-sm font-semibold text-gray-900">Ask Command Center</h3>
+            <p className="mt-2 text-sm leading-6 text-gray-700">
+              {commandCenter.leadershipBrief.headline}
+            </p>
+            <div className="mt-3 rounded-lg border border-violet-100 bg-white p-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-violet-700">
+                {commandCenter.leadershipBrief.title}
+              </h4>
+              <ul className="mt-2 space-y-1 text-xs text-gray-700">
+                {commandCenter.leadershipBrief.slides.map((slide) => (
+                  <li key={slide}>{slide}</li>
+                ))}
+              </ul>
+              <p className="mt-2 text-xs text-gray-600">{commandCenter.leadershipBrief.reviewGate}</p>
+            </div>
+            <div className="mt-3 rounded-lg border border-violet-100 bg-white p-3">
+              <div className="flex flex-wrap items-start justify-between gap-2">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-violet-700">
+                    Presentation package
+                  </h4>
+                  <p className="mt-1 text-xs text-gray-600">{commandCenter.presentationDeck.audience}</p>
+                </div>
+                <span className="rounded border border-gray-200 bg-gray-50 px-2 py-1 font-mono text-[10px] text-gray-600">
+                  {commandCenter.presentationDeck.schema}
+                </span>
+              </div>
+              <dl className="mt-3 grid gap-2 text-xs text-gray-700">
+                {commandCenter.presentationDeck.slides.map((slide) => (
+                  <div key={slide.title}>
+                    <dt className="font-semibold text-gray-900">{slide.title}</dt>
+                    <dd className="mt-0.5">{slide.takeaway}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-3 text-xs text-gray-600">
+                Sources: {commandCenter.presentationDeck.generatedFrom.join(", ")}. Formats:{" "}
+                {commandCenter.presentationDeck.exportFormats.join(", ")}.
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-gray-700">
+                {commandCenter.presentationDeck.evidenceList.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className="mt-2 text-xs text-gray-600">{commandCenter.presentationDeck.accountOwnerReviewGate}</p>
+              <p className="mt-2 text-xs text-gray-600">{commandCenter.presentationDeck.exportGate}</p>
+            </div>
+            <div className="mt-4 space-y-3">
+              <CommandList title="Power user groups" values={commandCenter.powerUserGroups.map((group) => `${group.accountName}, ${group.practiceGroup}: ${group.runs} runs`)} />
+              <CommandList title="Needs attention" values={commandCenter.needsAttention} />
+              <CommandList title="Recommended actions" values={commandCenter.recommendedActions} />
+              <CommandList title="Enabled releases" values={commandCenter.releaseReadiness} />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 overflow-x-auto rounded-lg border border-gray-100">
+          <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
+            <h3 className="text-sm font-semibold text-gray-900">Prompt improvement backlog</h3>
+            <p className="mt-1 text-xs text-gray-600">
+              Structured prompt contracts for workflows that need stronger source hierarchy, failure conditions or review-table output.
+            </p>
+          </div>
+          <table className="w-full min-w-[860px] text-sm">
+            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+              <tr>
+                <th className="px-3 py-2 font-medium">Workflow</th>
+                <th className="px-3 py-2 font-medium">Account</th>
+                <th className="px-3 py-2 font-medium">Status</th>
+                <th className="px-3 py-2 font-medium">Missing</th>
+                <th className="px-3 py-2 font-medium">Review gate</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {commandCenter.promptReadiness.map((item) => (
+                <tr key={`${item.accountName}-${item.workflow}`}>
+                  <td className="px-3 py-3 font-medium text-gray-900">{item.workflow}</td>
+                  <td className="px-3 py-3 text-gray-600">{item.accountName}</td>
+                  <td className="px-3 py-3">
+                    <span className={`rounded border px-2 py-1 text-xs ${commandStatusClass(item.status)}`}>
+                      {item.status.replace("_", " ")}
+                    </span>
+                  </td>
+                  <td className="px-3 py-3 text-gray-600">
+                    {item.missingFields.length ? item.missingFields.join(", ") : "Complete"}
+                  </td>
+                  <td className="px-3 py-3 text-gray-600">{item.reviewGate}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <div className="space-y-8">
         {processedAccounts.length === 0 ? (
           <Card>
@@ -311,4 +628,44 @@ export default async function AccountHealthPage({
       </div>
     </main>
   );
+}
+
+function CommandMetric({
+  label,
+  value,
+  tone = "text-gray-900",
+}: {
+  label: string;
+  value: number;
+  tone?: string;
+}) {
+  return (
+    <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 text-center">
+      <div className={`text-2xl font-semibold ${tone}`}>{value}</div>
+      <div className="mt-0.5 text-xs text-gray-500">{label}</div>
+    </div>
+  );
+}
+
+function CommandList({ title, values }: { title: string; values: string[] }) {
+  return (
+    <div>
+      <h4 className="text-xs font-bold uppercase tracking-wider text-violet-700">{title}</h4>
+      <ul className="mt-1 space-y-1 text-xs text-gray-700">
+        {(values.length ? values : ["No items in this synthetic snapshot."]).slice(0, 4).map((value) => (
+          <li key={value}>{value}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function commandStatusClass(status: string) {
+  if (status === "ahead" || status === "enabled" || status === "ready") {
+    return "border-emerald-200 bg-emerald-50 text-emerald-700";
+  }
+  if (status === "behind" || status === "not_enabled" || status === "blocked") {
+    return "border-red-200 bg-red-50 text-red-700";
+  }
+  return "border-amber-200 bg-amber-50 text-amber-800";
 }
