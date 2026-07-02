@@ -32,15 +32,9 @@
 
 
 
-See [CASE_STUDY.md](../CASE_STUDY.md) for the problem, controls, and limitations, and [TEAM_PLAYBOOK.md](../TEAM_PLAYBOOK.md) for the team operating guidelines.
+Enablement materials for legal AI adoption: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.
 
-Enablement materials for legal AI: partner briefings, associate hands-on, adoption questionnaires, workflow discovery. Not legal advice; data is synthetic.
-
-**Public-safety posture:** synthetic workshop materials only, source provenance for assumptions and feedback, explicit lawyer review gates, and no legal advice.
-
-> **If you don't code:** scroll to [What the demo produces](#what-the-demo-produces). This repo ships a sample output you can read in the browser. The point isn't the code; it's whether the legal work is structured, cited, reviewable, and testable.
-
-![demo](../docs/demo.png)
+All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice.
 
 ## Run it
 
@@ -50,11 +44,9 @@ cd legal-ai-workshop-kit
 make generate-pilot
 ```
 
-Runs end to end, offline and deterministically.
-
 ## What the demo produces
 
-The demo scores candidate workflows through the prioritization matrix and outputs the recommended first pilot based on impact, frequency, AI fit, and review feasibility. You can read the committed sample output: [`examples/workshop-outcome.md`](../examples/workshop-outcome.md).
+The demo scores candidate workflows through a prioritization matrix and recommends a first pilot based on impact, frequency, AI fit, and review feasibility.
 
 ```markdown
 # Sample output: prioritization result
@@ -66,87 +58,31 @@ The demo scores candidate workflows through the prioritization matrix and output
 | Document / issue summary | 3 | 5 | 4 | 4 | **16** |
 ```
 
-In the sample run, the matrix turns a demo into a prioritised adoption plan, not a one-off session.
-
 ## Pilot-to-adoption path
 
-This is the Harvey / Legora reviewer path:
+This is the legal-AI rollout reviewer path:
 
-1. **Onboarding:** scope the team with the adoption questionnaire and workflow discovery template.
-2. **Blocker diagnosis:** use the prioritization matrix to separate high-value workflows from low-review-feasibility demos.
-3. **Workshop follow-up:** run the partner briefing, 60-minute workshop, or 90-minute associate hands-on based on the blocker.
-4. **Product feedback:** convert observed friction into a structured product-feedback note for Engineering and Product.
-5. **Usage trend:** re-baseline adoption with the maturity model and first 90 days deployment plan.
-
-## What it checks / does
-
-| Document / Tool | Focus | Verification Method |
-|---|---|---|
-| Discovery Questionnaire | Readiness check | Assesses Firm/Team operational and technological readiness |
-| Prioritization Matrix | Use-case ranking | Evaluates workflows against feasibility and business impact |
-| Product-Feedback Template | Product improvement | Translates user friction observed in workshops into requirements |
-
----
-
-> **What workflow does this improve?** Onboarding and enablement: getting partners, associates, and in-house counsel actually using legal AI after the contract is signed.
-> **Who is the user?** A Legal Engineer, CSM, or Innovation lead running the rollout.
-> **Where does human review happen?** Every agenda and template keeps the rule explicit: AI produces a first pass, a named lawyer signs off before reliance.
-> **What is blocked until approval?** Nothing ships to a court or client on AI output alone. The kit teaches the review gate, it does not remove it.
-> **What would I tell Product?** The product-feedback template turns what you observe in sessions into structured requirements for Engineering.
-
-## Problem
-
-Adoption does not fail at procurement. It fails in the first ninety days, when a workshop
-never gets booked, a skeptical partner is never answered, and the friction associates hit
-never reaches Product. This kit is the operating system for that ninety days: what to run,
-in what order, with whom, and what to do with what you learn.
-
-## Who runs this
-
-A Legal Engineer or CSM owning the rollout. The kit assumes you are not the lawyer of
-record and not the engineer; you are the person who makes the tool stick.
+1. Scope the team with the adoption questionnaire and workflow discovery template.
+2. Use the prioritization matrix to separate high-value workflows from low-review-feasibility demos.
+3. Run the right enablement format: partner briefing, workshop, or hands-on session.
+4. Convert user friction into structured product-feedback notes.
+5. Re-baseline adoption with the maturity model and first 90 days deployment plan.
 
 ## What's inside
 
-| Document | Use it when |
-| --- | --- |
-| [60-minute workshop agenda](#sessions-60-min-workshop-agenda) | You have a practice group for an hour and want them using the tool by the end. |
-| [30-minute partner briefing](#sessions-30-min-partner-briefing) | You have a partner's calendar for half an hour and need a go/no-go decision. |
-| [90-minute associate hands-on](#sessions-90-min-associate-hands-on) | You want associates to build real fluency on synthetic documents. |
-| [Adoption questionnaire](#discovery-adoption-questionnaire) | You are scoping an account and need to score its readiness. |
-| [Workflow discovery template](#discovery-workflow-discovery-template) | You are mapping a real workflow to a candidate AI use case. |
-| [Use-case prioritization matrix](#discovery-use-case-prioritization-matrix) | You have a list of candidate use cases and need to pick what to pilot first. |
-| [ROI & value worksheet](#discovery-roi-calculator) | You need a worksheet to calculate hours saved and direct financial ROI. |
-| [Skeptical-partner objections](#enablement-skeptical-partner-objections) | A partner is pushing back and you need an evidence-based answer, fast. |
-| [Follow-up email templates](#enablement-follow-up-email-templates) | A session just ended, or usage dipped, and you need to send the right note. |
-| [Product-feedback template](#enablement-product-feedback-template) | You watched a user hit friction and want to turn it into a product requirement. |
-| [Adoption maturity model](#enablement-adoption-maturity-model) | You need a structured framework to map dashboard metrics to rollout stages. |
-| [First 90 days deployment plan](first-90-days-deployment-plan.md) | You are forward-deployed and need a measurable day-1-to-90 rollout sequence. |
-| [Unified Playbook (Markdown)](workshop-kit-unified.md) / [HTML](workshop-kit-unified.html) | You want a single compiled document for review containing all assets. |
-| [Customer workflow](#docs-customer-workflow) | You need the standard context on the typical customer workflow. |
-| [Product-feedback notes](#docs-product-feedback-notes) | You need the standard repository file for worked product feedback examples. |
-| [Reviewer guide](#docs-reviewer-guide) | You need the standard guidance for reviewing these artifacts. |
-
-Also includes an [example intake](../examples/synthetic-input.json) with its [prioritization result](../examples/sample-output.md).
-
-## How to use it in a rollout
-
-1. Scope the account with the adoption questionnaire and a few workflow-discovery sessions.
-2. Rank candidate use cases with the prioritization matrix; pick one to pilot.
-3. Run the partner briefing for the go decision, then the workshop for the group, then the associate hands-on for fluency.
-4. Capture friction with the product-feedback template; send the right follow-up.
-5. Re-baseline and expand.
+- Session agendas for partner briefings, workshops, and hands-on training.
+- Discovery templates for adoption readiness and workflow mapping.
+- Prioritization tools for choosing the first pilot.
+- Follow-up templates and product-feedback notes.
+- A unified playbook for reviewer evaluation.
 
 ## Data statement
 
-All examples are generic or synthetic. No real client, firm, matter, or personal data
-appears anywhere in this repo. Merge fields in the email templates use `{{double_brace}}`
-placeholders you replace per engagement.
+All examples are generic or synthetic. No real client, firm, matter, or personal data appears anywhere in this repo.
 
 ## Check
 
-`make check` verifies every required document exists and that none is left half-written.
-It is the only automated gate in this repo.
+`make check` verifies that the required materials exist.
 
 
 </div>
