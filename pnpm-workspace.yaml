@@ -4,7 +4,10 @@
 packages:
   - "."
 
-
+# pnpm 11 requires explicit approval for dependency build scripts in fresh CI installs.
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
 
 overrides:
   postcss: '>=8.5.10'
