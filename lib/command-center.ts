@@ -1,4 +1,11 @@
-import { getAccounts, getBlockers, getWorkflowUsage } from "./data";
+import { getAccounts, getBenchmarkRows, getBlockers, getWorkflowUsage } from "./data";
+
+export type ReviewGate = {
+  requiredReviewer: "account_owner";
+  state: "draft";
+  externalActionAllowed: false;
+  note: string;
+};
 
 export type ProductUsageSummary = {
   product: string;
@@ -22,6 +29,7 @@ export type PowerUserGroup = {
 export type PracticeGroupUsageSummary = {
   practiceGroup: string;
   activeUsers: number;
+  dailyUsageAmongLicensedUsers: number;
   workflowRuns: number;
   reviewTables: number;
   draftOutputs: number;
@@ -43,6 +51,7 @@ export type ReleaseAction = {
   eligibleUsers: number;
   recommendedAction: string;
   gate: string;
+  reviewGateControl: ReviewGate;
 };
 
 export type LeadershipBrief = {
@@ -50,6 +59,7 @@ export type LeadershipBrief = {
   headline: string;
   slides: string[];
   reviewGate: string;
+  reviewGateControl: ReviewGate;
 };
 
 export type CommandCenterDeckSlide = {
@@ -57,6 +67,7 @@ export type CommandCenterDeckSlide = {
   takeaway: string;
   evidence: string[];
   reviewGate: string;
+  reviewGateControl: ReviewGate;
 };
 
 export type CommandCenterPresentationDeck = {
@@ -70,6 +81,32 @@ export type CommandCenterPresentationDeck = {
   evidenceList: string[];
   accountOwnerReviewGate: string;
   exportGate: string;
+  reviewGateControl: ReviewGate;
+  markdownReport: string;
+};
+
+export type GovernancePanel = {
+  schema: "legal-ai-adoption.governance-panel.v1";
+  sourceMode: "local_synthetic_json";
+  generatedFrom: string[];
+  auditTrailEntries: Array<{
+    id: string;
+    type: "tool_call" | "file_access" | "agent_action";
+    subject: string;
+    provenanceRef: string;
+    externalActionAllowed: false;
+  }>;
+  ethicalWalls: {
+    enabled: true;
+    matterIsolation: "synthetic_account_boundaries";
+    crossMatterAccess: "blocked";
+  };
+  outputTraceability: {
+    provenanceRefs: string[];
+    promptRefs: string[];
+    externalActionAllowed: false;
+  };
+  reviewGateControl: ReviewGate;
 };
 
 export type CommandCenterAOSLayer = {
@@ -147,6 +184,7 @@ export type PromptReadinessItem = {
   missingFields: string[];
   suggestedPrompt: string;
   reviewGate: string;
+  reviewGateControl: ReviewGate;
 };
 
 export type CommandCenterReport = {
@@ -171,10 +209,27 @@ export type CommandCenterReport = {
   promptReadiness: PromptReadinessItem[];
   leadershipBrief: LeadershipBrief;
   presentationDeck: CommandCenterPresentationDeck;
+  governancePanel: GovernancePanel;
+  reviewGateControl: ReviewGate;
   aosProfile: CommandCenterAOSProfile;
 };
 
 const GENERATED_AT = "2026-07-01T09:00:00.000Z";
+const SOURCE_FILES = [
+  "data/accounts.json",
+  "data/blockers.json",
+  "data/workflows.json",
+  "data/benchmarks.json",
+];
+
+function reviewGateControl(note: string): ReviewGate {
+  return {
+    requiredReviewer: "account_owner",
+    state: "draft",
+    externalActionAllowed: false,
+    note,
+  };
+}
 
 export function commandCenterReport(): CommandCenterReport {
   const accounts = getAccounts();
@@ -257,6 +312,14 @@ export function commandCenterReport(): CommandCenterReport {
     releaseActions,
     promptReadiness,
   });
+  const governancePanel = buildGovernancePanel({
+    workflows,
+    promptReadiness,
+    presentationDeck,
+  });
+  const gate = reviewGateControl(
+    "Synthetic Command Center report remains draft-only until account owner review.",
+  );
   const aosProfile = buildAOSProfile({
     activeUsers,
     workflowRuns,
@@ -271,6 +334,7 @@ export function commandCenterReport(): CommandCenterReport {
     releaseActions,
     promptReadiness,
     presentationDeck,
+    governancePanel,
   });
 
   return {
@@ -298,6 +362,8 @@ export function commandCenterReport(): CommandCenterReport {
     promptReadiness,
     leadershipBrief,
     presentationDeck,
+    governancePanel,
+    reviewGateControl: gate,
     aosProfile,
   };
 }
@@ -305,10 +371,11 @@ export function commandCenterReport(): CommandCenterReport {
 function buildPracticeGroupUsage(workflows: ReturnType<typeof getWorkflowUsage>): PracticeGroupUsageSummary[] {
   const groups = new Map<string, PracticeGroupUsageSummary>();
   for (const workflow of workflows) {
-    const current = groups.get(workflow.practiceGroup) ?? {
-      practiceGroup: workflow.practiceGroup,
-      activeUsers: 0,
-      workflowRuns: 0,
+	    const current = groups.get(workflow.practiceGroup) ?? {
+	      practiceGroup: workflow.practiceGroup,
+	      activeUsers: 0,
+      dailyUsageAmongLicensedUsers: 0,
+	      workflowRuns: 0,
       reviewTables: 0,
       draftOutputs: 0,
       verifiedOutputs: 0,
@@ -321,8 +388,14 @@ function buildPracticeGroupUsage(workflows: ReturnType<typeof getWorkflowUsage>)
     current.verifiedOutputs += workflow.verifiedOutputs;
     current.blockedOutputs += workflow.blockedOutputs;
     groups.set(workflow.practiceGroup, current);
-  }
-  return [...groups.values()].sort((left, right) => right.workflowRuns - left.workflowRuns);
+	  }
+  return [...groups.values()]
+    .map((group) => ({
+      ...group,
+      dailyUsageAmongLicensedUsers:
+        group.activeUsers === 0 ? 0 : Math.round((group.workflowRuns / (group.activeUsers * 5)) * 100) / 100,
+    }))
+    .sort((left, right) => right.workflowRuns - left.workflowRuns);
 }
 
 function buildPromptReadiness({
@@ -346,7 +419,7 @@ function buildPromptReadiness({
           : missingFields.length > 0
             ? "needs_structure"
             : "ready";
-      return {
+	      return {
         workflow: workflow.workflow,
         accountName: accountById.get(workflow.accountId)?.name ?? workflow.accountId,
         status,
@@ -359,9 +432,12 @@ function buildPromptReadiness({
           "Output: draft answer, citations, review-table row, verification state and next action.",
           "Review gate: human review required before client, public or external use.",
         ].join("\n"),
-        reviewGate:
-          "Synthetic adoption signal only. Account owner review is required before enablement or client-facing use.",
-      };
+	        reviewGate:
+	          "Synthetic adoption signal only. Account owner review is required before enablement or client-facing use.",
+        reviewGateControl: reviewGateControl(
+          "Account owner must review prompt readiness before enablement or client-facing use.",
+        ),
+	      };
     })
     .sort((left, right) => {
       const rank = { blocked: 2, needs_structure: 1, ready: 0 };
@@ -395,39 +471,17 @@ function buildBenchmarks({
   verificationRate: number;
   blockedOutputs: number;
 }): BenchmarkInsight[] {
-  const rows = [
-    {
-      metric: "Active users",
-      firmValue: activeUsers,
-      peerMedian: 72,
-      action: "Lean on power users in Litigation and Corporate to raise weekly active use.",
-    },
-    {
-      metric: "Workflow runs",
-      firmValue: workflowRuns,
-      peerMedian: 410,
-      action: "Convert the top two ad hoc workflows into supervised agents.",
-    },
-    {
-      metric: "Review tables",
-      firmValue: reviewTables,
-      peerMedian: 52,
-      action: "Add a review-table clinic for diligence and regulatory tracking teams.",
-    },
-    {
-      metric: "Verified output rate",
-      firmValue: Math.round(verificationRate * 100),
-      peerMedian: 70,
-      action: "Make verification rate the core trust metric in the next leadership report.",
-    },
-    {
-      metric: "Blocked outputs",
-      firmValue: blockedOutputs,
-      peerMedian: 18,
-      action: "Run a source drill-down clinic for teams with blocked trust workflows.",
-      higherIsBetter: false,
-    },
-  ];
+  const valueByMetric = new Map([
+    ["Active users", activeUsers],
+    ["Workflow runs", workflowRuns],
+    ["Review tables", reviewTables],
+    ["Verified output rate", Math.round(verificationRate * 100)],
+    ["Blocked outputs", blockedOutputs],
+  ]);
+  const rows = getBenchmarkRows().map((row) => ({
+    ...row,
+    firmValue: valueByMetric.get(row.metric) ?? 0,
+  }));
 
   return rows.map((row) => ({
     metric: row.metric,
@@ -468,8 +522,8 @@ function buildReleaseActions({
       : release === "Review table export" || release === "Shared review spaces"
         ? "pilot"
         : "not_enabled";
-    return {
-      release,
+	    return {
+	      release,
       status,
       eligibleUsers,
       recommendedAction:
@@ -478,10 +532,13 @@ function buildReleaseActions({
           : status === "pilot"
             ? "Run a supervised pilot with synthetic or approved matter examples."
             : "Prepare an enablement brief before opening access.",
-      gate: "No customer-facing expansion, outreach or external output without account owner review.",
-    };
-  });
-}
+	      gate: "No customer-facing expansion, outreach or external output without account owner review.",
+      reviewGateControl: reviewGateControl(
+        "Account owner review is required before release enablement, outreach or external output.",
+      ),
+	    };
+	  });
+	}
 
 function buildLeadershipBrief({
   verificationRate,
@@ -498,12 +555,16 @@ function buildLeadershipBrief({
   return {
     title: "Synthetic leadership report",
     headline: `${Math.round(verificationRate * 100)}% of draft outputs are verified, with ${pilotCount} release pilot(s) ready for owner review.`,
-    slides: [
+	    slides: [
       `Power users: ${powerUserGroups.slice(0, 2).map((group) => `${group.accountName} ${group.practiceGroup}`).join("; ")}`,
       `Priority risks: ${recommendedActions.slice(0, 2).join("; ")}`,
       `Release plan: ${releaseActions.slice(0, 3).map((action) => `${action.release} ${action.status}`).join("; ")}`,
     ],
-    reviewGate: "Synthetic report only. Account owners must review before use in renewal, expansion or client-facing materials.",
+    reviewGate:
+      "Synthetic report only. Account owners must review before use in renewal, expansion or client-facing materials.",
+    reviewGateControl: reviewGateControl(
+      "Account owner must review this leadership brief before renewal, expansion or client-facing use.",
+    ),
   };
 }
 
@@ -531,10 +592,13 @@ function buildPresentationDeck({
   const topProduct = productUsage[0];
   const blockedBenchmark = benchmarks.find((benchmark) => benchmark.metric === "Blocked outputs");
   const pilotReleases = releaseActions.filter((release) => release.status === "pilot");
+  const slideGate = reviewGateControl(
+    "Account owner review is required before using deck slides externally.",
+  );
   return {
     schema: "legal-ai-adoption.command-center-deck.v1",
     sourceMode: "local_synthetic_json",
-    generatedFrom: ["data/accounts.json", "data/blockers.json", "data/workflows.json"],
+    generatedFrom: SOURCE_FILES,
     title: leadershipBrief.title,
     audience: "firm leadership, innovation leads and account owners",
     exportFormats: ["pptx", "pdf", "markdown_report"],
@@ -547,6 +611,7 @@ function buildPresentationDeck({
           `${pilotReleases.length} release pilot(s) ready for owner review`,
         ],
         reviewGate,
+        reviewGateControl: slideGate,
       },
       {
         title: "Usage concentration",
@@ -561,12 +626,14 @@ function buildPresentationDeck({
             ]
           : ["No usage evidence."],
         reviewGate,
+        reviewGateControl: slideGate,
       },
       {
         title: "Trust and blockers",
         takeaway: blockedBenchmark?.action ?? "Review blocked outputs before any expansion narrative.",
         evidence: recommendedActions.slice(0, 3),
         reviewGate,
+        reviewGateControl: slideGate,
       },
       {
         title: "Enablement plan",
@@ -574,8 +641,9 @@ function buildPresentationDeck({
         evidence: [
           ...powerUserGroups.slice(0, 2).map((group) => `${group.accountName}: ${group.runs} run(s)`),
           ...promptReadiness.slice(0, 2).map((item) => `${item.workflow}: ${item.status}`),
-        ],
+	        ],
         reviewGate,
+        reviewGateControl: slideGate,
       },
     ],
     evidenceList: [
@@ -587,6 +655,118 @@ function buildPresentationDeck({
     ],
     accountOwnerReviewGate: reviewGate,
     exportGate: reviewGate,
+    reviewGateControl: slideGate,
+    markdownReport: renderCommandCenterMarkdown({
+      leadershipBrief,
+      verificationRate,
+      productUsage,
+      benchmarks,
+      powerUserGroups,
+      recommendedActions,
+      releaseActions,
+      promptReadiness,
+    }),
+	  };
+	}
+
+export function renderCommandCenterMarkdown({
+  leadershipBrief,
+  verificationRate,
+  productUsage,
+  benchmarks,
+  powerUserGroups,
+  recommendedActions,
+  releaseActions,
+  promptReadiness,
+}: {
+  leadershipBrief: LeadershipBrief;
+  verificationRate: number;
+  productUsage: ProductUsageSummary[];
+  benchmarks: BenchmarkInsight[];
+  powerUserGroups: PowerUserGroup[];
+  recommendedActions: string[];
+  releaseActions: ReleaseAction[];
+  promptReadiness: PromptReadinessItem[];
+}) {
+  return [
+    `# ${leadershipBrief.title}`,
+    "",
+    leadershipBrief.headline,
+    "",
+    `Verified output rate: ${Math.round(verificationRate * 100)}%.`,
+    "",
+    "## Product Usage",
+    ...productUsage.slice(0, 5).map((item) => `- ${item.product}: ${item.runs} run(s), ${item.reviewTables} table(s)`),
+    "",
+    "## Benchmarks",
+    ...benchmarks.map((item) => `- ${item.metric}: ${item.firmValue} vs peer ${item.peerMedian}, ${item.status}`),
+    "",
+    "## Power Users",
+    ...powerUserGroups.map((item) => `- ${item.accountName}, ${item.practiceGroup}: ${item.runs} run(s)`),
+    "",
+    "## Recommended Actions",
+    ...recommendedActions.map((action) => `- ${action}`),
+    "",
+    "## Release Actions",
+    ...releaseActions.map((action) => `- ${action.release}: ${action.status}, ${action.gate}`),
+    "",
+    "## Prompt Readiness",
+    ...promptReadiness.map((item) => `- ${item.workflow}: ${item.status}`),
+    "",
+    "Review gate: draft only. Account owner review is required before use outside this synthetic dashboard.",
+  ].join("\n");
+}
+
+function buildGovernancePanel({
+  workflows,
+  promptReadiness,
+  presentationDeck,
+}: {
+  workflows: ReturnType<typeof getWorkflowUsage>;
+  promptReadiness: PromptReadinessItem[];
+  presentationDeck: CommandCenterPresentationDeck;
+}): GovernancePanel {
+  const gate = reviewGateControl(
+    "Account owner review is required before operational use of governance analytics.",
+  );
+  return {
+    schema: "legal-ai-adoption.governance-panel.v1",
+    sourceMode: "local_synthetic_json",
+    generatedFrom: SOURCE_FILES,
+    auditTrailEntries: [
+      ...workflows.slice(0, 4).map((workflow, index) => ({
+        id: `audit-tool-call-${index + 1}`,
+        type: "tool_call" as const,
+        subject: workflow.workflow,
+        provenanceRef: `workflow:${workflow.accountId}:${workflow.practiceGroup}`,
+        externalActionAllowed: false as const,
+      })),
+      ...promptReadiness.slice(0, 3).map((item, index) => ({
+        id: `audit-agent-action-${index + 1}`,
+        type: "agent_action" as const,
+        subject: item.workflow,
+        provenanceRef: `prompt-readiness:${item.status}`,
+        externalActionAllowed: false as const,
+      })),
+      {
+        id: "audit-file-access-1",
+        type: "file_access" as const,
+        subject: presentationDeck.title,
+        provenanceRef: presentationDeck.generatedFrom.join(","),
+        externalActionAllowed: false as const,
+      },
+    ],
+    ethicalWalls: {
+      enabled: true,
+      matterIsolation: "synthetic_account_boundaries",
+      crossMatterAccess: "blocked",
+    },
+    outputTraceability: {
+      provenanceRefs: presentationDeck.evidenceList,
+      promptRefs: promptReadiness.map((item) => item.workflow),
+      externalActionAllowed: false,
+    },
+    reviewGateControl: gate,
   };
 }
 
@@ -604,6 +784,7 @@ function buildAOSProfile({
   releaseActions,
   promptReadiness,
   presentationDeck,
+  governancePanel,
 }: {
   activeUsers: number;
   workflowRuns: number;
@@ -618,12 +799,12 @@ function buildAOSProfile({
   releaseActions: ReleaseAction[];
   promptReadiness: PromptReadinessItem[];
   presentationDeck: CommandCenterPresentationDeck;
+  governancePanel: GovernancePanel;
 }): CommandCenterAOSProfile {
   const releaseStatus = new Map(releaseActions.map((release) => [release.release, release.status]));
   const productRuns = new Map(productUsage.map((product) => [product.product, product.runs]));
   const reviewGate =
     "Synthetic adoption signal only. Account owner review is required before enablement or client-facing use.";
-  const sourceFiles = ["data/accounts.json", "data/blockers.json", "data/workflows.json"];
   const productSurfaceCoverage: CommandCenterProductSurfaceCoverage[] = [
     {
       surface: "Agent",
@@ -690,7 +871,7 @@ function buildAOSProfile({
   return {
     schema: "legal-ai-adoption.command-center-aos.v1",
     sourceMode: "local_synthetic_json",
-    generatedFrom: sourceFiles,
+    generatedFrom: SOURCE_FILES,
     aosLayers: [
       {
         key: "large_language_models",
@@ -710,7 +891,7 @@ function buildAOSProfile({
         key: "data_integrations",
         label: "Data and integrations",
         status: "implemented",
-        evidence: sourceFiles.join(", "),
+        evidence: SOURCE_FILES.join(", "),
         gate: "Local synthetic JSON only.",
       },
       {
@@ -782,7 +963,7 @@ function buildAOSProfile({
     },
     trustedSources: {
       sourceMode: "local_synthetic_json",
-      sourceFileCount: sourceFiles.length,
+      sourceFileCount: SOURCE_FILES.length,
       syntheticEvidenceOnly: true,
       externalActionAllowed: false,
     },
@@ -821,6 +1002,7 @@ function buildAOSProfile({
       dataRetention: "local_synthetic_json",
       auditTrail: "static_report_generation",
       approvalGate: "account_owner_review_required",
+      governancePanel: governancePanel.schema,
     },
     productSurfaceCoverage,
     adoptionSignals: {

@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml)
 
-CI: passing. Deterministic test suite: 14 checks.
+CI: passing. Deterministic tests cover health scoring, Command Center analytics and synthetic data contracts.
 
 See [CASE_STUDY.md](CASE_STUDY.md) for the problem, controls, and limitations.
 

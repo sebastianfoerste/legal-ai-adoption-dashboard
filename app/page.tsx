@@ -456,6 +456,40 @@ export default async function AccountHealthPage({
               <p className="mt-2 text-xs text-gray-600">{commandCenter.presentationDeck.accountOwnerReviewGate}</p>
               <p className="mt-2 text-xs text-gray-600">{commandCenter.presentationDeck.exportGate}</p>
             </div>
+            <div className="mt-3 rounded-lg border border-violet-100 bg-white p-3">
+              <div className="flex flex-wrap items-start justify-between gap-2">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-violet-700">
+                    Governance panel
+                  </h4>
+                  <p className="mt-1 text-xs text-gray-600">{commandCenter.governancePanel.schema}</p>
+                </div>
+                <span className="rounded border border-red-100 bg-red-50 px-2 py-1 text-[10px] font-semibold text-red-700">
+                  {commandCenter.governancePanel.reviewGateControl.externalActionAllowed
+                    ? "external allowed"
+                    : "external blocked"}
+                </span>
+              </div>
+              <dl className="mt-3 grid gap-2 text-xs text-gray-700 sm:grid-cols-2">
+                <div>
+                  <dt className="font-semibold text-gray-900">Audit events</dt>
+                  <dd>{commandCenter.governancePanel.auditTrailEntries.length}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-gray-900">Source mode</dt>
+                  <dd>{commandCenter.governancePanel.sourceMode}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-gray-900">Matter isolation</dt>
+                  <dd>{commandCenter.governancePanel.ethicalWalls.matterIsolation}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-gray-900">Prompt refs</dt>
+                  <dd>{commandCenter.governancePanel.outputTraceability.promptRefs.length}</dd>
+                </div>
+              </dl>
+              <p className="mt-3 text-xs text-gray-600">{commandCenter.governancePanel.reviewGateControl.note}</p>
+            </div>
             <div className="mt-4 space-y-3">
               <CommandList title="Power user groups" values={commandCenter.powerUserGroups.map((group) => `${group.accountName}, ${group.practiceGroup}: ${group.runs} runs`)} />
               <CommandList title="Needs attention" values={commandCenter.needsAttention} />

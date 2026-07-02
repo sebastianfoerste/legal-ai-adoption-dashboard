@@ -50,4 +50,6 @@ Minimum vocabulary:
 
 `sourceMode` is `local_synthetic_json`. `externalActionAllowed` is always
 `false`. Presentation output is a draft package only and requires account-owner
-review before renewal, expansion or client-facing use.
+review before renewal, expansion or client-facing use. The presentation deck
+also records generated-from files, evidence items, export formats and the
+account-owner review gate.

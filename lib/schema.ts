@@ -88,3 +88,17 @@ export const workflowUsageSchema = z.object({
   recommendedAction: z.string(),
 });
 export type WorkflowUsage = z.infer<typeof workflowUsageSchema>;
+
+export const benchmarkRowSchema = z.object({
+  metric: z.enum([
+    "Active users",
+    "Workflow runs",
+    "Review tables",
+    "Verified output rate",
+    "Blocked outputs",
+  ]),
+  peerMedian: z.number().nonnegative(),
+  higherIsBetter: z.boolean(),
+  action: z.string(),
+});
+export type BenchmarkRow = z.infer<typeof benchmarkRowSchema>;
