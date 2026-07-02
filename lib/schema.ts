@@ -63,3 +63,42 @@ export const feedbackItemSchema = z.object({
   status: z.enum(["new", "triaged", "shared_with_product"]),
 });
 export type FeedbackItem = z.infer<typeof feedbackItemSchema>;
+
+export const workflowUsageSchema = z.object({
+  accountId: z.string(),
+  product: z.enum([
+    "assistant",
+    "agents",
+    "knowledge",
+    "review_tables",
+    "word",
+    "outlook",
+    "shared_spaces",
+  ]),
+  workflow: z.string(),
+  practiceGroup: practiceGroupSchema.shape.name,
+  runs: z.number().int().nonnegative(),
+  activeUsers: z.number().int().nonnegative(),
+  reviewTables: z.number().int().nonnegative(),
+  draftOutputs: z.number().int().nonnegative(),
+  verifiedOutputs: z.number().int().nonnegative(),
+  blockedOutputs: z.number().int().nonnegative(),
+  weeklyRuns: z.array(z.number().int().nonnegative()).min(2),
+  lastReleaseEnabled: z.string(),
+  recommendedAction: z.string(),
+});
+export type WorkflowUsage = z.infer<typeof workflowUsageSchema>;
+
+export const benchmarkRowSchema = z.object({
+  metric: z.enum([
+    "Active users",
+    "Workflow runs",
+    "Review tables",
+    "Verified output rate",
+    "Blocked outputs",
+  ]),
+  peerMedian: z.number().nonnegative(),
+  higherIsBetter: z.boolean(),
+  action: z.string(),
+});
+export type BenchmarkRow = z.infer<typeof benchmarkRowSchema>;

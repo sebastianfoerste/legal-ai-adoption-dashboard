@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml)
 
-CI: passing. Deterministic test suite: 14 checks.
+CI: passing. Deterministic tests cover health scoring, Command Center analytics and synthetic data contracts.
 
 See [CASE_STUDY.md](CASE_STUDY.md) for the problem, controls, and limitations.
 
@@ -12,6 +12,12 @@ A mock dashboard for steering legal-AI adoption inside a law firm or in-house te
 It shows how a Customer Success Manager, Legal Engineer, or Innovation lead watches
 adoption, catches accounts before they stall, and turns user friction into product
 feedback. All data is synthetic.
+
+The Command Center includes `legal-ai-adoption.command-center-aos.v1`, a
+Legora-inspired aOS adoption profile covering Agent, Tabular Review, Workflows,
+Legal Research, Word, Outlook, Portal, Monitors, Lists and Mobile handoff
+signals. It is a product pattern only, with no Legora integration or dependency.
+External action is blocked.
 
 **Public-safety posture:** synthetic account data only, source provenance for dashboard inputs, review-gated legal outputs, and no legal advice.
 
@@ -35,6 +41,8 @@ This is the Harvey / Legora reviewer path:
 3. **Workshop follow-up:** use the attached re-engagement action to book the right partner briefing, associate hands-on, or workflow discovery session.
 4. **Product feedback:** route observed friction to the Product Feedback Queue with severity, product area, and customer impact.
 5. **Usage trend:** return to weekly active usage and blocker status to decide whether adoption is improving or the account is at renewal risk.
+6. **aOS adoption profile:** inspect the Command Center coverage table before
+   turning any synthetic insight into a leadership deck or account action.
 
 ## Problem
 
@@ -69,6 +77,8 @@ Three pages:
 1. **Account Health** (`/`): a portfolio overview strip (accounts by band, expansion-ready, open high-severity blockers), then per-account health with a score breakdown, practice groups, persona adoption, and the weekly-active trend.
 2. **Adoption Blockers** (`/blockers`): open blockers by category, worst first, each with a re-engagement action and a workshop follow-up.
 3. **Product Feedback Queue** (`/feedback`): user friction routed to product areas, with a triage pipeline.
+4. **Command Center aOS profile** (`/`): synthetic product-surface coverage,
+   review gates, deck package readiness and blocked external action status.
 
 ## Screenshots
 
