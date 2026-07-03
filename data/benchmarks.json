@@ -1,0 +1,32 @@
+[
+  {
+    "metric": "Active users",
+    "peerMedian": 72,
+    "higherIsBetter": true,
+    "action": "Lean on power users in Litigation and Corporate to raise weekly active use."
+  },
+  {
+    "metric": "Workflow runs",
+    "peerMedian": 410,
+    "higherIsBetter": true,
+    "action": "Convert the top two ad hoc workflows into supervised agents."
+  },
+  {
+    "metric": "Review tables",
+    "peerMedian": 52,
+    "higherIsBetter": true,
+    "action": "Add a review-table clinic for diligence and regulatory tracking teams."
+  },
+  {
+    "metric": "Verified output rate",
+    "peerMedian": 70,
+    "higherIsBetter": true,
+    "action": "Make verification rate the core trust metric in the next leadership report."
+  },
+  {
+    "metric": "Blocked outputs",
+    "peerMedian": 18,
+    "higherIsBetter": false,
+    "action": "Run a source drill-down clinic for teams with blocked trust workflows."
+  }
+]
