@@ -1,0 +1,55 @@
+{
+  "period": "Q2 2026 (synthetic)",
+  "interviews": [
+    {
+      "account": "Globex LLP (synthetic)",
+      "role": "Knowledge & Innovation Partner",
+      "arr_band": "250k-1m",
+      "renewal_risk": "medium",
+      "pains": [
+        {"theme": "No audit trail for AI-assisted edits", "severity": "high", "quote": "Risk won't sign off until we can show who changed what and when."},
+        {"theme": "Hard to onboard associates", "severity": "medium", "quote": "Every new associate needs an hour of hand-holding to start."}
+      ]
+    },
+    {
+      "account": "Initech Legal (synthetic)",
+      "role": "Director of Legal Operations",
+      "arr_band": ">1m",
+      "renewal_risk": "high",
+      "pains": [
+        {"theme": "No audit trail for AI-assisted edits", "severity": "blocker", "quote": "Without an exportable audit log this fails our internal review."},
+        {"theme": "Can't restrict who approves sensitive matters", "severity": "high", "quote": "We need approval permissions by practice group."}
+      ]
+    },
+    {
+      "account": "Hooli Chambers (synthetic)",
+      "role": "Managing Associate",
+      "arr_band": "50k-250k",
+      "renewal_risk": "low",
+      "pains": [
+        {"theme": "Hard to onboard associates", "severity": "high", "quote": "The first session is great, then people drift back to old habits."},
+        {"theme": "Citations not always traceable to the source", "severity": "medium", "quote": "I can't trust a summary I can't click through to the clause."}
+      ]
+    },
+    {
+      "account": "Soylent Partners (synthetic)",
+      "role": "General Counsel",
+      "arr_band": ">1m",
+      "renewal_risk": "medium",
+      "pains": [
+        {"theme": "No audit trail for AI-assisted edits", "severity": "high", "quote": "The board asks how we govern this and I need a clean answer."},
+        {"theme": "Can't restrict who approves sensitive matters", "severity": "high", "quote": "Junior staff should not be able to approve high-value matters."}
+      ]
+    },
+    {
+      "account": "Umbrella Legal (synthetic)",
+      "role": "Innovation Lead",
+      "arr_band": "50k-250k",
+      "renewal_risk": "low",
+      "pains": [
+        {"theme": "Citations not always traceable to the source", "severity": "medium", "quote": "Grounding is the whole trust question for our partners."},
+        {"theme": "No weekly usage visibility", "severity": "low", "quote": "I'd like to see which teams are actually using it each week."}
+      ]
+    }
+  ]
+}

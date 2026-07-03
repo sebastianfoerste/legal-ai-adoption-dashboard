@@ -1,0 +1,18 @@
+{
+  "_comment": "Trimmed synthetic account record — the kind of input the health score consumes. Not real data.",
+  "id": "acct-001",
+  "name": "Meridian & Cole LLP",
+  "type": "law_firm",
+  "seats": 50,
+  "activeUsers": 45,
+  "weeklyActiveUsers": [30, 32, 35, 40, 45],
+  "practiceGroups": [
+    { "name": "Corporate", "seats": 18, "activeUsers": 17, "weeklyActiveUsers": [10, 12, 14, 16, 17], "queriesPerWeek": 420 }
+  ],
+  "personas": [
+    { "role": "Associate", "count": 30, "adoptionRate": 0.9 }
+  ],
+  "openBlockers": ["medium"],
+  "feedbackTotal": 4,
+  "feedbackSharedWithProduct": 3
+}
