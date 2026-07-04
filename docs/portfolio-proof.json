@@ -1,0 +1,34 @@
+{
+  "schema_version": "portfolio-proof.v1",
+  "repository": "legal-ai-adoption-dashboard",
+  "github_url": "https://github.com/sebastianfoerste/legal-ai-adoption-dashboard",
+  "pinned_on_github": true,
+  "reviewer_path": [
+    "README.md",
+    "docs/reviewer-guide.md",
+    "docs/product-feedback-notes.md"
+  ],
+  "proof_surfaces": [
+    { "path": "README.md", "label": "Repository front door" },
+    { "path": "docs/reviewer-guide.md", "label": "Reviewer guide" },
+    { "path": "docs/product-feedback-notes.md", "label": "Product feedback workflow" },
+    { "path": "data/accounts.json", "label": "Synthetic adoption accounts" },
+    { "path": "lib/health.test.ts", "label": "Health-score test coverage" }
+  ],
+  "validation_gates": [
+    "pnpm test",
+    "pnpm build"
+  ],
+  "safety_controls": [
+    "synthetic account data only",
+    "human-review gate stays explicit",
+    "signals support account action review",
+    "no legal advice"
+  ],
+  "blocked_actions": [
+    "no real client names",
+    "no personal data",
+    "no autonomous renewal or expansion action",
+    "no external communication"
+  ]
+}
