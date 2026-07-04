@@ -1,8 +1,8 @@
 # Product feedback notes
 
 This note shows the operating discipline that makes adoption work: turning what users say
-Engineering can build. Below, three items from the synthetic feedback queue, rewritten as
-product requirements.
+into what Engineering can build. Below, three items from the synthetic feedback queue,
+rewritten as product requirements.
 
 ## 1. Citation grounding in long documents
 **Signals:** "Clause extraction misses cross-referenced definitions in long SPAs"
