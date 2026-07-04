@@ -1,8 +1,8 @@
 # Product feedback notes
 
-This is the step the role is really screening for: turning what users say into what
-Engineering can build. Below, three items from the synthetic feedback queue, rewritten as
-product requirements.
+This note shows the operating discipline that makes adoption work: turning what users say
+into what Engineering can build. Below, three items from the synthetic feedback queue,
+rewritten as product requirements.
 
 ## 1. Citation grounding in long documents
 **Signals:** "Clause extraction misses cross-referenced definitions in long SPAs"
