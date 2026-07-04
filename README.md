@@ -18,6 +18,7 @@ used, which evidence files support the deck, which actions remain blocked, and
 which account-owner review gate applies before any renewal or expansion move.
 
 **Public-safety posture:** synthetic account data only, source provenance for dashboard inputs, review-gated legal outputs, and no legal advice.
+Portfolio proof contract: [`docs/portfolio-proof.json`](docs/portfolio-proof.json).
 
 **Live demo:** https://legal-ai-adoption-dashboard.vercel.app
 
