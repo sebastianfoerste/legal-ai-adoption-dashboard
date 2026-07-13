@@ -76,6 +76,7 @@ Three pages:
 2. **Adoption Blockers** (`/blockers`): open blockers by category, worst first, each with a re-engagement action and a workshop follow-up.
 3. **Product Feedback Queue** (`/feedback`): user friction routed to product areas, with a triage pipeline.
 4. **Adoption Cockpit review summary** (`/`): synthetic product-surface coverage, review gates, deck package readiness and blocked external action status.
+5. **Command Center** (`/command-center`): constrained adoption analytics, review-gated capability recommendations and a filterable leadership report package.
 
 ## Screenshots
 
