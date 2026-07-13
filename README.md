@@ -76,6 +76,7 @@ Three pages:
 2. **Adoption Blockers** (`/blockers`): open blockers by category, worst first, each with a re-engagement action and a workshop follow-up.
 3. **Product Feedback Queue** (`/feedback`): user friction routed to product areas, with a triage pipeline.
 4. **Adoption Cockpit review summary** (`/`): synthetic product-surface coverage, review gates, deck package readiness and blocked external action status.
+5. **Command Center** (`/command-center`): constrained adoption analytics, review-gated capability recommendations and a filterable leadership report package.
 
 ## Screenshots
 
@@ -109,6 +110,8 @@ up top flags that one account in the book is already expansion-ready. That is th
 build the upsell around this quarter.
 
 ## Limitations
+
+The Command Center validates synthetic `legal-workflow.event.v1` bundles and reports workflow-version adoption, review latency, comment resolution, lock contention, reviewer coverage and permission-governance alerts. The telemetry contract rejects document text, comments, names and client identifiers. The dashboard remains analytical and cannot mutate permissions in another app.
 
 - The health score is a deliberately simple, transparent formula (see `lib/health.ts`), not a tuned model.
 - Practice-group health uses utilization and trend only; it has no group-level feedback signal, so a group never reads "healthy."
