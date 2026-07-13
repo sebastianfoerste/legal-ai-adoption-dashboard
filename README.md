@@ -111,6 +111,8 @@ build the upsell around this quarter.
 
 ## Limitations
 
+The Command Center validates synthetic `legal-workflow.event.v1` bundles and reports workflow-version adoption, review latency, comment resolution, lock contention, reviewer coverage and permission-governance alerts. The telemetry contract rejects document text, comments, names and client identifiers. The dashboard remains analytical and cannot mutate permissions in another app.
+
 - The health score is a deliberately simple, transparent formula (see `lib/health.ts`), not a tuned model.
 - Practice-group health uses utilization and trend only; it has no group-level feedback signal, so a group never reads "healthy."
 - Data is static JSON. There is no persistence, auth, or multi-tenancy. This is an MVP that demonstrates the workflow, not a product.

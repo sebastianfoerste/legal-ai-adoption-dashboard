@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "telemetry:validate": "node scripts/validate-telemetry.mjs"
   },
   "dependencies": {
     "next": "16.2.9",

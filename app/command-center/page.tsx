@@ -1,7 +1,9 @@
 import { commandCenterSnapshot } from "@/lib/command-center";
+import { workflowGovernanceSnapshot } from "@/lib/workflow-governance";
 
 export default function CommandCenterPage() {
   const { answer, recommendations, leadershipReport } = commandCenterSnapshot();
+  const governance = workflowGovernanceSnapshot();
   return (
     <main className="mx-auto max-w-5xl space-y-6 px-6 py-8">
       <header>
@@ -26,6 +28,13 @@ export default function CommandCenterPage() {
           ))}
         </div>
       </section>
+
+      <section className="grid gap-4 md:grid-cols-3">
+        <article className="rounded-lg border border-gray-200 bg-white p-5"><h2 className="font-semibold">Workflow templates</h2><p className="mt-3 text-3xl font-semibold">{governance.workflowAnalytics.events}</p><p className="mt-1 text-sm text-gray-600">events across {governance.workflowAnalytics.apps} synthetic apps, {governance.workflowAnalytics.blockedEvents} blocked</p></article>
+        <article className="rounded-lg border border-gray-200 bg-white p-5"><h2 className="font-semibold">Collaboration</h2><p className="mt-3 text-3xl font-semibold">{governance.collaborationMetrics.reviewerCoveragePercent}%</p><p className="mt-1 text-sm text-gray-600">reviewer coverage, {governance.collaborationMetrics.commentResolutionMinutes} minute comment resolution, {governance.collaborationMetrics.lockContention} lock conflict</p></article>
+        <article className="rounded-lg border border-gray-200 bg-white p-5"><h2 className="font-semibold">Permission governance</h2><p className="mt-3 text-3xl font-semibold">{governance.permissionGovernance.alerts.length}</p><p className="mt-1 text-sm text-gray-600">synthetic access alerts across {governance.permissionGovernance.activeShares} active shares</p></article>
+      </section>
+      <section className="rounded-lg border border-gray-200 bg-white p-5"><h2 className="font-semibold">Share review queue</h2><div className="mt-4 space-y-3">{governance.permissionGovernance.alerts.map((alert)=><article key={`${alert.eventId}-${alert.reason}`} className="rounded-md border border-amber-200 bg-amber-50 p-3"><strong className="text-sm">{alert.severity.toUpperCase()} · {alert.eventId}</strong><p className="mt-1 text-sm text-amber-900">{alert.reason}</p></article>)}</div><p className="mt-4 text-xs text-gray-500">Source: {governance.sourceRef}. Analytics only. External permission mutation is disabled.</p></section>
 
       <section className="rounded-lg border border-gray-200 bg-white p-5">
         <h2 className="font-semibold">Capability recommendations</h2>
