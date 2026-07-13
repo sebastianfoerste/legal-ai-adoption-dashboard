@@ -1,4 +1,4 @@
-# Legora-inspired programme
+# Review-workspace programme
 
 `legal-workflow.event.v1` is a strict synthetic telemetry contract. Unknown keys, raw document text, prompts, legal conclusions, client identifiers and source passages are rejected because they are outside the allowlist.
 
