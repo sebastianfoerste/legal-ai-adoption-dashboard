@@ -4,6 +4,7 @@ import rawEvents from "../data/legal-workflow-events.json";
 export const WorkflowEventSchema = z.object({
   schema: z.literal("legal-workflow.event.v1"), id: z.string().min(1), appId: z.string().min(1), featureId: z.string().min(1),
   eventType: z.enum(["workflow_started", "review_started", "approved", "comment_opened", "comment_resolved", "lock_conflict", "source_verified", "review_reopened", "share_created", "share_expired", "share_revoked", "workflow_blocked"]),
+  // Zod 4 exposes ISO validators through z.iso. The review warning about this API applies to Zod 3.
   status: z.string().min(1), occurredAt: z.iso.datetime(), durationMs: z.number().int().nonnegative().optional(), timeSavedMs: z.number().int().nonnegative().optional(), reviewerRole: z.string().min(1).optional(), workflowVersion: z.number().int().positive().optional(), workflowRunId: z.string().min(1).optional(), productId: z.string().min(1).optional(), practiceGroup: z.string().min(1).optional(), resourceCount: z.number().int().nonnegative().optional(), expiresAt: z.iso.datetime().optional(), guestAccess: z.boolean().optional(), accessReviewDueAt: z.iso.datetime().optional(), synthetic: z.literal(true),
 }).strict();
 
@@ -30,7 +31,7 @@ export function workflowGovernanceSnapshot(events = parseWorkflowEvents(rawEvent
   return {
     schema: "legal-ai-adoption.workflow-governance.v1" as const,
     workflowAnalytics: { events: events.length, apps: new Set(events.map((event) => event.appId)).size, workflowStarts: events.filter((event) => event.eventType === "workflow_started").length, approvals, completionRatePercent: startedRunIds.size ? Math.round(completedStartedRuns.size / startedRunIds.size * 100) : 0, blockedEvents: events.filter((event) => event.status === "blocked").length, timeSavedMinutes: Math.round(events.reduce((sum, event) => sum + (event.timeSavedMs ?? 0), 0) / 60000), versions: [...new Set(events.flatMap((event) => event.workflowVersion ? [`v${event.workflowVersion}`] : []))], byProduct: countBy(events, (event) => event.productId ?? event.appId), byPracticeGroup: countBy(events.filter((event) => event.practiceGroup), (event) => event.practiceGroup as string) },
-    collaborationMetrics: { timeToFirstReviewMinutes: averageMinutes(durations("review_started")), timeToApprovalMinutes: averageMinutes(durations("approved")), commentResolutionMinutes: averageMinutes(durations("comment_resolved")), reopenRatePercent: approvals ? Math.round(events.filter((event) => event.eventType === "review_reopened").length / approvals * 100) : 0, lockContention: events.filter((event) => event.eventType === "lock_conflict").length, reviewerCoveragePercent: Math.round(reviewerEvents.length / events.length * 100), sourceVerifications: events.filter((event) => event.eventType === "source_verified").length },
+    collaborationMetrics: { timeToFirstReviewMinutes: averageMinutes(durations("review_started")), timeToApprovalMinutes: averageMinutes(durations("approved")), commentResolutionMinutes: averageMinutes(durations("comment_resolved")), reopenRatePercent: approvals ? Math.round(events.filter((event) => event.eventType === "review_reopened").length / approvals * 100) : 0, lockContention: events.filter((event) => event.eventType === "lock_conflict").length, reviewerCoveragePercent: events.length ? Math.round(reviewerEvents.length / events.length * 100) : 0, sourceVerifications: events.filter((event) => event.eventType === "source_verified").length },
     permissionGovernance: { activeShares: shares.filter((event) => event.status === "active").length, expiredShares: shares.filter((event) => event.eventType === "share_expired").length, revokedShares: shares.filter((event) => event.eventType === "share_revoked").length, guestShares: shares.filter((event) => event.guestAccess).length, resourcesAcrossShares: shares.reduce((sum, event) => sum + (event.resourceCount ?? 0), 0), overdueAccessReviews: shares.filter((event) => event.status === "active" && event.accessReviewDueAt && new Date(event.accessReviewDueAt) <= now).length, alerts: alerts.map((alert) => ({ ...alert, href: `#event-${alert.eventId}` })) },
     metricDefinitions: {
       completionRatePercent: "Approved events divided by workflow started events.",
@@ -44,5 +45,10 @@ export function workflowGovernanceSnapshot(events = parseWorkflowEvents(rawEvent
 }
 
 function countBy(events: WorkflowEvent[], key: (event: WorkflowEvent) => string) {
-  return Object.fromEntries([...new Set(events.map(key))].sort().map((value) => [value, events.filter((event) => key(event) === value).length]));
+  const counts = new Map<string, number>();
+  for (const event of events) {
+    const value = key(event);
+    counts.set(value, (counts.get(value) ?? 0) + 1);
+  }
+  return Object.fromEntries([...counts].sort(([left], [right]) => left.localeCompare(right)));
 }

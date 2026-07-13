@@ -23,4 +23,10 @@ describe("workflow telemetry and governance", () => {
     expect(() => parseWorkflowEvents([{ schema: "legal-workflow.event.v1", id: "bad", appId: "app", featureId: "feature", eventType: "approved", status: "approved", occurredAt: "2026-07-13T00:00:00Z", synthetic: true, documentText: "secret" }])).toThrow();
     expect(() => parseWorkflowEvents([{ schema: "legal-workflow.event.v1", id: "bad", appId: "app", featureId: "feature", eventType: "approved", status: "approved", occurredAt: "2026-07-13T00:00:00Z", synthetic: true, clientId: "client" }])).toThrow();
   });
+  it("returns finite zero metrics for an empty event set", () => {
+    const snapshot = workflowGovernanceSnapshot([]);
+    expect(snapshot.collaborationMetrics.reviewerCoveragePercent).toBe(0);
+    expect(snapshot.workflowAnalytics.byProduct).toEqual({});
+    expect(snapshot.workflowAnalytics.byPracticeGroup).toEqual({});
+  });
 });
