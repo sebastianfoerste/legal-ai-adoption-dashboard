@@ -8,6 +8,7 @@ const nav = [
   { href: "/blockers", label: "Adoption Blockers" },
   { href: "/feedback", label: "Product Feedback" },
   { href: "/command-center", label: "Command Center" },
+  { href: "/benchmarks", label: "Benchmarks" },
 ];
 
 export function NavLinks() {
