@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/packages/legal-workflow-contract/schema/legal-workflow.event.v1.schema.json",
+  "title": "Legal workflow event v1 bundle",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schema",
+      "id",
+      "appId",
+      "featureId",
+      "eventType",
+      "status",
+      "occurredAt",
+      "synthetic"
+    ],
+    "properties": {
+      "schema": {"const": "legal-workflow.event.v1"},
+      "id": {"type": "string", "minLength": 1},
+      "appId": {"type": "string", "minLength": 1},
+      "featureId": {"type": "string", "minLength": 1},
+      "eventType": {
+        "enum": [
+          "workflow_started",
+          "review_started",
+          "approved",
+          "comment_opened",
+          "comment_resolved",
+          "lock_conflict",
+          "source_verified",
+          "review_reopened",
+          "share_created",
+          "share_expired",
+          "share_revoked",
+          "workflow_blocked"
+        ]
+      },
+      "status": {"type": "string", "minLength": 1},
+      "occurredAt": {"type": "string", "format": "date-time"},
+      "durationMs": {"type": "integer", "minimum": 0},
+      "timeSavedMs": {"type": "integer", "minimum": 0},
+      "reviewerRole": {"type": "string", "minLength": 1},
+      "workflowVersion": {"type": "integer", "minimum": 1},
+      "workflowRunId": {"type": "string", "minLength": 1},
+      "productId": {"type": "string", "minLength": 1},
+      "practiceGroup": {"type": "string", "minLength": 1},
+      "resourceCount": {"type": "integer", "minimum": 0},
+      "expiresAt": {"type": "string", "format": "date-time"},
+      "guestAccess": {"type": "boolean"},
+      "accessReviewDueAt": {"type": "string", "format": "date-time"},
+      "synthetic": {"const": true}
+    }
+  }
+}

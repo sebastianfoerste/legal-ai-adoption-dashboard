@@ -1,0 +1,13 @@
+{
+  "name": "@sebastianfoerste/legal-workflow-contract",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./schema/legal-workflow.event.v1.schema.json"
+  },
+  "peerDependencies": {
+    "zod": "^4.4.3"
+  }
+}

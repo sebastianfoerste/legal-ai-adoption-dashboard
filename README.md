@@ -113,6 +113,8 @@ build the upsell around this quarter.
 
 The Command Center validates synthetic `legal-workflow.event.v1` bundles and reports workflow-version adoption, review latency, comment resolution, lock contention, reviewer coverage and permission-governance alerts. The telemetry contract rejects document text, comments, names and client identifiers. The dashboard remains analytical and cannot mutate permissions in another app.
 
+The versioned contract is maintained in `packages/legal-workflow-contract`. Dashboard analytics consume its typed Zod schema, and the standalone validator consumes its JSON Schema allowlist. The facilitation content is maintained in `workshop-kit` and retains its own `make check` gate. Run `make dashboard-check`, `make contract-check` and `make workshop-check` independently, or run `make check` for the combined gate.
+
 - The health score is a deliberately simple, transparent formula (see `lib/health.ts`), not a tuned model.
 - Practice-group health uses utilization and trend only; it has no group-level feedback signal, so a group never reads "healthy."
 - Data is static JSON. There is no persistence, auth, or multi-tenancy. This is an MVP that demonstrates the workflow, not a product.
