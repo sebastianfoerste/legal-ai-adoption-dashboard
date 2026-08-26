@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal AI Workshop Kit Playbook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        
+    :root {
+        --bg-color: #0b0f19;
+        --card-bg: rgba(22, 30, 49, 0.7);
+        --border-color: rgba(255, 255, 255, 0.08);
+        --text-primary: #f3f4f6;
+        --text-secondary: #9ca3af;
+        --primary: #3b82f6;
+        --primary-hover: #60a5fa;
+        --accent-success: #10b981;
+        --accent-warning: #f59e0b;
+        --accent-danger: #ef4444;
+        --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        --heading-font: 'Outfit', sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        font-family: var(--font-family);
+        line-height: 1.6;
+        display: flex;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: var(--bg-color);
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Sidebar Navigation */
+    aside {
+        width: 320px;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(12px);
+        border-right: 1px solid var(--border-color);
+        padding: 2rem 1.5rem;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        z-index: 100;
+    }
+
+    .sidebar-title {
+        font-family: var(--heading-font);
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #fff;
+        letter-spacing: -0.025em;
+        background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .sidebar-subtitle {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 2rem;
+    }
+
+    aside ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+
+    aside a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        display: block;
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    aside a:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    aside a.active {
+        color: #fff;
+        background: rgba(59, 130, 246, 0.15);
+        border-color: rgba(59, 130, 246, 0.3);
+        font-weight: 500;
+    }
+
+    /* Main Content Area */
+    main {
+        margin-left: 320px;
+        padding: 3rem 4rem;
+        max-width: 1000px;
+        width: calc(100% - 320px);
+        margin-right: auto;
+    }
+
+    section {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 2.5rem;
+        margin-bottom: 3rem;
+        box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(8px);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--heading-font);
+        color: #fff;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+        margin-top: 0;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 1rem;
+        background: linear-gradient(135deg, #fff 50%, #9ca3af 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.5rem;
+        margin-top: 2rem;
+    }
+
+    h3 {
+        font-size: 1.35rem;
+    }
+
+    p {
+        color: #d1d5db;
+        margin-bottom: 1.25rem;
+        font-size: 0.975rem;
+    }
+
+    /* Links */
+    a {
+        color: var(--primary-hover);
+        text-decoration: none;
+        transition: color 0.15s ease;
+    }
+    a:hover {
+        color: #93c5fd;
+        text-decoration: underline;
+    }
+
+    /* Lists */
+    ul, ol {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+        color: #d1d5db;
+    }
+    li {
+        margin-bottom: 0.5rem;
+        font-size: 0.975rem;
+    }
+
+    /* Code blocks */
+    pre {
+        background: #030712;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1.25rem;
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+    }
+    code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.875rem;
+        color: #f3f4f6;
+    }
+    p > code, li > code {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.85em;
+    }
+
+    /* Tables */
+    .table-container {
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.9rem;
+    }
+    th, td {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    th {
+        background: rgba(255, 255, 255, 0.02);
+        color: #fff;
+        font-weight: 600;
+        font-family: var(--heading-font);
+    }
+    tr:last-child td {
+        border-bottom: none;
+    }
+    tr:hover td {
+        background: rgba(255, 255, 255, 0.01);
+    }
+
+    /* Alerts */
+    .alert {
+        border-left: 4px solid var(--primary);
+        background: rgba(59, 130, 246, 0.05);
+        border-radius: 0 8px 8px 0;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    .alert-title {
+        font-weight: 700;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+        color: var(--primary-hover);
+    }
+    .alert-tip {
+        border-left-color: var(--accent-success);
+        background: rgba(16, 185, 129, 0.05);
+    }
+    .alert-tip .alert-title {
+        color: var(--accent-success);
+    }
+    .alert-important {
+        border-left-color: var(--primary);
+        background: rgba(59, 130, 246, 0.05);
+    }
+    .alert-important .alert-title {
+        color: var(--primary-hover);
+    }
+    .alert-warning {
+        border-left-color: var(--accent-warning);
+        background: rgba(245, 158, 11, 0.05);
+    }
+    .alert-warning .alert-title {
+        color: var(--accent-warning);
+    }
+    .alert-caution {
+        border-left-color: var(--accent-danger);
+        background: rgba(239, 68, 68, 0.05);
+    }
+    .alert-caution .alert-title {
+        color: var(--accent-danger);
+    }
+
+    /* Blockquotes */
+    blockquote {
+        border-left: 4px solid var(--border-color);
+        padding-left: 1.25rem;
+        color: var(--text-secondary);
+        font-style: italic;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Horizontal Rule */
+    hr {
+        border: none;
+        border-top: 1px solid var(--border-color);
+        margin: 2rem 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        body {
+            flex-direction: column;
+        }
+        aside {
+            width: 100%;
+            position: relative;
+            height: auto;
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+        main {
+            margin-left: 0;
+            width: 100%;
+            padding: 1.5rem;
+        }
+        section {
+            padding: 1.5rem;
+        }
+    }
+    
+    </style>
+</head>
+<body>
+    <aside>
+        <div class="sidebar-title">Legal AI</div>
+        <div class="sidebar-subtitle">Workshop Kit Playbook</div>
+        <nav>
+            <ul>
+                <li><a href="#readme" id="link-readme">legal-ai-workshop-kit</a></li>
+<li><a href="#what-this-proves" id="link-what-this-proves">What this proves</a></li>
+<li><a href="#docs-reviewer-guide" id="link-docs-reviewer-guide">Reviewer guide</a></li>
+<li><a href="#docs-customer-workflow" id="link-docs-customer-workflow">Customer workflow</a></li>
+<li><a href="#docs-product-feedback-notes" id="link-docs-product-feedback-notes">Product-feedback notes</a></li>
+<li><a href="#discovery-adoption-questionnaire" id="link-discovery-adoption-questionnaire">Adoption questionnaire</a></li>
+<li><a href="#discovery-workflow-discovery-template" id="link-discovery-workflow-discovery-template">Workflow discovery template</a></li>
+<li><a href="#discovery-use-case-prioritization-matrix" id="link-discovery-use-case-prioritization-matrix">Use-case prioritization matrix</a></li>
+<li><a href="#discovery-roi-calculator" id="link-discovery-roi-calculator">Legal AI ROI Calculation Worksheet</a></li>
+<li><a href="#sessions-30-min-partner-briefing" id="link-sessions-30-min-partner-briefing">30-minute partner briefing</a></li>
+<li><a href="#sessions-60-min-workshop-agenda" id="link-sessions-60-min-workshop-agenda">60-minute workshop agenda</a></li>
+<li><a href="#sessions-90-min-associate-hands-on" id="link-sessions-90-min-associate-hands-on">90-minute associate hands-on</a></li>
+<li><a href="#enablement-adoption-maturity-model" id="link-enablement-adoption-maturity-model">Legal AI Adoption Maturity Model Playbook</a></li>
+<li><a href="#enablement-skeptical-partner-objections" id="link-enablement-skeptical-partner-objections">Skeptical-partner objection handling</a></li>
+<li><a href="#enablement-follow-up-email-templates" id="link-enablement-follow-up-email-templates">Follow-up email templates</a></li>
+<li><a href="#enablement-product-feedback-template" id="link-enablement-product-feedback-template">Product-feedback template</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main>
+        
+        <section id="readme">
+            <h1>legal-ai-workshop-kit</h1>
+            <p>Enablement materials for legal AI adoption: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.</p>
+<p>All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice.</p>
+<h2 id="readme--run it">Run it</h2>
+<pre><code class="language-text">git clone https://github.com/sebastianfoerste/legal-ai-workshop-kit
+cd legal-ai-workshop-kit
+make generate-pilot</code></pre>
+<h2 id="readme--what the demo produces">What the demo produces</h2>
+<p>The demo scores candidate workflows through a prioritization matrix and recommends a first pilot based on impact, frequency, AI fit, and review feasibility.</p>
+<pre><code class="language-text"># Sample output: prioritization result
+
+| Candidate workflow | Impact | Frequency | AI fit | Review feasibility | Total |
+|---|---:|---:|---:|---:|---:|
+| NDA first-pass review | 4 | 5 | 5 | 5 | **19** |
+| Clause comparison across versions | 4 | 4 | 5 | 5 | **18** |
+| Document / issue summary | 3 | 5 | 4 | 4 | **16** |</code></pre>
+<h2 id="readme--pilot-to-adoption path">Pilot-to-adoption path</h2>
+<p>This is the legal-AI rollout reviewer path:</p>
+<ol>
+<li>Scope the team with the adoption questionnaire and workflow discovery template.</li>
+<li>Use the prioritization matrix to separate high-value workflows from low-review-feasibility demos.</li>
+<li>Run the right enablement format: partner briefing, workshop, or hands-on session.</li>
+<li>Convert user friction into structured product-feedback notes.</li>
+<li>Re-baseline adoption with the maturity model and first 90 days deployment plan.</li>
+</ol>
+<h2 id="readme--what's inside">What's inside</h2>
+<ul>
+<li>Session agendas for partner briefings, workshops, and hands-on training.</li>
+<li>Discovery templates for adoption readiness and workflow mapping.</li>
+<li>Prioritization tools for choosing the first pilot.</li>
+<li>Follow-up templates and product-feedback notes.</li>
+<li>A unified playbook for reviewer evaluation.</li>
+</ul>
+<h2 id="readme--data statement">Data statement</h2>
+<p>All examples are generic or synthetic. No real client, firm, matter, or personal data appears anywhere in this repo.</p>
+<h2 id="readme--check">Check</h2>
+<p><code>make check</code> verifies that the required materials exist.</p>
+        </section>
+        
+
+        <section id="what-this-proves">
+            <h1>What this proves</h1>
+            <p>Building a legal-AI tool is one job. Getting a skeptical partnership to actually use it is a different one, and it is the one the post-sales / Legal Engineer role is really about. This repo is the evidence for the second job.</p>
+<div class="table-container"><table>
+<thead><tr>
+<th>Document</th>
+<th>Responsibility it demonstrates</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><a href="#sessions-60-min-workshop-agenda">60-minute workshop agenda</a></td>
+<td>Running enablement that ends in committed workflows, not applause.</td>
+</tr>
+<tr>
+<td><a href="#sessions-30-min-partner-briefing">30-minute partner briefing</a></td>
+<td>Making the economic and risk case to a decision-maker in their register.</td>
+</tr>
+<tr>
+<td><a href="#sessions-90-min-associate-hands-on">90-minute associate hands-on</a></td>
+<td>Building real user fluency, with verification as the core skill.</td>
+</tr>
+<tr>
+<td><a href="#discovery-adoption-questionnaire">Adoption questionnaire</a></td>
+<td>Scoring account readiness before spending time — predicting blockers early.</td>
+</tr>
+<tr>
+<td><a href="#discovery-workflow-discovery-template">Workflow discovery template</a></td>
+<td>Mapping real work to AI use cases, with verification cost as a first-class field.</td>
+</tr>
+<tr>
+<td><a href="#discovery-use-case-prioritization-matrix">Use-case prioritization matrix</a></td>
+<td>Sequencing pilots for trust first, ambition second.</td>
+</tr>
+<tr>
+<td><a href="#enablement-skeptical-partner-objections">Skeptical-partner objections</a></td>
+<td>Handling resistance with evidence and the review gate, not hype.</td>
+</tr>
+<tr>
+<td><a href="#enablement-follow-up-email-templates">Follow-up email templates</a></td>
+<td>Re-engagement and expansion at the right moment, in the right words.</td>
+</tr>
+<tr>
+<td><a href="#enablement-product-feedback-template">Product-feedback template</a></td>
+<td>Translating field friction into structured requirements for Engineering.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The through-line: every artifact keeps the human-review gate explicit and treats trust as the thing to earn first. That is what makes legal AI adoptable inside a regulated practice, and it is the judgment the role is hiring for.</p>
+        </section>
+        
+
+        <section id="docs-reviewer-guide">
+            <h1>Reviewer guide</h1>
+            <p>A five-minute path for a reviewer who is not going to read every document.</p>
+<ol>
+<li><strong>Start at the <a href="#readme">README</a>.</strong> The "What's inside" table is the map — each</li>
+</ol>
+<p>document says when you would reach for it.</p>
+<ol>
+<li><strong>Open the <a href="#sessions-60-min-workshop-agenda">60-minute workshop agenda</a>.</strong> It shows</li>
+</ol>
+<p>how a session is run: it ends in committed workflows and keeps the review gate on screen the whole hour. This is the core deliverable.</p>
+<ol>
+<li><strong>Open the <a href="#enablement-product-feedback-template">product-feedback template</a>.</strong> Read</li>
+</ol>
+<p>the worked example. This is the artifact that turns what you see in a session into a requirement Engineering can act on — the skill the role is screening for.</p>
+<ol>
+<li><strong>Skim the <a href="#discovery-use-case-prioritization-matrix">prioritization matrix</a>.</strong> Note</li>
+</ol>
+<p>the floor rule: never pilot a workflow you cannot cheaply verify, regardless of impact. That single rule captures the trust-first judgment behind the whole kit.</p>
+<p>What to check: the content is usable as-is, the human-review gate is explicit everywhere, and nothing frames the tool as replacing a lawyer.</p>
+<p>Run <code>make check</code> to confirm every document is present and none is left half-written.</p>
+        </section>
+        
+
+        <section id="docs-customer-workflow">
+            <h1>Customer workflow</h1>
+            <p>How the kit is used end to end across the life of an account.</p>
+<h2 id="docs-customer-workflow--scope (week 0)">Scope (week 0)</h2>
+<p>Run the <a href="#discovery-adoption-questionnaire">adoption questionnaire</a> with the account. Score the five sections. A low section is not a stop; it is the first work item — usually champion time or a data path. Do not book a workshop into an account that scores in the hold band.</p>
+<h2 id="docs-customer-workflow--discover (weeks 0–2)">Discover (weeks 0–2)</h2>
+<p>Fill a <a href="#discovery-workflow-discovery-template">workflow discovery template</a> for each candidate workflow with the group. The two fields that decide fit are frequency and verification cost. A workflow that is rare or expensive to check is a poor first pilot however appealing it sounds.</p>
+<h2 id="docs-customer-workflow--prioritize (week 2)">Prioritize (week 2)</h2>
+<p>Score the candidates in the <a href="#discovery-use-case-prioritization-matrix">prioritization matrix</a>. Apply the floor rule and pick one workflow to pilot. Sequence for trust: frequent and easy to verify beats high-impact and hard to verify.</p>
+<h2 id="docs-customer-workflow--decide (week 2)">Decide (week 2)</h2>
+<p>Run the <a href="#sessions-30-min-partner-briefing">partner briefing</a>. The output is a sponsored four-week pilot with a named workflow and a workshop date, or a clear no.</p>
+<h2 id="docs-customer-workflow--enable (weeks 3–4)">Enable (weeks 3–4)</h2>
+<p>Run the <a href="#sessions-60-min-workshop-agenda">workshop</a> for the group, then the <a href="#sessions-90-min-associate-hands-on">associate hands-on</a> for fluency. Both end in committed workflows and a captured friction log.</p>
+<h2 id="docs-customer-workflow--sustain (ongoing)">Sustain (ongoing)</h2>
+<p>Watch usage. When it dips, the cause is usually a specific blocker — workflow fit, training, or trust. Send the re-engagement note from the <a href="#enablement-follow-up-email-templates">follow-up templates</a> that names the likely cause, and fix it. Log every friction point with the <a href="#enablement-product-feedback-template">product-feedback template</a>.</p>
+<h2 id="docs-customer-workflow--expand (when earned)">Expand (when earned)</h2>
+<p>When usage is a habit and the group asks for more, send the expansion note. Repeat the cycle for the next workflow or group. Expansion is earned on a real usage signal, never pushed on a calendar.</p>
+<p>Throughout: the human-review gate never moves. The kit teaches adoption of a reviewed product; it never removes the lawyer's sign-off.</p>
+        </section>
+        
+
+        <section id="docs-product-feedback-notes">
+            <h1>Product-feedback notes</h1>
+            <p>A worked example of the step that matters most: three observations from one workshop, turned into requirements Engineering can act on. Each uses the <a href="#enablement-product-feedback-template">product-feedback template</a>.</p>
+<h2 id="docs-product-feedback-notes--observation 1 — missed cross-referenced definition">Observation 1 — missed cross-referenced definition</h2>
+<p><strong>Seen:</strong> a Corporate associate, NDA first-pass review. The tool extracted the confidentiality clause but missed that an earlier definition section changed what "Confidential Information" meant. <strong>Class:</strong> trust. A missed definition changes the risk read. <strong>Requirement:</strong> resolve cross-referenced definitions before extraction and attach the controlling definition to the extracted clause. <strong>Acceptance:</strong> on a document where a definition modifies a later clause, the extracted clause shows the controlling definition without the reviewer hunting for it. <strong>Priority:</strong> highest — trust-touching, and it hits the most frequent corporate workflow.</p>
+<h2 id="docs-product-feedback-notes--observation 2 — us-style drafting register">Observation 2 — US-style drafting register</h2>
+<p><strong>Seen:</strong> an in-house counsel, drafting. The output read as US-style boilerplate on a German-law contract. <strong>Class:</strong> fit. Not wrong, but unusable without a rewrite. <strong>Requirement:</strong> a jurisdiction setting that switches the drafting register and the review checklist. <strong>Acceptance:</strong> under a German-law profile, the draft drops US boilerplate and uses the local register. <strong>Priority:</strong> high for in-house accounts in the DACH region; lower elsewhere.</p>
+<h2 id="docs-product-feedback-notes--observation 3 — no usage export">Observation 3 — no usage export</h2>
+<p><strong>Seen:</strong> an Innovation lead, planning a wider rollout. Wanted last-quarter usage by group and could not get it without asking us. <strong>Class:</strong> convenience, but it blocks a champion's own planning. <strong>Requirement:</strong> a self-serve export of per-group usage and trend. <strong>Acceptance:</strong> an Innovation lead pulls last-quarter active users by group without a support request. <strong>Priority:</strong> medium — cheap, and it turns a champion into an advocate.</p>
+<h2 id="docs-product-feedback-notes--the pattern to take to engineering">The pattern to take to Engineering</h2>
+<p>Sequence by class, not by volume of complaints: ground first (Observation 1), fit second (Observation 2), convenience third (Observation 3). Trust-touching items are a different class of problem and jump the queue.</p>
+        </section>
+        
+
+        <section id="discovery-adoption-questionnaire">
+            <h1>Adoption questionnaire</h1>
+            <p><strong>Use this when</strong> you are scoping an account and need a readiness score before you commit workshop time.</p>
+<p>Score each question, total by section, and read the band at the end. The five sections map to the same signals the adoption dashboard tracks — champion, workflow pain, data constraints, prior experience, and sponsorship — so a low section here predicts a blocker later.</p>
+<p>Scoring: <strong>0</strong> = no / not present, <strong>1</strong> = partial, <strong>2</strong> = yes / strong.</p>
+<h2 id="discovery-adoption-questionnaire--1. champion (max 6)">1. Champion (max 6)</h2>
+<ul>
+<li>Is there a named Innovation lead or PSL who owns this rollout? ___</li>
+<li>Does that person have time allocated, not just the title? ___</li>
+<li>Can they get a partner on the phone when needed? ___</li>
+</ul>
+<p>A low score here is the single best predictor of a stall. No champion, no adoption.</p>
+<h2 id="discovery-adoption-questionnaire--2. workflow pain (max 6)">2. Workflow pain (max 6)</h2>
+<ul>
+<li>Is there a high-frequency task the group already complains about? ___</li>
+<li>Does that task have a clear first-pass-then-review shape? ___</li>
+<li>Is the pain felt by associates, who will actually use the tool, not only by partners? ___</li>
+</ul>
+<p>Pain the users feel is what pulls a tool into daily use. Pain only partners feel does not.</p>
+<h2 id="discovery-adoption-questionnaire--3. data and confidentiality constraints (max 6)">3. Data and confidentiality constraints (max 6)</h2>
+<ul>
+<li>Is there an approved environment that keeps client data out of untrusted systems? ___</li>
+<li>Are the relevant confidentiality and privilege constraints already mapped? ___</li>
+<li>Can the group identify synthetic or non-confidential documents to train on? ___</li>
+</ul>
+<p>A zero in this section is not a disqualifier; it is the first work item.</p>
+<h2 id="discovery-adoption-questionnaire--4. prior ai experience (max 6)">4. Prior AI experience (max 6)</h2>
+<ul>
+<li>Has the group used any AI tool before, even informally? ___</li>
+<li>Did that experience leave trust intact, or burned? ___</li>
+<li>Is there realistic expectation-setting, rather than either hype or dismissal? ___</li>
+</ul>
+<p>A burned prior experience scores low and changes the rollout: lead with the review gate and small wins, not capability claims.</p>
+<h2 id="discovery-adoption-questionnaire--5. sponsorship and economics (max 6)">5. Sponsorship and economics (max 6)</h2>
+<ul>
+<li>Is a partner willing to sponsor a pilot, not just permit one? ___</li>
+<li>Is there a reason the economics matter to them now — leverage, write-offs, cycle time? ___</li>
+<li>Will someone be measured on whether this works? ___</li>
+</ul>
+<h2 id="discovery-adoption-questionnaire--reading the score (max 30)">Reading the score (max 30)</h2>
+<ul>
+<li><strong>24–30 — ready.</strong> Book the partner briefing and a workshop. Expect fast adoption.</li>
+<li><strong>16–23 — ready with gaps.</strong> Close the lowest section first. Usually champion time or a data path.</li>
+<li><strong>8–15 — not yet.</strong> One or two foundations are missing. Do the groundwork before spending workshop time.</li>
+<li><strong>0–7 — hold.</strong> No champion, no pain, no sponsor. A workshop here will not stick.</li>
+</ul>
+<p>Record the section scores, not just the total. The dashboard reads blockers by category, and a low section here is the category that will show up there.</p>
+        </section>
+        
+
+        <section id="discovery-workflow-discovery-template">
+            <h1>Workflow discovery template</h1>
+            <p><strong>Use this when</strong> you are mapping a real workflow to a candidate AI use case, so the pilot targets something that matters and can actually be reviewed.</p>
+<p>Fill one of these per candidate workflow. The fields force the two questions that decide whether a workflow is a good fit: how often does it happen, and how cheaply can a human verify the output.</p>
+<h2 id="discovery-workflow-discovery-template--template">Template</h2>
+<ul>
+<li><strong>Workflow name:</strong> <code>{{name}}</code></li>
+<li><strong>Practice group:</strong> <code>{{group}}</code></li>
+<li><strong>Trigger:</strong> what starts this work? (a signed engagement, an inbound contract, a filing)</li>
+<li><strong>Inputs:</strong> what documents or facts come in?</li>
+<li><strong>Current steps:</strong> the sequence today, who does each step.</li>
+<li><strong>Time cost:</strong> rough hours per instance, and who spends them.</li>
+<li><strong>Frequency:</strong> how often per week or month, across the group.</li>
+<li><strong>Mandatory review point:</strong> where must a qualified lawyer review before anything is relied on or sent? This never moves.</li>
+<li><strong>Candidate AI step:</strong> which single step becomes a first pass the AI produces and a human checks?</li>
+<li><strong>Verification cost:</strong> how long does it take a human to confirm the AI output is right? If the answer is "as long as doing it from scratch," this is a poor fit.</li>
+<li><strong>Confidentiality note:</strong> can this run in the approved environment, and is there a synthetic version for training?</li>
+</ul>
+<h2 id="discovery-workflow-discovery-template--worked example (synthetic)">Worked example (synthetic)</h2>
+<ul>
+<li><strong>Workflow name:</strong> NDA first-pass review</li>
+<li><strong>Practice group:</strong> Corporate</li>
+<li><strong>Trigger:</strong> an inbound NDA arrives ahead of a deal conversation.</li>
+<li><strong>Inputs:</strong> the counterparty's NDA, the firm's NDA playbook.</li>
+<li><strong>Current steps:</strong> paralegal logs it; associate reads it against the playbook; associate marks deviations; partner reviews the marked-up version.</li>
+<li><strong>Time cost:</strong> ~45 minutes of associate time per NDA.</li>
+<li><strong>Frequency:</strong> 10–15 per week across the group.</li>
+<li><strong>Mandatory review point:</strong> partner sign-off on the marked-up NDA before it goes back to the counterparty. Unchanged.</li>
+<li><strong>Candidate AI step:</strong> the associate's first pass — extract clauses, compare to the playbook, flag deviations — becomes an AI first pass the associate verifies.</li>
+<li><strong>Verification cost:</strong> ~10 minutes to check flagged clauses against the text. Much less than the 45 minutes from scratch. Good fit.</li>
+<li><strong>Confidentiality note:</strong> runs in the approved environment; a synthetic NDA set exists for the workshop.</li>
+</ul>
+<p>This example scores well because it is frequent, the review point is clear, and verification is far cheaper than the original task. Carry the filled template into the prioritization matrix.</p>
+        </section>
+        
+
+        <section id="discovery-use-case-prioritization-matrix">
+            <h1>Use-case prioritization matrix</h1>
+            <p><strong>Use this when</strong> you have several candidate workflows and need to pick what to pilot first — on evidence, not on whoever lobbied loudest.</p>
+<p>Score each candidate 1–5 on four dimensions. Total out of 20. Then apply the floor rule.</p>
+<h2 id="discovery-use-case-prioritization-matrix--dimensions">Dimensions</h2>
+<ul>
+<li><strong>Impact</strong> — time saved per instance times the value of the work. A partner-facing summary scores higher than an internal note.</li>
+<li><strong>Frequency</strong> — how often the task recurs across the group. Daily beats quarterly.</li>
+<li><strong>AI fit</strong> — how well current models handle this task today, honestly assessed.</li>
+<li><strong>Review feasibility</strong> — how cheaply a human can verify the output. High means a quick claim-to-source check; low means re-doing the work to trust it.</li>
+</ul>
+<h2 id="discovery-use-case-prioritization-matrix--worked example (synthetic)">Worked example (synthetic)</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Candidate workflow</th>
+<th>Impact</th>
+<th>Frequency</th>
+<th>AI fit</th>
+<th>Review feasibility</th>
+<th>Total</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>---</td>
+<td>---:</td>
+<td>---:</td>
+<td>---:</td>
+<td>---:</td>
+<td>---:</td>
+</tr>
+<tr>
+<td>NDA first-pass review</td>
+<td>4</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td><strong>19</strong></td>
+</tr>
+<tr>
+<td>Clause comparison across versions</td>
+<td>4</td>
+<td>4</td>
+<td>5</td>
+<td>5</td>
+<td><strong>18</strong></td>
+</tr>
+<tr>
+<td>Document / issue summary</td>
+<td>3</td>
+<td>5</td>
+<td>4</td>
+<td>4</td>
+<td><strong>16</strong></td>
+</tr>
+<tr>
+<td>DPA review (GDPR)</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td><strong>13</strong></td>
+</tr>
+<tr>
+<td>Litigation research memo</td>
+<td>5</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td><strong>13</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="discovery-use-case-prioritization-matrix--the floor rule">The floor rule</h2>
+<p>Pick the highest total — <strong>but never pilot a workflow scoring below 4 on Review feasibility</strong>, no matter how high its impact.</p>
+<p>In the example, the litigation research memo ties on total and scores highest on impact, but its review feasibility is 2: the output is hard and slow to verify, and a missed fabricated citation is a serious error. It is the wrong first pilot. Lead with the <strong>NDA first-pass review</strong> instead — frequent, well-handled, and cheap to check. Win trust on something verifiable before taking on the work that is expensive to review.</p>
+<h2 id="discovery-use-case-prioritization-matrix--why this order matters for adoption">Why this order matters for adoption</h2>
+<p>The first pilot sets the trust narrative for the whole account. A workflow that is frequent and easy to verify produces visible wins and few scares. A high-impact but hard-to-verify workflow produces the opposite, and one bad citation early can end the rollout. Sequence for trust first, ambition second.</p>
+        </section>
+        
+
+        <section id="discovery-roi-calculator">
+            <h1>Legal AI ROI Calculation Worksheet</h1>
+            <p>This worksheet provides Customer Success Managers (CSMs) and Legal Engineers with a standardized, data-backed framework to calculate the economic impact and return on investment (ROI) of legal-AI rollouts ahead of QBRs and renewal conversations.</p>
+<hr />
+<h2 id="discovery-roi-calculator--1. key value metrics & formulas">1. Key Value Metrics &amp; Formulas</h2>
+<p>To compute the direct value realized by a practice group, we measure the frequency of tasks and the net duration delta between manual processing and AI-assisted drafting/verification.</p>
+<h3 id="discovery-roi-calculator--formula a: weekly time saved (hours)">Formula A: Weekly Time Saved (Hours)</h3>
+<p>$$\text{Hours Saved/Week} = \frac{\text{Weekly Frequency} \times (\text{Manual Baseline Duration (mins)} - \text{AI Verification Duration (mins)})}{60}$$</p>
+<h3 id="discovery-roi-calculator--formula b: annual direct value ($)">Formula B: Annual Direct Value ($)</h3>
+<p>$$\text{Annual Direct Value} = \text{Weekly Hours Saved} \times 52 \text{ weeks} \times \text{Blended Billable Rate}$$</p>
+<p><em>Note: Use a blended associate billable rate (typically \$300–\$450 depending on firm tier and region) to represent the billable capacity freed up for strategic client work.</em></p>
+<h3 id="discovery-roi-calculator--formula c: net value & roi">Formula C: Net Value &amp; ROI</h3>
+<p>$$\text{Net Annual Value} = \text{Annual Direct Value} - \text{Annual Software License Cost}$$ $$\text{ROI (\%)} = \left( \frac{\text{Net Annual Value}}{\text{Annual Software License Cost}} \right) \times 100$$</p>
+<hr />
+<h2 id="discovery-roi-calculator--2. sample calculation table (corporate & litigation rollouts)">2. Sample Calculation Table (Corporate &amp; Litigation Rollouts)</h2>
+<p>Below is an economic model based on typical usage inputs (calibrated against <code>examples/synthetic-input.json</code> and the dashboard practice groups):</p>
+<div class="table-container"><table>
+<thead><tr>
+<th>Practice Group</th>
+<th>Target Workflow</th>
+<th>Weekly Volume</th>
+<th>Manual Time</th>
+<th>Verification Time</th>
+<th>Net Time Saved</th>
+<th>Weekly Hours Saved</th>
+<th>Annual Direct Value (@\$350/hr)</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>---</td>
+<td>---</td>
+<td>---:</td>
+<td>---:</td>
+<td>---:</td>
+<td>---:</td>
+<td>---:</td>
+<td>---:</td>
+</tr>
+<tr>
+<td><strong>Corporate</strong></td>
+<td>NDA first-pass review</td>
+<td>12.5</td>
+<td>45 min</td>
+<td>10 min</td>
+<td>35 min</td>
+<td>7.3 hrs</td>
+<td>\$132,860</td>
+</tr>
+<tr>
+<td><strong>Litigation</strong></td>
+<td>Research memo draft</td>
+<td>3.5</td>
+<td>180 min</td>
+<td>90 min</td>
+<td>90 min</td>
+<td>5.3 hrs</td>
+<td>\$96,460</td>
+</tr>
+<tr>
+<td><strong>Corporate</strong></td>
+<td>Version clause compare</td>
+<td>9.0</td>
+<td>30 min</td>
+<td>8 min</td>
+<td>22 min</td>
+<td>3.3 hrs</td>
+<td>\$60,060</td>
+</tr>
+<tr>
+<td><strong>Corporate</strong></td>
+<td>DPA review (GDPR)</td>
+<td>3.5</td>
+<td>60 min</td>
+<td>25 min</td>
+<td>35 min</td>
+<td>2.0 hrs</td>
+<td>\$36,400</td>
+</tr>
+<tr>
+<td><strong>Total Portfolio</strong></td>
+<td></td>
+<td><strong>28.5</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>17.9 hrs</strong></td>
+<td><strong>\$325,780</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="discovery-roi-calculator--annual economic return summary">Annual Economic Return Summary</h3>
+<ul>
+<li><strong>Total Hours Saved per Year:</strong> 930.8 hours</li>
+<li><strong>Annual Direct Value (Re-allocated Capacity):</strong> \$325,780</li>
+<li><strong>Assumed Annual License Cost (e.g., 50 seats):</strong> \$75,000</li>
+<li><strong>Net Annual Value:</strong> \$250,780</li>
+<li><strong>Total Portfolio ROI:</strong> <strong>334.4%</strong></li>
+</ul>
+<hr />
+<h2 id="discovery-roi-calculator--3. playbook: leveraging roi in renewal conversations">3. Playbook: Leveraging ROI in Renewal Conversations</h2>
+<p>When preparing for a renewal or seat-expansion discussion, present this worksheet alongside the <strong>Account Health Dashboard</strong> statistics:</p>
+<ol>
+<li><strong>Reconcile with Utilization Data:</strong> Match the "Weekly Volume" in this worksheet with the active queries and weekly active user counts shown on the dashboard homepage.</li>
+<li><strong>Handle Partner Skepticism Proactively:</strong> If a partner questions the value, frame the time savings as "recovered capacity." Instead of cutting associate heads, emphasize that associates saved <strong>17.9 hours per week</strong> which was re-allocated to high-value briefing memos and client deal strategy.</li>
+<li><strong>Link to Blocker Mitigation:</strong> If blockers (e.g., <code>trust_in_output</code>) were resolved during the quarter, show how resolving that blocker (e.g., via a citation grounding clinic) unlocked the corresponding practice group's ROI in the table above.</li>
+</ol>
+        </section>
+        
+
+        <section id="sessions-30-min-partner-briefing">
+            <h1>30-minute partner briefing</h1>
+            <p><strong>Use this when</strong> you have a partner's calendar for half an hour and need a go/no-go decision on rolling the tool into their group.</p>
+<p><strong>Outcome:</strong> the partner makes one decision — sponsor a pilot in their group, or not — with the economics and the risk posture clear. No live demo unless they ask; this is a business conversation, not a tool tour.</p>
+<p><strong>Audience register:</strong> executive. Short sentences. No technical detail. Lead with the number, end with the ask.</p>
+<hr />
+<h2 id="sessions-30-min-partner-briefing--0:00–0:08 — the business case">0:00–0:08 — The business case</h2>
+<p>Three numbers, framed in their terms:</p>
+<ul>
+<li><strong>Leverage.</strong> First-pass review and drafting move down a level. A partner's time shifts from producing the draft to reviewing it. The group bills the same work at a better mix.</li>
+<li><strong>Utilization.</strong> The tasks that get written off — the short turnarounds that never make the bill — become economic again when the first pass takes minutes.</li>
+<li><strong>Cycle time.</strong> Matters that waited on associate capacity move faster, which clients notice at renewal.</li>
+</ul>
+<p>State the one that matters most to this partner first. For a rainmaker, cycle time. For a managing partner, leverage and write-offs.</p>
+<h2 id="sessions-30-min-partner-briefing--0:08–0:16 — what changes in their workflow">0:08–0:16 — What changes in their workflow</h2>
+<p>Be concrete about the day:</p>
+<ul>
+<li>The associate's first pass arrives in minutes, not the next morning.</li>
+<li>The partner's job becomes review, not redrafting from a blank page.</li>
+<li>The work product that reaches the partner already carries its sources, so review is checking, not reconstructing.</li>
+</ul>
+<p>Name what does not change: the partner still owns the advice, still signs off, still carries the judgment. The tool changes who produces the draft, not who is responsible for it.</p>
+<h2 id="sessions-30-min-partner-briefing--0:16–0:24 — risk and confidentiality posture">0:16–0:24 — Risk and confidentiality posture</h2>
+<p>Answer the two questions a partner always has, before they ask:</p>
+<ul>
+<li><strong>Confidentiality.</strong> No client data goes into an untrusted system. The rollout uses the approved environment, and the workshops run on synthetic documents. Spell out the data path in one sentence.</li>
+<li><strong>Reliability.</strong> Every output passes a human-review gate before reliance. The tool produces a first pass; a named lawyer checks each claim against its source and signs off. A wrong citation is caught at review, not at filing.</li>
+</ul>
+<p>If the firm has a professional-responsibility or risk committee, name that this rollout is consistent with its guidance, or that you will route it there first.</p>
+<h2 id="sessions-30-min-partner-briefing--0:24–0:30 — the decision ask">0:24–0:30 — The decision ask</h2>
+<p>One ask: sponsor a four-week pilot in your group. That means naming one workflow, letting us run a workshop and an associate session, and a fifteen-minute check-in at the end. If the pilot does not earn its place, we stop.</p>
+<p>Leave with a yes/no and, on yes, a named workflow and a date for the workshop.</p>
+<hr />
+<h2 id="sessions-30-min-partner-briefing--briefing notes">Briefing notes</h2>
+<ul>
+<li>Do not open the tool unless the partner asks. The decision is economic and professional, not technical.</li>
+<li>If the partner raises a specific objection, switch to the objection-handling guide and answer it directly, then return to the ask.</li>
+<li>The output of this meeting is a sponsored pilot with a named workflow and a date. Anything vaguer is a soft no.</li>
+</ul>
+        </section>
+        
+
+        <section id="sessions-60-min-workshop-agenda">
+            <h1>60-minute workshop agenda</h1>
+            <p><strong>Use this when</strong> you have a practice group for an hour and want them using the tool on their own work by the end.</p>
+<p><strong>Outcome:</strong> every attendee runs one real task end to end, sees where the human-review gate sits, and leaves with one workflow they commit to trying that week.</p>
+<p><strong>Room setup:</strong> attendees on laptops with access provisioned in advance. One facilitator (Legal Engineer or CSM). One practice-group sponsor in the room who will be named on the follow-up. Synthetic documents loaded so nobody pastes a live matter.</p>
+<hr />
+<h2 id="sessions-60-min-workshop-agenda--0:00–0:05 — framing">0:00–0:05 — Framing</h2>
+<p><strong>Leads:</strong> facilitator. <strong>Objective:</strong> set the rule before the tool. State plainly: the AI produces a first pass; a named lawyer reviews and signs off before anything is relied on or sent. Adoption is measured by useful first passes, not by replaced judgment. <strong>Artifact:</strong> one slide with the review-gate rule, left on screen for the hour.</p>
+<h2 id="sessions-60-min-workshop-agenda--0:05–0:25 — one live use case for this group">0:05–0:25 — One live use case for this group</h2>
+<p><strong>Leads:</strong> facilitator, with the sponsor narrating the real workflow. <strong>Objective:</strong> run the single highest-frequency task this group actually does — NDA first-pass review for corporate, clause comparison for finance, document summary for litigation — against a synthetic document, live, on the screen. <strong>How:</strong> facilitator drives once; then attendees repeat it on their own laptops with a second synthetic document. Stop at the point where a lawyer would normally review. <strong>Artifact:</strong> each attendee has produced one first-pass output.</p>
+<h2 id="sessions-60-min-workshop-agenda--0:25–0:35 — where the review gate sits">0:25–0:35 — Where the review gate sits</h2>
+<p><strong>Leads:</strong> facilitator. <strong>Objective:</strong> show the failure modes before trust is assumed. Walk one output that looks right and one that contains a wrong citation. Teach the two checks every output gets: does each claim trace to the source, and would you put your name on it. <strong>Artifact:</strong> a shared one-page checklist (claim-to-source, name-on-it) attendees keep.</p>
+<h2 id="sessions-60-min-workshop-agenda--0:35–0:50 — hands-on, their own task">0:35–0:50 — Hands-on, their own task</h2>
+<p><strong>Leads:</strong> attendees; facilitator circulates. <strong>Objective:</strong> each attendee picks one recurring task from their week and runs it on a synthetic or non-confidential version. The facilitator helps phrase the request and points out where the output needs a human pass. <strong>Artifact:</strong> each attendee names one task they will run for real this week.</p>
+<h2 id="sessions-60-min-workshop-agenda--0:50–1:00 — commitments and next steps">0:50–1:00 — Commitments and next steps</h2>
+<p><strong>Leads:</strong> facilitator and sponsor. <strong>Objective:</strong> convert the hour into a plan. Each attendee states their one committed workflow. The sponsor agrees to a two-week check-in. The facilitator notes any friction raised, for the product-feedback template and the follow-up email. <strong>Artifact:</strong> a list of committed workflows by name, a booked check-in, and a friction log.</p>
+<hr />
+<h2 id="sessions-60-min-workshop-agenda--facilitator notes">Facilitator notes</h2>
+<ul>
+<li>Keep the review-gate slide visible the entire hour. It is the message that makes the tool adoptable in a regulated practice.</li>
+<li>Never let an attendee paste a live matter. Have synthetic documents ready and say why.</li>
+<li>The commitments at the end are the real output. A workshop with no named next task does not move adoption.</li>
+<li>Capture friction verbatim during the hands-on block; it feeds the product-feedback template the same day.</li>
+</ul>
+        </section>
+        
+
+        <section id="sessions-90-min-associate-hands-on">
+            <h1>90-minute associate hands-on</h1>
+            <p><strong>Use this when</strong> you want associates to build real fluency — not a demo, but supervised practice on synthetic documents until the workflow is theirs.</p>
+<p><strong>Outcome:</strong> each associate completes three guided tasks, learns to spot a hallucinated citation, and leaves able to run the workflow unsupervised the next day.</p>
+<p><strong>Setup:</strong> associates on laptops, access provisioned. Synthetic documents loaded. One facilitator. The session is hands-on throughout; the facilitator demonstrates once per task, then associates work and the facilitator circulates.</p>
+<hr />
+<h2 id="sessions-90-min-associate-hands-on--0:00–0:10 — setup and the one rule">0:00–0:10 — Setup and the one rule</h2>
+<p>Confirm everyone has access and the synthetic document set. State the rule that governs the whole session and the job: the AI produces a first pass, the associate verifies every claim against the source, and a supervising lawyer signs off before the work is used. The associate's new skill is not prompting — it is fast, reliable review.</p>
+<h2 id="sessions-90-min-associate-hands-on--0:10–0:35 — task 1: first-pass nda review">0:10–0:35 — Task 1: First-pass NDA review</h2>
+<p><strong>Input:</strong> a synthetic mutual NDA. <strong>What to do:</strong> ask the tool to extract the key clauses and flag anything unusual. <strong>Expected output:</strong> a clause list with risk flags — for example, a perpetual confidentiality term flagged as high. <strong>Review step:</strong> for each flagged clause, the associate opens the NDA and confirms the quoted text actually appears and the flag is fair. Any flag that cannot be traced to the text is struck.</p>
+<h2 id="sessions-90-min-associate-hands-on--0:35–1:00 — task 2: clause comparison across versions">0:35–1:00 — Task 2: Clause comparison across versions</h2>
+<p><strong>Input:</strong> two synthetic versions of the same agreement. <strong>What to do:</strong> ask the tool for the substantive differences, not the cosmetic ones. <strong>Expected output:</strong> a short list of changed obligations — a liability cap that moved, a notice period that shortened. <strong>Review step:</strong> the associate verifies each reported change against both documents and confirms nothing material was missed by spot-checking one section the tool did not mention.</p>
+<h2 id="sessions-90-min-associate-hands-on--1:00–1:20 — task 3: issue summary for a partner">1:00–1:20 — Task 3: Issue summary for a partner</h2>
+<p><strong>Input:</strong> a synthetic memo or set of facts. <strong>What to do:</strong> ask for a one-paragraph issue summary a partner could read in thirty seconds. <strong>Expected output:</strong> a tight summary with the open question stated. <strong>Review step:</strong> the associate checks that every assertion is supported and rewrites in the firm's register before it would go anywhere near a partner.</p>
+<h2 id="sessions-90-min-associate-hands-on--1:20–1:30 — spot the hallucination, and capture friction">1:20–1:30 — Spot the hallucination, and capture friction</h2>
+<p><strong>Spot it:</strong> the facilitator hands out one pre-made output containing a fabricated citation. Associates race to find it and explain how they caught it. This drills the claim-to-source check until it is reflex. <strong>Capture friction:</strong> each associate names the one thing that slowed them down. The facilitator logs it for the product-feedback template.</p>
+<hr />
+<h2 id="sessions-90-min-associate-hands-on--facilitator notes">Facilitator notes</h2>
+<ul>
+<li>Demonstrate each task once, then get out of the way. Fluency comes from doing, not watching.</li>
+<li>The spot-the-hallucination drill is the most important ten minutes. An associate who cannot catch a bad citation is not ready to use the tool unsupervised.</li>
+<li>Every task ends on a review step on purpose. The habit you are building is verification, not generation.</li>
+<li>The friction captured here is the highest-signal product feedback you will get; route it the same day.</li>
+</ul>
+        </section>
+        
+
+        <section id="enablement-adoption-maturity-model">
+            <h1>Legal AI Adoption Maturity Model Playbook</h1>
+            <p>This playbook establishes a structured framework for steering law firms and in-house teams through four progressive stages of legal-AI maturity. Use this playbook in tandem with the <strong>Adoption Dashboard</strong> to track, score, and advance account rollouts.</p>
+<hr />
+<h2 id="enablement-adoption-maturity-model--the four stages of maturity">The Four Stages of Maturity</h2>
+<pre><code class="language-text">graph TD
+    S1[Stage 1: Exploration] --&gt;|Exit Gate: Utilization &gt; 50%| S2[Stage 2: Operationalization]
+    S2 --&gt;|Exit Gate: No High Blockers + QBR Delta &gt; 0| S3[Stage 3: Integration]
+    S3 --&gt;|Exit Gate: 3+ Practice Groups + Custom Workflows| S4[Stage 4: Optimization]</code></pre>
+<hr />
+<h3 id="enablement-adoption-maturity-model--stage 1: exploration (pilot phase)">Stage 1: Exploration (Pilot Phase)</h3>
+<ul>
+<li><strong>Objective:</strong> Establish baseline trust and identify high-value candidate workflows with a small cohort of champions.</li>
+<li><strong>Dashboard Indicators:</strong></li>
+<li><strong>Utilization Rate:</strong> 10%–45% of seats active.</li>
+<li><strong>Health Band:</strong> <code>needs_attention</code> or <code>steady</code>.</li>
+<li><strong>Blockers:</strong> High severity <code>trust_in_output</code> or <code>training_gap</code> blockers are common.</li>
+<li><strong>CSM / Legal Engineer Activities:</strong></li>
+<li>Run the <strong>Intake &amp; Discovery</strong> questionnaire.</li>
+<li>Execute the <strong>30-minute Partner Briefing</strong> to lock in primary use cases.</li>
+<li>Conduct the <strong>90-minute Associate Hands-on Clinic</strong> to address initial verification friction.</li>
+<li><strong>Exit Gate:</strong> </li>
+<li>[ ] Primary champion cohort demonstrates utilization &gt; 50%.</li>
+<li>[ ] At least one use case prioritizes with positive ROI savings.</li>
+</ul>
+<hr />
+<h3 id="enablement-adoption-maturity-model--stage 2: operationalization (practice group rollout)">Stage 2: Operationalization (Practice Group Rollout)</h3>
+<ul>
+<li><strong>Objective:</strong> Standardize AI-assisted workflows within a full practice group and resolve day-to-day adoption friction.</li>
+<li><strong>Dashboard Indicators:</strong></li>
+<li><strong>Utilization Rate:</strong> 45%–70% of seats active.</li>
+<li><strong>Health Band:</strong> <code>steady</code> or <code>healthy</code>.</li>
+<li><strong>QBR Delta:</strong> Positive trajectory (<code>+5</code> or higher).</li>
+<li><strong>CSM / Legal Engineer Activities:</strong></li>
+<li>Standardize saved prompt templates for the primary workflow.</li>
+<li>Triage product feedback items weekly and sync with IT/Engineering on integrations.</li>
+<li>Monitor WAU trends and resolve blocker spikes in secondary practice groups.</li>
+<li><strong>Exit Gate:</strong></li>
+<li>[ ] No open High-Severity blockers for more than 14 days.</li>
+<li>[ ] Blended WAU trend is stable or upward.</li>
+</ul>
+<hr />
+<h3 id="enablement-adoption-maturity-model--stage 3: integration (system expansion)">Stage 3: Integration (System Expansion)</h3>
+<ul>
+<li><strong>Objective:</strong> Embed the tool into the firm’s core workflows (e.g. Document Management System integration) and scale across multiple practice groups.</li>
+<li><strong>Dashboard Indicators:</strong></li>
+<li><strong>Seats Active:</strong> &gt; 70% of licenses utilized.</li>
+<li><strong>Health Band:</strong> Consistent <code>healthy</code>.</li>
+<li><strong>QBR Delta:</strong> Upward momentum (<code>+8</code> or higher).</li>
+<li><strong>CSM / Legal Engineer Activities:</strong></li>
+<li>Propose license expansions (using the D2 Renewal/Expansion Timeline signals).</li>
+<li>Integrate document retrieval connector pilots.</li>
+<li>Compile the QBR ROI calculator data to demonstrate direct time savings to managing partners.</li>
+<li><strong>Exit Gate:</strong></li>
+<li>[ ] Active usage spans 3+ distinct practice groups.</li>
+<li>[ ] Verified integration with core document repositories.</li>
+</ul>
+<hr />
+<h3 id="enablement-adoption-maturity-model--stage 4: optimization (firm-wide standard)">Stage 4: Optimization (Firm-Wide Standard)</h3>
+<ul>
+<li><strong>Objective:</strong> Institutionalize legal AI as a firm-wide competitive differentiator, optimizing ROI and legal quality.</li>
+<li><strong>Dashboard Indicators:</strong></li>
+<li><strong>Seats Active:</strong> &gt; 85% utilization.</li>
+<li><strong>Health Band:</strong> Permanent <code>healthy</code> / <code>steady</code>.</li>
+<li><strong>Blockers:</strong> Zero high-severity blockers.</li>
+<li><strong>CSM / Legal Engineer Activities:</strong></li>
+<li>Hold quarterly value alignment sessions with the executive committee.</li>
+<li>Showcase firm-wide billable capacity savings.</li>
+<li>Refine custom health weights in <code>health-config.json</code> to raise engagement standards.</li>
+<li><strong>Exit Gate:</strong></li>
+<li>[ ] The platform is designated as the firm-wide standard for draft reviews.</li>
+<li>[ ] Regular cadence of product feedback looping directly to the AI vendor.</li>
+</ul>
+        </section>
+        
+
+        <section id="enablement-skeptical-partner-objections">
+            <h1>Skeptical-partner objection handling</h1>
+            <p><strong>Use this when</strong> a partner is pushing back and you need an evidence-based answer in the room. Each response leans on the review gate and concrete mechanics, not on capability claims. Answer the objection, then return to the ask.</p>
+<h2 id="enablement-skeptical-partner-objections--1. "it hallucinates. it makes things up."">1. "It hallucinates. It makes things up."</h2>
+<p>Yes, models can fabricate. That is exactly why nothing here relies on raw output. Every result passes a claim-to-source check: each statement must trace to the document it came from, and an ungrounded citation is struck. The workshop drills this until it is reflex. The tool produces a first pass; it does not get the last word.</p>
+<h2 id="enablement-skeptical-partner-objections--2. "our client data cannot go into these systems."">2. "Our client data cannot go into these systems."</h2>
+<p>Agreed, and it does not. The rollout uses the approved environment, and every workshop runs on synthetic documents. The data path is mapped before a single session. Confidentiality is a design constraint here, not an afterthought.</p>
+<h2 id="enablement-skeptical-partner-objections--3. "this cannibalizes the billable hour."">3. "This cannibalizes the billable hour."</h2>
+<p>The work that disappears is the work clients already resist paying for — the long first pass on a short-turnaround task that gets written off. What remains is judgment, which is what clients actually buy. The group bills the same matters at a better mix, and the tasks that used to be written off become economic again.</p>
+<h2 id="enablement-skeptical-partner-objections--4. "associates will stop learning the fundamentals."">4. "Associates will stop learning the fundamentals."</h2>
+<p>The skill shifts from producing a first draft to reviewing one critically, which is the more senior skill and the one partners actually need them to have. The associate session is built around verification — spotting the weak citation, catching the missed clause. That is fundamentals, taught earlier.</p>
+<h2 id="enablement-skeptical-partner-objections--5. "i don't trust output i didn't produce."">5. "I don't trust output I didn't produce."</h2>
+<p>You should not trust it on faith, and the workflow never asks you to. The output arrives with its sources attached, so your review is checking against the document, not reconstructing the work. You still own the advice and still sign off. The tool changes who produces the draft, not who is responsible for it.</p>
+<h2 id="enablement-skeptical-partner-objections--6. "it is not accurate enough for our standard."">6. "It is not accurate enough for our standard."</h2>
+<p>For finished work, correct — which is why it never produces finished work. It produces a first pass that a lawyer brings to your standard. Measure it against the blank page an associate starts from, not against your final sign-off. On that comparison it is a clear gain.</p>
+<h2 id="enablement-skeptical-partner-objections--7. "we tried an ai tool before and it was useless."">7. "We tried an AI tool before and it was useless."</h2>
+<p>That is worth taking seriously; a burned first experience is real. Tell me what failed, and we will design the pilot around it. We start with one frequent, easy-to-verify workflow and prove it on your documents before we ask for trust on anything harder.</p>
+<h2 id="enablement-skeptical-partner-objections--8. "this is a malpractice risk."">8. "This is a malpractice risk."</h2>
+<p>The risk is using output without review — which is the one thing the workflow forbids. The human-review gate is the control: a named lawyer checks each claim against its source before reliance. Used this way, the tool reduces risk on routine work by catching the things a tired associate at 2 a.m. misses, then having a human confirm them.</p>
+<h2 id="enablement-skeptical-partner-objections--9. "i don't have time to learn another tool."">9. "I don't have time to learn another tool."</h2>
+<p>The partner briefing takes thirty minutes and you may never touch the tool yourself. Your associates use it; you review their work as you do today, just faster and with sources attached. The time cost to you is the half hour we are in.</p>
+<hr />
+<p><strong>After any objection:</strong> return to the ask. "Given that — would you sponsor a four-week pilot on one workflow, so we can show you on your own documents rather than argue it?"</p>
+        </section>
+        
+
+        <section id="enablement-follow-up-email-templates">
+            <h1>Follow-up email templates</h1>
+            <p><strong>Use this when</strong> a session just ended, a decision is pending, or usage dipped, and you need to send the right note quickly. Replace every <code>{{merge_field}}</code> per engagement. Keep them short; these are working notes, not marketing.</p>
+<hr />
+<h2 id="enablement-follow-up-email-templates--1. post-workshop recap">1. Post-workshop recap</h2>
+<p><strong>Subject:</strong> {{group}} workshop — your committed workflows and next step</p>
+<p>Hi {{first_name}},</p>
+<p>Thanks for the hour today. Here is what the group committed to, so it does not slip:</p>
+<ul>
+<li>Each attendee named one workflow to run this week: {{committed_workflows}}.</li>
+<li>The rule we work to: the tool produces a first pass, a named lawyer checks each claim against its source and signs off.</li>
+<li>I logged the friction points raised; the useful ones go to the product team.</li>
+</ul>
+<p>I will check in on {{checkin_date}} to see how the committed workflows went. If anyone gets stuck before then, send them my way.</p>
+<p>Best, {{your_name}}</p>
+<hr />
+<h2 id="enablement-follow-up-email-templates--2. partner decision nudge">2. Partner decision nudge</h2>
+<p><strong>Subject:</strong> {{group}} pilot — quick decision</p>
+<p>Hi {{first_name}},</p>
+<p>Following our briefing: the ask is a four-week pilot on one workflow — {{candidate_workflow}} — with a workshop, one associate session, and a fifteen-minute check-in at the end. If it does not earn its place, we stop.</p>
+<p>Could you give me a yes or no by {{decision_date}}? On a yes, I need one workflow named and a date for the workshop. Nothing else from you.</p>
+<p>Best, {{your_name}}</p>
+<hr />
+<h2 id="enablement-follow-up-email-templates--3. re-engagement after a usage dip">3. Re-engagement after a usage dip</h2>
+<p><strong>Subject:</strong> {{group}} — noticed usage cooled, worth a quick look?</p>
+<p>Hi {{first_name}},</p>
+<p>Usage in {{group}} has dropped over the last few weeks. That is usually a sign of a specific blocker, not lost interest. The common ones are a workflow that did not quite fit, a training gap, or a trust question that never got answered.</p>
+<p>Fifteen minutes this week would let me find which it is and fix it. I would rather catch it now than at renewal. Does {{proposed_time}} work?</p>
+<p>Best, {{your_name}}</p>
+<hr />
+<h2 id="enablement-follow-up-email-templates--4. expansion proposal">4. Expansion proposal</h2>
+<p><strong>Subject:</strong> {{group}} is ready to expand — proposal inside</p>
+<p>Hi {{first_name}},</p>
+<p>{{group}} has crossed the line from trial to habit: {{usage_signal}}, and the team is asking for more. That is the moment to expand.</p>
+<p>I propose adding {{expansion_scope}} — another workflow, another group, or both. Same model: one pilot workflow, a workshop, an associate session, a check-in. I have attached a one-page plan. Worth fifteen minutes to walk through?</p>
+<p>Best, {{your_name}}</p>
+<hr />
+<p><strong>Notes</strong></p>
+<ul>
+<li>Send the recap the same day, while the commitments are warm.</li>
+<li>The re-engagement note works because it names the likely cause; a generic "checking in" does not.</li>
+<li>The expansion note only goes out when the usage signal is real. Sending it early burns credibility.</li>
+</ul>
+        </section>
+        
+
+        <section id="enablement-product-feedback-template">
+            <h1>Product-feedback template</h1>
+            <p><strong>Use this when</strong> you watched a user hit friction and want to turn it into something Engineering can act on — not a vague complaint, a structured requirement. This is the artifact that proves you translate field signal into product input.</p>
+<p>Fill one per distinct friction point. Keep the user's words in the "observed" field; do not sand them down.</p>
+<h2 id="enablement-product-feedback-template--template">Template</h2>
+<ul>
+<li><strong>Date / session:</strong> <code>{{date}}</code> / <code>{{session}}</code></li>
+<li><strong>User and persona:</strong> who hit this, and their role (Partner, Associate, PSL, Innovation lead, In-house counsel).</li>
+<li><strong>Workflow:</strong> what they were trying to do.</li>
+<li><strong>Observed friction:</strong> what actually happened, in their words. Quote them.</li>
+<li><strong>Frequency:</strong> does this hit every time, sometimes, or once? How many users have you seen hit it?</li>
+<li><strong>Severity:</strong> does it block the workflow, slow it, or merely annoy? Does it touch trust (a wrong citation) or only convenience?</li>
+<li><strong>Proposed change:</strong> the smallest change that would remove the friction. One sentence.</li>
+<li><strong>Acceptance:</strong> how you would know it is fixed. Concrete and checkable.</li>
+<li><strong>Line to Product / Engineering:</strong> the one sentence you would say in a triage meeting.</li>
+</ul>
+<h2 id="enablement-product-feedback-template--worked example (synthetic)">Worked example (synthetic)</h2>
+<ul>
+<li><strong>Date / session:</strong> 2026-06-18 / Corporate associate hands-on</li>
+<li><strong>User and persona:</strong> associate, Corporate group.</li>
+<li><strong>Workflow:</strong> first-pass NDA review on a long agreement.</li>
+<li><strong>Observed friction:</strong> "It pulled the confidentiality clause but missed that the definition section three pages earlier changes what 'Confidential Information' even means."</li>
+<li><strong>Frequency:</strong> every time, on agreements with cross-referenced definitions. Seen with three associates.</li>
+<li><strong>Severity:</strong> touches trust. A missed definition changes the risk read, and the associate only caught it because they knew the document.</li>
+<li><strong>Proposed change:</strong> resolve cross-referenced definitions before extracting a clause, and attach the controlling definition to the extracted clause.</li>
+<li><strong>Acceptance:</strong> on a document where a definition section modifies a later clause, the extracted clause shows the controlling definition; a reviewer can confirm it without hunting.</li>
+<li><strong>Line to Product / Engineering:</strong> "Clause extraction ignores cross-referenced definitions; this is a grounding gap, not a formatting nicety, and it is hitting our most frequent corporate workflow."</li>
+</ul>
+<hr />
+<p><strong>Notes</strong></p>
+<ul>
+<li>Severity that touches trust outranks severity that touches convenience. A wrong citation is a different class of problem than a clunky export.</li>
+<li>"Proposed change" is your hypothesis, not a spec. Engineering owns the solution; you own the clear problem.</li>
+<li>Route trust-touching items the same day. Convenience items can batch weekly.</li>
+</ul>
+        </section>
+        
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('aside nav a');
+
+            // Simple intersection observer to highlight current section in TOC
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                                // Scroll link into view inside sidebar if needed
+                                link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            } else {
+                                link.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            // Smooth scrolling to section from TOC
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                        window.history.pushState(null, null, '#' + targetId);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
