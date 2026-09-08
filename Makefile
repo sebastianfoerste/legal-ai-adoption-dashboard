@@ -16,4 +16,5 @@ workshop-check:
 workshop-export:
 	scripts/export-workshop-kit.sh
 
-check: dashboard-check contract-check workshop-check
+check: dashboard-check workshop-check
+	pnpm telemetry:validate
