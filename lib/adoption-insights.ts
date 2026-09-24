@@ -1,16 +1,16 @@
 import { adoptionCockpitReport, type AdoptionCockpitReport } from "./adoption-cockpit";
 
-export type CommandCenterEvidence = {
+export type AdoptionInsightsEvidence = {
   metric: string;
   value: string;
   sourceRef: string;
 };
 
-export type CommandCenterAnswer = {
-  schema: "legal-ai-adoption.command-center-answer.v1";
+export type AdoptionInsightsAnswer = {
+  schema: "legal-ai-adoption.insights-answer.v1";
   question: string;
   answer: string;
-  evidence: CommandCenterEvidence[];
+  evidence: AdoptionInsightsEvidence[];
   status: "answered" | "review_required" | "unsupported_question";
   reviewRequired: true;
   externalActionAllowed: false;
@@ -26,8 +26,8 @@ export type CapabilityRecommendation = {
   gate: string;
 };
 
-export type CommandCenterReport = {
-  schema: "legal-ai-adoption.command-center-report.v1";
+export type AdoptionInsightsReport = {
+  schema: "legal-ai-adoption.insights-report.v1";
   title: string;
   audience: string;
   filters: {
@@ -46,10 +46,10 @@ export type CommandCenterReport = {
   externalActionAllowed: false;
 };
 
-export function answerCommandCenterQuestion(
+export function answerAdoptionInsightsQuestion(
   report: AdoptionCockpitReport,
   question: string,
-): CommandCenterAnswer {
+): AdoptionInsightsAnswer {
   const normalized = question.toLowerCase();
   if (normalized.includes("verification") || normalized.includes("verified")) {
     return answer(
@@ -102,7 +102,7 @@ export function answerCommandCenterQuestion(
     );
   }
   return {
-    schema: "legal-ai-adoption.command-center-answer.v1",
+    schema: "legal-ai-adoption.insights-answer.v1",
     question,
     answer: "This question is outside the supported synthetic adoption metrics. Select adoption, verification, practice-group usage or release readiness.",
     evidence: [],
@@ -112,9 +112,9 @@ export function answerCommandCenterQuestion(
   };
 }
 
-function answer(question: string, text: string, evidence: CommandCenterEvidence[]): CommandCenterAnswer {
+function answer(question: string, text: string, evidence: AdoptionInsightsEvidence[]): AdoptionInsightsAnswer {
   return {
-    schema: "legal-ai-adoption.command-center-answer.v1",
+    schema: "legal-ai-adoption.insights-answer.v1",
     question,
     answer: text,
     evidence,
@@ -150,10 +150,10 @@ export function recommendCapabilities(report: AdoptionCockpitReport): Capability
   return recommendations.slice(0, 6).map((recommendation, index) => ({ rank: index + 1, ...recommendation }));
 }
 
-export function buildCommandCenterReport(
+export function buildAdoptionInsightsReport(
   report: AdoptionCockpitReport,
   filters: { practiceGroups?: string[]; products?: string[] } = {},
-): CommandCenterReport {
+): AdoptionInsightsReport {
   const practiceGroups = report.practiceGroupUsage.filter(
     (group) => !filters.practiceGroups?.length || filters.practiceGroups.includes(group.practiceGroup),
   );
@@ -184,7 +184,7 @@ export function buildCommandCenterReport(
     },
   ];
   const markdown = [
-    "# Synthetic Legal AI Command Center Report",
+    "# Synthetic Legal AI Adoption Insights Report",
     "",
     ...sections.flatMap((section) => [
       `## ${section.heading}`,
@@ -197,8 +197,8 @@ export function buildCommandCenterReport(
     "Review gate: account-owner approval is required before external use or account action.",
   ].join("\n");
   return {
-    schema: "legal-ai-adoption.command-center-report.v1",
-    title: "Synthetic Legal AI Command Center Report",
+    schema: "legal-ai-adoption.insights-report.v1",
+    title: "Synthetic Legal AI Adoption Insights Report",
     audience: "Innovation, Legal Operations and account leadership",
     filters: { practiceGroups: filters.practiceGroups ?? [], products: filters.products ?? [] },
     sections,
@@ -210,12 +210,12 @@ export function buildCommandCenterReport(
   };
 }
 
-export function commandCenterSnapshot() {
+export function adoptionInsightsSnapshot() {
   const report = adoptionCockpitReport();
   return {
     report,
-    answer: answerCommandCenterQuestion(report, "Which teams have the deepest adoption and verified output use?"),
+    answer: answerAdoptionInsightsQuestion(report, "Which teams have the deepest adoption and verified output use?"),
     recommendations: recommendCapabilities(report),
-    leadershipReport: buildCommandCenterReport(report),
+    leadershipReport: buildAdoptionInsightsReport(report),
   };
 }

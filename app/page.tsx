@@ -196,7 +196,7 @@ export default async function AccountHealthPage({
               Legal AI adoption intelligence
             </h2>
             <p className="mt-1 max-w-3xl text-sm text-gray-600">
-              Synthetic aggregate view across assistant, workflow agents, review tables, knowledge, Outlook and writing-style usage. External action remains blocked by review policy.
+              Synthetic aggregate view of usage across drafting, document review, knowledge and email surfaces. External action remains blocked by review policy.
             </p>
           </div>
           <span className="rounded border border-gray-200 bg-gray-50 px-2 py-1 font-mono text-xs text-gray-600">

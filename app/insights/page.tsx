@@ -1,13 +1,13 @@
-import { commandCenterSnapshot } from "@/lib/command-center";
+import { adoptionInsightsSnapshot } from "@/lib/adoption-insights";
 import { workflowGovernanceSnapshot } from "@/lib/workflow-governance";
 
-export default function CommandCenterPage() {
-  const { answer, recommendations, leadershipReport } = commandCenterSnapshot();
+export default function AdoptionInsightsPage() {
+  const { answer, recommendations, leadershipReport } = adoptionInsightsSnapshot();
   const governance = workflowGovernanceSnapshot();
   return (
     <main className="mx-auto max-w-5xl space-y-6 px-6 py-8">
       <header>
-        <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Command Center</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Adoption Insights</p>
         <h1 className="mt-1 text-2xl font-semibold">Adoption intelligence and recommendations</h1>
         <p className="mt-2 max-w-3xl text-sm text-gray-600">
           Ask constrained questions over synthetic adoption data, prioritize reviewed capability rollouts and prepare a leadership report package.
@@ -15,7 +15,7 @@ export default function CommandCenterPage() {
       </header>
 
       <section className="rounded-lg border border-gray-200 bg-white p-5">
-        <h2 className="font-semibold">Command Center Agent</h2>
+        <h2 className="font-semibold">Ask the adoption data</h2>
         <p className="mt-2 text-sm font-medium text-gray-900">{answer.question}</p>
         <p className="mt-2 text-sm leading-6 text-gray-600">{answer.answer}</p>
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -66,7 +66,7 @@ export default function CommandCenterPage() {
             <p className="mt-1 text-sm text-gray-600">{leadershipReport.audience}</p>
           </div>
           <div className="flex items-center gap-2">
-            <a className="rounded-md border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700" href="/command-center/report">
+            <a className="rounded-md border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700" href="/insights/report">
               Download Markdown
             </a>
             <span className="rounded-full bg-amber-100 px-3 py-1 text-xs text-amber-800">account-owner review required</span>
