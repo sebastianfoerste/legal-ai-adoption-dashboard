@@ -7,7 +7,7 @@ const nav = [
   { href: "/", label: "Account Health" },
   { href: "/blockers", label: "Adoption Blockers" },
   { href: "/feedback", label: "Product Feedback" },
-  { href: "/command-center", label: "Command Center" },
+  { href: "/insights", label: "Adoption Insights" },
 ];
 
 export function NavLinks() {
