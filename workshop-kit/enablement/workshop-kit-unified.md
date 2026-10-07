@@ -76,6 +76,10 @@ This is the legal-AI rollout reviewer path:
 - Follow-up templates and product-feedback notes.
 - A unified playbook for reviewer evaluation.
 
+## Practitioner research pack
+
+[`research/`](#readme) prepares a first qualitative study round on the contract-review handoff with four to eight practitioners. It is preparation only: no invitation has been sent and no session has been held. Predictive statements elsewhere in the kit are worded as hypotheses that the study and later adoption data can check.
+
 ## Data statement
 
 All examples are generic or synthetic. No real client, firm, matter, or personal data appears anywhere in this repo.
@@ -265,58 +269,79 @@ class of problem and jump the queue.
 
 
 
-**Use this when** you are scoping an account and need a readiness score before you commit
-workshop time.
+**Use this when** you are scoping an account and want a structured record of what is in
+place before you commit workshop time.
 
-Score each question, total by section, and read the band at the end. The five sections map
-to the same signals the adoption dashboard tracks — champion, workflow pain, data
-constraints, prior experience, and sponsorship — so a low section here predicts a blocker
-later.
+Score each question and total by section. The five sections correspond to the signals the
+adoption dashboard tracks: champion, workflow pain, data constraints, prior experience and
+sponsorship.
 
-Scoring: **0** = no / not present, **1** = partial, **2** = yes / strong.
+The score is a discussion aid. Its weights and bands are uncalibrated judgments: no data
+shows that a given score predicts adoption. Each section therefore states a hypothesis and
+what to record so that the hypothesis can be checked against what happens later.
+
+Scoring: **0** = no / not present, **1** = partial, **2** = yes / strong. Write "not known"
+where you could not find out. An unknown is not a zero.
 
 ## 1. Champion (max 6)
 - Is there a named Innovation lead or PSL who owns this rollout? ___
-- Does that person have time allocated, not just the title? ___
+- Does that person have time allocated, as well as the title? ___
 - Can they get a partner on the phone when needed? ___
 
-A low score here is the single best predictor of a stall. No champion, no adoption.
+Hypothesis H1: an account without a named champion who has allocated time is more likely to
+stall after the first workshop. To check it, record this score and compare it with repeat
+use in the three reporting periods after training.
 
 ## 2. Workflow pain (max 6)
 - Is there a high-frequency task the group already complains about? ___
 - Does that task have a clear first-pass-then-review shape? ___
-- Is the pain felt by associates, who will actually use the tool, not only by partners? ___
+- Is the pain felt by associates, who will use the tool, as well as by partners? ___
 
-Pain the users feel is what pulls a tool into daily use. Pain only partners feel does not.
+Hypothesis H2: a tool is used repeatedly where the people who operate it feel the pain of
+the current task. To check it, record who named the pain and compare with who the repeat
+users are.
 
 ## 3. Data and confidentiality constraints (max 6)
 - Is there an approved environment that keeps client data out of untrusted systems? ___
 - Are the relevant confidentiality and privilege constraints already mapped? ___
 - Can the group identify synthetic or non-confidential documents to train on? ___
 
-A zero in this section is not a disqualifier; it is the first work item.
+A zero in this section does not disqualify the account. It is the first work item.
 
 ## 4. Prior AI experience (max 6)
 - Has the group used any AI tool before, even informally? ___
-- Did that experience leave trust intact, or burned? ___
-- Is there realistic expectation-setting, rather than either hype or dismissal? ___
+- Did that experience leave trust intact? ___
+- Are expectations realistic, without hype and without dismissal? ___
 
-A burned prior experience scores low and changes the rollout: lead with the review gate and
-small wins, not capability claims.
+Hypothesis H3: a group whose earlier experience damaged trust responds better to a rollout
+that starts with the review gate and small, checkable tasks. To check it, record the earlier
+experience in the group's own words and note which first task was chosen.
 
 ## 5. Sponsorship and economics (max 6)
-- Is a partner willing to sponsor a pilot, not just permit one? ___
-- Is there a reason the economics matter to them now — leverage, write-offs, cycle time? ___
+- Is a partner willing to sponsor a pilot, beyond permitting one? ___
+- Is there a reason the economics matter to them now: leverage, write-offs, cycle time? ___
 - Will someone be measured on whether this works? ___
 
 ## Reading the score (max 30)
-- **24–30 — ready.** Book the partner briefing and a workshop. Expect fast adoption.
-- **16–23 — ready with gaps.** Close the lowest section first. Usually champion time or a data path.
-- **8–15 — not yet.** One or two foundations are missing. Do the groundwork before spending workshop time.
-- **0–7 — hold.** No champion, no pain, no sponsor. A workshop here will not stick.
 
-Record the section scores, not just the total. The dashboard reads blockers by category,
-and a low section here is the category that will show up there.
+The bands suggest where to start the conversation. They are not forecasts.
+
+- **24–30:** the foundations asked about are in place. Propose the partner briefing and a workshop.
+- **16–23:** some foundations are missing. Address the lowest section first.
+- **8–15:** several foundations are missing. Agree the groundwork before spending workshop time.
+- **0–7:** no champion, no named pain and no sponsor were found. Hypothesis H4: a workshop
+  at this stage does not lead to repeat use. If you run one anyway, record the outcome.
+
+Record the section scores, the unknowns and the date, as well as the total. Hypothesis H5:
+a low section here corresponds to the blocker category that appears later on the
+dashboard. The comparison of the two records is what tests it.
+
+## What this questionnaire does not show
+
+- It records what people say is in place. It does not observe anyone doing the work. For
+  that, use the [practitioner research pack](#readme).
+- It is not evidence of adoption. A high score, a well-attended workshop and a good
+  satisfaction rating can all coexist with no repeat use.
 
 
 </div>
@@ -333,9 +358,10 @@ and a low section here is the category that will show up there.
 **Use this when** you are mapping a real workflow to a candidate AI use case, so the pilot
 targets something that matters and can actually be reviewed.
 
-Fill one of these per candidate workflow. The fields force the two questions that decide
-whether a workflow is a good fit: how often does it happen, and how cheaply can a human
-verify the output.
+Fill one of these per candidate workflow. The fields ask the two questions this kit treats
+as the main test of fit: how often does the work happen, and how cheaply can a human verify
+the output. That these two decide fit is a working hypothesis. Record the source of every
+figure, because an estimate and a measurement are different kinds of evidence.
 
 ## Template
 
@@ -344,11 +370,12 @@ verify the output.
 - **Trigger:** what starts this work? (a signed engagement, an inbound contract, a filing)
 - **Inputs:** what documents or facts come in?
 - **Current steps:** the sequence today, who does each step.
-- **Time cost:** rough hours per instance, and who spends them.
+- **Time cost:** hours per instance and who spends them. State whether this is an estimate or a measured sample, and from how many instances.
 - **Frequency:** how often per week or month, across the group.
 - **Mandatory review point:** where must a qualified lawyer review before anything is relied on or sent? This never moves.
 - **Candidate AI step:** which single step becomes a first pass the AI produces and a human checks?
-- **Verification cost:** how long does it take a human to confirm the AI output is right? If the answer is "as long as doing it from scratch," this is a poor fit.
+- **Verification cost:** how long does it take a human to confirm the AI output is right, and to correct it where it is wrong? Count review and correction. If the answer is "as long as doing it from scratch", the hypothesis is that this is a poor fit. Until a per-task sample exists, mark the figure as an estimate.
+- **Evidence type:** for each answer above, note whether it comes from what someone reported about past work, from watching the task, or from an opinion about a proposal.
 - **Confidentiality note:** can this run in the approved environment, and is there a synthetic version for training?
 
 ## Worked example (synthetic)
@@ -358,16 +385,19 @@ verify the output.
 - **Trigger:** an inbound NDA arrives ahead of a deal conversation.
 - **Inputs:** the counterparty's NDA, the firm's NDA playbook.
 - **Current steps:** paralegal logs it; associate reads it against the playbook; associate marks deviations; partner reviews the marked-up version.
-- **Time cost:** ~45 minutes of associate time per NDA.
+- **Time cost:** ~45 minutes of associate time per NDA. Estimate by the team, not measured.
 - **Frequency:** 10–15 per week across the group.
 - **Mandatory review point:** partner sign-off on the marked-up NDA before it goes back to the counterparty. Unchanged.
 - **Candidate AI step:** the associate's first pass — extract clauses, compare to the playbook, flag deviations — becomes an AI first pass the associate verifies.
-- **Verification cost:** ~10 minutes to check flagged clauses against the text. Much less than the 45 minutes from scratch. Good fit.
+- **Verification cost:** ~10 minutes to check flagged clauses against the text. Estimate, review only; correction time is not yet known. If a per-task sample confirms it, the workflow is a good fit.
+- **Evidence type:** all figures are reported estimates. Nothing here was observed.
 - **Confidentiality note:** runs in the approved environment; a synthetic NDA set exists for the workshop.
 
-This example scores well because it is frequent, the review point is clear, and
-verification is far cheaper than the original task. Carry the filled template into the
-prioritization matrix.
+This example is a promising candidate because it is frequent, the review point is clear,
+and verification is estimated to be far cheaper than the original task. The estimate is the
+hypothesis a pilot has to test: measure production, review and correction per task, total
+them per task, and compare the median with a baseline measured the same way. Carry the
+filled template into the prioritization matrix.
 
 
 </div>
@@ -433,13 +463,17 @@ rollout. Sequence for trust first, ambition second.
 
 
 
-This worksheet provides Customer Success Managers (CSMs) and Legal Engineers with a standardized, data-backed framework to calculate the economic impact and return on investment (ROI) of legal-AI rollouts ahead of QBRs and renewal conversations.
+**Use this when** you need to show how a time difference would translate into money, and want every assumption behind the figure in view.
+
+> **Correction, 6 October 2026.** Earlier versions called this worksheet "data-backed" and presented its table as value realised. The table is an illustration built from assumed inputs. Its time figures count verification only and leave out the time to produce the AI output and to correct it; its rates are assumed billable rates. No figure below was measured, and none is a forecast. For a measured comparison use per-task observations as defined in the dashboard's measurement dictionary (`docs/MEASUREMENT_DICTIONARY.md` in the dashboard repository): production, review and correction are totalled per task before the median is taken, abandoned attempts stay in the denominator, and a financial figure is calculated only when time fell and quality did not get worse.
+
+This worksheet gives Customer Success Managers (CSMs) and Legal Engineers one consistent way to illustrate the economic effect of a legal-AI rollout ahead of QBRs and renewal conversations.
 
 ---
 
 ## 1. Key Value Metrics & Formulas
 
-To compute the direct value realized by a practice group, we measure the frequency of tasks and the net duration delta between manual processing and AI-assisted drafting/verification.
+To illustrate the direct value for a practice group, the worksheet multiplies the frequency of a task by the assumed difference between manual processing and AI-assisted work.
 
 ### Formula A: Weekly Time Saved (Hours)
 $$\text{Hours Saved/Week} = \frac{\text{Weekly Frequency} \times (\text{Manual Baseline Duration (mins)} - \text{AI Verification Duration (mins)})}{60}$$
@@ -457,7 +491,7 @@ $$\text{ROI (\%)} = \left( \frac{\text{Net Annual Value}}{\text{Annual Software 
 
 ## 2. Sample Calculation Table (Corporate & Litigation Rollouts)
 
-Below is an economic model based on typical usage inputs (calibrated against `examples/synthetic-input.json` and the dashboard practice groups):
+Below is an illustration from assumed inputs (taken from `examples/synthetic-input.json` and the dashboard practice groups; nothing in it is calibrated against observed work):
 
 | Practice Group | Target Workflow | Weekly Volume | Manual Time | Verification Time | Net Time Saved | Weekly Hours Saved | Annual Direct Value (@\$350/hr) |
 |---|---|---:|---:|---:|---:|---:|---:|
@@ -480,9 +514,10 @@ Below is an economic model based on typical usage inputs (calibrated against `ex
 
 When preparing for a renewal or seat-expansion discussion, present this worksheet alongside the **Account Health Dashboard** statistics:
 
+0. **State the basis first:** say which inputs are estimates and which were measured. If none was measured, present the table as a hypothesis to test in a pilot.
 1. **Reconcile with Utilization Data:** Match the "Weekly Volume" in this worksheet with the active queries and weekly active user counts shown on the dashboard homepage.
-2. **Handle Partner Skepticism Proactively:** If a partner questions the value, frame the time savings as "recovered capacity." Instead of cutting associate heads, emphasize that associates saved **17.9 hours per week** which was re-allocated to high-value briefing memos and client deal strategy.
-3. **Link to Blocker Mitigation:** If blockers (e.g., `trust_in_output`) were resolved during the quarter, show how resolving that blocker (e.g., via a citation grounding clinic) unlocked the corresponding practice group's ROI in the table above.
+2. **Handle Partner Skepticism Proactively:** If a partner questions the value, frame the time savings as "recovered capacity." Say that the illustration assumes **17.9 hours per week** of associate time would be freed and redeployed to other work of the same value. Both the saving and the redeployment are assumptions until measured.
+3. **Link to Blocker Mitigation:** If blockers (e.g., `trust_in_output`) were resolved during the quarter, show what was observed after the blocker was resolved, and state that a link between the two is plausible and not established without a comparison group.
 
 
 </div>

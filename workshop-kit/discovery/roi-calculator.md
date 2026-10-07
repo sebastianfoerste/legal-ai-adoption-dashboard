@@ -1,12 +1,16 @@
 # Legal AI ROI Calculation Worksheet
 
-This worksheet provides Customer Success Managers (CSMs) and Legal Engineers with a standardized, data-backed framework to calculate the economic impact and return on investment (ROI) of legal-AI rollouts ahead of QBRs and renewal conversations.
+**Use this when** you need to show how a time difference would translate into money, and want every assumption behind the figure in view.
+
+> **Correction, 6 October 2026.** Earlier versions called this worksheet "data-backed" and presented its table as value realised. The table is an illustration built from assumed inputs. Its time figures count verification only and leave out the time to produce the AI output and to correct it; its rates are assumed billable rates. No figure below was measured, and none is a forecast. For a measured comparison use per-task observations as defined in the dashboard's measurement dictionary (`docs/MEASUREMENT_DICTIONARY.md` in the dashboard repository): production, review and correction are totalled per task before the median is taken, abandoned attempts stay in the denominator, and a financial figure is calculated only when time fell and quality did not get worse.
+
+This worksheet gives Customer Success Managers (CSMs) and Legal Engineers one consistent way to illustrate the economic effect of a legal-AI rollout ahead of QBRs and renewal conversations.
 
 ---
 
 ## 1. Key Value Metrics & Formulas
 
-To compute the direct value realized by a practice group, we measure the frequency of tasks and the net duration delta between manual processing and AI-assisted drafting/verification.
+To illustrate the direct value for a practice group, the worksheet multiplies the frequency of a task by the assumed difference between manual processing and AI-assisted work.
 
 ### Formula A: Weekly Time Saved (Hours)
 $$\text{Hours Saved/Week} = \frac{\text{Weekly Frequency} \times (\text{Manual Baseline Duration (mins)} - \text{AI Verification Duration (mins)})}{60}$$
@@ -24,7 +28,7 @@ $$\text{ROI (\%)} = \left( \frac{\text{Net Annual Value}}{\text{Annual Software 
 
 ## 2. Sample Calculation Table (Corporate & Litigation Rollouts)
 
-Below is an economic model based on typical usage inputs (calibrated against `examples/synthetic-input.json` and the dashboard practice groups):
+Below is an illustration from assumed inputs (taken from `examples/synthetic-input.json` and the dashboard practice groups; nothing in it is calibrated against observed work):
 
 | Practice Group | Target Workflow | Weekly Volume | Manual Time | Verification Time | Net Time Saved | Weekly Hours Saved | Annual Direct Value (@\$350/hr) |
 |---|---|---:|---:|---:|---:|---:|---:|
@@ -47,6 +51,7 @@ Below is an economic model based on typical usage inputs (calibrated against `ex
 
 When preparing for a renewal or seat-expansion discussion, present this worksheet alongside the **Account Health Dashboard** statistics:
 
+0. **State the basis first:** say which inputs are estimates and which were measured. If none was measured, present the table as a hypothesis to test in a pilot.
 1. **Reconcile with Utilization Data:** Match the "Weekly Volume" in this worksheet with the active queries and weekly active user counts shown on the dashboard homepage.
-2. **Handle Partner Skepticism Proactively:** If a partner questions the value, frame the time savings as "recovered capacity." Instead of cutting associate heads, emphasize that associates saved **17.9 hours per week** which was re-allocated to high-value briefing memos and client deal strategy.
-3. **Link to Blocker Mitigation:** If blockers (e.g., `trust_in_output`) were resolved during the quarter, show how resolving that blocker (e.g., via a citation grounding clinic) unlocked the corresponding practice group's ROI in the table above.
+2. **Handle Partner Skepticism Proactively:** If a partner questions the value, frame the time savings as "recovered capacity." Say that the illustration assumes **17.9 hours per week** of associate time would be freed and redeployed to other work of the same value. Both the saving and the redeployment are assumptions until measured.
+3. **Link to Blocker Mitigation:** If blockers (e.g., `trust_in_output`) were resolved during the quarter, show what was observed after the blocker was resolved, and state that a link between the two is plausible and not established without a comparison group.

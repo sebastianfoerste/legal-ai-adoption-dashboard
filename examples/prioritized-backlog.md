@@ -1,3 +1,9 @@
+> **Correction, 6 October 2026.** This report is superseded and kept for the record. Its score
+> counted reach twice, and any "Status" it prints was assigned by rank with no delivery record
+> behind it; no requirement named here was shipped. Corrected output:
+> [`product-feedback-loop/examples/prioritized-backlog.md`](../product-feedback-loop/examples/prioritized-backlog.md).
+> `prioritized-backlog.json` in this folder is the unchanged output of the same superseded run.
+
 # Prioritised product backlog (from customer feedback)
 
 _Period: Q2 2026 (synthetic) · 5 themes from synthetic interviews_

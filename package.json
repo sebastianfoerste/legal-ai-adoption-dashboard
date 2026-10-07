@@ -9,7 +9,9 @@
     "lint": "eslint",
     "test": "vitest run",
     "telemetry:validate": "node scripts/validate-telemetry.mjs",
-    "contract:test": "vitest run packages/legal-workflow-contract/src/index.test.ts"
+    "contract:test": "vitest run packages/legal-workflow-contract/src/index.test.ts",
+    "boundary:check": "node scripts/check-private-boundary.mjs",
+    "evidence:backlog": "UPDATE_EVIDENCE_BACKLOG=1 vitest run lib/evidence/backlog.test.ts"
   },
   "dependencies": {
     "next": "16.2.9",

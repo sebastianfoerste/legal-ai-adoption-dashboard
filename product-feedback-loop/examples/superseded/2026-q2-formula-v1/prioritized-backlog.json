@@ -1,0 +1,70 @@
+{
+  "period": "Q2 2026 (synthetic)",
+  "themes": [
+    {
+      "theme": "No audit trail for AI-assisted edits",
+      "reach_accounts": 3,
+      "max_severity": "blocker",
+      "revenue_signal": 14.4,
+      "priority_score": 173,
+      "requirement": "Exportable, append-only audit log of every AI-assisted edit (who, what, when).",
+      "representative_quote": "Without an exportable audit log this fails our internal review.",
+      "raised_by": [
+        "Globex LLP (synthetic)",
+        "Initech Legal (synthetic)",
+        "Soylent Partners (synthetic)"
+      ]
+    },
+    {
+      "theme": "Can't restrict who approves sensitive matters",
+      "reach_accounts": 2,
+      "max_severity": "high",
+      "revenue_signal": 10.8,
+      "priority_score": 65,
+      "requirement": "Role-based approval permissions, scoped by practice group and matter value.",
+      "representative_quote": "We need approval permissions by practice group.",
+      "raised_by": [
+        "Initech Legal (synthetic)",
+        "Soylent Partners (synthetic)"
+      ]
+    },
+    {
+      "theme": "Hard to onboard associates",
+      "reach_accounts": 2,
+      "max_severity": "high",
+      "revenue_signal": 5.6,
+      "priority_score": 34,
+      "requirement": "Guided in-product onboarding flow with role-specific first tasks.",
+      "representative_quote": "The first session is great, then people drift back to old habits.",
+      "raised_by": [
+        "Globex LLP (synthetic)",
+        "Hooli Chambers (synthetic)"
+      ]
+    },
+    {
+      "theme": "Citations not always traceable to the source",
+      "reach_accounts": 2,
+      "max_severity": "medium",
+      "revenue_signal": 4.0,
+      "priority_score": 16,
+      "requirement": "Click-through citation grounding: every cited passage links to the source location.",
+      "representative_quote": "I can't trust a summary I can't click through to the clause.",
+      "raised_by": [
+        "Hooli Chambers (synthetic)",
+        "Umbrella Legal (synthetic)"
+      ]
+    },
+    {
+      "theme": "No weekly usage visibility",
+      "reach_accounts": 1,
+      "max_severity": "low",
+      "revenue_signal": 2.0,
+      "priority_score": 2,
+      "requirement": "Weekly per-team usage view with low-usage warnings.",
+      "representative_quote": "I'd like to see which teams are actually using it each week.",
+      "raised_by": [
+        "Umbrella Legal (synthetic)"
+      ]
+    }
+  ]
+}

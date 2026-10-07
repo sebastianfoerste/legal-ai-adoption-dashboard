@@ -44,6 +44,10 @@ This is the legal-AI rollout reviewer path:
 - Follow-up templates and product-feedback notes.
 - A unified playbook for reviewer evaluation.
 
+## Practitioner research pack
+
+[`research/`](research/README.md) prepares a first qualitative study round on the contract-review handoff with four to eight practitioners. It is preparation only: no invitation has been sent and no session has been held. Predictive statements elsewhere in the kit are worded as hypotheses that the study and later adoption data can check.
+
 ## Data statement
 
 All examples are generic or synthetic. No real client, firm, matter, or personal data appears anywhere in this repo.

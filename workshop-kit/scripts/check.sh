@@ -25,6 +25,19 @@ examples/sample-output.md
 examples/generated-pilot-plan.md
 SECURITY.md
 PRIVACY.md
+research/README.md
+research/study-plan.md
+research/data-handling.md
+research/screener.md
+research/invitation-draft.md
+research/information-sheet.md
+research/consent-form.md
+research/moderator-script.md
+research/synthetic-task-pack.md
+research/task-answer-key.md
+research/observation-sheet.md
+research/follow-up-questions.md
+research/follow-up-session-plan.md
 "
 
 status=0

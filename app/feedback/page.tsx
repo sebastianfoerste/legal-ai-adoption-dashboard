@@ -3,6 +3,12 @@ import { SeverityTag } from "@/components/SeverityTag";
 import { PageHeader } from "@/components/PageHeader";
 import { Card } from "@/components/Card";
 import type { FeedbackItem } from "@/lib/schema";
+import Link from "next/link";
+import { resolveAsOf } from "@/lib/engagement/as-of";
+import { getEvidenceStore } from "@/lib/evidence/data";
+import { changesForFeedbackItem, viewChanges } from "@/lib/evidence/loop";
+import { AsOfNote } from "@/components/AsOfNote";
+import { ChangeEvidenceSummary } from "@/components/evidence/ChangeEvidence";
 
 const areaLabel: Record<FeedbackItem["productArea"], string> = {
   drafting: "Drafting",
@@ -23,12 +29,13 @@ const statusLabel: Record<FeedbackItem["status"], string> = {
 function StatusPipeline({ status }: { status: FeedbackItem["status"] }) {
   const idx = statusOrder.indexOf(status);
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex flex-wrap items-center gap-1">
+      <span className="mr-1 text-xs font-semibold text-gray-500">Routing:</span>
       {statusOrder.map((s, i) => (
         <span
           key={s}
           className={`rounded-full px-2 py-0.5 text-xs ${
-            i <= idx ? "bg-emerald-100 text-emerald-800" : "bg-gray-100 text-gray-400"
+            i <= idx ? "bg-sky-100 text-sky-800" : "bg-gray-100 text-gray-400"
           }`}
         >
           {statusLabel[s]}
@@ -38,7 +45,13 @@ function StatusPipeline({ status }: { status: FeedbackItem["status"] }) {
   );
 }
 
-export default function FeedbackPage() {
+export default async function FeedbackPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const asOfState = resolveAsOf((await searchParams)?.asOf);
+  const evidence = viewChanges(getEvidenceStore(), asOfState.date);
   const accounts = getAccounts();
   const accountName = (id: string) => accounts.find((a) => a.id === id)?.name ?? id;
   const feedback = getFeedback();
@@ -59,8 +72,17 @@ export default function FeedbackPage() {
     <main className="mx-auto max-w-5xl px-6 py-10">
       <PageHeader
         title="Product Feedback Queue"
-        subtitle="User friction captured during adoption, routed to product areas — the view you hand to Product and Engineering."
+        subtitle="User friction captured during adoption, routed to product areas, with the evidence, decision and delivery record behind each item."
       >
+        <AsOfNote asOf={asOfState} />
+        <p className="mt-3 max-w-3xl text-sm text-gray-600">
+          Routing says where an item sits in triage. It is not a delivery status: whether anything
+          was built, released or shown to help is read from the change record in{" "}
+          <Link href="/research" className="font-medium text-violet-700 hover:text-violet-800">
+            Research to Change
+          </Link>
+          . An item without a change record has no delivery status.
+        </p>
         <div className="mt-4 flex flex-wrap gap-3 text-sm">
           {statusCounts.map(({ status, count }) => (
             <span key={status} className="rounded-lg border border-gray-200 px-3 py-1.5">
@@ -95,6 +117,17 @@ export default function FeedbackPage() {
                   </div>
                   <div className="mt-2">
                     <StatusPipeline status={f.status} />
+                  </div>
+                  <div className="mt-3 space-y-2">
+                    {changesForFeedbackItem(evidence, f.id).map((view) => (
+                      <ChangeEvidenceSummary key={view.change.id} view={view} />
+                    ))}
+                    {changesForFeedbackItem(evidence, f.id).length === 0 && (
+                      <p className="rounded-lg border border-dashed border-gray-300 px-3 py-2 text-xs italic text-gray-500">
+                        No change record. Evidence, priority decision and delivery status are unknown
+                        for this item. Next decision: triage it into a problem record or close it.
+                      </p>
+                    )}
                   </div>
                 </li>
               ))}

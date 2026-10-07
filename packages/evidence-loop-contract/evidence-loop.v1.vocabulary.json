@@ -1,0 +1,27 @@
+{
+  "schema": "legal-ai-adoption.evidence-loop.v1",
+  "description": "Shared vocabulary of the evidence loop. lib/evidence/schema.ts and product-feedback-loop both test against this file, so a status cannot mean one thing in the dashboard and another in the memo.",
+  "originKinds": ["synthetic_fixture", "approved_aggregate", "participant_session"],
+  "publicOriginKinds": ["synthetic_fixture", "approved_aggregate"],
+  "evidenceTypes": ["past_behaviour", "observed_task", "opinion_on_proposal"],
+  "problemClasses": ["quality_control", "workflow_fit", "convenience"],
+  "decisionStatuses": ["prioritised", "needs_evidence", "deferred", "rejected"],
+  "confidenceLevels": ["low", "medium", "high"],
+  "deliveryStatuses": ["not_started", "in_progress", "released", "deferred", "rejected"],
+  "outcomeResults": ["supported", "contradicted", "inconclusive"],
+  "outcomeStatuses": ["supported", "contradicted", "inconclusive", "awaiting_evidence", "not_applicable"],
+  "taskCompletion": ["completed_unaided", "completed_with_assistance", "not_completed"],
+  "forbiddenKeys": [
+    "name",
+    "fullName",
+    "email",
+    "phone",
+    "employer",
+    "firm",
+    "contact",
+    "contactDetails",
+    "consentRecord",
+    "signature",
+    "recordingUrl"
+  ]
+}

@@ -1,5 +1,6 @@
 import type { Account, Blocker } from "./schema";
 import type { HealthResult } from "./health";
+import type { Recommendation } from "./engagement/expansion";
 
 export interface RecommendedAction {
   title: string;
@@ -12,7 +13,10 @@ export interface RecommendedAction {
 export function recommendAction(
   account: Account,
   blockers: Blocker[],
-  health: HealthResult
+  health: HealthResult,
+  // Review recommendation from the expansion evidence model. Health alone never triggers
+  // an expansion play.
+  expansion?: Recommendation,
 ): RecommendedAction {
   // Find open blockers for this account, sorting by severity (high > medium > low)
   const openBlockers = blockers
@@ -22,9 +26,20 @@ export function recommendAction(
       return severityWeight[b.severity] - severityWeight[a.severity];
     });
 
+  // A low-severity blocker is a caveat on an expansion proposal, not a reason to hold it,
+  // which mirrors the blocker criterion in the evidence model.
+  if (expansion === "expand" && openBlockers.every((b) => b.severity === "low")) {
+    return {
+      title: "Prepare Bounded Expansion Proposal",
+      description: `All six expansion criteria are met on the recorded evidence. Prepare the proposal with its caveats for account-owner review.`,
+      deliverable: "Customer Review Report",
+      targetGroups: account.practiceGroups.map((g) => g.name),
+    };
+  }
+
   if (openBlockers.length > 0) {
     const primaryBlocker = openBlockers[0];
-    
+
     // Map blocker category to recommended actions
     switch (primaryBlocker.category) {
       case "trust_in_output":
@@ -87,15 +102,6 @@ export function recommendAction(
       description: `Account health has dropped to ${health.band === "at_risk" ? "At Risk" : "Needs Attention"}. Proactively schedule a touchpoint to uncover hidden blockers.`,
       deliverable: "Adoption Questionnaire",
       targetGroups: allGroups,
-    };
-  }
-
-  if (health.expansionReady) {
-    return {
-      title: "Propose Account Expansion",
-      description: `Account is highly utilized with healthy adoption trends. Prepare a business case to expand seat licenses.`,
-      deliverable: "30-minute Partner Briefing",
-      targetGroups: account.practiceGroups.map((g) => g.name),
     };
   }
 

@@ -1,0 +1,174 @@
+{
+  "specialists": [
+    {
+      "id": "spec-01",
+      "label": "Specialist A",
+      "region": "DACH",
+      "weeklyCapacityHours": 30,
+      "capacityBasis": "Assumption: 30 of 40 contracted hours are assignable to accounts; the rest covers enablement content and internal work.",
+      "synthetic": true
+    },
+    {
+      "id": "spec-02",
+      "label": "Specialist B",
+      "region": "UK and Ireland",
+      "weeklyCapacityHours": 30,
+      "capacityBasis": "Assumption: 30 of 40 contracted hours are assignable to accounts; the rest covers enablement content and internal work.",
+      "synthetic": true
+    },
+    {
+      "id": "spec-03",
+      "label": "Specialist C",
+      "region": "DACH",
+      "weeklyCapacityHours": 18,
+      "capacityBasis": "Assumption: joined in May 2026; 60% of the standard 30 assignable hours during the first six months.",
+      "synthetic": true
+    }
+  ],
+  "commitments": [
+    {
+      "id": "com-001",
+      "accountId": "acct-005",
+      "ownerType": "specialist",
+      "ownerId": "spec-01",
+      "ownerLabel": "Specialist A",
+      "description": "Send the General Counsel the written follow-up review with the evidence table.",
+      "madeOn": "2026-07-20",
+      "dueOn": "2026-08-03",
+      "status": "open",
+      "completedOn": null,
+      "synthetic": true
+    },
+    {
+      "id": "com-002",
+      "accountId": "acct-004",
+      "ownerType": "specialist",
+      "ownerId": "spec-02",
+      "ownerLabel": "Specialist B",
+      "description": "Share the correction-category analysis with the two supervising partners.",
+      "madeOn": "2026-07-09",
+      "dueOn": "2026-07-24",
+      "status": "open",
+      "completedOn": null,
+      "synthetic": true
+    },
+    {
+      "id": "com-003",
+      "accountId": "acct-003",
+      "ownerType": "specialist",
+      "ownerId": "spec-02",
+      "ownerLabel": "Specialist B",
+      "description": "Propose three dates for the sponsor meeting to the managing partner's office.",
+      "madeOn": "2026-06-25",
+      "dueOn": "2026-07-10",
+      "status": "open",
+      "completedOn": null,
+      "synthetic": true
+    },
+    {
+      "id": "com-004",
+      "accountId": "acct-002",
+      "ownerType": "specialist",
+      "ownerId": "spec-01",
+      "ownerLabel": "Specialist A",
+      "description": "Confirm the clinic date with the Corporate and Employment practice leads.",
+      "madeOn": "2026-06-02",
+      "dueOn": "2026-06-12",
+      "status": "done",
+      "completedOn": "2026-06-10",
+      "synthetic": true
+    },
+    {
+      "id": "com-005",
+      "accountId": "acct-002",
+      "ownerType": "customer",
+      "ownerId": null,
+      "ownerLabel": "Customer IT lead",
+      "description": "Confirm the test environment for the document-management connector pilot.",
+      "madeOn": "2026-06-18",
+      "dueOn": "2026-07-17",
+      "status": "open",
+      "completedOn": null,
+      "synthetic": true
+    }
+  ],
+  "escalations": [
+    {
+      "id": "esc-001",
+      "accountId": "acct-003",
+      "raisedOn": "2026-07-14",
+      "raisedById": "spec-02",
+      "topic": "No active sponsor, 47 days before the renewal date when raised.",
+      "severity": "high",
+      "status": "open",
+      "decisionNeeded": "Decide whether the regional lead joins the sponsor meeting and who owns the renewal conversation.",
+      "decisionOwner": "Manager",
+      "dueOn": "2026-08-04",
+      "resolvedOn": null,
+      "synthetic": true
+    },
+    {
+      "id": "esc-002",
+      "accountId": "acct-004",
+      "raisedOn": "2026-07-24",
+      "raisedById": "spec-02",
+      "topic": "Customer requests 40 further seats for a workflow whose value is not demonstrated; the lead specialist has no spare hours.",
+      "severity": "medium",
+      "status": "open",
+      "decisionNeeded": "Agree the position for the commercial conversation and decide whether support hours move to this account.",
+      "decisionOwner": "Manager",
+      "dueOn": "2026-08-07",
+      "resolvedOn": null,
+      "synthetic": true
+    },
+    {
+      "id": "esc-003",
+      "accountId": "acct-002",
+      "raisedOn": "2026-05-20",
+      "raisedById": "spec-01",
+      "topic": "Connector pilot had no agreed priority against two other integration requests.",
+      "severity": "medium",
+      "status": "resolved",
+      "decisionNeeded": "Set the order of the three integration requests.",
+      "decisionOwner": "Manager",
+      "dueOn": "2026-06-05",
+      "resolvedOn": "2026-06-05",
+      "synthetic": true
+    }
+  ],
+  "coachingActions": [
+    {
+      "id": "coach-001",
+      "specialistId": "spec-02",
+      "observedOn": "2026-07-23",
+      "observation": "The refresher training was proposed on the customer's own explanation of the problem, without testing it against the correction data.",
+      "action": "Before the next proposal, write down the hypothesis and the observation that would disprove it; review both in the weekly one-to-one.",
+      "evidenceRef": "int-004",
+      "status": "open",
+      "dueOn": "2026-08-07",
+      "synthetic": true
+    },
+    {
+      "id": "coach-002",
+      "specialistId": "spec-03",
+      "observedOn": "2026-07-10",
+      "observation": "First independently delivered session. The follow-up measure was set after delivery and has not been agreed with the customer.",
+      "action": "Agree the measure for the sign-off session with the Employment lead, then shadow the follow-up review on 28 August.",
+      "evidenceRef": "int-002",
+      "status": "open",
+      "dueOn": "2026-08-14",
+      "synthetic": true
+    },
+    {
+      "id": "coach-003",
+      "specialistId": "spec-01",
+      "observedOn": "2026-07-22",
+      "observation": "The diagnosis used shadowed reviews and a time sample before any action was proposed, and named the confounders in the evaluation.",
+      "action": "Present the diagnosis method at the team session so it becomes the shared template for intervention proposals.",
+      "evidenceRef": "int-001",
+      "status": "open",
+      "dueOn": "2026-08-21",
+      "synthetic": true
+    }
+  ]
+}

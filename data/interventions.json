@@ -1,0 +1,298 @@
+[
+  {
+    "id": "int-001",
+    "accountId": "acct-005",
+    "workflowId": "wf-aurich-supplier-review",
+    "practiceGroup": "Corporate",
+    "blockerId": "blk-011",
+    "observedProblem": "Repeat use fell from 5 of 8 eligible lawyers in the onboarding period to 1 of 8 two periods later, although 7 of 8 had activated after training.",
+    "supportingEvidence": [
+      {
+        "kind": "adoption_metric",
+        "summary": "Repeat users 5, then 2, then 1 of 8 eligible lawyers across the first three reporting periods.",
+        "ref": "data/adoption-periods.json#series-aurich-supplier-review"
+      },
+      {
+        "kind": "value_measurement",
+        "summary": "Median 167.5 active minutes per signed-off issues list (median of per-task totals, 10 accepted of 12 attempts) against a team estimate of 140 minutes without the tool; 5 of 10 sampled results went back for a second correction round.",
+        "ref": "data/value-measurements.json#vm-aurich-supplier-review"
+      },
+      {
+        "kind": "specialist_observation",
+        "summary": "In three shadowed reviews the lawyer rebuilt the output into the team's own clause checklist before reviewing it.",
+        "ref": null
+      }
+    ],
+    "hypothesis": "The output order does not match the team's review checklist, so lawyers restructure it by hand and the tool saves no time. Training is not the constraint.",
+    "assignedSpecialistId": "spec-01",
+    "action": "Map the workflow output to the team's 14-point supplier checklist, add a reviewer sign-off step, and run two supervised review clinics with the Corporate group.",
+    "dates": {
+      "proposedOn": "2026-03-20",
+      "startedOn": "2026-03-31",
+      "completedOn": "2026-04-17",
+      "followUpDueOn": "2026-06-26",
+      "evaluatedOn": "2026-07-22"
+    },
+    "expectedResult": {
+      "metric": "Repeat users and median minutes to a signed-off issues list",
+      "target": "At least 6 of 8 eligible lawyers as repeat users and a median below 100 minutes",
+      "byDate": "2026-06-21"
+    },
+    "followUpObservations": [
+      {
+        "observedOn": "2026-05-27",
+        "summary": "First follow-up period: repeat users 6 of 8; sampled median 86 minutes (9 results).",
+        "bearing": "supports"
+      },
+      {
+        "observedOn": "2026-06-24",
+        "summary": "Second follow-up period: repeat users 6 of 8; rework on 2 of 11 sampled results.",
+        "bearing": "supports"
+      },
+      {
+        "observedOn": "2026-07-21",
+        "summary": "Third complete period: repeat users 7 of 8; follow-up sample median 90 active minutes per accepted result (30 accepted of 31 attempts); 2 quality failures.",
+        "bearing": "supports"
+      }
+    ],
+    "outcome": {
+      "result": "achieved",
+      "rationale": "Both targets were met in three consecutive complete reporting periods.",
+      "attribution": "plausible_not_established",
+      "confounders": [
+        "German clause-library release on 11 May, inside the follow-up window",
+        "No comparison group; eight eligible users"
+      ]
+    },
+    "synthetic": true
+  },
+  {
+    "id": "int-002",
+    "accountId": "acct-005",
+    "workflowId": null,
+    "practiceGroup": "Employment",
+    "blockerId": null,
+    "observedProblem": "In the German-language legal summary workflow, 25 of 36 draft outputs were verified and 4 were blocked at review; 7 were neither verified nor blocked.",
+    "supportingEvidence": [
+      {
+        "kind": "adoption_metric",
+        "summary": "25 of 36 draft outputs verified; 4 blocked at review.",
+        "ref": "data/workflows.json"
+      }
+    ],
+    "hypothesis": "Reviewers are unsure which outputs need a second reader, so sign-off stalls.",
+    "assignedSpecialistId": "spec-03",
+    "action": "One 60-minute session on the reviewer sign-off step with the Employment group.",
+    "dates": {
+      "proposedOn": "2026-06-15",
+      "startedOn": "2026-07-01",
+      "completedOn": "2026-07-08",
+      "followUpDueOn": "2026-08-14",
+      "evaluatedOn": null
+    },
+    "expectedResult": {
+      "metric": "Share of draft outputs verified",
+      "target": "At least 30 of 36 comparable draft outputs verified in the next reporting period",
+      "byDate": "2026-08-14"
+    },
+    "followUpObservations": [],
+    "outcome": null,
+    "synthetic": true
+  },
+  {
+    "id": "int-003",
+    "accountId": "acct-005",
+    "workflowId": "wf-aurich-supplier-review",
+    "practiceGroup": "Employment",
+    "blockerId": null,
+    "observedProblem": "Employment has no checklist-mapped review workflow. The General Counsel asked for the Corporate playbook to be extended.",
+    "supportingEvidence": [
+      {
+        "kind": "customer_statement",
+        "summary": "Request recorded in the review meeting of 20 July.",
+        "ref": "data/engagements.json#acct-005"
+      }
+    ],
+    "hypothesis": "The checklist mapping transfers to employment-contract review if the checklist is rebuilt with the Employment lead. This is untested.",
+    "assignedSpecialistId": "spec-01",
+    "action": "Rebuild the checklist with the Employment lead and pilot with three lawyers for one reporting period before any seat increase.",
+    "dates": {
+      "proposedOn": "2026-07-24",
+      "startedOn": null,
+      "completedOn": null,
+      "followUpDueOn": null,
+      "evaluatedOn": null
+    },
+    "expectedResult": {
+      "metric": "Repeat users in the Employment pilot and median minutes to a signed-off result",
+      "target": "All three pilot lawyers as repeat users and a median below the group's own pre-pilot sample",
+      "byDate": "2026-09-25"
+    },
+    "followUpObservations": [],
+    "outcome": null,
+    "synthetic": true
+  },
+  {
+    "id": "int-004",
+    "accountId": "acct-004",
+    "workflowId": "wf-brightmoor-spa-draft",
+    "practiceGroup": "Corporate",
+    "blockerId": "blk-012",
+    "observedProblem": "Fewer than half of started drafting runs reached a partner-accepted draft: 81 of 184 in the first two reporting periods.",
+    "supportingEvidence": [
+      {
+        "kind": "adoption_metric",
+        "summary": "Completion 41 of 88 and 40 of 96 started runs.",
+        "ref": "data/adoption-periods.json#series-brightmoor-spa-draft"
+      },
+      {
+        "kind": "customer_statement",
+        "summary": "The Innovation Lead attributed the gap to prompting skill among associates.",
+        "ref": null
+      }
+    ],
+    "hypothesis": "Associates lack prompting fluency; a refresher will raise completion.",
+    "assignedSpecialistId": "spec-02",
+    "action": "90-minute refresher training for 18 Corporate associates.",
+    "dates": {
+      "proposedOn": "2026-04-28",
+      "startedOn": "2026-05-06",
+      "completedOn": "2026-05-06",
+      "followUpDueOn": "2026-06-26",
+      "evaluatedOn": "2026-07-23"
+    },
+    "expectedResult": {
+      "metric": "Completion rate of started drafting runs",
+      "target": "At least 60 of 100 started runs reach a partner-accepted draft",
+      "byDate": "2026-06-21"
+    },
+    "followUpObservations": [
+      {
+        "observedOn": "2026-06-24",
+        "summary": "Activity rose to 134 started runs; 43 reached an accepted draft (32%).",
+        "bearing": "contradicts"
+      },
+      {
+        "observedOn": "2026-07-22",
+        "summary": "141 started, 45 completed. Median active time per accepted draft rose from 222.5 to 260 minutes; rework on 14 of 26 sampled drafts.",
+        "bearing": "contradicts"
+      }
+    ],
+    "outcome": {
+      "result": "not_achieved",
+      "rationale": "Activity increased after the training while completion fell and correction time rose. The prompting-skill hypothesis is not supported.",
+      "attribution": "not_assessed",
+      "confounders": ["Two large transactions closed in June"]
+    },
+    "synthetic": true
+  },
+  {
+    "id": "int-005",
+    "accountId": "acct-004",
+    "workflowId": "wf-brightmoor-spa-draft",
+    "practiceGroup": "Corporate",
+    "blockerId": "blk-012",
+    "observedProblem": "Correction is the largest single step on the way to an accepted draft: a median of 110 correction minutes against a median task total of 260. Partners rewrite the negotiated clauses of agent drafts.",
+    "supportingEvidence": [
+      {
+        "kind": "value_measurement",
+        "summary": "Median 260 active minutes per accepted draft after the training against 222.5 before; 26 of 32 attempts accepted against 24 of 27; quality failures on 9 of 26 sampled drafts against 5 of 24.",
+        "ref": "data/value-measurements.json#vm-brightmoor-spa-draft"
+      },
+      {
+        "kind": "specialist_observation",
+        "summary": "Correction categories reviewed on 26 sampled drafts with two supervising partners: 17 concerned negotiated risk-allocation clauses.",
+        "ref": null
+      }
+    ],
+    "hypothesis": "The workflow scope is too broad. Negotiated risk-allocation clauses need partner judgment early; the agent helps on definitions, schedules and boilerplate.",
+    "assignedSpecialistId": "spec-02",
+    "action": "Narrow the agent scope to definitions, schedules and boilerplate for a six-week trial with one deal team; partners draft risk-allocation clauses directly.",
+    "dates": {
+      "proposedOn": "2026-07-23",
+      "startedOn": "2026-07-27",
+      "completedOn": null,
+      "followUpDueOn": "2026-09-11",
+      "evaluatedOn": null
+    },
+    "expectedResult": {
+      "metric": "Median minutes to a partner-accepted draft and rework rate",
+      "target": "Median below 180 minutes and rework on fewer than 8 of 26 comparable drafts",
+      "byDate": "2026-09-11"
+    },
+    "followUpObservations": [],
+    "outcome": null,
+    "synthetic": true
+  },
+  {
+    "id": "int-006",
+    "accountId": "acct-002",
+    "workflowId": null,
+    "practiceGroup": "Corporate",
+    "blockerId": "blk-003",
+    "observedProblem": "In the GDPR DPA review workflow, 22 of 39 draft outputs were verified and 9 were blocked at review.",
+    "supportingEvidence": [
+      {
+        "kind": "adoption_metric",
+        "summary": "22 of 39 draft outputs verified; 9 blocked.",
+        "ref": "data/workflows.json"
+      },
+      {
+        "kind": "customer_statement",
+        "summary": "Practice leads said they re-check every cited provision by hand.",
+        "ref": null
+      }
+    ],
+    "hypothesis": "Reviewers do not trust citations because the verification step is not part of their review routine.",
+    "assignedSpecialistId": "spec-01",
+    "action": "Citation-verification clinic with the Corporate and Employment practice leads, then a shared verification checklist.",
+    "dates": {
+      "proposedOn": "2026-06-02",
+      "startedOn": "2026-06-16",
+      "completedOn": null,
+      "followUpDueOn": "2026-07-24",
+      "evaluatedOn": null
+    },
+    "expectedResult": {
+      "metric": "Share of draft outputs verified",
+      "target": "At least 30 of 39 comparable draft outputs verified",
+      "byDate": "2026-07-24"
+    },
+    "followUpObservations": [],
+    "outcome": null,
+    "synthetic": true
+  },
+  {
+    "id": "int-007",
+    "accountId": "acct-003",
+    "workflowId": null,
+    "practiceGroup": "Litigation",
+    "blockerId": "blk-006",
+    "observedProblem": "Weekly active users fell from 20 to 8 of 40 licensed seats over five weeks.",
+    "supportingEvidence": [
+      {
+        "kind": "adoption_metric",
+        "summary": "Weekly active users 20, 15, 12, 10, 8.",
+        "ref": "data/accounts.json#acct-003"
+      }
+    ],
+    "hypothesis": "Partners do not rely on output without source verification, and no active sponsor sets expectations for the group.",
+    "assignedSpecialistId": "spec-02",
+    "action": "Sponsor meeting with the managing partner's office, then supervised use for two Litigation partners.",
+    "dates": {
+      "proposedOn": "2026-06-25",
+      "startedOn": null,
+      "completedOn": null,
+      "followUpDueOn": null,
+      "evaluatedOn": null
+    },
+    "expectedResult": {
+      "metric": "Weekly active users in Litigation",
+      "target": "At least 9 of 20 licensed Litigation seats active per week",
+      "byDate": "2026-08-21"
+    },
+    "followUpObservations": [],
+    "outcome": null,
+    "synthetic": true
+  }
+]

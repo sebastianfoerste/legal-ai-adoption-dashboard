@@ -24,11 +24,19 @@ A falling trend or a new high-severity blocker moves an account into "needs atte
 the Blockers page. The attached action is the playbook: pair a skeptic with the Innovation
 lead, run the partner briefing on review gates, mandate the associate hands-on.
 
+## Intervention and follow-up
+When a group stalls, the specialist records the observed problem, the evidence, a
+hypothesis and an expected result before acting. After delivery the intervention stays
+"completed, not evaluated" until follow-up observations are compared with the expected
+result. The evaluation may find that the result was not achieved; that finding redirects
+the next intervention.
+
 ## Expansion and renewal
-An account reads "Expansion-ready" only when it is healthy, well-utilized, and growing.
-That flag is the trigger for the expansion conversation — earned on evidence, not pushed
-on a calendar. Renewal then argues from momentum: trend up, blockers closing, feedback
-shipping.
+An account receives the recommendation "Expand" only when six criteria are met on recorded
+evidence: demonstrated workflow value, sustained use, no unresolved blocker in the way,
+customer demand, sponsor support and delivery capacity. A high health score is not one of
+them, and unknown evidence never counts as met. The renewal panel lists recorded signals
+and suggests when to hold the review. It is a decision aid and predicts nothing.
 
 Throughout: the product gates every output behind a named lawyer. This dashboard never
 actions an expansion or renewal automatically — it surfaces the signal for a human to act on.

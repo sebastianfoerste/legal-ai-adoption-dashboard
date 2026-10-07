@@ -19,6 +19,7 @@ export function ExportButton({ accounts }: ExportButtonProps) {
       "Health Score",
       "Health Band",
       "Renewal Date",
+      "Data Class",
     ];
 
     const rows = accounts.map((a) => {
@@ -34,6 +35,7 @@ export function ExportButton({ accounts }: ExportButtonProps) {
         health.score,
         health.band,
         a.renewalDate,
+        "synthetic",
       ];
     });
 
@@ -44,7 +46,7 @@ export function ExportButton({ accounts }: ExportButtonProps) {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "legal_ai_adoption_accounts_export.csv");
+    link.setAttribute("download", "synthetic_legal_ai_adoption_accounts_export.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

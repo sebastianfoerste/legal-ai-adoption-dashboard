@@ -24,6 +24,11 @@ jobs:
           node-version: 24
           cache: pnpm
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -33,5 +38,18 @@ jobs:
       - name: Run Vitest tests
         run: pnpm run test
 
+      - name: Validate telemetry contract
+        run: pnpm run telemetry:validate
+
+      - name: Check the private-data boundary
+        run: pnpm run boundary:check
+
+      - name: Run feedback-loop tests and output check
+        run: make feedback-check
+
+      - name: Run workshop-kit check
+        run: make workshop-check
+
+      # The build must not need network access: no font or asset is fetched at build time.
       - name: Run Next.js build
         run: pnpm run build

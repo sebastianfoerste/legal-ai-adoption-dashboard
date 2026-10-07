@@ -1,8 +1,8 @@
 {
   "weights": {
-    "utilization": 0.50,
-    "trend": 0.30,
-    "engagement": 0.20
+    "utilization": 0.45,
+    "trend": 0.25,
+    "reviewedCompletion": 0.30
   },
   "penalties": {
     "highBlocker": 12,

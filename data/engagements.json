@@ -1,0 +1,198 @@
+[
+  {
+    "accountId": "acct-001",
+    "scenario": null,
+    "assignments": [{ "specialistId": "spec-02", "role": "lead", "plannedHoursPerWeek": 6 }],
+    "complexity": {
+      "practiceGroupsInScope": 3,
+      "workingLanguages": 1,
+      "integrationsInFlight": 0,
+      "stakeholderGroups": 2,
+      "regulatedSector": false
+    },
+    "sponsor": {
+      "status": "active",
+      "evidence": "The innovation partner attended the last quarterly review and set the Corporate training date.",
+      "recordedOn": "2026-06-30"
+    },
+    "demand": { "status": "not_recorded", "evidence": null, "recordedOn": null },
+    "expansionCase": null,
+    "objectives": [],
+    "customerOwnerRole": "Innovation partner (customer)",
+    "reviewOwnerId": "spec-02",
+    "nextReviewDate": "2026-09-30",
+    "synthetic": true
+  },
+  {
+    "accountId": "acct-002",
+    "scenario": null,
+    "assignments": [
+      { "specialistId": "spec-01", "role": "lead", "plannedHoursPerWeek": 9 },
+      { "specialistId": "spec-03", "role": "support", "plannedHoursPerWeek": 4 }
+    ],
+    "complexity": {
+      "practiceGroupsInScope": 3,
+      "workingLanguages": 2,
+      "integrationsInFlight": 1,
+      "stakeholderGroups": 3,
+      "regulatedSector": false
+    },
+    "sponsor": { "status": "not_recorded", "evidence": null, "recordedOn": null },
+    "demand": { "status": "not_recorded", "evidence": null, "recordedOn": null },
+    "expansionCase": null,
+    "objectives": [],
+    "customerOwnerRole": "Head of Legal Operations (customer)",
+    "reviewOwnerId": "spec-01",
+    "nextReviewDate": "2026-08-21",
+    "synthetic": true
+  },
+  {
+    "accountId": "acct-003",
+    "scenario": null,
+    "assignments": [{ "specialistId": "spec-02", "role": "lead", "plannedHoursPerWeek": 8 }],
+    "complexity": {
+      "practiceGroupsInScope": 3,
+      "workingLanguages": 1,
+      "integrationsInFlight": 0,
+      "stakeholderGroups": 4,
+      "regulatedSector": false
+    },
+    "sponsor": {
+      "status": "disengaged",
+      "evidence": "The managing partner's office declined two review meetings in June and named no delegate.",
+      "recordedOn": "2026-07-14"
+    },
+    "demand": {
+      "status": "declined",
+      "evidence": "The finance partner stated in June that no further seats will be discussed before renewal.",
+      "recordedOn": "2026-06-24"
+    },
+    "expansionCase": null,
+    "objectives": [],
+    "customerOwnerRole": "Managing partner's office (customer)",
+    "reviewOwnerId": "spec-02",
+    "nextReviewDate": "2026-08-07",
+    "synthetic": true
+  },
+  {
+    "accountId": "acct-004",
+    "scenario": {
+      "id": "scenario-b",
+      "label": "Synthetic scenario B: high activity, expansion inappropriate",
+      "summary": "A well-used account asks for 40 more seats. Activity is high and rising, but fewer than a third of started drafting runs reach an accepted draft, time to an accepted draft has risen, and the lead specialist has no spare hours."
+    },
+    "assignments": [{ "specialistId": "spec-02", "role": "lead", "plannedHoursPerWeek": 14 }],
+    "complexity": {
+      "practiceGroupsInScope": 3,
+      "workingLanguages": 1,
+      "integrationsInFlight": 2,
+      "stakeholderGroups": 5,
+      "regulatedSector": false
+    },
+    "sponsor": {
+      "status": "changed_unconfirmed",
+      "evidence": "The sponsoring partner joined the firm's management board in June. The successor has not confirmed the programme goals.",
+      "recordedOn": "2026-07-09"
+    },
+    "demand": {
+      "status": "requested",
+      "evidence": "The Innovation Lead asked on 22 July for 40 further seats so that every Corporate associate can use the drafting agent.",
+      "recordedOn": "2026-07-22"
+    },
+    "expansionCase": {
+      "proposedScope": "40 further seats for the share purchase agreement first-draft agent across Corporate.",
+      "basedOnWorkflowId": "wf-brightmoor-spa-draft",
+      "targetGroups": ["Corporate"],
+      "additionalDeliveryHoursPerWeek": 8
+    },
+    "objectives": [
+      {
+        "id": "obj-b1",
+        "statement": "At least 60% of started drafting runs reach a partner-accepted draft.",
+        "workflowId": "wf-brightmoor-spa-draft",
+        "metric": "completion_rate_min",
+        "target": 0.6
+      },
+      {
+        "id": "obj-b2",
+        "statement": "Median time to a partner-accepted draft stays below 180 minutes, review and correction included.",
+        "workflowId": "wf-brightmoor-spa-draft",
+        "metric": "median_minutes_max",
+        "target": 180
+      },
+      {
+        "id": "obj-b3",
+        "statement": "Quality failures on no more than 15% of sampled drafts.",
+        "workflowId": "wf-brightmoor-spa-draft",
+        "metric": "quality_failure_rate_max",
+        "target": 0.15
+      }
+    ],
+    "customerOwnerRole": "Innovation Lead (customer)",
+    "reviewOwnerId": "spec-02",
+    "nextReviewDate": "2026-09-11",
+    "synthetic": true
+  },
+  {
+    "accountId": "acct-005",
+    "scenario": {
+      "id": "scenario-a",
+      "label": "Synthetic scenario A: stalled adoption, diagnosed and recovered",
+      "summary": "An in-house team activates after training, then stops using the workflow. Diagnosis shows the output did not fit the team's review checklist. After a checklist-mapped playbook and two clinics, repeat use and time to a signed-off result improve over three complete reporting periods."
+    },
+    "assignments": [
+      { "specialistId": "spec-01", "role": "lead", "plannedHoursPerWeek": 7 },
+      { "specialistId": "spec-03", "role": "support", "plannedHoursPerWeek": 3 }
+    ],
+    "complexity": {
+      "practiceGroupsInScope": 3,
+      "workingLanguages": 2,
+      "integrationsInFlight": 0,
+      "stakeholderGroups": 2,
+      "regulatedSector": true
+    },
+    "sponsor": {
+      "status": "active",
+      "evidence": "The General Counsel chaired both follow-up reviews and named an internal owner for the review checklist.",
+      "recordedOn": "2026-07-20"
+    },
+    "demand": {
+      "status": "requested",
+      "evidence": "The General Counsel asked on 20 July to extend the reviewed playbook to Employment and to price six further seats for procurement counsel.",
+      "recordedOn": "2026-07-20"
+    },
+    "expansionCase": {
+      "proposedScope": "Extend the supplier-contract review playbook to Employment and add six seats for procurement counsel, after a one-period pilot with three Employment lawyers.",
+      "basedOnWorkflowId": "wf-aurich-supplier-review",
+      "targetGroups": ["Employment"],
+      "additionalDeliveryHoursPerWeek": 4
+    },
+    "objectives": [
+      {
+        "id": "obj-a1",
+        "statement": "At least 6 of the 8 eligible Corporate lawyers use the supplier-contract review in two or more weeks of each reporting period.",
+        "workflowId": "wf-aurich-supplier-review",
+        "metric": "repeat_users_min",
+        "target": 6
+      },
+      {
+        "id": "obj-a2",
+        "statement": "Median time to a signed-off issues list stays below 100 minutes, review and correction included.",
+        "workflowId": "wf-aurich-supplier-review",
+        "metric": "median_minutes_max",
+        "target": 100
+      },
+      {
+        "id": "obj-a3",
+        "statement": "Quality failures on no more than 10% of sampled results.",
+        "workflowId": "wf-aurich-supplier-review",
+        "metric": "quality_failure_rate_max",
+        "target": 0.1
+      }
+    ],
+    "customerOwnerRole": "General Counsel (customer)",
+    "reviewOwnerId": "spec-01",
+    "nextReviewDate": "2026-08-28",
+    "synthetic": true
+  }
+]

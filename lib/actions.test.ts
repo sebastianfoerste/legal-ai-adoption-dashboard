@@ -26,8 +26,8 @@ describe("recommendAction", () => {
   const dummyHealth: HealthResult = {
     score: 85,
     band: "healthy",
-    expansionReady: false,
-    breakdown: { utilizationPts: 40, trendPts: 25, engagementPts: 20, penalty: 0 }
+    breakdown: { utilizationPts: 40, trendPts: 25, reviewedCompletionPts: 20, penalty: 0 },
+    unknownComponents: [],
   };
 
   it("recommends citation clinic for trust_in_output blockers", () => {
@@ -83,8 +83,8 @@ describe("recommendAction", () => {
     const lowHealth: HealthResult = {
       score: 35,
       band: "at_risk",
-      expansionReady: false,
-      breakdown: { utilizationPts: 15, trendPts: 10, engagementPts: 10, penalty: 0 }
+      breakdown: { utilizationPts: 15, trendPts: 10, reviewedCompletionPts: 10, penalty: 0 },
+      unknownComponents: [],
     };
 
     const action = recommendAction(dummyAccount, [], lowHealth);
@@ -92,17 +92,43 @@ describe("recommendAction", () => {
     expect(action.deliverable).toBe("Adoption Questionnaire");
   });
 
-  it("recommends expansion proposal if account is healthy and expansion ready", () => {
-    const expansionHealth: HealthResult = {
-      score: 90,
-      band: "healthy",
-      expansionReady: true,
-      breakdown: { utilizationPts: 45, trendPts: 25, engagementPts: 20, penalty: 0 }
-    };
+  const healthyHealth: HealthResult = {
+    score: 90,
+    band: "healthy",
+    breakdown: { utilizationPts: 45, trendPts: 25, reviewedCompletionPts: 20, penalty: 0 },
+    unknownComponents: [],
+  };
 
-    const action = recommendAction(dummyAccount, [], expansionHealth);
-    expect(action.title).toBe("Propose Account Expansion");
-    expect(action.deliverable).toBe("30-minute Partner Briefing");
+  it("proposes expansion only when the evidence model recommends it", () => {
+    const action = recommendAction(dummyAccount, [], healthyHealth, "expand");
+    expect(action.title).toBe("Prepare Bounded Expansion Proposal");
+    expect(action.deliverable).toBe("Customer Review Report");
+  });
+
+  it("treats a low-severity blocker as a caveat on expansion and a higher one as a stop", () => {
+    const blocker = (severity: Blocker["severity"]): Blocker => ({
+      id: `blk-${severity}`,
+      accountId: "acct-test",
+      category: "training_gap",
+      severity,
+      status: "open",
+      affectedGroups: ["Corporate"],
+      reEngagementAction: "",
+      workshopFollowUp: "",
+    });
+    expect(recommendAction(dummyAccount, [blocker("low")], healthyHealth, "expand").title).toBe(
+      "Prepare Bounded Expansion Proposal",
+    );
+    expect(recommendAction(dummyAccount, [blocker("medium")], healthyHealth, "expand").title).toBe(
+      "Schedule prompt Fluency Workshop",
+    );
+  });
+
+  it("does not propose expansion for a healthy score alone", () => {
+    for (const recommendation of [undefined, "continue", "adjust", "pause"] as const) {
+      const action = recommendAction(dummyAccount, [], healthyHealth, recommendation);
+      expect(action.title).toBe("Maintain Standard Engagement");
+    }
   });
 
   it("recommends standard cadence by default for healthy/steady accounts without blockers", () => {

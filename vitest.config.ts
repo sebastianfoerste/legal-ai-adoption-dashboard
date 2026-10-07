@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["**/*.test.ts"],
-    exclude: ["**/node_modules/**", ".next/**"],
+    // .claude/worktrees holds other checkouts of this repository; their tests are not ours.
+    exclude: ["**/node_modules/**", ".next/**", ".claude/**"],
   },
 });

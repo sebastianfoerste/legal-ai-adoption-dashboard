@@ -1,9 +1,20 @@
 import { commandCenterSnapshot } from "@/lib/command-center";
 import { workflowGovernanceSnapshot } from "@/lib/workflow-governance";
+import { getAccounts } from "@/lib/data";
+import { formatDate, resolveAsOf } from "@/lib/engagement/as-of";
+import { getEngagement, specialistLabel } from "@/lib/engagement/data";
+import { accountExpansion } from "@/lib/engagement/expansion";
+import { RecommendationPill } from "@/components/engagement/ExpansionPanel";
 
-export default function CommandCenterPage() {
+export default async function CommandCenterPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
+  const asOf = resolveAsOf((await searchParams)?.asOf).date;
   const { answer, recommendations, leadershipReport } = commandCenterSnapshot();
   const governance = workflowGovernanceSnapshot();
+  const reviews = getAccounts().map((account) => ({
+    account,
+    expansion: accountExpansion(account.id, asOf),
+    engagement: getEngagement(account.id),
+  }));
   return (
     <main className="mx-auto max-w-5xl space-y-6 px-6 py-8">
       <header>
@@ -57,6 +68,42 @@ export default function CommandCenterPage() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="rounded-lg border border-gray-200 bg-white p-5" aria-labelledby="reviews-heading">
+        <h2 id="reviews-heading" className="font-semibold">Customer review reports</h2>
+        <p className="mt-1 text-sm text-gray-600">
+          One synthetic review per account: objectives, adoption trends, intervention outcomes, quality evidence, unresolved problems and a reasoned recommendation with owners and review dates.
+        </p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[680px] text-sm">
+            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+              <tr>
+                <th className="px-3 py-2 font-medium">Account</th>
+                <th className="px-3 py-2 font-medium">Recommendation</th>
+                <th className="px-3 py-2 font-medium">Next review</th>
+                <th className="px-3 py-2 font-medium">Owner</th>
+                <th className="px-3 py-2 font-medium">Report</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {reviews.map(({ account, expansion, engagement }) => (
+                <tr key={account.id}>
+                  <td className="px-3 py-3 font-medium text-gray-900">{account.name}</td>
+                  <td className="px-3 py-3"><RecommendationPill recommendation={expansion.recommendation} short /></td>
+                  <td className="whitespace-nowrap px-3 py-3 text-gray-600">{engagement ? formatDate(engagement.nextReviewDate) : "Unknown"}</td>
+                  <td className="px-3 py-3 text-gray-600">{engagement ? specialistLabel(engagement.reviewOwnerId) : "Unknown"}</td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <a className="font-medium text-blue-700 underline" href={`/accounts/${account.id}/review`}>Open</a>
+                    <span className="mx-2 text-gray-300">|</span>
+                    <a className="font-medium text-blue-700 underline" href={`/command-center/report?account=${account.id}`}>Markdown</a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 text-xs text-gray-500">Synthetic scenarios. Recommendations are decision aids for the account owner; nothing is sent or booked.</p>
       </section>
 
       <section className="rounded-lg border border-gray-200 bg-white p-5">

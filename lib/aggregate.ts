@@ -1,4 +1,4 @@
-import { getAccounts, getBlockers, getFeedback } from "./data";
+import { getAccounts, getBlockers, getWorkflowUsage } from "./data";
 import { computeHealth, type HealthResult } from "./health";
 
 export function accountHealth(accountId: string): HealthResult {
@@ -7,13 +7,13 @@ export function accountHealth(accountId: string): HealthResult {
   const openBlockers = getBlockers()
     .filter((b) => b.accountId === accountId && b.status !== "resolved")
     .map((b) => b.severity);
-  const feedback = getFeedback().filter((f) => f.accountId === accountId);
+  const workflows = getWorkflowUsage().filter((w) => w.accountId === accountId);
   return computeHealth({
     seats: account.seats,
     activeUsers: account.activeUsers,
     weeklyActiveUsers: account.weeklyActiveUsers,
     openBlockers,
-    feedbackSharedWithProduct: feedback.filter((f) => f.status === "shared_with_product").length,
-    feedbackTotal: feedback.length,
+    draftOutputs: workflows.reduce((sum, w) => sum + w.draftOutputs, 0),
+    verifiedOutputs: workflows.reduce((sum, w) => sum + w.verifiedOutputs, 0),
   });
 }
