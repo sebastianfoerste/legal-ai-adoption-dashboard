@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { GET as downloadReport } from "../../app/command-center/report/route";
+import { GET as downloadReport } from "../../app/insights/report/route";
 import { getAccounts } from "../data";
 import { buildCustomerReview, type CustomerReview } from "./customer-review";
 
@@ -94,7 +94,7 @@ describe("customer review report", () => {
 
 describe("report route", () => {
   it("serves a customer review as a synthetic Markdown download", async () => {
-    const response = downloadReport(new Request("http://localhost/command-center/report?account=acct-005"));
+    const response = downloadReport(new Request("http://localhost/insights/report?account=acct-005"));
     expect(response.status).toBe(200);
     expect(response.headers.get("content-type")).toContain("text/markdown");
     expect(response.headers.get("content-disposition")).toContain(
@@ -104,13 +104,13 @@ describe("report route", () => {
   });
 
   it("returns 404 for an unknown account", async () => {
-    const response = downloadReport(new Request("http://localhost/command-center/report?account=nope"));
+    const response = downloadReport(new Request("http://localhost/insights/report?account=nope"));
     expect(response.status).toBe(404);
   });
 
   it("keeps serving the portfolio report when no account is given", async () => {
-    const text = await downloadReport(new Request("http://localhost/command-center/report")).text();
-    expect(text).toContain("# Synthetic Legal AI Command Center Report");
+    const text = await downloadReport(new Request("http://localhost/insights/report")).text();
+    expect(text).toContain("# Synthetic Legal AI Adoption Insights Report");
     expect(text).toContain("## Customer review recommendations");
   });
 });

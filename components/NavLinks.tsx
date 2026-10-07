@@ -10,7 +10,7 @@ const nav = [
   { href: "/research", label: "Research to Change" },
   { href: "/interventions", label: "Interventions" },
   { href: "/manager", label: "Manager Decisions" },
-  { href: "/command-center", label: "Command Center" },
+  { href: "/insights", label: "Adoption Insights" },
 ];
 
 export function NavLinks() {

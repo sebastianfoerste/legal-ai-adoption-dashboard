@@ -88,13 +88,13 @@ Pages:
 
 1. **Account Health** (`/`): a portfolio overview strip (accounts by band, accounts whose expansion evidence is met, open high-severity blockers), then per-account health with a score breakdown, the review recommendation, practice groups, persona adoption, and the weekly-active trend.
 2. **Account detail** (`/accounts/[id]`): expansion readiness with supporting and missing evidence, the renewal decision aid, adoption over time, customer value and the account's interventions.
-3. **Customer review** (`/accounts/[id]/review`): the seven-section review report; `/command-center/report?account=<id>` downloads it as Markdown.
+3. **Customer review** (`/accounts/[id]/review`): the seven-section review report; `/insights/report?account=<id>` downloads it as Markdown.
 4. **Adoption Blockers** (`/blockers`): open blockers by category, worst first, each with a re-engagement action and a workshop follow-up.
 5. **Product Feedback Queue** (`/feedback`): user friction routed to product areas, with a triage pipeline.
 6. **Interventions** (`/interventions`): every intervention by stage: proposed, underway, completed and not evaluated, evaluated.
 7. **Manager Decisions** (`/manager`): why each account receives attention, specialist assignments against capacity and complexity, overdue commitments, escalations, coaching actions and expansion readiness across accounts.
 8. **Adoption Cockpit review summary** (`/`): synthetic product-surface coverage, review gates, deck package readiness and blocked external action status.
-9. **Command Center** (`/command-center`): constrained adoption analytics, review-gated capability recommendations, the customer review reports and a filterable leadership report package.
+9. **Adoption Insights** (`/insights`): constrained adoption analytics, review-gated capability recommendations, the customer review reports and a filterable leadership report package.
 
 The two scenarios are Stadtwerke Aurich (`/accounts/acct-005`, scenario A) and Brightmoor & Associates (`/accounts/acct-004`, scenario B). [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) walks through both in ten minutes.
 
@@ -147,7 +147,7 @@ commercial conversation.
 
 ## Limitations
 
-The Command Center validates synthetic `legal-workflow.event.v1` bundles and reports workflow-version adoption, review latency, comment resolution, lock contention, reviewer coverage and permission-governance alerts. The telemetry contract rejects document text, comments, names and client identifiers. The dashboard remains analytical and cannot mutate permissions in another app.
+The Adoption Insights validates synthetic `legal-workflow.event.v1` bundles and reports workflow-version adoption, review latency, comment resolution, lock contention, reviewer coverage and permission-governance alerts. The telemetry contract rejects document text, comments, names and client identifiers. The dashboard remains analytical and cannot mutate permissions in another app.
 
 The versioned contract is maintained in `packages/legal-workflow-contract`. Dashboard analytics consume its typed Zod schema, and the standalone validator consumes its JSON Schema allowlist. The facilitation content is maintained in `workshop-kit` and retains its own `make check` gate. Run `make dashboard-check`, `make contract-check` and `make workshop-check` independently, or run `make check` for the combined gate.
 

@@ -35,8 +35,8 @@ or personal data.
   denylist kept in the private store (`PRIVATE_RESEARCH_DENYLIST`); never copy that list,
   or anything from the private store, into this repository.
 - `app/` — Server-Component routes: `/`, `/accounts/[id]`, `/accounts/[id]/review`,
-  `/blockers`, `/feedback`, `/research` (and the Markdown route `/research/backlog`), `/interventions`, `/manager`, `/command-center`, and the
-  Markdown route `/command-center/report` (`?account=<id>` for a customer review).
+  `/blockers`, `/feedback`, `/research` (and the Markdown route `/research/backlog`), `/interventions`, `/manager`, `/insights`, and the
+  Markdown route `/insights/report` (`?account=<id>` for a customer review).
 - `components/` — presentational Server Components; `components/engagement/` holds the
   panels for the manager layer. `ExportButton` and `NavLinks` are the only client components.
 

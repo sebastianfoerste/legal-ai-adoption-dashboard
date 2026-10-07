@@ -104,13 +104,13 @@ Implementation:
 
 Objectives, adoption trends, intervention outcomes, quality evidence, unresolved problems,
 a reasoned recommendation, owners and next review dates. Rendered at
-`/accounts/[id]/review` and served as Markdown at `/command-center/report?account=<id>`.
+`/accounts/[id]/review` and served as Markdown at `/insights/report?account=<id>`.
 
 Implementation:
 
 1. `lib/engagement/customer-review.ts`
 2. `app/accounts/[id]/review/page.tsx`
-3. `app/command-center/report/route.ts`
+3. `app/insights/report/route.ts`
 
 ## Adoption Blockers
 

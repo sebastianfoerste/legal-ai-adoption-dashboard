@@ -6,8 +6,8 @@ components.
 
 ## Report route
 
-`GET /command-center/report` returns the portfolio report as a Markdown download.
-`GET /command-center/report?account=<id>` returns that account's customer review as
+`GET /insights/report` returns the portfolio report as a Markdown download.
+`GET /insights/report?account=<id>` returns that account's customer review as
 `synthetic-customer-review-<id>.md`, or 404 for an unknown account. Both documents
 open and close with a synthetic notice. The route reads bundled JSON and has no
 side effects.

@@ -1,4 +1,4 @@
-import { commandCenterSnapshot } from "../../../lib/command-center";
+import { adoptionInsightsSnapshot } from "../../../lib/adoption-insights";
 import { resolveAsOf } from "../../../lib/engagement/as-of";
 import { buildCustomerReview } from "../../../lib/engagement/customer-review";
 
@@ -28,6 +28,6 @@ export function GET(request: Request) {
     // The id is safe in a filename only because it matched a known account above.
     return markdownDownload(review.markdown, `synthetic-customer-review-${review.accountId}.md`);
   }
-  const { leadershipReport } = commandCenterSnapshot();
-  return markdownDownload(leadershipReport.markdown, "synthetic-legal-ai-command-center-report.md");
+  const { leadershipReport } = adoptionInsightsSnapshot();
+  return markdownDownload(leadershipReport.markdown, "synthetic-legal-ai-adoption-insights-report.md");
 }

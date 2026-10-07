@@ -1,4 +1,4 @@
-import { commandCenterSnapshot } from "@/lib/command-center";
+import { adoptionInsightsSnapshot } from "@/lib/adoption-insights";
 import { workflowGovernanceSnapshot } from "@/lib/workflow-governance";
 import { getAccounts } from "@/lib/data";
 import { formatDate, resolveAsOf } from "@/lib/engagement/as-of";
@@ -6,9 +6,9 @@ import { getEngagement, specialistLabel } from "@/lib/engagement/data";
 import { accountExpansion } from "@/lib/engagement/expansion";
 import { RecommendationPill } from "@/components/engagement/ExpansionPanel";
 
-export default async function CommandCenterPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
+export default async function AdoptionInsightsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const asOf = resolveAsOf((await searchParams)?.asOf).date;
-  const { answer, recommendations, leadershipReport } = commandCenterSnapshot();
+  const { answer, recommendations, leadershipReport } = adoptionInsightsSnapshot();
   const governance = workflowGovernanceSnapshot();
   const reviews = getAccounts().map((account) => ({
     account,
@@ -18,7 +18,7 @@ export default async function CommandCenterPage({ searchParams }: { searchParams
   return (
     <main className="mx-auto max-w-5xl space-y-6 px-6 py-8">
       <header>
-        <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Command Center</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Adoption Insights</p>
         <h1 className="mt-1 text-2xl font-semibold">Adoption intelligence and recommendations</h1>
         <p className="mt-2 max-w-3xl text-sm text-gray-600">
           Ask constrained questions over synthetic adoption data, prioritize reviewed capability rollouts and prepare a leadership report package.
@@ -26,7 +26,7 @@ export default async function CommandCenterPage({ searchParams }: { searchParams
       </header>
 
       <section className="rounded-lg border border-gray-200 bg-white p-5">
-        <h2 className="font-semibold">Command Center Agent</h2>
+        <h2 className="font-semibold">Ask the adoption data</h2>
         <p className="mt-2 text-sm font-medium text-gray-900">{answer.question}</p>
         <p className="mt-2 text-sm leading-6 text-gray-600">{answer.answer}</p>
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -96,7 +96,7 @@ export default async function CommandCenterPage({ searchParams }: { searchParams
                   <td className="whitespace-nowrap px-3 py-3">
                     <a className="font-medium text-blue-700 underline" href={`/accounts/${account.id}/review`}>Open</a>
                     <span className="mx-2 text-gray-300">|</span>
-                    <a className="font-medium text-blue-700 underline" href={`/command-center/report?account=${account.id}`}>Markdown</a>
+                    <a className="font-medium text-blue-700 underline" href={`/insights/report?account=${account.id}`}>Markdown</a>
                   </td>
                 </tr>
               ))}
@@ -113,7 +113,7 @@ export default async function CommandCenterPage({ searchParams }: { searchParams
             <p className="mt-1 text-sm text-gray-600">{leadershipReport.audience}</p>
           </div>
           <div className="flex items-center gap-2">
-            <a className="rounded-md border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700" href="/command-center/report">
+            <a className="rounded-md border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700" href="/insights/report">
               Download Markdown
             </a>
             <span className="rounded-full bg-amber-100 px-3 py-1 text-xs text-amber-800">account-owner review required</span>

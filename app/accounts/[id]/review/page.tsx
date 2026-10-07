@@ -85,7 +85,7 @@ export default async function CustomerReviewPage({
       >
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <a
-            href={`/command-center/report?account=${review.accountId}&asOf=${review.asOf}`}
+            href={`/insights/report?account=${review.accountId}&asOf=${review.asOf}`}
             className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-violet-500"
           >
             Download Markdown

@@ -103,8 +103,8 @@ further investment.
 Seven sections: objectives, adoption trends, intervention outcomes, quality evidence,
 unresolved problems, recommendation, owners and next review dates. Click "Download
 Markdown". The file name starts with `synthetic-` and the first and last lines carry the
-synthetic notice. Open `/accounts/acct-004/review` for the contrasting report, or the
-Command Center for the list of all five.
+synthetic notice. Open `/accounts/acct-004/review` for the contrasting report, or
+Adoption Insights for the list of all five.
 
 ### 9:15 to 10:00. What holds this together
 
