@@ -32,7 +32,8 @@ The software record uses these identifiers. Use them exactly as written.
 - Research questions `RQ1` to `RQ5` and assumptions `A1` to `A5`: see [study-plan.md](study-plan.md).
 - Evidence types: `past_behaviour`, `observed_task`, `opinion_on_proposal`. Scripts and
   sheets keep them apart.
-- Task packs: `TP-A` for round 1, `TP-B` for the follow-up session.
+- Task packs: `TP-A` for round 1, `TP-B` for the follow-up session. `TP-M` is a separate
+  pack on a whole matter for a later round; it is not comparable with the other two.
 - Per-task measures: `completion`, `assistanceCount`, `interpretationErrors`,
   `trustConcerns`, `acceptable`, `minutesToAcceptable`. Definitions are in
   [task-answer-key.md](task-answer-key.md).
@@ -55,6 +56,7 @@ The software record uses these identifiers. Use them exactly as written.
 | 10 | [observation-sheet.md](observation-sheet.md) | One sheet per session | Moderator and note-taker |
 | 11 | [follow-up-questions.md](follow-up-questions.md) | Questions after a session and after a product change | Research team until authorised |
 | 12 | [follow-up-session-plan.md](follow-up-session-plan.md) | Follow-up session with TP-B and the comparison with round 1 | Research team |
+| 13 | [matter-task-pack.md](matter-task-pack.md) | `TP-M`: the same session on a synthetic multi-document matter, its prerequisites and where its records go. Not part of round 1 | Research team |
 
 ## Needs the owner's explicit authorisation
 

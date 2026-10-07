@@ -38,6 +38,7 @@ research/task-answer-key.md
 research/observation-sheet.md
 research/follow-up-questions.md
 research/follow-up-session-plan.md
+research/matter-task-pack.md
 "
 
 status=0

@@ -10,7 +10,7 @@ handling, and feedback templates. No code to run.
 - `enablement/` — skeptical-partner objection handling, follow-up email templates, product-feedback template.
 - `docs/` — reviewer guide, customer workflow, worked product-feedback notes.
 - `examples/` — a synthetic discovery intake and the prioritization result derived from it.
-- `research/` — the practitioner study pack for the contract-review handoff: plan, screener, invitation draft, information and consent, moderator script, synthetic task packs, observation sheet, follow-up plan and data handling. Preparation only; completed sheets and participant records never enter this repository.
+- `research/` — the practitioner study pack for the contract-review handoff: plan, screener, invitation draft, information and consent, moderator script, synthetic task packs, a matter task pack for a later round, observation sheet, follow-up plan and data handling. Preparation only; completed sheets and participant records never enter this repository.
 
 ## Rules
 - Every document must be usable as-is in a real engagement. No placeholder text.
