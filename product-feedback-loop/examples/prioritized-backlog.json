@@ -2,6 +2,9 @@
   "schema": "feedback-loop.backlog.v2",
   "formula": "feedback-loop.score.v2",
   "evidence_schema": "legal-ai-adoption.evidence-loop.v1",
+  "origin": {
+    "kind": "synthetic_fixture"
+  },
   "period": "Q2 2026 (synthetic)",
   "weights": {
     "severity": {

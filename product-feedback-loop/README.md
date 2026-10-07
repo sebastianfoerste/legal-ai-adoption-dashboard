@@ -17,6 +17,8 @@ make check    # tests, and the committed examples must equal the generated outpu
 
 Deterministic and offline. Inputs: `data/interviews.json` and, one level up, `data/evidence-loop.json` with its vocabulary in `packages/evidence-loop-contract/`. Pass `--no-evidence` to the CLI to run without the store; every status then reads "not recorded".
 
+The interview file and every interview in it state an `origin`, in the form the evidence store uses. The CLI refuses a file without one: a name ending in "(synthetic)" does not count. Interview files hold synthetic fixtures only, and the generated backlog carries the same origin.
+
 ## What the demo produces
 
 - [`examples/prioritized-backlog.md`](examples/prioritized-backlog.md): two lanes. Quality and control failures come first, ordered by severity and reach. The commercially weighted backlog follows, ordered by score.

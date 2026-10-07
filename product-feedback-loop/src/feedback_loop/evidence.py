@@ -19,6 +19,7 @@ DEFAULT_VOCABULARY = (
 DEFAULT_STORE = _PACKAGE_ROOT.parent / "data" / "evidence-loop.json"
 
 NO_RECORD = "not recorded"
+SYNTHETIC_FIXTURE = "synthetic_fixture"
 
 
 class EvidenceError(ValueError):
@@ -110,6 +111,45 @@ def load_store(
     if issues:
         raise EvidenceError("evidence store rejected:\n- " + "\n- ".join(issues))
     return store
+
+
+def validate_interviews(doc: dict[str, Any], vocabulary: dict[str, Any]) -> list[str]:
+    """An interview file and every interview in it state their origin.
+
+    The file holds synthetic fixtures only. The backlog and the memo label their input as
+    synthetic, and practitioner evidence reaches the public tree through the evidence
+    store as an approved aggregate, never as an interview.
+    """
+    issues: list[str] = []
+    records = [("$", doc)] + [
+        (f"$.interviews[{index}]", interview)
+        for index, interview in enumerate(doc.get("interviews", []) if isinstance(doc, dict) else [])
+    ]
+    for path, record in records:
+        origin = record.get("origin") if isinstance(record, dict) else None
+        kind = origin.get("kind") if isinstance(origin, dict) else None
+        if kind is None:
+            issues.append(f'{path}: no origin stated; a name ending in "(synthetic)" does not count')
+        elif kind not in vocabulary["originKinds"]:
+            issues.append(f"{path}: unknown origin {kind!r}")
+        elif kind not in vocabulary["publicOriginKinds"]:
+            issues.append(f"{path}: {kind!r} records belong in the private research store")
+        elif kind != SYNTHETIC_FIXTURE:
+            issues.append(
+                f"{path}: interview files hold synthetic fixtures only; "
+                f"{kind!r} evidence enters through the evidence store"
+            )
+    forbidden = set(vocabulary["forbiddenKeys"])
+    issues += [f"{path}: identifying field" for path, key, _ in _walk_origins(doc) if key in forbidden]
+    return issues
+
+
+def load_interviews(path: Path | str, vocabulary_path: Path | str = DEFAULT_VOCABULARY) -> dict[str, Any]:
+    doc = json.loads(Path(path).read_text(encoding="utf-8"))
+    issues = validate_interviews(doc, load_vocabulary(vocabulary_path))
+    if issues:
+        raise EvidenceError("interview file rejected:\n- " + "\n- ".join(issues))
+    return doc
 
 
 def statuses_by_theme(store: dict[str, Any] | None) -> dict[str, list[ChangeStatus]]:

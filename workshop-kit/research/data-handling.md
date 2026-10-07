@@ -26,9 +26,12 @@ Three checks enforce the boundary in the repository:
 
 - `lib/evidence/private-boundary.ts` rejects a participant record and any identifying
   field (name, email, phone, employer, firm, contact details, consent record, signature,
-  recording link) when the public store is loaded.
+  recording link) when the public store is loaded. The dashboard's feedback queue passes
+  through the same check, and every feedback item must state its origin.
 - `scripts/check-private-boundary.mjs` runs in the combined gate and fails if a private
-  file is tracked by Git or a participant record appears in a tracked data file.
+  file is tracked by Git, a participant record appears in a tracked data file, a feedback
+  item or an interview states no origin, or a name from the denylist (section 2) appears
+  in a tracked text file.
 - `.gitignore` excludes `/private-research/` and `*.private.json`, as a second line of
   defence in case the store is ever placed inside a checkout by mistake.
 
@@ -41,6 +44,7 @@ only link between them.
 {{private_store_location}}/
   identity/                 access: study owner only
     participants.json       study code, name, contact details, recruitment route
+    denylist.txt            names that must never appear in the repository, one per line
     consent/                signed forms or written replies, one per consent reference
     withdrawals.json        study code, date, what was deleted
   analysis/                 access: study owner only
@@ -51,6 +55,14 @@ only link between them.
   recordings/               access: study owner only, emptied within 14 days
   approvals/                one file per approved aggregate or quotation
 ```
+
+The denylist holds the name of every participant, of each employer, and of any client or
+matter a participant mentioned. Add to it on the day of each session. The boundary check
+reads it when the environment variable `PRIVATE_RESEARCH_DENYLIST` holds its absolute
+path, and it refuses a list kept inside the repository. A match is reported as "matches
+denylist entry 3", so the name never reaches a terminal or a build log. The list catches
+the names you know. It cannot recognise a name nobody entered, so the reading in section 6
+still decides.
 
 Rules for the analytical files:
 
@@ -121,6 +133,7 @@ and views apply to real records inside the private store.
 | Aggregate | Counts with role labels only, from at least three sessions, with no detail that singles out one participant. The study owner approves in writing. |
 | Quotation | Only with consent item 4, attributed by role label, checked for identifying detail, and confirmed with the participant shortly before publication. The study owner approves in writing. |
 | Record | One file in `approvals/` with an approval reference, date, approver role, the exact text and the sessions it rests on. |
+| Name check | Before the approved text is committed, the boundary check runs with `PRIVATE_RESEARCH_DENYLIST` set. Once any record with origin `approved_aggregate` is in the public tree, the gate fails without the denylist. |
 | Publication | The approved text enters the public store as a new record with origin `approved_aggregate` and the approval reference. The original observation stays private. |
 
 No percentage is published from a round of four to eight sessions.

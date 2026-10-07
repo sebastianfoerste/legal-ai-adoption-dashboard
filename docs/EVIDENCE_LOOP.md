@@ -76,6 +76,18 @@ it. `publicBoundaryIssues` rejects participant records and identifying fields be
 store is parsed; `scripts/check-private-boundary.mjs` repeats the check on the tracked tree
 in every gate.
 
+Two inputs sit outside the store and feed it: the dashboard's feedback items
+(`data/feedback.json`) and the interview file (`product-feedback-loop/data/interviews.json`).
+Each item, each interview and the interview file itself state an `origin` in the same
+form. A name ending in "(synthetic)" does not count. The feedback loader runs the same
+boundary check as the store, and the interview loader accepts synthetic fixtures only,
+because practitioner evidence becomes public through the store as an approved aggregate.
+
+Names are checked against a denylist that lives in the private store. Set
+`PRIVATE_RESEARCH_DENYLIST` to its absolute path and run `pnpm boundary:check`. The check
+reports a match by entry number. As long as the public tree holds synthetic fixtures only,
+the list is optional; with the first approved aggregate the gate fails without it.
+
 The dashboard loads only the bundled public store. To analyse real observations, run the
 same code against the private store on a local machine; nothing in this repository reads
 that location.

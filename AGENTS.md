@@ -30,7 +30,10 @@ or personal data.
   `packages/evidence-loop-contract/`. Rules: delivery status lives only in that store and is
   never derived from rank; a release is not an outcome; observation and interpretation are
   separate fields; a real participant record is never marked synthetic and never enters this
-  repository (see `workshop-kit/research/data-handling.md`).
+  repository (see `workshop-kit/research/data-handling.md`). Feedback items and interviews
+  state an `origin` too, and a record without one is refused. Names are checked against a
+  denylist kept in the private store (`PRIVATE_RESEARCH_DENYLIST`); never copy that list,
+  or anything from the private store, into this repository.
 - `app/` — Server-Component routes: `/`, `/accounts/[id]`, `/accounts/[id]/review`,
   `/blockers`, `/feedback`, `/research` (and the Markdown route `/research/backlog`), `/interventions`, `/manager`, `/command-center`, and the
   Markdown route `/command-center/report` (`?account=<id>` for a customer review).

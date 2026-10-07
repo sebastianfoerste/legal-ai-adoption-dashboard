@@ -25,6 +25,9 @@ component summary for `acct-002`, which the dashboard labels and does not report
 its records are `synthetic_fixture`. The loader refuses a `participant_session` record: real
 observations belong in the private research store, never here.
 
+`feedback.json` states an `origin` on every item in the same form, and the loader refuses
+an item without one.
+
 Each record in the other engagement files carries `"synthetic": true`, and `lib/engagement/schema.ts`
 rejects any other value and any unknown key. A `null` count means "not captured" and is
 shown as "Unknown".

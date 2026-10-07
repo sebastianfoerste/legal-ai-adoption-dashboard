@@ -1,5 +1,8 @@
-import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { execFileSync, spawnSync } from "node:child_process";
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import vocabulary from "../../packages/evidence-loop-contract/evidence-loop.v1.vocabulary.json";
 import { getEvidenceStore } from "./data";
@@ -7,7 +10,10 @@ import {
   FORBIDDEN_KEYS,
   PUBLIC_ORIGIN_KINDS,
   assertPublicStore,
+  denylistIssues,
   importIssues,
+  needsDenylist,
+  parseDenylist,
   publicBoundaryIssues,
 } from "./private-boundary";
 import { evidenceStoreSchema, originSchema } from "./schema";
@@ -107,7 +113,50 @@ describe("import of real observations", () => {
   });
 });
 
+describe("denylist", () => {
+  // Invented names standing in for the private list.
+  const entries = parseDenylist("# participants\nJordan Example\n\nExample & Partner\n");
+
+  it("reads one entry per line and skips comments and blanks", () => {
+    expect(entries).toEqual(["Jordan Example", "Example & Partner"]);
+  });
+
+  it("reports a match by entry number and never by name", () => {
+    const issues = denylistIssues(
+      { observations: [{ id: "obs-1", observed: "As jordan  example put it, the source was hard to find." }] },
+      entries,
+    );
+    expect(issues).toEqual(["$.observations[obs-1].observed: matches denylist entry 1"]);
+    expect(issues.join(" ").toLowerCase()).not.toContain("jordan");
+  });
+
+  it("matches whole words only", () => {
+    expect(denylistIssues("Jordan Examples are common.", entries)).toEqual([]);
+    expect(denylistIssues("Sent by Example & Partner.", entries)).toEqual(["$: matches denylist entry 2"]);
+  });
+
+  it("is needed as soon as a record is not a synthetic fixture", () => {
+    expect(needsDenylist(store)).toBe(false);
+    const aggregate = { kind: "approved_aggregate", approvalRef: "APP-1", approvedOn: "2026-10-01", approvedByRole: "Study owner" };
+    expect(needsDenylist({ ...store, observations: [{ ...store.observations[0], origin: aggregate }] })).toBe(true);
+  });
+});
+
 describe("repository", () => {
+  const cwd = new URL("../..", import.meta.url);
+  const run = (denylist?: string) =>
+    spawnSync("node", ["scripts/check-private-boundary.mjs"], {
+      cwd,
+      encoding: "utf8",
+      env: { ...process.env, PRIVATE_RESEARCH_DENYLIST: denylist ?? "" },
+    });
+  const temp = mkdtempSync(join(tmpdir(), "denylist-"));
+  const listFile = (name: string, text: string) => {
+    const path = join(temp, name);
+    writeFileSync(path, text, "utf8");
+    return path;
+  };
+
   it("ignores the private research folder and local store files", () => {
     const ignore = readFileSync(new URL("../../.gitignore", import.meta.url), "utf8");
     expect(ignore).toContain("/private-research/");
@@ -115,10 +164,29 @@ describe("repository", () => {
   });
 
   it("passes the boundary check script", () => {
-    const out = execFileSync("node", ["scripts/check-private-boundary.mjs"], {
-      cwd: new URL("../..", import.meta.url),
-      encoding: "utf8",
-    });
+    const out = execFileSync("node", ["scripts/check-private-boundary.mjs"], { cwd, encoding: "utf8" });
     expect(out).toContain("private-data boundary holds");
+    expect(out).toContain("feedback items and interviews state their origin");
+  });
+
+  it("passes with a denylist that matches nothing", () => {
+    const result = run(listFile("clean.txt", "Nobody Atall\n"));
+    expect(result.status).toBe(0);
+    expect(result.stdout).toContain("denylist checked (1 entry)");
+  });
+
+  it("fails on a denylisted name in a tracked file, without printing the name", () => {
+    // "Globex LLP" is an invented account in the synthetic interviews.
+    const result = run(listFile("hit.txt", "Nobody Atall\nglobex llp\n"));
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain("product-feedback-loop/data/interviews.json: matches denylist entry 2");
+    expect(result.stderr.toLowerCase()).not.toContain("globex");
+  });
+
+  it("refuses a denylist kept inside the repository, and an empty one", () => {
+    expect(run(fileURLToPath(new URL("../../data/README.md", import.meta.url))).stderr).toContain(
+      "must be an absolute path outside the public repository",
+    );
+    expect(run(listFile("empty.txt", "# nothing yet\n")).stderr).toContain("the name check cannot be made");
   });
 });

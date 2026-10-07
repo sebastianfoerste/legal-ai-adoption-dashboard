@@ -3,6 +3,7 @@ import benchmarksJson from "../data/benchmarks.json";
 import blockersJson from "../data/blockers.json";
 import feedbackJson from "../data/feedback.json";
 import workflowsJson from "../data/workflows.json";
+import { assertPublicStore } from "./evidence/private-boundary";
 import {
   accountSchema,
   benchmarkRowSchema,
@@ -19,6 +20,9 @@ import {
 const accounts: Account[] = accountSchema.array().parse(accountsJson);
 const benchmarks: BenchmarkRow[] = benchmarkRowSchema.array().parse(benchmarksJson);
 const blockers: Blocker[] = blockerSchema.array().parse(blockersJson);
+// Same boundary as the evidence store: a participant record or an identifying field in a
+// feedback item fails here instead of being rendered.
+assertPublicStore(feedbackJson, "Feedback queue");
 const feedback: FeedbackItem[] = feedbackItemSchema.array().parse(feedbackJson);
 const workflows: WorkflowUsage[] = workflowUsageSchema.array().parse(workflowsJson);
 

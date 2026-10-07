@@ -14,7 +14,13 @@ import json
 import sys
 from pathlib import Path
 
-from feedback_loop.evidence import DEFAULT_STORE, DEFAULT_VOCABULARY, EvidenceError, load_store
+from feedback_loop.evidence import (
+    DEFAULT_STORE,
+    DEFAULT_VOCABULARY,
+    EvidenceError,
+    load_interviews,
+    load_store,
+)
 from feedback_loop.scoring import (
     FORMULA_VERSION,
     WEIGHTS,
@@ -36,7 +42,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--quiet", action="store_true", help="Do not print to stdout.")
     args = parser.parse_args(argv)
 
-    doc = json.loads(Path(args.input).read_text(encoding="utf-8"))
+    try:
+        doc = load_interviews(args.input, args.vocabulary)
+    except (OSError, EvidenceError) as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 2
     period = doc.get("period", "current period")
     evidence = None
     if not args.no_evidence:
@@ -63,6 +73,7 @@ def main(argv: list[str] | None = None) -> int:
             "schema": BACKLOG_SCHEMA,
             "formula": FORMULA_VERSION,
             "evidence_schema": evidence["schema"] if evidence else None,
+            "origin": doc["origin"],
             "period": period,
             "weights": WEIGHTS,
             "themes": [t.to_dict() for t in scored],

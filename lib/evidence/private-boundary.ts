@@ -57,11 +57,57 @@ export function publicBoundaryIssues(value: unknown, path = "$"): string[] {
   return issues;
 }
 
-export function assertPublicStore(value: unknown): void {
+export function assertPublicStore(value: unknown, label = "Evidence store"): void {
   const issues = publicBoundaryIssues(value);
   if (issues.length > 0) {
-    throw new Error(`Evidence store is not publishable:\n- ${issues.join("\n- ")}`);
+    throw new Error(`${label} is not publishable:\n- ${issues.join("\n- ")}`);
   }
+}
+
+/** One entry per line. Blank lines and lines starting with `#` are ignored. */
+export function parseDenylist(text: string): string[] {
+  return text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line !== "" && !line.startsWith("#"));
+}
+
+const escapePattern = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/** Whole words, any case, any run of whitespace between the words of an entry. */
+export const denylistPattern = (entry: string): RegExp =>
+  new RegExp(`(?<![\\p{L}\\p{N}])${entry.split(/\s+/).map(escapePattern).join("\\s+")}(?![\\p{L}\\p{N}])`, "iu");
+
+/**
+ * The names of participants, their employers and their clients are known only to the
+ * private research store. This checks public text against that list. A match is reported
+ * by entry number, so the name itself never reaches a log.
+ */
+export function denylistIssues(value: unknown, entries: readonly string[], path = "$"): string[] {
+  if (typeof value === "string") {
+    return entries.flatMap((entry, index) =>
+      denylistPattern(entry).test(value) ? [`${path}: matches denylist entry ${index + 1}`] : [],
+    );
+  }
+  if (Array.isArray(value)) {
+    return value.flatMap((item, index) => {
+      const id = isRecord(item) && typeof item.id === "string" ? item.id : String(index);
+      return denylistIssues(item, entries, `${path}[${id}]`);
+    });
+  }
+  if (!isRecord(value)) return [];
+  return Object.entries(value).flatMap(([key, child]) => denylistIssues(child, entries, `${path}.${key}`));
+}
+
+/**
+ * Synthetic fixtures were never near a real name. Anything else has passed through real
+ * sessions, so publishing it without the name check is refused.
+ */
+export function needsDenylist(value: unknown): boolean {
+  if (Array.isArray(value)) return value.some(needsDenylist);
+  if (!isRecord(value)) return false;
+  if (isRecord(value.origin) && value.origin.kind !== "synthetic_fixture") return true;
+  return Object.values(value).some(needsDenylist);
 }
 
 /**

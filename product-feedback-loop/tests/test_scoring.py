@@ -1,10 +1,14 @@
 """Deterministic tests. Pure stdlib unittest."""
 
+import contextlib
 import copy
+import io
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
+from feedback_loop import cli
 from feedback_loop.evidence import (
     DEFAULT_STORE,
     DEFAULT_VOCABULARY,
@@ -13,6 +17,7 @@ from feedback_loop.evidence import (
     load_store,
     load_vocabulary,
     outcome_status,
+    validate_interviews,
     validate_store,
 )
 from feedback_loop.scoring import (
@@ -255,6 +260,62 @@ class SharedStore(unittest.TestCase):
     def test_every_interview_theme_has_a_delivery_record(self):
         for t in aggregate_themes(DOC, STORE):
             self.assertTrue(t.changes, t.theme)
+
+
+class InterviewOrigin(unittest.TestCase):
+    def issues(self, doc):
+        return validate_interviews(doc, VOCABULARY)
+
+    def test_the_bundled_interviews_state_their_origin(self):
+        self.assertEqual(self.issues(DOC), [])
+        self.assertEqual(DOC["origin"], {"kind": "synthetic_fixture"})
+
+    def test_a_name_suffix_does_not_stand_in_for_an_origin(self):
+        doc = copy.deepcopy(DOC)
+        del doc["interviews"][0]["origin"]
+        self.assertIn("(synthetic)", doc["interviews"][0]["account"])
+        self.assertEqual(
+            self.issues(doc),
+            ['$.interviews[0]: no origin stated; a name ending in "(synthetic)" does not count'],
+        )
+        del doc["origin"]
+        self.assertEqual(len(self.issues(doc)), 2)
+
+    def test_participant_records_and_aggregates_do_not_belong_in_an_interview_file(self):
+        private = copy.deepcopy(DOC)
+        private["interviews"][0]["origin"] = {
+            "kind": "participant_session", "studyId": "s", "consentRef": "c", "storageRef": "r",
+        }
+        self.assertIn("private research store", self.issues(private)[0])
+        aggregate = copy.deepcopy(DOC)
+        aggregate["interviews"][0]["origin"] = {
+            "kind": "approved_aggregate", "approvalRef": "APP-1",
+            "approvedOn": "2026-10-01", "approvedByRole": "Study owner",
+        }
+        self.assertIn("enters through the evidence store", self.issues(aggregate)[0])
+
+    def test_identifying_fields_are_refused(self):
+        doc = copy.deepcopy(DOC)
+        doc["interviews"][0]["email"] = "someone@example.invalid"
+        self.assertEqual(self.issues(doc), ["$.interviews[0].email: identifying field"])
+
+    def test_the_cli_refuses_an_unlabelled_file_and_labels_its_output(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            unlabelled = copy.deepcopy(DOC)
+            del unlabelled["origin"]
+            source = Path(tmp) / "interviews.json"
+            source.write_text(json.dumps(unlabelled), encoding="utf-8")
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                code = cli.main(["--input", str(source), "--out", str(Path(tmp) / "out"), "--quiet"])
+            self.assertEqual(code, 2)
+            self.assertIn("interview file rejected", stderr.getvalue())
+            self.assertFalse((Path(tmp) / "out").exists())
+
+            source.write_text(json.dumps(DOC), encoding="utf-8")
+            self.assertEqual(cli.main(["--input", str(source), "--out", str(Path(tmp) / "out"), "--quiet"]), 0)
+            backlog = json.loads((Path(tmp) / "out" / "prioritized-backlog.json").read_text(encoding="utf-8"))
+            self.assertEqual(backlog["origin"], {"kind": "synthetic_fixture"})
 
 
 if __name__ == "__main__":
