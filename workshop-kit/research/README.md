@@ -57,6 +57,7 @@ The software record uses these identifiers. Use them exactly as written.
 | 11 | [follow-up-questions.md](follow-up-questions.md) | Questions after a session and after a product change | Research team until authorised |
 | 12 | [follow-up-session-plan.md](follow-up-session-plan.md) | Follow-up session with TP-B and the comparison with round 1 | Research team |
 | 13 | [matter-task-pack.md](matter-task-pack.md) | `TP-M`: the same session on a synthetic multi-document matter, its prerequisites and where its records go. Not part of round 1 | Research team |
+| 14 | [legal-review-worksheet.md](legal-review-worksheet.md) | For each open merge field: what it must say, the provision it answers and a wording to start from, with the sources checked | Legal reviewer |
 
 ## Needs the owner's explicit authorisation
 
@@ -109,6 +110,10 @@ that a qualified reviewer must complete or confirm:
 
 The review should also cover the employer-permission question in the screener and the
 statement on professional confidentiality in the information sheet.
+
+[legal-review-worksheet.md](legal-review-worksheet.md) prepares that review. It proposes a
+starting wording for each field and lists eight points to settle, among them that the
+sheet's withdrawal cut-off does not fit a consent basis. It decides nothing.
 
 ## Check
 

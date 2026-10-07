@@ -90,7 +90,9 @@ One sitting produces two records.
 **The observation sheet.** The six per-task measures of the pack apply unchanged:
 `completion`, `assistanceCount`, `interpretationErrors`, `trustConcerns`, `acceptable` and
 `minutesToAcceptable`, with `taskPackId` set to `TP-M`. Note for each observation which
-finding it belongs to.
+finding it belongs to. On the [observation sheet](observation-sheet.md), write `TP-M` in
+the task pack field, use the session kind `observed_task`, and leave the table of seeded
+defects blank, because this pack has none.
 
 **The harness reviewer session.** For each finding: `accepted`, `corrected` or `rejected`,
 a usefulness score from 1 to 4 on the harness scale, and a reason for anything not

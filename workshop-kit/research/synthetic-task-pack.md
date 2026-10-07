@@ -17,6 +17,11 @@ produced it.
   [task-answer-key.md](task-answer-key.md). The handouts carry no defect labels. Do not
   reveal the defects during round 1.
 - Client material never enters a session. Use these handouts and nothing else.
+- The four party names were searched in the UK Companies House register on 7 October
+  2026. The words Quillbarrow, Tallowmere, Pennywhistle and Cobaltfern returned no
+  company. An earlier name for the `TP-A` customer matched existing companies and was
+  replaced. Repeat the search before a round starts, and check any other register that
+  matters for the participants you invite.
 - Each list is a first pass awaiting lawyer review. The participant acts as the reviewing
   lawyer. Nothing in the task treats the list as reliable before that review.
 - The lists appear here in their baseline form. A changed form for the follow-up session
@@ -64,7 +69,7 @@ in difficulty. The follow-up plan requires that limit to be stated with every co
 this excerpt with an AI-assisted review tool and asks you to sign the list off before it
 goes to the client contact.
 
-**Supplier Services Agreement (excerpt)** between Heronbrook Example Bakeries Ltd (the
+**Supplier Services Agreement (excerpt)** between Quillbarrow Example Bakeries Ltd (the
 "Customer") and Tallowmere Example Services Ltd (the "Supplier").
 
 Capitalised terms that this excerpt does not define are defined in parts of the agreement

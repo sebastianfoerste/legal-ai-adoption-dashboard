@@ -39,6 +39,7 @@ research/observation-sheet.md
 research/follow-up-questions.md
 research/follow-up-session-plan.md
 research/matter-task-pack.md
+research/legal-review-worksheet.md
 "
 
 status=0
