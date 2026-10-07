@@ -29,6 +29,7 @@ describe("data layer", () => {
     const { origin, ...unlabelled } = item;
     expect(origin).toEqual({ kind: "synthetic_fixture" });
     expect(feedbackItemSchema.safeParse(unlabelled).success).toBe(false);
+    expect(feedbackItemSchema.safeParse({ ...item, evidenceClass: "synthetic_example" }).success).toBe(false);
     const real = { ...item, origin: { kind: "participant_session", studyId: "s", consentRef: "c", storageRef: "r" } };
     expect(() => assertPublicStore([real], "Feedback queue")).toThrow(
       `Feedback queue is not publishable:\n- $[${item.id}].origin: "participant_session" records belong in the private research store`,

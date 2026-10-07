@@ -8,6 +8,7 @@ rank or a score: it reports what the record says, or that no record exists.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -68,6 +69,46 @@ def _walk_origins(value: Any, path: str = "$"):
             yield from _walk_origins(child, f"{path}.{key}")
 
 
+def _scan_text(value: Any, path: str, patterns: list[tuple[str, re.Pattern[str]]]):
+    if isinstance(value, str):
+        for label, pattern in patterns:
+            if pattern.search(value):
+                yield f"{path}: contains {label}"
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            yield from _scan_text(item, f"{path}[{index}]", patterns)
+    elif isinstance(value, dict):
+        for key, child in value.items():
+            # A reference field such as approvalRef may hold a link.
+            if not re.search(r"Refs?$", key):
+                yield from _scan_text(child, f"{path}.{key}", patterns)
+
+
+def _identifier_issues(store: Any, vocabulary: dict[str, Any], path: str = "$") -> list[str]:
+    """Obvious identifiers in the text of an approved aggregate, by the shared pattern list.
+
+    Synthetic fixtures are not read: they were never near a real name, and their invented
+    companies carry legal forms on purpose.
+    """
+    patterns = [(p["label"], re.compile(p["pattern"])) for p in vocabulary["identifierPatterns"]]
+    issues: list[str] = []
+
+    def visit(value: Any, where: str) -> None:
+        if isinstance(value, list):
+            for index, item in enumerate(value):
+                label = item.get("id", index) if isinstance(item, dict) else index
+                visit(item, f"{where}[{label}]")
+        elif isinstance(value, dict):
+            origin = value.get("origin")
+            if isinstance(origin, dict) and origin.get("kind") == "approved_aggregate":
+                issues.extend(_scan_text(value, where, patterns))
+            for key, child in value.items():
+                visit(child, f"{where}.{key}")
+
+    visit(store, path)
+    return issues
+
+
 def validate_store(store: dict[str, Any], vocabulary: dict[str, Any]) -> list[str]:
     """The subset of the dashboard's rules that this module depends on."""
     issues: list[str] = []
@@ -81,6 +122,7 @@ def validate_store(store: dict[str, Any], vocabulary: dict[str, Any]) -> list[st
             issues.append(f"{path}: identifying field")
         if key == "origin" and isinstance(child, dict) and child.get("kind") not in public_kinds:
             issues.append(f"{path}: {child.get('kind')!r} records belong in the private research store")
+    issues += _identifier_issues(store, vocabulary)
     problems = {problem["id"] for problem in store.get("problems", [])}
     for change in store.get("changes", []):
         cid = change["id"]

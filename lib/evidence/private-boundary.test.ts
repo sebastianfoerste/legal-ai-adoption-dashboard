@@ -11,6 +11,7 @@ import {
   PUBLIC_ORIGIN_KINDS,
   assertPublicStore,
   denylistIssues,
+  identifierIssues,
   importIssues,
   needsDenylist,
   parseDenylist,
@@ -110,6 +111,54 @@ describe("import of real observations", () => {
     ]);
     expect(importIssues(manifest, [{ ...record, email: "someone@example.invalid" }], REPO)[0]).toContain("identifying field");
     expect(importIssues(manifest, [store.observations[0]], REPO)[0]).toContain("synthetic fixtures stay in the repository");
+  });
+});
+
+describe("identifiers in free text", () => {
+  const aggregate = { kind: "approved_aggregate", approvalRef: "https://approvals.example.invalid/APP-1", approvedOn: "2026-10-01", approvedByRole: "Study owner" };
+  const published = (observed: string) => ({
+    ...store,
+    observations: [{ ...store.observations[0], id: "obs-agg", observed, origin: aggregate }],
+  });
+
+  it("shares its patterns with the contract file", () => {
+    expect(vocabulary.identifierPatterns.map((p) => p.label)).toEqual([
+      "an email address",
+      "a web address",
+      "a phone number",
+      "a company legal form",
+      "a personal title before a name",
+    ]);
+  });
+
+  it("refuses obvious identifiers in an approved aggregate", () => {
+    const cases: Record<string, string> = {
+      "Write to someone@example.invalid for the file.": "an email address",
+      "See www.example.invalid for context.": "a web address",
+      "Call +49 30 1234567 to confirm.": "a phone number",
+      "Their employer is a GmbH in Hamburg.": "a company legal form",
+      "Dr. Beispiel asked for the clause number.": "a personal title before a name",
+    };
+    for (const [observed, label] of Object.entries(cases)) {
+      expect(publicBoundaryIssues(published(observed))).toContain(`$.observations[obs-agg].observed: contains ${label}`);
+    }
+  });
+
+  it("accepts plain findings, dates and reference fields", () => {
+    expect(publicBoundaryIssues(published("Three of five reviewers re-read the contract on 2026-01-12."))).toEqual([]);
+    expect(identifierIssues({ approvalRef: "https://approvals.example.invalid/APP-1" })).toEqual([]);
+  });
+
+  it("leaves synthetic fixtures alone, legal forms included", () => {
+    expect(identifierIssues({ account: "Example LLP" })).toEqual(["$.account: contains a company legal form"]);
+    expect(publicBoundaryIssues({ id: "x", account: "Example LLP", origin: { kind: "synthetic_fixture" } })).toEqual([]);
+  });
+
+  it("is applied to participant records before an import", () => {
+    const named = { id: "obs-p01-2", observed: "Dr. Beispiel checked every quote.", origin: privateOrigin };
+    expect(importIssues(manifest, [named], REPO)).toEqual([
+      "obs-p01-2: $.observed: contains a personal title before a name",
+    ]);
   });
 });
 

@@ -257,6 +257,21 @@ class SharedStore(unittest.TestCase):
             finally:
                 tmp.unlink(missing_ok=True)
 
+    def test_an_approved_aggregate_is_read_for_obvious_identifiers(self):
+        aggregate = {
+            "kind": "approved_aggregate", "approvalRef": "https://approvals.example.invalid/APP-1",
+            "approvedOn": "2026-10-01", "approvedByRole": "Study owner",
+        }
+        published = copy.deepcopy(STORE)
+        published["observations"][0]["origin"] = aggregate
+        self.assertEqual(validate_store(published, VOCABULARY), [])
+        published["observations"][0]["observed"] = "Write to someone@example.invalid for the file."
+        observation = published["observations"][0]["id"]
+        self.assertEqual(
+            validate_store(published, VOCABULARY),
+            [f"$.observations[{observation}].observed: contains an email address"],
+        )
+
     def test_every_interview_theme_has_a_delivery_record(self):
         for t in aggregate_themes(DOC, STORE):
             self.assertTrue(t.changes, t.theme)

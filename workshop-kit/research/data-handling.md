@@ -64,6 +64,13 @@ denylist entry 3", so the name never reaches a terminal or a build log. The list
 the names you know. It cannot recognise a name nobody entered, so the reading in section 6
 still decides.
 
+The same checks read free text for obvious identifiers: an email address, a web address, a
+phone number, a company legal form such as GmbH or LLP, and a personal title before a
+name. They apply to every approved aggregate in the public tree and to every participant
+record offered for import. Synthetic fixtures are not read, because their invented
+companies carry legal forms on purpose. Reference fields such as `approvalRef` are left
+out, since a reference may be a link.
+
 Rules for the analytical files:
 
 - A participant appears only as a study code such as `P01`, a role label and an experience

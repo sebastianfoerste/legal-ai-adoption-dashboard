@@ -23,5 +23,12 @@
     "consentRecord",
     "signature",
     "recordingUrl"
+  ],
+  "identifierPatterns": [
+    { "label": "an email address", "pattern": "[\\w.+-]+@[\\w-]+\\.[\\w.-]+" },
+    { "label": "a web address", "pattern": "(?:https?://|\\bwww\\.)\\S+" },
+    { "label": "a phone number", "pattern": "(?<![\\w-])(?:\\+\\d|0\\d)[\\d ()/-]{6,}\\d" },
+    { "label": "a company legal form", "pattern": "\\b(?:GmbH|mbH|AG|SE|KGaA|KG|OHG|UG|PartG|mbB|LLP|LLC|Ltd|Inc|Corp|PLC)\\b" },
+    { "label": "a personal title before a name", "pattern": "\\b(?:Dr|Prof|Herr|Frau|Mr|Mrs|Ms|RA|RAin)\\.?\\s+[A-ZÄÖÜ][A-Za-zÄÖÜäöüß-]+" }
   ]
 }

@@ -15,6 +15,24 @@ const publicKinds = new Set(vocabulary.publicOriginKinds);
 const forbidden = new Set(vocabulary.forbiddenKeys);
 const problems = [];
 
+const identifierPatterns = vocabulary.identifierPatterns.map(({ label, pattern }) => [label, new RegExp(pattern)]);
+
+// Free text of a record that came out of real sessions is read for obvious identifiers.
+// Reference fields such as approvalRef may hold a link and are left out.
+function scanText(value, path, file) {
+  if (typeof value === "string") {
+    for (const [label, pattern] of identifierPatterns) {
+      if (pattern.test(value)) problems.push(`${file} ${path}: contains ${label}`);
+    }
+  } else if (Array.isArray(value)) {
+    value.forEach((item, index) => scanText(item, `${path}[${index}]`, file));
+  } else if (typeof value === "object" && value !== null) {
+    for (const [key, child] of Object.entries(value)) {
+      if (!/Refs?$/.test(key)) scanText(child, `${path}.${key}`, file);
+    }
+  }
+}
+
 function walk(value, path, file) {
   if (Array.isArray(value)) {
     value.forEach((item, index) => walk(item, `${path}[${item?.id ?? index}]`, file));
@@ -26,6 +44,7 @@ function walk(value, path, file) {
     if (key === "origin" && child && typeof child === "object" && !publicKinds.has(child.kind)) {
       problems.push(`${file} ${path}.origin: "${child.kind}" belongs in the private research store`);
     }
+    if (key === "origin" && child?.kind === "approved_aggregate") scanText(value, path, file);
     walk(child, `${path}.${key}`, file);
   }
 }

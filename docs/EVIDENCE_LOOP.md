@@ -88,6 +88,15 @@ Names are checked against a denylist that lives in the private store. Set
 reports a match by entry number. As long as the public tree holds synthetic fixtures only,
 the list is optional; with the first approved aggregate the gate fails without it.
 
+The text of an approved aggregate, and of a participant record offered for import, is also
+read for obvious identifiers: email and web addresses, phone numbers, company legal forms
+and a title before a name. The patterns are listed once, as `identifierPatterns` in the
+vocabulary file, and the dashboard, the boundary script and the Python module all read
+that list. Neither check recognises a name nobody anticipated. The approver's reading
+remains the decision.
+
+The feedback item schema is strict. An item with an unknown key is refused.
+
 The dashboard loads only the bundled public store. To analyse real observations, run the
 same code against the private store on a local machine; nothing in this repository reads
 that location.

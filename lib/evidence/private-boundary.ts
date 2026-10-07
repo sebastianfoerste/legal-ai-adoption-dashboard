@@ -1,4 +1,5 @@
 import { z } from "zod";
+import vocabulary from "../../packages/evidence-loop-contract/evidence-loop.v1.vocabulary.json";
 
 /**
  * The public repository holds synthetic fixtures and, at most, aggregates or quotations
@@ -25,6 +26,35 @@ export const FORBIDDEN_KEYS = [
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
+/**
+ * Text that is likely to identify a person or an organisation. The patterns live in the
+ * contract file, so the dashboard, the boundary script and the Python module apply the
+ * same list. They catch the obvious cases; the denylist and the approver's reading catch
+ * the rest.
+ */
+const IDENTIFIER_PATTERNS = vocabulary.identifierPatterns.map(
+  ({ label, pattern }) => [label, new RegExp(pattern)] as const,
+);
+
+// A field such as `approvalRef` or `implementationRef` holds a reference, which may be a link.
+const isReferenceKey = (key: string) => /Refs?$/.test(key);
+
+/** Why the free text of a record may identify someone. Synthetic fixtures are not checked. */
+export function identifierIssues(value: unknown, path = "$"): string[] {
+  if (typeof value === "string") {
+    return IDENTIFIER_PATTERNS.flatMap(([label, pattern]) =>
+      pattern.test(value) ? [`${path}: contains ${label}`] : [],
+    );
+  }
+  if (Array.isArray(value)) {
+    return value.flatMap((item, index) => identifierIssues(item, `${path}[${index}]`));
+  }
+  if (!isRecord(value)) return [];
+  return Object.entries(value).flatMap(([key, child]) =>
+    isReferenceKey(key) ? [] : identifierIssues(child, `${path}.${key}`),
+  );
+}
+
 /** Why a store must not be published. Empty means it may be. Works on unparsed JSON. */
 export function publicBoundaryIssues(value: unknown, path = "$"): string[] {
   if (Array.isArray(value)) {
@@ -47,6 +77,8 @@ export function publicBoundaryIssues(value: unknown, path = "$"): string[] {
       if (kind === "approved_aggregate" && !child.approvalRef) {
         issues.push(`${path}.origin: an approved aggregate needs an approval reference`);
       }
+      // An approved aggregate has passed through real sessions, so its text is read for names.
+      if (kind === "approved_aggregate") issues.push(...identifierIssues(value, path));
     }
     // A real record must not be relabelled to pass a synthetic-only schema.
     if (key === "synthetic" && child === true && isRecord(value.origin) && value.origin.kind !== "synthetic_fixture") {
@@ -154,6 +186,8 @@ export function importIssues(manifest: unknown, records: unknown[], repositoryRo
       // The origin kind is expected here; identifying fields are not, in any store.
       if (issue.includes("identifying field")) issues.push(`${id}: ${issue}`);
     }
+    // An analytical record names nobody: no employer, client or contact detail in its text.
+    for (const issue of identifierIssues(record)) issues.push(`${id}: ${issue}`);
   });
   return issues;
 }
