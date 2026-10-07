@@ -17,11 +17,11 @@ produced it.
   [task-answer-key.md](task-answer-key.md). The handouts carry no defect labels. Do not
   reveal the defects during round 1.
 - Client material never enters a session. Use these handouts and nothing else.
-- The four party names were searched in the UK Companies House register on 7 October
-  2026. The words Quillbarrow, Tallowmere, Pennywhistle and Cobaltfern returned no
-  company. An earlier name for the `TP-A` customer matched existing companies and was
-  replaced. Repeat the search before a round starts, and check any other register that
-  matters for the participants you invite.
+- The four party names were searched on 7 October 2026 in the UK Companies House register
+  and in OpenCorporates, which covers registers in many countries. The words Quillbarrow,
+  Tallowmere, Marrowfen and Cobaltfern returned no company in either. Two earlier names
+  matched existing companies and were replaced. Repeat both searches before a round
+  starts.
 - Each list is a first pass awaiting lawyer review. The participant acts as the reviewing
   lawyer. Nothing in the task treats the list as reliable before that review.
 - The lists appear here in their baseline form. A changed form for the follow-up session
@@ -197,7 +197,7 @@ End of handout
 this excerpt with an AI-assisted review tool and asks you to sign the list off before it
 goes to the client contact.
 
-**Software Maintenance Agreement (excerpt)** between Pennywhistle Example Freight Ltd (the
+**Software Maintenance Agreement (excerpt)** between Marrowfen Example Freight Ltd (the
 "Customer") and Cobaltfern Example Software Ltd (the "Provider").
 
 Capitalised terms that this excerpt does not define are defined in parts of the agreement
