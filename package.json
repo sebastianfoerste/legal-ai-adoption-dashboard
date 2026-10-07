@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
+    "verify:quick": "tsc --noEmit && vitest run",
     "telemetry:validate": "node scripts/validate-telemetry.mjs",
     "contract:test": "vitest run packages/legal-workflow-contract/src/index.test.ts",
     "boundary:check": "node scripts/check-private-boundary.mjs",
