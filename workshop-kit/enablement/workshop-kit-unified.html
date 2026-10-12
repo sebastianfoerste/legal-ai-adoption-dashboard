@@ -354,13 +354,18 @@
 <li><a href="#discovery-workflow-discovery-template" id="link-discovery-workflow-discovery-template">Workflow discovery template</a></li>
 <li><a href="#discovery-use-case-prioritization-matrix" id="link-discovery-use-case-prioritization-matrix">Use-case prioritization matrix</a></li>
 <li><a href="#discovery-roi-calculator" id="link-discovery-roi-calculator">Legal AI ROI Calculation Worksheet</a></li>
+<li><a href="#discovery-pilot-success-metrics" id="link-discovery-pilot-success-metrics">Pilot success metrics</a></li>
 <li><a href="#sessions-30-min-partner-briefing" id="link-sessions-30-min-partner-briefing">30-minute partner briefing</a></li>
 <li><a href="#sessions-60-min-workshop-agenda" id="link-sessions-60-min-workshop-agenda">60-minute workshop agenda</a></li>
 <li><a href="#sessions-90-min-associate-hands-on" id="link-sessions-90-min-associate-hands-on">90-minute associate hands-on</a></li>
+<li><a href="#sessions-30-min-partner-briefing-de" id="link-sessions-30-min-partner-briefing-de">Partnergespräch in 30 Minuten</a></li>
 <li><a href="#enablement-adoption-maturity-model" id="link-enablement-adoption-maturity-model">Legal AI Adoption Maturity Model Playbook</a></li>
 <li><a href="#enablement-skeptical-partner-objections" id="link-enablement-skeptical-partner-objections">Skeptical-partner objection handling</a></li>
 <li><a href="#enablement-follow-up-email-templates" id="link-enablement-follow-up-email-templates">Follow-up email templates</a></li>
 <li><a href="#enablement-product-feedback-template" id="link-enablement-product-feedback-template">Product-feedback template</a></li>
+<li><a href="#team-demo-quality-rubric" id="link-team-demo-quality-rubric">Demo quality rubric</a></li>
+<li><a href="#team-discovery-question-bank" id="link-team-discovery-question-bank">Discovery question bank by practice group</a></li>
+<li><a href="#team-legal-engineer-onboarding-plan" id="link-team-legal-engineer-onboarding-plan">Onboarding plan for a new legal engineer</a></li>
             </ul>
         </nav>
     </aside>
@@ -369,7 +374,7 @@
         <section id="readme">
             <h1>legal-ai-workshop-kit</h1>
             <p>Enablement materials for legal AI adoption: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.</p>
-<p>All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice.</p>
+<p>All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice. Portfolio proof contract: <a href="../docs/portfolio-proof.json"><code>docs/portfolio-proof.json</code></a>.</p>
 <h2 id="readme--run it">Run it</h2>
 <pre><code class="language-text">git clone https://github.com/sebastianfoerste/legal-ai-workshop-kit
 cd legal-ai-workshop-kit
@@ -395,8 +400,10 @@ make generate-pilot</code></pre>
 <h2 id="readme--what's inside">What's inside</h2>
 <ul>
 <li>Session agendas for partner briefings, workshops, and hands-on training.</li>
+<li>A German partner briefing, <a href="#sessions-30-min-partner-briefing-de"><code>sessions/30-min-partner-briefing-de.md</code></a>, that answers the confidentiality question under §§ 43a, 43e BRAO and § 203 StGB.</li>
 <li>Discovery templates for adoption readiness and workflow mapping.</li>
-<li>Prioritization tools for choosing the first pilot.</li>
+<li>Prioritization tools for choosing the first pilot, and <a href="#discovery-pilot-success-metrics">pilot success metrics</a> agreed with the sponsor before the pilot starts.</li>
+<li>Team playbooks in <a href="../team/"><code>team/</code></a>: a demo quality rubric, a discovery question bank by practice group, and a six-week onboarding plan for a new legal engineer.</li>
 <li>Follow-up templates and product-feedback notes.</li>
 <li>A unified playbook for reviewer evaluation.</li>
 </ul>
@@ -411,7 +418,7 @@ make generate-pilot</code></pre>
 
         <section id="what-this-proves">
             <h1>What this proves</h1>
-            <p>Building a legal-AI tool is one job. Getting a skeptical partnership to actually use it is a different one, and it is the one the post-sales / Legal Engineer role is really about. This repo is the evidence for the second job.</p>
+            <p>Building a legal-AI tool is only the start. Adoption depends on whether a skeptical partnership can see the workflow, the review gate, and the commercial reason to use it. This repo packages that adoption layer.</p>
 <div class="table-container"><table>
 <thead><tr>
 <th>Document</th>
@@ -456,7 +463,7 @@ make generate-pilot</code></pre>
 </tr>
 </tbody>
 </table></div>
-<p>The through-line: every artifact keeps the human-review gate explicit and treats trust as the thing to earn first. That is what makes legal AI adoptable inside a regulated practice, and it is the judgment the role is hiring for.</p>
+<p>The through-line: every artifact keeps the human-review gate explicit and treats trust as the thing to earn first. That makes legal AI adoptable inside a regulated practice and gives product teams concrete signals for the next workflow.</p>
         </section>
         
 
@@ -474,7 +481,7 @@ make generate-pilot</code></pre>
 <ol>
 <li><strong>Open the <a href="#enablement-product-feedback-template">product-feedback template</a>.</strong> Read</li>
 </ol>
-<p>the worked example. This is the artifact that turns what you see in a session into a requirement Engineering can act on — the skill the role is screening for.</p>
+<p>the worked example. It turns session evidence into a requirement Engineering can act on.</p>
 <ol>
 <li><strong>Skim the <a href="#discovery-use-case-prioritization-matrix">prioritization matrix</a>.</strong> Note</li>
 </ol>
@@ -811,6 +818,84 @@ make generate-pilot</code></pre>
         </section>
         
 
+        <section id="discovery-pilot-success-metrics">
+            <h1>Pilot success metrics</h1>
+            <p><strong>Use this when</strong> a sponsor has agreed to a pilot and you need to fix, before it starts, how both sides will judge it. Agree the metrics in the kickoff meeting and write them into the pilot plan. A pilot without agreed metrics ends in an opinion, and opinions rarely justify a firm-wide rollout.</p>
+<h2 id="discovery-pilot-success-metrics--choose three to five metrics">Choose three to five metrics</h2>
+<p>Pick at least one from each group. Record the baseline before the pilot starts.</p>
+<div class="table-container"><table>
+<thead><tr>
+<th>Group</th>
+<th>Metric</th>
+<th>How to measure it</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Usage</td>
+<td>Weekly active users among invited lawyers</td>
+<td>Product usage data</td>
+</tr>
+<tr>
+<td>Usage</td>
+<td>Share of pilot matters where the workflow was used</td>
+<td>Matter list checked weekly with the team lead</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>Reviewer corrections per output</td>
+<td>Sample ten outputs per week; count substantive corrections</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>Unsupported citations found at review</td>
+<td>Same sample; count citations the reviewer could not verify</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Turnaround of the first pass</td>
+<td>Self-reported by associates against the agreed baseline</td>
+</tr>
+<tr>
+<td>Confidence</td>
+<td>Would the reviewer rely on the first pass again for this task?</td>
+<td>Three-question survey at weeks two and four</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="discovery-pilot-success-metrics--set thresholds in advance">Set thresholds in advance</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Decision at the end</th>
+<th>Condition</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Expand to the next practice group</td>
+<td>Usage and quality thresholds met, sponsor confirms</td>
+</tr>
+<tr>
+<td>Extend the pilot by two weeks</td>
+<td>Usage met, quality below threshold with a known cause</td>
+</tr>
+<tr>
+<td>Stop</td>
+<td>Usage below threshold after a re-engagement attempt, or a quality problem review cannot contain</td>
+</tr>
+</tbody>
+</table></div>
+<p>Write the actual numbers into the pilot plan with the sponsor. This file gives the structure; the thresholds depend on the workflow and the team.</p>
+<h2 id="discovery-pilot-success-metrics--rules that keep the numbers honest">Rules that keep the numbers honest</h2>
+<ul>
+<li>Count unsupported citations found at review as the review gate working. Report them, and report separately any that got past review. Only the second number is a failure of the rollout.</li>
+<li>Self-reported time savings are estimates. Present them as estimates.</li>
+<li>A pilot team chosen for enthusiasm overstates firm-wide adoption. Note how the team was chosen.</li>
+<li>Never measure on client documents outside the approved environment. Workshop exercises use synthetic documents.</li>
+</ul>
+<h2 id="discovery-pilot-success-metrics--reporting">Reporting</h2>
+<p>One page at the end: metrics against baseline and threshold, three user quotes, the open product feedback items, and the recommended decision. Feed the same figures into the <a href="#enablement-adoption-maturity-model">adoption maturity model</a> so that the next practice group starts from a documented baseline.</p>
+        </section>
+        
+
         <section id="sessions-30-min-partner-briefing">
             <h1>30-minute partner briefing</h1>
             <p><strong>Use this when</strong> you have a partner's calendar for half an hour and need a go/no-go decision on rolling the tool into their group.</p>
@@ -903,6 +988,50 @@ make generate-pilot</code></pre>
 <li>The spot-the-hallucination drill is the most important ten minutes. An associate who cannot catch a bad citation is not ready to use the tool unsupervised.</li>
 <li>Every task ends on a review step on purpose. The habit you are building is verification, not generation.</li>
 <li>The friction captured here is the highest-signal product feedback you will get; route it the same day.</li>
+</ul>
+        </section>
+        
+
+        <section id="sessions-30-min-partner-briefing-de">
+            <h1>Partnergespräch in 30 Minuten</h1>
+            <p>Deutsche Fassung von <a href="#sessions-30-min-partner-briefing">30-min-partner-briefing.md</a>, angepasst an das deutsche Berufsrecht.</p>
+<p><strong>Wann Du dieses Format nutzt:</strong> Ein Partner gibt Dir eine halbe Stunde. Am Ende soll er entscheiden, ob seine Praxisgruppe das Werkzeug in einem Pilotprojekt erprobt.</p>
+<p><strong>Ergebnis:</strong> Der Partner trifft eine Entscheidung. Er unterstützt ein Pilotprojekt in seiner Gruppe oder er lehnt ab. Wirtschaftlichkeit und Risikolage sind ihm dabei klar. Du führst das Werkzeug nur vor, wenn er danach fragt. Das Gespräch behandelt eine unternehmerische Frage und keine Produktfunktionen.</p>
+<p><strong>Ton:</strong> Gespräch auf Partnerebene. Kurze Sätze, keine technischen Einzelheiten. Beginne mit der Zahl und ende mit der Bitte um eine Entscheidung.</p>
+<hr />
+<h2 id="sessions-30-min-partner-briefing-de--0:00 bis 0:08: die wirtschaftliche begründung">0:00 bis 0:08: Die wirtschaftliche Begründung</h2>
+<p>Drei Größen, in der Sprache des Partners:</p>
+<ul>
+<li><strong>Leverage.</strong> Erstdurchsicht und Erstentwurf wandern eine Ebene nach unten. Der Partner prüft den Entwurf, statt ihn selbst zu schreiben. Die Gruppe rechnet dieselbe Arbeit mit einer besseren Verteilung der Stunden ab.</li>
+<li><strong>Abschreibungen.</strong> Kurzfristige Aufgaben, deren Stunden heute oft nicht auf der Rechnung landen, rechnen sich wieder, wenn die Erstdurchsicht Minuten dauert.</li>
+<li><strong>Durchlaufzeit.</strong> Mandate, die auf freie Associates gewartet haben, kommen schneller voran. Mandanten merken das spätestens bei der nächsten Panel-Entscheidung.</li>
+</ul>
+<p>Beginne mit der Größe, die diesem Partner am wichtigsten ist. Bei einem Akquisiteur ist das die Durchlaufzeit, bei einem Managing Partner sind es Leverage und Abschreibungen.</p>
+<h2 id="sessions-30-min-partner-briefing-de--0:08 bis 0:16: was sich im arbeitsalltag ändert">0:08 bis 0:16: Was sich im Arbeitsalltag ändert</h2>
+<p>Beschreibe den Tag konkret:</p>
+<ul>
+<li>Die Erstdurchsicht des Associates liegt nach Minuten vor und nicht am nächsten Morgen.</li>
+<li>Der Partner prüft einen Entwurf. Er beginnt nicht mit einem leeren Blatt.</li>
+<li>Das Arbeitsergebnis nennt seine Fundstellen. Der Partner kontrolliert die Belege, statt sie selbst zusammenzusuchen.</li>
+</ul>
+<p>Sage ausdrücklich, was gleich bleibt: Der Partner verantwortet den Rat, gibt ihn frei und trifft die Wertung. Das Werkzeug ändert, wer den Entwurf erstellt. Die Verantwortung für den Entwurf bleibt beim Anwalt.</p>
+<h2 id="sessions-30-min-partner-briefing-de--0:16 bis 0:24: verschwiegenheit und verlässlichkeit">0:16 bis 0:24: Verschwiegenheit und Verlässlichkeit</h2>
+<p>Beantworte die beiden Fragen, die jeder Partner hat, bevor er sie stellt.</p>
+<ul>
+<li><strong>Verschwiegenheit.</strong> Der Rechtsanwalt ist zur Verschwiegenheit verpflichtet (§ 43a Abs. 2 BRAO). Er darf einem Dienstleister den Zugang zu Mandatsgeheimnissen eröffnen, soweit dies für die Inanspruchnahme der Dienstleistung erforderlich ist (§ 43e Abs. 1 BRAO). Der Vertrag mit dem Dienstleister bedarf der Textform (§ 43e Abs. 3 BRAO). Strafrechtlich knüpft § 203 Abs. 3 Satz 2 StGB an dieselbe Erforderlichkeit an. Beschreibe den Weg der Daten in einem Satz: welche Umgebung, welcher Vertrag, welcher Speicherort. Die Workshops arbeiten ausschließlich mit synthetischen Dokumenten.</li>
+<li><strong>Verlässlichkeit.</strong> Auf ein Ergebnis darf sich niemand stützen, bevor ein namentlich benannter Anwalt es geprüft hat. Das Werkzeug liefert eine Erstdurchsicht. Der Anwalt gleicht jede Aussage mit ihrer Fundstelle ab und gibt sie frei. Ein falsches Zitat fällt so bei der Prüfung auf und nicht erst im Schriftsatz.</li>
+</ul>
+<p>Hat die Kanzlei einen Berufsrechts- oder Risikoausschuss, sage, ob das Vorhaben mit dessen Vorgaben vereinbar ist. Andernfalls kündige an, dass Du es dort zuerst vorlegst.</p>
+<p>Dieser Abschnitt gibt den Gesetzeswortlaut verkürzt wieder und ersetzt keine berufsrechtliche Prüfung der konkreten Einführung.</p>
+<h2 id="sessions-30-min-partner-briefing-de--0:24 bis 0:30: die entscheidung">0:24 bis 0:30: Die Entscheidung</h2>
+<p>Eine Bitte: Unterstützen Sie ein vierwöchiges Pilotprojekt in Ihrer Gruppe. Dazu benennt der Partner einen Arbeitsablauf, ermöglicht einen Workshop und eine Associate-Schulung und nimmt sich am Ende fünfzehn Minuten für die Auswertung. Bewährt sich das Pilotprojekt nicht, endet es.</p>
+<p>Verlasse das Gespräch mit einem Ja oder einem Nein. Bei einem Ja stehen ein benannter Arbeitsablauf und ein Termin für den Workshop fest.</p>
+<hr />
+<h2 id="sessions-30-min-partner-briefing-de--hinweise für das gespräch">Hinweise für das Gespräch</h2>
+<ul>
+<li>Öffne das Werkzeug nur, wenn der Partner danach fragt. Er entscheidet über eine wirtschaftliche und berufsrechtliche Frage.</li>
+<li>Erhebt der Partner einen konkreten Einwand, wechsle zum Leitfaden <a href="#enablement-skeptical-partner-objections">skeptical-partner-objections.md</a>, beantworte den Einwand und kehre zur Entscheidung zurück.</li>
+<li>Das Gespräch endet mit einem unterstützten Pilotprojekt, einem benannten Arbeitsablauf und einem Termin. Jedes unbestimmtere Ergebnis ist ein höfliches Nein.</li>
 </ul>
         </section>
         
@@ -1090,6 +1219,234 @@ make generate-pilot</code></pre>
 <li>"Proposed change" is your hypothesis, not a spec. Engineering owns the solution; you own the clear problem.</li>
 <li>Route trust-touching items the same day. Convenience items can batch weekly.</li>
 </ul>
+        </section>
+        
+
+        <section id="team-demo-quality-rubric">
+            <h1>Demo quality rubric</h1>
+            <p><strong>Use this when</strong> you lead a team that runs legal AI demos and you need one standard for what a good demo looks like. A reviewer scores a recorded or shadowed demo, and the presenter scores the same demo independently. The conversation about the differences is the coaching session.</p>
+<p><strong>Scale:</strong> 0 = absent, 1 = attempted, 2 = solid, 3 = a colleague should copy this.</p>
+<h2 id="team-demo-quality-rubric--criteria">Criteria</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Criterion</th>
+<th>What a 3 looks like</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Discovery before screen share</td>
+<td>The presenter asked at least three workflow questions and restated the answers before opening the product.</td>
+</tr>
+<tr>
+<td>Practice-area fit</td>
+<td>The documents, the task and the vocabulary match the audience's practice group. An M&amp;A team sees a disclosure schedule, a disputes team sees a pleading.</td>
+</tr>
+<tr>
+<td>One workflow, end to end</td>
+<td>The demo follows a single task from input to reviewed output. It does not tour features.</td>
+</tr>
+<tr>
+<td>Review step shown</td>
+<td>The presenter checks at least one output against its source on screen and says who signs off in real use.</td>
+</tr>
+<tr>
+<td>Failure handled honestly</td>
+<td>When the output is wrong or thin, the presenter says so, shows how review catches it, and moves on.</td>
+</tr>
+<tr>
+<td>Objections answered</td>
+<td>Confidentiality, reliability and billing questions get a direct answer in under a minute each, or a named follow-up.</td>
+</tr>
+<tr>
+<td>Clear next step</td>
+<td>The meeting ends with a named workflow, an owner on the customer side and a date.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="team-demo-quality-rubric--how to use the score">How to use the score</h2>
+<ul>
+<li>A total under 12 of 21 means the presenter shadows two more demos before presenting alone.</li>
+<li>Score the review step and failure handling first. A demo that hides the review step teaches customers to rely on unreviewed output, and that damages the rollout later.</li>
+<li>Track scores per criterion across the team each quarter. A criterion that is weak for everyone points to a gap in the team's materials, and the fix is a better script or sample document.</li>
+</ul>
+<h2 id="team-demo-quality-rubric--review cadence">Review cadence</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Presenter stage</th>
+<th>Reviewed demos</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>First month</td>
+<td>Every demo</td>
+</tr>
+<tr>
+<td>Months two and three</td>
+<td>One per week</td>
+</tr>
+<tr>
+<td>After that</td>
+<td>One per month, plus any demo the presenter flags</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="team-demo-quality-rubric--what this rubric does not measure">What this rubric does not measure</h2>
+<p>Deal outcome. A well-run demo to the wrong audience still loses, and a weak demo sometimes wins. Keep the rubric about the craft, and review pipeline and qualification separately.</p>
+<p>All examples in this kit are synthetic. Demo documents must never contain client data.</p>
+        </section>
+        
+
+        <section id="team-discovery-question-bank">
+            <h1>Discovery question bank by practice group</h1>
+            <p><strong>Use this when</strong> you prepare a first conversation with a practice group and want questions that a practising lawyer would recognise as informed. Pick five, not all. Each question aims at a workflow that is frequent, reviewable and painful enough to justify a pilot. Record the answers in the <a href="#discovery-workflow-discovery-template">workflow discovery template</a>.</p>
+<h2 id="team-discovery-question-bank--questions for every group">Questions for every group</h2>
+<ul>
+<li>Which task did your associates do most often last week that you would not want to bill in full?</li>
+<li>Where does a draft wait longest before someone can review it?</li>
+<li>When a first draft is wrong, who notices, and at what stage?</li>
+<li>Which documents may leave the firm's environment, and who decides that?</li>
+<li>What would have to be true after four weeks for you to call a pilot a success?</li>
+</ul>
+<h2 id="team-discovery-question-bank--corporate and m&a">Corporate and M&amp;A</h2>
+<ul>
+<li>How do you build the first issues list from a data room today, and how many people touch it?</li>
+<li>Which clauses do you compare across a set of contracts most often: change of control, assignment, exclusivity, termination?</li>
+<li>How do you keep disclosure schedules consistent with the due diligence findings?</li>
+<li>Where do precedent documents live, and how does a junior find the right one?</li>
+</ul>
+<h2 id="team-discovery-question-bank--disputes">Disputes</h2>
+<ul>
+<li>How do you build a chronology from correspondence and exhibits, and how long does the first version take?</li>
+<li>Who checks that each factual statement in a brief points to an exhibit?</li>
+<li>How do you track the other side's arguments across successive submissions?</li>
+<li>What is your rule for verifying a case citation before it goes into a filing?</li>
+</ul>
+<h2 id="team-discovery-question-bank--finance and regulatory">Finance and regulatory</h2>
+<ul>
+<li>Which conditions precedent or covenant checks repeat on every deal?</li>
+<li>How do you monitor changes in regulation or supervisory guidance for standing clients?</li>
+<li>When a client asks whether an activity needs a licence, how much of the first answer is reused from earlier advice?</li>
+<li>Which outputs go to a regulator, and what review do they get before submission?</li>
+</ul>
+<h2 id="team-discovery-question-bank--in-house teams">In-house teams</h2>
+<ul>
+<li>Which requests from the business arrive most often, and which of them need a lawyer at all?</li>
+<li>How long does a standard NDA or supplier contract take from request to signature?</li>
+<li>Which playbook positions do you negotiate repeatedly, and where are they written down?</li>
+<li>What do you report to the general counsel or the board about the legal function's workload?</li>
+</ul>
+<h2 id="team-discovery-question-bank--reading the answers">Reading the answers</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Signal in the answer</th>
+<th>What it suggests</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>High volume, clear review owner, low confidentiality barrier</td>
+<td>Strong first pilot candidate</td>
+</tr>
+<tr>
+<td>High volume, nobody owns review</td>
+<td>Fix the review step before piloting</td>
+</tr>
+<tr>
+<td>Rare, bespoke, partner-only work</td>
+<td>Poor pilot candidate, however impressive the demo</td>
+</tr>
+<tr>
+<td>"We cannot put that anywhere"</td>
+<td>Settle the data path first; see the partner briefing</td>
+</tr>
+</tbody>
+</table></div>
+<p>Score the shortlisted workflows with the <a href="#discovery-use-case-prioritization-matrix">prioritization matrix</a>.</p>
+        </section>
+        
+
+        <section id="team-legal-engineer-onboarding-plan">
+            <h1>Onboarding plan for a new legal engineer</h1>
+            <p><strong>Use this when</strong> a lawyer joins a legal engineering team from private practice or an in-house role. The plan assumes strong legal judgment and little experience with demos, pilots or product feedback. It runs for six weeks and ends with the new joiner owning one customer workflow alone.</p>
+<h2 id="team-legal-engineer-onboarding-plan--principles">Principles</h2>
+<ul>
+<li>Practise on synthetic documents until the review habit is automatic. Customer data comes later and only inside the approved environment.</li>
+<li>Every week ends with something observable: a recorded demo, a written discovery summary, a filed feedback note.</li>
+<li>The manager reviews work against the <a href="#team-demo-quality-rubric">demo quality rubric</a>, so the standard is known from day one.</li>
+</ul>
+<h2 id="team-legal-engineer-onboarding-plan--week by week">Week by week</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Week</th>
+<th>Focus</th>
+<th>Observable output</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Learn the product on the new joiner's own practice area. Read this kit.</td>
+<td>A ten-minute recorded walkthrough of one workflow, including a review step</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Shadow three customer sessions. Learn the data path and the confidentiality answers.</td>
+<td>Written answers to the five most common objections, in the joiner's own words</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Run discovery with a colleague playing the partner. Use the <a href="#team-discovery-question-bank">question bank</a>.</td>
+<td>A completed workflow discovery template</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Co-present two demos, taking the workflow section.</td>
+<td>Two rubric scores, self and reviewer, with one agreed improvement</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Lead a demo with the manager observing. File feedback from it.</td>
+<td>One structured note using the <a href="#enablement-product-feedback-template">product feedback template</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Own one pilot workflow with a customer contact.</td>
+<td>A pilot plan with success metrics and a check-in date</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="team-legal-engineer-onboarding-plan--manager checkpoints">Manager checkpoints</h2>
+<ul>
+<li><strong>End of week 2:</strong> can the joiner explain the data path and the review gate without notes?</li>
+<li><strong>End of week 4:</strong> is the rubric score for "review step shown" and "failure handled honestly" at 2 or above?</li>
+<li><strong>End of week 6:</strong> does the pilot plan name a workflow, an owner, a metric and a date?</li>
+</ul>
+<p>A joiner who misses a checkpoint repeats that week's output with coaching. Missing a checkpoint in the first six weeks is normal for lawyers who are new to presenting.</p>
+<h2 id="team-legal-engineer-onboarding-plan--common early mistakes">Common early mistakes</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Mistake</th>
+<th>Correction</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Touring features</td>
+<td>One workflow, end to end</td>
+</tr>
+<tr>
+<td>Answering a confidentiality question with product marketing</td>
+<td>State the data path in one sentence, then the contract basis</td>
+</tr>
+<tr>
+<td>Hiding a wrong output</td>
+<td>Show how review catches it</td>
+</tr>
+<tr>
+<td>Reporting feedback as an anecdote</td>
+<td>Use the template: workflow, friction, frequency, evidence</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="team-legal-engineer-onboarding-plan--after week 6">After week 6</h2>
+<p>The joiner enters the team's normal review cadence and contributes one improvement to the shared materials in their first quarter: a sample document, a question for the bank, or an objection answer.</p>
         </section>
         
     </main>

@@ -1,0 +1,32 @@
+{
+  "schema_version": "portfolio-proof.v1",
+  "repository": "legal-ai-workshop-kit",
+  "github_url": "https://github.com/sebastianfoerste/legal-ai-workshop-kit",
+  "pinned_on_github": true,
+  "reviewer_path": [
+    "README.md",
+    "docs/reviewer-guide.md",
+    "examples/generated-pilot-plan.md"
+  ],
+  "proof_surfaces": [
+    { "path": "README.md", "label": "Repository front door" },
+    { "path": "docs/reviewer-guide.md", "label": "Reviewer guide" },
+    { "path": "examples/synthetic-input.json", "label": "Synthetic discovery intake" },
+    { "path": "examples/generated-pilot-plan.md", "label": "Generated pilot plan" }
+  ],
+  "validation_gates": [
+    "make check"
+  ],
+  "safety_controls": [
+    "synthetic examples only",
+    "partner sign-off stays explicit",
+    "workshop outputs are review materials",
+    "no legal advice"
+  ],
+  "blocked_actions": [
+    "no real client names",
+    "no confidential matter detail",
+    "no AI replaces lawyer framing",
+    "no placeholder material"
+  ]
+}

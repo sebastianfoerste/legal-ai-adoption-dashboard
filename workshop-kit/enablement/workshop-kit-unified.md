@@ -15,13 +15,18 @@
 - [Workflow discovery template](#discovery-workflow-discovery-template)
 - [Use-case prioritization matrix](#discovery-use-case-prioritization-matrix)
 - [Legal AI ROI Calculation Worksheet](#discovery-roi-calculator)
+- [Pilot success metrics](#discovery-pilot-success-metrics)
 - [30-minute partner briefing](#sessions-30-min-partner-briefing)
 - [60-minute workshop agenda](#sessions-60-min-workshop-agenda)
 - [90-minute associate hands-on](#sessions-90-min-associate-hands-on)
+- [Partnergespräch in 30 Minuten](#sessions-30-min-partner-briefing-de)
 - [Legal AI Adoption Maturity Model Playbook](#enablement-adoption-maturity-model)
 - [Skeptical-partner objection handling](#enablement-skeptical-partner-objections)
 - [Follow-up email templates](#enablement-follow-up-email-templates)
 - [Product-feedback template](#enablement-product-feedback-template)
+- [Demo quality rubric](#team-demo-quality-rubric)
+- [Discovery question bank by practice group](#team-discovery-question-bank)
+- [Onboarding plan for a new legal engineer](#team-legal-engineer-onboarding-plan)
 
 ---
 
@@ -35,6 +40,7 @@
 Enablement materials for legal AI adoption: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.
 
 All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice.
+Portfolio proof contract: [`docs/portfolio-proof.json`](../docs/portfolio-proof.json).
 
 ## Run it
 
@@ -71,8 +77,10 @@ This is the legal-AI rollout reviewer path:
 ## What's inside
 
 - Session agendas for partner briefings, workshops, and hands-on training.
+- A German partner briefing, [`sessions/30-min-partner-briefing-de.md`](#sessions-30-min-partner-briefing-de), that answers the confidentiality question under §§ 43a, 43e BRAO and § 203 StGB.
 - Discovery templates for adoption readiness and workflow mapping.
-- Prioritization tools for choosing the first pilot.
+- Prioritization tools for choosing the first pilot, and [pilot success metrics](#discovery-pilot-success-metrics) agreed with the sponsor before the pilot starts.
+- Team playbooks in [`team/`](../team/): a demo quality rubric, a discovery question bank by practice group, and a six-week onboarding plan for a new legal engineer.
 - Follow-up templates and product-feedback notes.
 - A unified playbook for reviewer evaluation.
 
@@ -100,9 +108,9 @@ All examples are generic or synthetic. No real client, firm, matter, or personal
 
 
 
-Building a legal-AI tool is one job. Getting a skeptical partnership to actually use it is a
-different one, and it is the one the post-sales / Legal Engineer role is really about. This
-repo is the evidence for the second job.
+Building a legal-AI tool is only the start. Adoption depends on whether a skeptical
+partnership can see the workflow, the review gate, and the commercial reason to use it.
+This repo packages that adoption layer.
 
 | Document | Responsibility it demonstrates |
 | --- | --- |
@@ -117,8 +125,8 @@ repo is the evidence for the second job.
 | [Product-feedback template](#enablement-product-feedback-template) | Translating field friction into structured requirements for Engineering. |
 
 The through-line: every artifact keeps the human-review gate explicit and treats trust as
-the thing to earn first. That is what makes legal AI adoptable inside a regulated practice,
-and it is the judgment the role is hiring for.
+the thing to earn first. That makes legal AI adoptable inside a regulated practice and gives
+product teams concrete signals for the next workflow.
 
 
 </div>
@@ -140,8 +148,7 @@ A five-minute path for a reviewer who is not going to read every document.
    how a session is run: it ends in committed workflows and keeps the review gate on screen
    the whole hour. This is the core deliverable.
 3. **Open the [product-feedback template](#enablement-product-feedback-template).** Read
-   the worked example. This is the artifact that turns what you see in a session into a
-   requirement Engineering can act on — the skill the role is screening for.
+   the worked example. It turns session evidence into a requirement Engineering can act on.
 4. **Skim the [prioritization matrix](#discovery-use-case-prioritization-matrix).** Note
    the floor rule: never pilot a workflow you cannot cheaply verify, regardless of impact.
    That single rule captures the trust-first judgment behind the whole kit.
@@ -524,6 +531,61 @@ When preparing for a renewal or seat-expansion discussion, present this workshee
 
 ---
 
+<div id="discovery-pilot-success-metrics">
+
+
+## Pilot success metrics
+
+
+
+**Use this when** a sponsor has agreed to a pilot and you need to fix, before it starts,
+how both sides will judge it. Agree the metrics in the kickoff meeting and write them into
+the pilot plan. A pilot without agreed metrics ends in an opinion, and opinions rarely
+justify a firm-wide rollout.
+
+## Choose three to five metrics
+
+Pick at least one from each group. Record the baseline before the pilot starts.
+
+| Group | Metric | How to measure it |
+|---|---|---|
+| Usage | Weekly active users among invited lawyers | Product usage data |
+| Usage | Share of pilot matters where the workflow was used | Matter list checked weekly with the team lead |
+| Quality | Reviewer corrections per output | Sample ten outputs per week; count substantive corrections |
+| Quality | Unsupported citations found at review | Same sample; count citations the reviewer could not verify |
+| Time | Turnaround of the first pass | Self-reported by associates against the agreed baseline |
+| Confidence | Would the reviewer rely on the first pass again for this task? | Three-question survey at weeks two and four |
+
+## Set thresholds in advance
+
+| Decision at the end | Condition |
+|---|---|
+| Expand to the next practice group | Usage and quality thresholds met, sponsor confirms |
+| Extend the pilot by two weeks | Usage met, quality below threshold with a known cause |
+| Stop | Usage below threshold after a re-engagement attempt, or a quality problem review cannot contain |
+
+Write the actual numbers into the pilot plan with the sponsor. This file gives the
+structure; the thresholds depend on the workflow and the team.
+
+## Rules that keep the numbers honest
+
+- Count unsupported citations found at review as the review gate working. Report them, and report separately any that got past review. Only the second number is a failure of the rollout.
+- Self-reported time savings are estimates. Present them as estimates.
+- A pilot team chosen for enthusiasm overstates firm-wide adoption. Note how the team was chosen.
+- Never measure on client documents outside the approved environment. Workshop exercises use synthetic documents.
+
+## Reporting
+
+One page at the end: metrics against baseline and threshold, three user quotes, the open
+product feedback items, and the recommended decision. Feed the same figures into the
+[adoption maturity model](#enablement-adoption-maturity-model) so that the next
+practice group starts from a documented baseline.
+
+
+</div>
+
+---
+
 <div id="sessions-30-min-partner-briefing">
 
 
@@ -737,6 +799,88 @@ facilitator logs it for the product-feedback template.
 - The spot-the-hallucination drill is the most important ten minutes. An associate who cannot catch a bad citation is not ready to use the tool unsupervised.
 - Every task ends on a review step on purpose. The habit you are building is verification, not generation.
 - The friction captured here is the highest-signal product feedback you will get; route it the same day.
+
+
+</div>
+
+---
+
+<div id="sessions-30-min-partner-briefing-de">
+
+
+## Partnergespräch in 30 Minuten
+
+
+
+Deutsche Fassung von [30-min-partner-briefing.md](#sessions-30-min-partner-briefing), angepasst an
+das deutsche Berufsrecht.
+
+**Wann Du dieses Format nutzt:** Ein Partner gibt Dir eine halbe Stunde. Am Ende soll er
+entscheiden, ob seine Praxisgruppe das Werkzeug in einem Pilotprojekt erprobt.
+
+**Ergebnis:** Der Partner trifft eine Entscheidung. Er unterstützt ein Pilotprojekt in
+seiner Gruppe oder er lehnt ab. Wirtschaftlichkeit und Risikolage sind ihm dabei klar. Du
+führst das Werkzeug nur vor, wenn er danach fragt. Das Gespräch behandelt eine
+unternehmerische Frage und keine Produktfunktionen.
+
+**Ton:** Gespräch auf Partnerebene. Kurze Sätze, keine technischen Einzelheiten. Beginne mit
+der Zahl und ende mit der Bitte um eine Entscheidung.
+
+---
+
+## 0:00 bis 0:08: Die wirtschaftliche Begründung
+
+Drei Größen, in der Sprache des Partners:
+
+- **Leverage.** Erstdurchsicht und Erstentwurf wandern eine Ebene nach unten. Der Partner prüft den Entwurf, statt ihn selbst zu schreiben. Die Gruppe rechnet dieselbe Arbeit mit einer besseren Verteilung der Stunden ab.
+- **Abschreibungen.** Kurzfristige Aufgaben, deren Stunden heute oft nicht auf der Rechnung landen, rechnen sich wieder, wenn die Erstdurchsicht Minuten dauert.
+- **Durchlaufzeit.** Mandate, die auf freie Associates gewartet haben, kommen schneller voran. Mandanten merken das spätestens bei der nächsten Panel-Entscheidung.
+
+Beginne mit der Größe, die diesem Partner am wichtigsten ist. Bei einem Akquisiteur ist das
+die Durchlaufzeit, bei einem Managing Partner sind es Leverage und Abschreibungen.
+
+## 0:08 bis 0:16: Was sich im Arbeitsalltag ändert
+
+Beschreibe den Tag konkret:
+
+- Die Erstdurchsicht des Associates liegt nach Minuten vor und nicht am nächsten Morgen.
+- Der Partner prüft einen Entwurf. Er beginnt nicht mit einem leeren Blatt.
+- Das Arbeitsergebnis nennt seine Fundstellen. Der Partner kontrolliert die Belege, statt sie selbst zusammenzusuchen.
+
+Sage ausdrücklich, was gleich bleibt: Der Partner verantwortet den Rat, gibt ihn frei und
+trifft die Wertung. Das Werkzeug ändert, wer den Entwurf erstellt. Die Verantwortung für
+den Entwurf bleibt beim Anwalt.
+
+## 0:16 bis 0:24: Verschwiegenheit und Verlässlichkeit
+
+Beantworte die beiden Fragen, die jeder Partner hat, bevor er sie stellt.
+
+- **Verschwiegenheit.** Der Rechtsanwalt ist zur Verschwiegenheit verpflichtet (§ 43a Abs. 2 BRAO). Er darf einem Dienstleister den Zugang zu Mandatsgeheimnissen eröffnen, soweit dies für die Inanspruchnahme der Dienstleistung erforderlich ist (§ 43e Abs. 1 BRAO). Der Vertrag mit dem Dienstleister bedarf der Textform (§ 43e Abs. 3 BRAO). Strafrechtlich knüpft § 203 Abs. 3 Satz 2 StGB an dieselbe Erforderlichkeit an. Beschreibe den Weg der Daten in einem Satz: welche Umgebung, welcher Vertrag, welcher Speicherort. Die Workshops arbeiten ausschließlich mit synthetischen Dokumenten.
+- **Verlässlichkeit.** Auf ein Ergebnis darf sich niemand stützen, bevor ein namentlich benannter Anwalt es geprüft hat. Das Werkzeug liefert eine Erstdurchsicht. Der Anwalt gleicht jede Aussage mit ihrer Fundstelle ab und gibt sie frei. Ein falsches Zitat fällt so bei der Prüfung auf und nicht erst im Schriftsatz.
+
+Hat die Kanzlei einen Berufsrechts- oder Risikoausschuss, sage, ob das Vorhaben mit dessen
+Vorgaben vereinbar ist. Andernfalls kündige an, dass Du es dort zuerst vorlegst.
+
+Dieser Abschnitt gibt den Gesetzeswortlaut verkürzt wieder und ersetzt keine berufsrechtliche
+Prüfung der konkreten Einführung.
+
+## 0:24 bis 0:30: Die Entscheidung
+
+Eine Bitte: Unterstützen Sie ein vierwöchiges Pilotprojekt in Ihrer Gruppe. Dazu benennt
+der Partner einen Arbeitsablauf, ermöglicht einen Workshop und eine Associate-Schulung und
+nimmt sich am Ende fünfzehn Minuten für die Auswertung. Bewährt sich das Pilotprojekt nicht,
+endet es.
+
+Verlasse das Gespräch mit einem Ja oder einem Nein. Bei einem Ja stehen ein benannter
+Arbeitsablauf und ein Termin für den Workshop fest.
+
+---
+
+## Hinweise für das Gespräch
+
+- Öffne das Werkzeug nur, wenn der Partner danach fragt. Er entscheidet über eine wirtschaftliche und berufsrechtliche Frage.
+- Erhebt der Partner einen konkreten Einwand, wechsle zum Leitfaden [skeptical-partner-objections.md](#enablement-skeptical-partner-objections), beantworte den Einwand und kehre zur Entscheidung zurück.
+- Das Gespräch endet mit einem unterstützten Pilotprojekt, einem benannten Arbeitsablauf und einem Termin. Jedes unbestimmtere Ergebnis ist ein höfliches Nein.
 
 
 </div>
@@ -1044,6 +1188,181 @@ sand them down.
 - Severity that touches trust outranks severity that touches convenience. A wrong citation is a different class of problem than a clunky export.
 - "Proposed change" is your hypothesis, not a spec. Engineering owns the solution; you own the clear problem.
 - Route trust-touching items the same day. Convenience items can batch weekly.
+
+
+</div>
+
+---
+
+<div id="team-demo-quality-rubric">
+
+
+## Demo quality rubric
+
+
+
+**Use this when** you lead a team that runs legal AI demos and you need one standard for
+what a good demo looks like. A reviewer scores a recorded or shadowed demo, and the
+presenter scores the same demo independently. The conversation about the differences is
+the coaching session.
+
+**Scale:** 0 = absent, 1 = attempted, 2 = solid, 3 = a colleague should copy this.
+
+## Criteria
+
+| Criterion | What a 3 looks like |
+|---|---|
+| Discovery before screen share | The presenter asked at least three workflow questions and restated the answers before opening the product. |
+| Practice-area fit | The documents, the task and the vocabulary match the audience's practice group. An M&A team sees a disclosure schedule, a disputes team sees a pleading. |
+| One workflow, end to end | The demo follows a single task from input to reviewed output. It does not tour features. |
+| Review step shown | The presenter checks at least one output against its source on screen and says who signs off in real use. |
+| Failure handled honestly | When the output is wrong or thin, the presenter says so, shows how review catches it, and moves on. |
+| Objections answered | Confidentiality, reliability and billing questions get a direct answer in under a minute each, or a named follow-up. |
+| Clear next step | The meeting ends with a named workflow, an owner on the customer side and a date. |
+
+## How to use the score
+
+- A total under 12 of 21 means the presenter shadows two more demos before presenting alone.
+- Score the review step and failure handling first. A demo that hides the review step teaches customers to rely on unreviewed output, and that damages the rollout later.
+- Track scores per criterion across the team each quarter. A criterion that is weak for everyone points to a gap in the team's materials, and the fix is a better script or sample document.
+
+## Review cadence
+
+| Presenter stage | Reviewed demos |
+|---|---|
+| First month | Every demo |
+| Months two and three | One per week |
+| After that | One per month, plus any demo the presenter flags |
+
+## What this rubric does not measure
+
+Deal outcome. A well-run demo to the wrong audience still loses, and a weak demo sometimes
+wins. Keep the rubric about the craft, and review pipeline and qualification separately.
+
+All examples in this kit are synthetic. Demo documents must never contain client data.
+
+
+</div>
+
+---
+
+<div id="team-discovery-question-bank">
+
+
+## Discovery question bank by practice group
+
+
+
+**Use this when** you prepare a first conversation with a practice group and want questions
+that a practising lawyer would recognise as informed. Pick five, not all. Each question aims
+at a workflow that is frequent, reviewable and painful enough to justify a pilot. Record the
+answers in the [workflow discovery template](#discovery-workflow-discovery-template).
+
+## Questions for every group
+
+- Which task did your associates do most often last week that you would not want to bill in full?
+- Where does a draft wait longest before someone can review it?
+- When a first draft is wrong, who notices, and at what stage?
+- Which documents may leave the firm's environment, and who decides that?
+- What would have to be true after four weeks for you to call a pilot a success?
+
+## Corporate and M&A
+
+- How do you build the first issues list from a data room today, and how many people touch it?
+- Which clauses do you compare across a set of contracts most often: change of control, assignment, exclusivity, termination?
+- How do you keep disclosure schedules consistent with the due diligence findings?
+- Where do precedent documents live, and how does a junior find the right one?
+
+## Disputes
+
+- How do you build a chronology from correspondence and exhibits, and how long does the first version take?
+- Who checks that each factual statement in a brief points to an exhibit?
+- How do you track the other side's arguments across successive submissions?
+- What is your rule for verifying a case citation before it goes into a filing?
+
+## Finance and regulatory
+
+- Which conditions precedent or covenant checks repeat on every deal?
+- How do you monitor changes in regulation or supervisory guidance for standing clients?
+- When a client asks whether an activity needs a licence, how much of the first answer is reused from earlier advice?
+- Which outputs go to a regulator, and what review do they get before submission?
+
+## In-house teams
+
+- Which requests from the business arrive most often, and which of them need a lawyer at all?
+- How long does a standard NDA or supplier contract take from request to signature?
+- Which playbook positions do you negotiate repeatedly, and where are they written down?
+- What do you report to the general counsel or the board about the legal function's workload?
+
+## Reading the answers
+
+| Signal in the answer | What it suggests |
+|---|---|
+| High volume, clear review owner, low confidentiality barrier | Strong first pilot candidate |
+| High volume, nobody owns review | Fix the review step before piloting |
+| Rare, bespoke, partner-only work | Poor pilot candidate, however impressive the demo |
+| "We cannot put that anywhere" | Settle the data path first; see the partner briefing |
+
+Score the shortlisted workflows with the
+[prioritization matrix](#discovery-use-case-prioritization-matrix).
+
+
+</div>
+
+---
+
+<div id="team-legal-engineer-onboarding-plan">
+
+
+## Onboarding plan for a new legal engineer
+
+
+
+**Use this when** a lawyer joins a legal engineering team from private practice or an
+in-house role. The plan assumes strong legal judgment and little experience with demos,
+pilots or product feedback. It runs for six weeks and ends with the new joiner owning one
+customer workflow alone.
+
+## Principles
+
+- Practise on synthetic documents until the review habit is automatic. Customer data comes later and only inside the approved environment.
+- Every week ends with something observable: a recorded demo, a written discovery summary, a filed feedback note.
+- The manager reviews work against the [demo quality rubric](#team-demo-quality-rubric), so the standard is known from day one.
+
+## Week by week
+
+| Week | Focus | Observable output |
+|---|---|---|
+| 1 | Learn the product on the new joiner's own practice area. Read this kit. | A ten-minute recorded walkthrough of one workflow, including a review step |
+| 2 | Shadow three customer sessions. Learn the data path and the confidentiality answers. | Written answers to the five most common objections, in the joiner's own words |
+| 3 | Run discovery with a colleague playing the partner. Use the [question bank](#team-discovery-question-bank). | A completed workflow discovery template |
+| 4 | Co-present two demos, taking the workflow section. | Two rubric scores, self and reviewer, with one agreed improvement |
+| 5 | Lead a demo with the manager observing. File feedback from it. | One structured note using the [product feedback template](#enablement-product-feedback-template) |
+| 6 | Own one pilot workflow with a customer contact. | A pilot plan with success metrics and a check-in date |
+
+## Manager checkpoints
+
+- **End of week 2:** can the joiner explain the data path and the review gate without notes?
+- **End of week 4:** is the rubric score for "review step shown" and "failure handled honestly" at 2 or above?
+- **End of week 6:** does the pilot plan name a workflow, an owner, a metric and a date?
+
+A joiner who misses a checkpoint repeats that week's output with coaching. Missing a
+checkpoint in the first six weeks is normal for lawyers who are new to presenting.
+
+## Common early mistakes
+
+| Mistake | Correction |
+|---|---|
+| Touring features | One workflow, end to end |
+| Answering a confidentiality question with product marketing | State the data path in one sentence, then the contract basis |
+| Hiding a wrong output | Show how review catches it |
+| Reporting feedback as an anecdote | Use the template: workflow, friction, frequency, evidence |
+
+## After week 6
+
+The joiner enters the team's normal review cadence and contributes one improvement to the
+shared materials in their first quarter: a sample document, a question for the bank, or an
+objection answer.
 
 
 </div>

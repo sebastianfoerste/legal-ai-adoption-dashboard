@@ -1,8 +1,8 @@
 # What this proves
 
-Building a legal-AI tool is one job. Getting a skeptical partnership to actually use it is a
-different one, and it is the one the post-sales / Legal Engineer role is really about. This
-repo is the evidence for the second job.
+Building a legal-AI tool is only the start. Adoption depends on whether a skeptical
+partnership can see the workflow, the review gate, and the commercial reason to use it.
+This repo packages that adoption layer.
 
 | Document | Responsibility it demonstrates |
 | --- | --- |
@@ -17,5 +17,5 @@ repo is the evidence for the second job.
 | [Product-feedback template](enablement/product-feedback-template.md) | Translating field friction into structured requirements for Engineering. |
 
 The through-line: every artifact keeps the human-review gate explicit and treats trust as
-the thing to earn first. That is what makes legal AI adoptable inside a regulated practice,
-and it is the judgment the role is hiring for.
+the thing to earn first. That makes legal AI adoptable inside a regulated practice and gives
+product teams concrete signals for the next workflow.

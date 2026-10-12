@@ -3,6 +3,7 @@
 Enablement materials for legal AI adoption: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.
 
 All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice.
+Portfolio proof contract: [`docs/portfolio-proof.json`](docs/portfolio-proof.json).
 
 ## Run it
 
@@ -39,8 +40,10 @@ This is the legal-AI rollout reviewer path:
 ## What's inside
 
 - Session agendas for partner briefings, workshops, and hands-on training.
+- A German partner briefing, [`sessions/30-min-partner-briefing-de.md`](sessions/30-min-partner-briefing-de.md), that answers the confidentiality question under §§ 43a, 43e BRAO and § 203 StGB.
 - Discovery templates for adoption readiness and workflow mapping.
-- Prioritization tools for choosing the first pilot.
+- Prioritization tools for choosing the first pilot, and [pilot success metrics](discovery/pilot-success-metrics.md) agreed with the sponsor before the pilot starts.
+- Team playbooks in [`team/`](team/): a demo quality rubric, a discovery question bank by practice group, and a six-week onboarding plan for a new legal engineer.
 - Follow-up templates and product-feedback notes.
 - A unified playbook for reviewer evaluation.
 

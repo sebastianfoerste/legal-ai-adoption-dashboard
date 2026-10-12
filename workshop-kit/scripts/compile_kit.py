@@ -15,13 +15,18 @@ FILES = [
     "discovery/workflow-discovery-template.md",
     "discovery/use-case-prioritization-matrix.md",
     "discovery/roi-calculator.md",
+    "discovery/pilot-success-metrics.md",
     "sessions/30-min-partner-briefing.md",
     "sessions/60-min-workshop-agenda.md",
     "sessions/90-min-associate-hands-on.md",
+    "sessions/30-min-partner-briefing-de.md",
     "enablement/adoption-maturity-model.md",
     "enablement/skeptical-partner-objections.md",
     "enablement/follow-up-email-templates.md",
     "enablement/product-feedback-template.md",
+    "team/demo-quality-rubric.md",
+    "team/discovery-question-bank.md",
+    "team/legal-engineer-onboarding-plan.md",
 ]
 
 def slugify_path(path):
