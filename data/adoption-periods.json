@@ -1,0 +1,44 @@
+[
+  {
+    "id": "series-aurich-supplier-review",
+    "accountId": "acct-005",
+    "workflowId": "wf-aurich-supplier-review",
+    "workflowName": "Supplier contract first-pass review",
+    "practiceGroup": "Corporate",
+    "trainingCohort": { "trainedOn": "2026-01-07", "size": 8 },
+    "dataNotes": [
+      "Completed workflows were not tracked in the first reporting period; the sign-off step was configured on 2 February."
+    ],
+    "periods": [
+      { "start": "2026-01-05", "end": "2026-02-01", "phase": "onboarding", "licensedUsers": 10, "eligibleUsers": 8, "activeUsers": 7, "repeatUsers": 5, "cohortActiveUsers": 7, "workflowsStarted": 31, "workflowsCompleted": null },
+      { "start": "2026-02-02", "end": "2026-03-01", "phase": "stalled", "licensedUsers": 10, "eligibleUsers": 8, "activeUsers": 4, "repeatUsers": 2, "cohortActiveUsers": 4, "workflowsStarted": 14, "workflowsCompleted": 6 },
+      { "start": "2026-03-02", "end": "2026-03-29", "phase": "stalled", "licensedUsers": 10, "eligibleUsers": 8, "activeUsers": 3, "repeatUsers": 1, "cohortActiveUsers": 3, "workflowsStarted": 9, "workflowsCompleted": 4 },
+      { "start": "2026-03-30", "end": "2026-04-26", "phase": "intervention", "licensedUsers": 10, "eligibleUsers": 8, "activeUsers": 5, "repeatUsers": 3, "cohortActiveUsers": 5, "workflowsStarted": 19, "workflowsCompleted": 13 },
+      { "start": "2026-04-27", "end": "2026-05-24", "phase": "follow_up", "licensedUsers": 10, "eligibleUsers": 8, "activeUsers": 7, "repeatUsers": 6, "cohortActiveUsers": 7, "workflowsStarted": 34, "workflowsCompleted": 29 },
+      { "start": "2026-05-25", "end": "2026-06-21", "phase": "follow_up", "licensedUsers": 10, "eligibleUsers": 8, "activeUsers": 7, "repeatUsers": 6, "cohortActiveUsers": 7, "workflowsStarted": 37, "workflowsCompleted": 33 },
+      { "start": "2026-06-22", "end": "2026-07-19", "phase": "follow_up", "licensedUsers": 10, "eligibleUsers": 8, "activeUsers": 8, "repeatUsers": 7, "cohortActiveUsers": 8, "workflowsStarted": 41, "workflowsCompleted": 36 },
+      { "start": "2026-07-20", "end": "2026-08-16", "phase": "follow_up", "licensedUsers": 10, "eligibleUsers": 8, "activeUsers": 6, "repeatUsers": 2, "cohortActiveUsers": 6, "workflowsStarted": 15, "workflowsCompleted": 11 }
+    ],
+    "synthetic": true
+  },
+  {
+    "id": "series-brightmoor-spa-draft",
+    "accountId": "acct-004",
+    "workflowId": "wf-brightmoor-spa-draft",
+    "workflowName": "Share purchase agreement first-draft agent",
+    "practiceGroup": "Corporate",
+    "trainingCohort": { "trainedOn": "2026-03-04", "size": 18 },
+    "dataNotes": [
+      "The weekly activity export failed for two weeks in May, so repeat users and cohort activity are unknown for the period starting 27 April."
+    ],
+    "periods": [
+      { "start": "2026-03-02", "end": "2026-03-29", "phase": "onboarding", "licensedUsers": 24, "eligibleUsers": 20, "activeUsers": 17, "repeatUsers": 12, "cohortActiveUsers": 16, "workflowsStarted": 88, "workflowsCompleted": 41 },
+      { "start": "2026-03-30", "end": "2026-04-26", "phase": "baseline", "licensedUsers": 24, "eligibleUsers": 20, "activeUsers": 16, "repeatUsers": 12, "cohortActiveUsers": 15, "workflowsStarted": 96, "workflowsCompleted": 40 },
+      { "start": "2026-04-27", "end": "2026-05-24", "phase": "intervention", "licensedUsers": 24, "eligibleUsers": 20, "activeUsers": 18, "repeatUsers": null, "cohortActiveUsers": null, "workflowsStarted": 121, "workflowsCompleted": 44 },
+      { "start": "2026-05-25", "end": "2026-06-21", "phase": "follow_up", "licensedUsers": 24, "eligibleUsers": 20, "activeUsers": 18, "repeatUsers": 14, "cohortActiveUsers": 16, "workflowsStarted": 134, "workflowsCompleted": 43 },
+      { "start": "2026-06-22", "end": "2026-07-19", "phase": "follow_up", "licensedUsers": 24, "eligibleUsers": 20, "activeUsers": 19, "repeatUsers": 15, "cohortActiveUsers": 16, "workflowsStarted": 141, "workflowsCompleted": 45 },
+      { "start": "2026-07-20", "end": "2026-08-16", "phase": "follow_up", "licensedUsers": 24, "eligibleUsers": 20, "activeUsers": 15, "repeatUsers": 6, "cohortActiveUsers": 13, "workflowsStarted": 52, "workflowsCompleted": 15 }
+    ],
+    "synthetic": true
+  }
+]

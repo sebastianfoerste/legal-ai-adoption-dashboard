@@ -6,9 +6,15 @@
   "reviewer_path": [
     "README.md",
     "docs/reviewer-guide.md",
+    "docs/DEMO_GUIDE.md",
     "docs/product-feedback-notes.md"
   ],
   "proof_surfaces": [
+    { "path": "CASE_STUDY.md", "label": "What the project demonstrates and its limits" },
+    { "path": "docs/DEMO_GUIDE.md", "label": "Ten-minute demonstration guide" },
+    { "path": "lib/engagement/expansion.test.ts", "label": "Expansion decision test coverage" },
+    { "path": "lib/engagement/interventions.test.ts", "label": "Intervention state test coverage" },
+    { "path": "lib/engagement/adoption-trend.test.ts", "label": "Denominator and missing-data test coverage" },
     { "path": "README.md", "label": "Repository front door" },
     { "path": "docs/reviewer-guide.md", "label": "Reviewer guide" },
     { "path": "docs/product-feedback-notes.md", "label": "Product feedback workflow" },
@@ -23,6 +29,9 @@
     "synthetic account data only",
     "human-review gate stays explicit",
     "signals support account action review",
+    "missing evidence is shown as unknown and never counts as met",
+    "observed change is separated from assumed causal effect",
+    "specialists are role labels and are not ranked",
     "no legal advice"
   ],
   "blocked_actions": [

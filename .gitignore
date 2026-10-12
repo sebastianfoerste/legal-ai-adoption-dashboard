@@ -40,3 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .gstack/
+# local agent worktrees and preview configuration
+/.claude/
+
+# private research store: participant records never enter this repository
+/private-research/
+*.private.json

@@ -1,69 +1,208 @@
 {
+  "schema": "feedback-loop.backlog.v2",
+  "formula": "feedback-loop.score.v2",
+  "evidence_schema": "legal-ai-adoption.evidence-loop.v1",
+  "origin": {
+    "kind": "synthetic_fixture"
+  },
   "period": "Q2 2026 (synthetic)",
+  "weights": {
+    "severity": {
+      "blocker": 4,
+      "high": 3,
+      "medium": 2,
+      "low": 1
+    },
+    "arr_band": {
+      ">1m": 4,
+      "250k-1m": 3,
+      "50k-250k": 2,
+      "<50k": 1,
+      "none": 0
+    },
+    "renewal_risk": {
+      "high": 1.5,
+      "medium": 1.2,
+      "low": 1.0
+    },
+    "status": "uncalibrated judgment",
+    "reviewed_on": null,
+    "reviewed_by": null
+  },
   "themes": [
     {
       "theme": "No audit trail for AI-assisted edits",
+      "lane": "quality_control",
+      "problem_classes": [
+        "quality_control"
+      ],
       "reach_accounts": 3,
       "max_severity": "blocker",
-      "revenue_signal": 14.4,
-      "priority_score": 173,
-      "requirement": "Exportable, append-only audit log of every AI-assisted edit (who, what, when).",
+      "commercial_factor": 1.8,
+      "commercial_basis": "complete",
+      "accounts_without_revenue_data": [],
+      "priority_score": 21.6,
+      "requirement": "Append-only log of every AI-assisted edit with author, time and change, exportable by an administrator.",
       "representative_quote": "Without an exportable audit log this fails our internal review.",
       "raised_by": [
         "Globex LLP (synthetic)",
         "Initech Legal (synthetic)",
         "Soylent Partners (synthetic)"
+      ],
+      "changes": [
+        {
+          "change_id": "chg-003",
+          "title": "Exportable audit log of AI-assisted edits",
+          "requirement": "Append-only log of every AI-assisted edit with author, time and change, exportable by an administrator.",
+          "problem_class": "quality_control",
+          "decision": "prioritised",
+          "confidence": "medium",
+          "rationale": "A control failure raised by three accounts and first in the commercial ranking. No study observation yet shows how the record is used in a review.",
+          "delivery_status": "in_progress",
+          "release_evidence": null,
+          "outcome_status": "not_applicable",
+          "next_decision": "Do the two risk teams that raised the point accept the export format?",
+          "owner": "Product manager, platform (synthetic)"
+        }
       ]
     },
     {
       "theme": "Can't restrict who approves sensitive matters",
+      "lane": "quality_control",
+      "problem_classes": [
+        "quality_control"
+      ],
       "reach_accounts": 2,
       "max_severity": "high",
-      "revenue_signal": 10.8,
-      "priority_score": 65,
-      "requirement": "Role-based approval permissions, scoped by practice group and matter value.",
+      "commercial_factor": 1.9,
+      "commercial_basis": "complete",
+      "accounts_without_revenue_data": [],
+      "priority_score": 11.4,
+      "requirement": "Approval permissions scoped by practice group and matter value.",
       "representative_quote": "We need approval permissions by practice group.",
       "raised_by": [
         "Initech Legal (synthetic)",
         "Soylent Partners (synthetic)"
-      ]
-    },
-    {
-      "theme": "Hard to onboard associates",
-      "reach_accounts": 2,
-      "max_severity": "high",
-      "revenue_signal": 5.6,
-      "priority_score": 34,
-      "requirement": "Guided in-product onboarding flow with role-specific first tasks.",
-      "representative_quote": "The first session is great, then people drift back to old habits.",
-      "raised_by": [
-        "Globex LLP (synthetic)",
-        "Hooli Chambers (synthetic)"
+      ],
+      "changes": [
+        {
+          "change_id": "chg-004",
+          "title": "Role-based approval permissions",
+          "requirement": "Approval permissions scoped by practice group and matter value.",
+          "problem_class": "quality_control",
+          "decision": "prioritised",
+          "confidence": "low",
+          "rationale": "A control gap raised by two accounts. The rule customers need (role, group, value) is not yet specified by any of them.",
+          "delivery_status": "not_started",
+          "release_evidence": null,
+          "outcome_status": "not_applicable",
+          "next_decision": "Which approval rule do the two accounts need: by role, by group or by matter value?",
+          "owner": "Product manager, platform (synthetic)"
+        }
       ]
     },
     {
       "theme": "Citations not always traceable to the source",
+      "lane": "quality_control",
+      "problem_classes": [
+        "quality_control"
+      ],
       "reach_accounts": 2,
       "max_severity": "medium",
-      "revenue_signal": 4.0,
-      "priority_score": 16,
-      "requirement": "Click-through citation grounding: every cited passage links to the source location.",
+      "commercial_factor": 1.33,
+      "commercial_basis": "complete",
+      "accounts_without_revenue_data": [],
+      "priority_score": 5.3,
+      "requirement": "Each list item carries the clause number and a link to the clause.",
       "representative_quote": "I can't trust a summary I can't click through to the clause.",
       "raised_by": [
         "Hooli Chambers (synthetic)",
         "Umbrella Legal (synthetic)"
+      ],
+      "changes": [
+        {
+          "change_id": "chg-009",
+          "title": "Clause reference on every list item",
+          "requirement": "Each list item carries the clause number and a link to the clause.",
+          "problem_class": "quality_control",
+          "decision": "prioritised",
+          "confidence": "medium",
+          "rationale": "A verification gap seen in one task session and raised by two account feedback items.",
+          "delivery_status": "released",
+          "release_evidence": "synthetic-release-notes/2026-07#clause-references",
+          "outcome_status": "awaiting_evidence",
+          "next_decision": "Hold the overdue follow-up session, then assess.",
+          "owner": "Product manager, review (synthetic)"
+        }
+      ]
+    },
+    {
+      "theme": "Hard to onboard associates",
+      "lane": "commercial",
+      "problem_classes": [
+        "workflow_fit"
+      ],
+      "reach_accounts": 2,
+      "max_severity": "high",
+      "commercial_factor": 1.47,
+      "commercial_basis": "complete",
+      "accounts_without_revenue_data": [],
+      "priority_score": 8.8,
+      "requirement": "Show a short legend for item statuses at the top of every issues list.",
+      "representative_quote": "The first session is great, then people drift back to old habits.",
+      "raised_by": [
+        "Globex LLP (synthetic)",
+        "Hooli Chambers (synthetic)"
+      ],
+      "changes": [
+        {
+          "change_id": "chg-002",
+          "title": "Status legend on the issues list",
+          "requirement": "Show a short legend for item statuses at the top of every issues list.",
+          "problem_class": "workflow_fit",
+          "decision": "prioritised",
+          "confidence": "low",
+          "rationale": "Cheap to try. The observations do not show whether wording or a missing definition causes the misreading.",
+          "delivery_status": "released",
+          "release_evidence": "synthetic-release-notes/2026-05#status-legend",
+          "outcome_status": "contradicted",
+          "next_decision": "Withdraw the legend and test a status that names the clauses read on each item?",
+          "owner": "Product manager, review (synthetic)"
+        }
       ]
     },
     {
       "theme": "No weekly usage visibility",
+      "lane": "commercial",
+      "problem_classes": [
+        "convenience"
+      ],
       "reach_accounts": 1,
       "max_severity": "low",
-      "revenue_signal": 2.0,
-      "priority_score": 2,
-      "requirement": "Weekly per-team usage view with low-usage warnings.",
+      "commercial_factor": 1.33,
+      "commercial_basis": "complete",
+      "accounts_without_revenue_data": [],
+      "priority_score": 1.3,
+      "requirement": "Export of active users and runs by practice group and period.",
       "representative_quote": "I'd like to see which teams are actually using it each week.",
       "raised_by": [
         "Umbrella Legal (synthetic)"
+      ],
+      "changes": [
+        {
+          "change_id": "chg-005",
+          "title": "Self-serve usage export",
+          "requirement": "Export of active users and runs by practice group and period.",
+          "problem_class": "convenience",
+          "decision": "deferred",
+          "confidence": "medium",
+          "rationale": "A convenience item. No blocked workflow was observed, and the two quality and control items take the same team's capacity.",
+          "delivery_status": "deferred",
+          "release_evidence": null,
+          "outcome_status": "not_applicable",
+          "next_decision": "Revisit once the audit log is released.",
+          "owner": "Product manager, admin (synthetic)"
+        }
       ]
     }
   ]

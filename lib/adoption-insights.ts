@@ -1,4 +1,8 @@
 import { adoptionCockpitReport, type AdoptionCockpitReport } from "./adoption-cockpit";
+import { getAccounts } from "./data";
+import { formatDate } from "./engagement/as-of";
+import { getEngagement, specialistLabel } from "./engagement/data";
+import { accountExpansion, recommendationLabel } from "./engagement/expansion";
 
 export type AdoptionInsightsEvidence = {
   metric: string;
@@ -161,6 +165,14 @@ export function buildAdoptionInsightsReport(
     (product) => !filters.products?.length || filters.products.includes(product.product),
   );
   const recommendations = recommendCapabilities(report);
+  const reviews = getAccounts().map((account) => {
+    const expansion = accountExpansion(account.id);
+    const engagement = getEngagement(account.id);
+    const next = engagement
+      ? ` Next review ${formatDate(engagement.nextReviewDate)}, ${specialistLabel(engagement.reviewOwnerId)}.`
+      : "";
+    return `${account.name}: ${recommendationLabel[expansion.recommendation]} (${expansion.counts.met} of 6 criteria met, ${expansion.counts.unknown} unknown).${next}`;
+  });
   const sections = [
     {
       heading: "Executive summary",
@@ -182,9 +194,16 @@ export function buildAdoptionInsightsReport(
       takeaway: `${recommendations.length} review-gated actions are prioritized.`,
       evidence: recommendations.map((recommendation) => `${recommendation.rank}. ${recommendation.capability}: ${recommendation.action}`),
     },
+    {
+      heading: "Customer review recommendations",
+      takeaway: `${reviews.length} synthetic accounts are assessed against six expansion criteria. Each recommendation is a decision aid for the account owner; unknown evidence never counts as met.`,
+      evidence: reviews,
+    },
   ];
   const markdown = [
     "# Synthetic Legal AI Adoption Insights Report",
+    "",
+    "> SYNTHETIC DATA. Accounts and figures are invented for demonstration. No real client data.",
     "",
     ...sections.flatMap((section) => [
       `## ${section.heading}`,

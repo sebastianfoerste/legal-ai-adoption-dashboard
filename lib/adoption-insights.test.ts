@@ -47,11 +47,15 @@ describe("adoption insights", () => {
     const snapshot = adoptionInsightsSnapshot();
     expect(snapshot.answer.evidence.length).toBeGreaterThan(0);
     expect(snapshot.recommendations.length).toBeGreaterThan(0);
-    expect(snapshot.leadershipReport.sections).toHaveLength(4);
+    expect(snapshot.leadershipReport.sections).toHaveLength(5);
+    expect(snapshot.leadershipReport.sections[4].evidence).toHaveLength(5);
+    expect(snapshot.leadershipReport.markdown).toContain(
+      "Brightmoor & Associates LLP: Adjust (1 of 6 criteria met, 2 unknown).",
+    );
   });
 
   it("serves the generated Markdown report as a reviewable download", async () => {
-    const response = downloadReport();
+    const response = downloadReport(new Request("http://localhost/insights/report"));
     expect(response.headers.get("content-type")).toContain("text/markdown");
     expect(response.headers.get("content-disposition")).toContain("synthetic-legal-ai-adoption-insights-report.md");
     expect(await response.text()).toContain("# Synthetic Legal AI Adoption Insights Report");

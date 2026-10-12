@@ -1,0 +1,54 @@
+{
+  "_comment": "Synthetic discovery intake for one account, produced from the adoption questionnaire and workflow-discovery sessions. No real data. Feeds the prioritization matrix; see sample-output.md.",
+  "account": "Brightmoor & Associates LLP (synthetic)",
+  "group": "Corporate",
+  "champion": "Innovation lead, ~0.5 FTE allocated, can reach a sponsoring partner",
+  "readinessScore": { "champion": 6, "workflowPain": 5, "dataConstraints": 4, "priorExperience": 4, "sponsorship": 5, "total": 24, "band": "ready" },
+  "candidateWorkflows": [
+    {
+      "name": "NDA first-pass review",
+      "trigger": "inbound NDA ahead of a deal",
+      "frequency": "10-15 per week",
+      "timeCost": "~45 min/instance (associate)",
+      "mandatoryReview": "partner sign-off on the marked-up NDA",
+      "verificationCost": "~10 min",
+      "confidentiality": "approved environment; synthetic NDA set exists"
+    },
+    {
+      "name": "Clause comparison across versions",
+      "trigger": "counterparty returns a revised draft",
+      "frequency": "8-10 per week",
+      "timeCost": "~30 min/instance (associate)",
+      "mandatoryReview": "associate confirms changes; partner reviews material ones",
+      "verificationCost": "~8 min",
+      "confidentiality": "approved environment; synthetic versions exist"
+    },
+    {
+      "name": "Document / issue summary",
+      "trigger": "partner asks for a quick read on a memo or facts",
+      "frequency": "daily",
+      "timeCost": "~20 min/instance",
+      "mandatoryReview": "associate rewrites to firm register before it reaches a partner",
+      "verificationCost": "~10 min",
+      "confidentiality": "approved environment"
+    },
+    {
+      "name": "DPA review (GDPR)",
+      "trigger": "vendor or customer DPA arrives",
+      "frequency": "3-4 per week",
+      "timeCost": "~60 min/instance",
+      "mandatoryReview": "data-protection lead sign-off",
+      "verificationCost": "~25 min",
+      "confidentiality": "approved environment"
+    },
+    {
+      "name": "Litigation research memo",
+      "trigger": "new matter needs a law-and-authority read",
+      "frequency": "3-4 per week",
+      "timeCost": "~3 hours/instance",
+      "mandatoryReview": "supervising lawyer verifies every authority",
+      "verificationCost": "~90 min (authority-by-authority)",
+      "confidentiality": "approved environment"
+    }
+  ]
+}

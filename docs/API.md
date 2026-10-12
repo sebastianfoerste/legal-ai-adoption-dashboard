@@ -4,6 +4,41 @@ The dashboard is a local synthetic Next.js app. It does not expose an external
 HTTP API. Public contracts are TypeScript report objects used by the server
 components.
 
+## Report route
+
+`GET /insights/report` returns the portfolio report as a Markdown download.
+`GET /insights/report?account=<id>` returns that account's customer review as
+`synthetic-customer-review-<id>.md`, or 404 for an unknown account. Both documents
+open and close with a synthetic notice. The route reads bundled JSON and has no
+side effects.
+
+## Customer Review
+
+`buildCustomerReview(accountId)` in `lib/engagement/customer-review.ts` returns
+`legal-ai-adoption.customer-review.v1`, or `null` for an unknown account.
+
+Core fields:
+
+1. `objectives`: each agreed objective with status `met`, `not_met` or `unknown`
+2. `adoption`: per-workflow period metrics with numerator, denominator and caveats
+3. `interventions`: stage, outcome statement, owner and follow-up status
+4. `quality`: value assessments with observed change, verdict, attribution and
+   financial illustration
+5. `unresolved` and `evidenceGaps`
+6. `expansion`: six criteria, counts, recommendation, supporting and missing evidence
+7. `renewal`: signals and review priority, with a disclaimer and no probability
+8. `owners` and `nextReviewDate`
+9. `markdown`
+
+`synthetic` is always `true` and `externalActionAllowed` is always `false`.
+
+## Expansion Assessment
+
+`accountExpansion(accountId)` in `lib/engagement/expansion.ts` evaluates six
+criteria. `decideRecommendation` maps their statuses to `expand`, `continue`,
+`adjust` or `pause`; the rule is documented on the function. `humanDecisionRequired`
+is always `true`.
+
 ## Adoption Cockpit Report
 
 `adoptionCockpitReport()` in `lib/adoption-cockpit.ts` returns

@@ -10,6 +10,11 @@ import { TrendBar } from "@/components/TrendBar";
 import { PageHeader } from "@/components/PageHeader";
 import { Card } from "@/components/Card";
 import { ExportButton } from "@/components/ExportButton";
+import { RecommendationPill } from "@/components/engagement/ExpansionPanel";
+import { resolveAsOf } from "@/lib/engagement/as-of";
+import { AsOfNote } from "@/components/AsOfNote";
+import { accountExpansion } from "@/lib/engagement/expansion";
+import { accountRenewalAid, reviewPriorityLabel } from "@/lib/engagement/renewal";
 
 const pct = (n: number) => `${Math.round(n * 100)}%`;
 
@@ -21,8 +26,8 @@ const prompts: { q: string; a: string }[] = [
   { q: "What would I tell Product?", a: "See the Product Feedback Queue — friction routed to product areas." },
 ];
 
-function getRenewalStatus(dateStr: string) {
-  const current = new Date("2026-06-23");
+function getRenewalStatus(dateStr: string, asOf: string) {
+  const current = new Date(asOf);
   const renewal = new Date(dateStr);
   const diffTime = renewal.getTime() - current.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -43,6 +48,8 @@ export default async function AccountHealthPage({
   searchParams?: Promise<Record<string, string | undefined>>;
 }) {
   const params = (await searchParams) ?? {};
+  const asOfState = resolveAsOf(params.asOf);
+  const asOf = asOfState.date;
   const search = params.search ?? "";
   const type = params.type ?? "";
   const band = params.band ?? "";
@@ -58,7 +65,7 @@ export default async function AccountHealthPage({
     { label: "Needs attention", value: summary.byBand.needs_attention, tone: "text-amber-700" },
     { label: "Steady", value: summary.byBand.steady, tone: "text-sky-700" },
     { label: "Healthy", value: summary.byBand.healthy, tone: "text-emerald-700" },
-    { label: "Expansion-ready", value: summary.expansionReady, tone: "text-violet-700" },
+    { label: "Expansion evidence met", value: summary.byRecommendation.expand, tone: "text-violet-700" },
     { label: "Open high-sev blockers", value: summary.openHighSeverityBlockers, tone: "text-red-700" },
   ];
 
@@ -74,9 +81,11 @@ export default async function AccountHealthPage({
   // Map health & renewal urgency to sort order
   const processedAccounts = filteredAccounts.map((account) => {
     const health = accountHealth(account.id);
-    const renewalStatus = getRenewalStatus(account.renewalDate);
-    const action = recommendAction(account, blockers, health);
-    
+    const renewalStatus = getRenewalStatus(account.renewalDate, asOf);
+    const expansion = accountExpansion(account.id, asOf);
+    const renewal = accountRenewalAid(account.id, asOf);
+    const action = recommendAction(account, blockers, health, expansion.recommendation);
+
     let urgencyScore = 0;
     if (renewalStatus.daysLeft <= 90 && (health.band === "at_risk" || health.band === "needs_attention")) {
       urgencyScore = 3;
@@ -86,7 +95,7 @@ export default async function AccountHealthPage({
       urgencyScore = 1;
     }
 
-    return { account, health, renewalStatus, action, urgencyScore };
+    return { account, health, renewalStatus, action, urgencyScore, expansion, renewal };
   }).sort((a, b) => {
     if (b.urgencyScore !== a.urgencyScore) {
       return b.urgencyScore - a.urgencyScore;
@@ -100,6 +109,7 @@ export default async function AccountHealthPage({
         title="Account Health"
         subtitle="Adoption, utilization, and expansion readiness across the legal-AI account portfolio. All data is synthetic."
       >
+        <AsOfNote asOf={asOfState} />
         <dl className="mt-6 grid gap-3 rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm sm:grid-cols-2">
           {prompts.map((p) => (
             <div key={p.q}>
@@ -349,7 +359,8 @@ export default async function AccountHealthPage({
         </div>
 
         <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="space-y-5">
+          {/* min-w-0: a grid item otherwise grows to its widest table and pushes the page sideways. */}
+          <div className="min-w-0 space-y-5">
             <div className="overflow-x-auto rounded-lg border border-gray-100">
               <table className="w-full min-w-[760px] text-sm">
                 <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
@@ -408,7 +419,7 @@ export default async function AccountHealthPage({
             </div>
           </div>
 
-          <div className="rounded-lg border border-violet-100 bg-violet-50/50 p-4">
+          <div className="min-w-0 rounded-lg border border-violet-100 bg-violet-50/50 p-4">
             <h3 className="text-sm font-semibold text-gray-900">Ask Adoption Cockpit</h3>
             <p className="mt-2 text-sm leading-6 text-gray-700">
               {adoptionCockpit.leadershipBrief.headline}
@@ -543,7 +554,7 @@ export default async function AccountHealthPage({
             <p className="text-center py-6 text-sm text-gray-500">No accounts match the active search filters.</p>
           </Card>
         ) : (
-          processedAccounts.map(({ account, health, renewalStatus, action }) => {
+          processedAccounts.map(({ account, health, renewalStatus, action, expansion, renewal }) => {
             const utilization = account.seats > 0 ? account.activeUsers / account.seats : 0;
             const delta = health.score - account.previousHealthScore;
             const deltaClass = delta > 0 
@@ -572,11 +583,20 @@ export default async function AccountHealthPage({
                       <span className={`inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] font-semibold ${deltaClass}`}>
                         {deltaText}
                       </span>
-                      {renewalStatus.daysLeft <= 90 && (health.band === "at_risk" || health.band === "needs_attention") && (
-                        <span className="inline-flex items-center rounded bg-red-50 px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-red-700 uppercase">
-                          ⚠️ Renewal Risk
+                      {renewal.reviewPriority !== "routine" && (
+                        <span
+                          className="inline-flex items-center rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-amber-800 uppercase"
+                          title={renewal.disclaimer}
+                        >
+                          {reviewPriorityLabel[renewal.reviewPriority]}
                         </span>
                       )}
+                    </div>
+                    <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                      <RecommendationPill recommendation={expansion.recommendation} />
+                      <span>
+                        {expansion.counts.met} of 6 expansion criteria met, {expansion.counts.unknown} unknown
+                      </span>
                     </div>
                   </div>
                   <HealthBadge health={health} breakdown={health.breakdown} />
@@ -598,8 +618,6 @@ export default async function AccountHealthPage({
                         activeUsers: g.activeUsers,
                         weeklyActiveUsers: g.weeklyActiveUsers,
                         openBlockers: [],
-                        feedbackSharedWithProduct: 0,
-                        feedbackTotal: 0,
                       });
                       return (
                         <div key={g.name} className="rounded-lg border border-gray-100 bg-gray-50 p-3">

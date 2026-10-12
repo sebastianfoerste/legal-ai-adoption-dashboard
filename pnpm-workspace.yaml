@@ -3,6 +3,7 @@
 # transitively via next; pin it to the patched line.
 packages:
   - "."
+  - "packages/legal-workflow-contract"
 
 # pnpm 11 requires explicit approval for dependency build scripts in fresh CI installs.
 allowBuilds:

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { originSchema } from "./evidence/schema";
 
 export const severitySchema = z.enum(["low", "medium", "high"]);
 export type Severity = z.infer<typeof severitySchema>;
@@ -52,8 +53,12 @@ export const blockerSchema = z.object({
 });
 export type Blocker = z.infer<typeof blockerSchema>;
 
-export const feedbackItemSchema = z.object({
+// Strict: an unknown key is refused, so a field from another record model cannot ride along.
+export const feedbackItemSchema = z.strictObject({
   id: z.string(),
+  // Stated on every item, as in the evidence loop. An item without it is refused, and
+  // `lib/data.ts` keeps a participant record out before this schema is reached.
+  origin: originSchema,
   accountId: z.string(),
   sourcePersona: personaSchema.shape.role,
   text: z.string(),

@@ -13,6 +13,6 @@
     { "role": "Associate", "count": 30, "adoptionRate": 0.9 }
   ],
   "openBlockers": ["medium"],
-  "feedbackTotal": 4,
-  "feedbackSharedWithProduct": 3
+  "draftOutputs": 150,
+  "verifiedOutputs": 128
 }

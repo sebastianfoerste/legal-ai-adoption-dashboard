@@ -16,7 +16,8 @@ const bandLabel: Record<HealthResult["band"], string> = {
 
 function caption(b: HealthBreakdown): string {
   const r = Math.round;
-  return `util ${r(b.utilizationPts)} · trend ${r(b.trendPts)} · feedback ${r(b.engagementPts)} · −${r(b.penalty)} blockers`;
+  const reviewed = b.reviewedCompletionPts === null ? "unknown" : r(b.reviewedCompletionPts);
+  return `use ${r(b.utilizationPts)} · trend ${r(b.trendPts)} · reviewed output ${reviewed} · −${r(b.penalty)} blockers`;
 }
 
 export function HealthBadge({
@@ -28,17 +29,10 @@ export function HealthBadge({
 }) {
   return (
     <div className="flex flex-col items-end gap-1">
-      <span className="inline-flex items-center gap-2">
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-sm font-medium ring-1 ring-inset ${bandStyles[health.band]}`}
-        >
-          {bandLabel[health.band]} · {health.score}
-        </span>
-        {health.expansionReady && (
-          <span className="inline-flex items-center rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-800 ring-1 ring-inset ring-violet-300">
-            Expansion-ready
-          </span>
-        )}
+      <span
+        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-sm font-medium ring-1 ring-inset ${bandStyles[health.band]}`}
+      >
+        {bandLabel[health.band]} · {health.score}
       </span>
       {breakdown && <span className="text-xs text-gray-400">{caption(breakdown)}</span>}
     </div>

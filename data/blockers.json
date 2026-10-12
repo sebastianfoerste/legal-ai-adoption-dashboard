@@ -98,5 +98,25 @@
     "affectedGroups": ["Corporate"],
     "reEngagementAction": "Offer a 60-minute refresher for the in-house Corporate team.",
     "workshopFollowUp": "Re-check prompt usage two weeks after the refresher."
+  },
+  {
+    "id": "blk-011",
+    "accountId": "acct-005",
+    "category": "workflow_fit",
+    "severity": "medium",
+    "status": "resolved",
+    "affectedGroups": ["Corporate"],
+    "reEngagementAction": "Map the supplier-contract review output to the team's own review checklist.",
+    "workshopFollowUp": "Compare repeat use and time to a signed-off result over three reporting periods."
+  },
+  {
+    "id": "blk-012",
+    "accountId": "acct-004",
+    "category": "trust_in_output",
+    "severity": "medium",
+    "status": "open",
+    "affectedGroups": ["Corporate"],
+    "reEngagementAction": "Review correction categories with two supervising partners and narrow the drafting agent's scope.",
+    "workshopFollowUp": "Report median time to an accepted draft after the six-week scoped trial."
   }
 ]

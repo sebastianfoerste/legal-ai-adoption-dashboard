@@ -1,0 +1,459 @@
+{
+  "schema": "legal-ai-adoption.evidence-loop.v1",
+  "notice": "SYNTHETIC DEMONSTRATION CASES. Every session, participant code, observation, quotation, release and outcome in this file is invented to exercise the workflow. No practitioner has taken part. No product change described here was shipped.",
+  "study": {
+    "id": "study-handoff-r1",
+    "workflow": "Contract-review handoff",
+    "plannedParticipants": { "min": 4, "max": 8 },
+    "recruitmentAuthorised": false,
+    "invitationsSent": 0,
+    "sessionsCompleted": 0,
+    "followUpSessionsCompleted": 0,
+    "packPath": "workshop-kit/research/README.md",
+    "note": "The research pack is prepared. Recruitment is not authorised. The private research store is approved as an encrypted local folder outside the repository and has not been created."
+  },
+  "researchQuestions": [
+    {
+      "id": "RQ1",
+      "workflow": "Contract-review handoff",
+      "question": "How do reviewers currently decide that a first-pass issues list is acceptable to sign off, and what do they check first?",
+      "evidenceType": "past_behaviour",
+      "assumptions": ["A5 Participants have used an AI-assisted review tool at least once."],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "RQ2",
+      "workflow": "Contract-review handoff",
+      "question": "Where in the handoff from producer to reviewer is information lost or rebuilt, for example by re-keying the list into the reviewer's own checklist?",
+      "evidenceType": "past_behaviour",
+      "assumptions": [
+        "A1 Reviewers rebuild the issues list into their own checklist before signing off.",
+        "A3 The handoff problem looks similar in law firms and in-house teams."
+      ],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "RQ3",
+      "workflow": "Contract-review handoff",
+      "question": "Given a synthetic contract and an AI first-pass issues list with seeded defects, can a reviewer reach an acceptable result, and what assistance, interpretation errors and time does it take?",
+      "evidenceType": "observed_task",
+      "assumptions": ["A4 Synthetic documents prompt review behaviour close enough to real work to be informative."],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "RQ4",
+      "workflow": "Contract-review handoff",
+      "question": "Which information in the handoff (source links, what was checked, what was not checked) changes the reviewer's willingness to rely on the list?",
+      "evidenceType": "observed_task",
+      "assumptions": ["A2 Missing source links are the main reason reviewers re-read the whole contract."],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "RQ5",
+      "workflow": "Contract-review handoff",
+      "question": "How do practitioners react to a proposed handoff note?",
+      "evidenceType": "opinion_on_proposal",
+      "assumptions": [],
+      "origin": { "kind": "synthetic_fixture" }
+    }
+  ],
+  "sessions": [
+    { "id": "ses-01", "studyRound": "synthetic-round-1", "kind": "observed_task", "heldOn": "2026-03-10", "participantCode": "SYN-P01", "roleLabel": "Reviewing senior lawyer", "experienceBand": "8+ years", "questionIds": ["RQ1", "RQ2", "RQ3", "RQ4"], "taskPackId": "TP-A", "origin": { "kind": "synthetic_fixture" } },
+    { "id": "ses-02", "studyRound": "synthetic-round-1", "kind": "observed_task", "heldOn": "2026-03-12", "participantCode": "SYN-P02", "roleLabel": "Producing associate", "experienceBand": "0-2 years", "questionIds": ["RQ2", "RQ3"], "taskPackId": "TP-A", "origin": { "kind": "synthetic_fixture" } },
+    { "id": "ses-03", "studyRound": "synthetic-round-1", "kind": "observed_task", "heldOn": "2026-03-17", "participantCode": "SYN-P03", "roleLabel": "In-house counsel", "experienceBand": "3-7 years", "questionIds": ["RQ1", "RQ3"], "taskPackId": "TP-A", "origin": { "kind": "synthetic_fixture" } },
+    { "id": "ses-04", "studyRound": "synthetic-round-1", "kind": "interview", "heldOn": "2026-03-19", "participantCode": "SYN-P04", "roleLabel": "Professional support lawyer", "experienceBand": "8+ years", "questionIds": ["RQ2", "RQ5"], "taskPackId": null, "origin": { "kind": "synthetic_fixture" } },
+    { "id": "ses-05", "studyRound": "synthetic-follow-up-1", "kind": "follow_up_task", "heldOn": "2026-06-09", "participantCode": "SYN-P01", "roleLabel": "Reviewing senior lawyer", "experienceBand": "8+ years", "questionIds": ["RQ3"], "taskPackId": "TP-B", "origin": { "kind": "synthetic_fixture" } },
+    { "id": "ses-06", "studyRound": "synthetic-follow-up-1", "kind": "follow_up_task", "heldOn": "2026-06-11", "participantCode": "SYN-P03", "roleLabel": "In-house counsel", "experienceBand": "3-7 years", "questionIds": ["RQ3"], "taskPackId": "TP-B", "origin": { "kind": "synthetic_fixture" } },
+    { "id": "ses-07", "studyRound": "synthetic-follow-up-1", "kind": "follow_up_task", "heldOn": "2026-06-16", "participantCode": "SYN-P02", "roleLabel": "Producing associate", "experienceBand": "0-2 years", "questionIds": ["RQ3"], "taskPackId": "TP-B", "origin": { "kind": "synthetic_fixture" } },
+    { "id": "ses-08", "studyRound": "synthetic-follow-up-1", "kind": "follow_up_task", "heldOn": "2026-06-18", "participantCode": "SYN-P06", "roleLabel": "Producing associate", "experienceBand": "0-2 years", "questionIds": ["RQ3"], "taskPackId": "TP-B", "origin": { "kind": "synthetic_fixture" } },
+    { "id": "ses-09", "studyRound": "synthetic-follow-up-1", "kind": "follow_up_task", "heldOn": "2026-07-09", "participantCode": "SYN-P05", "roleLabel": "Reviewing partner", "experienceBand": "8+ years", "questionIds": ["RQ3"], "taskPackId": "TP-B", "origin": { "kind": "synthetic_fixture" } }
+  ],
+  "observations": [
+    {
+      "id": "obs-01", "sessionId": "ses-01", "questionId": "RQ3", "evidenceType": "observed_task",
+      "observed": "Signed off the issues list as it stood after 14 minutes. Did not open the definitions clause. Accepted the liability-cap item as listed.",
+      "quotation": null,
+      "taskResult": { "taskPackId": "TP-A", "completion": "completed_unaided", "assistanceCount": 0, "interpretationErrors": 1, "trustConcerns": 1, "acceptable": false, "minutesToAcceptable": null },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-02", "sessionId": "ses-01", "questionId": "RQ4", "evidenceType": "observed_task",
+      "observed": "Opened the source clause for two of six list items. For both, searched the contract by keyword because the item named no clause.",
+      "quotation": { "text": "If it says checked, I want to see where.", "permission": "internal_only", "approvalRef": null },
+      "taskResult": null,
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-03", "sessionId": "ses-02", "questionId": "RQ3", "evidenceType": "observed_task",
+      "observed": "Asked the moderator twice what the status 'checked' on an item covers. Reached an acceptable result after 18 minutes.",
+      "quotation": null,
+      "taskResult": { "taskPackId": "TP-A", "completion": "completed_with_assistance", "assistanceCount": 2, "interpretationErrors": 2, "trustConcerns": 0, "acceptable": true, "minutesToAcceptable": 18 },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-04", "sessionId": "ses-02", "questionId": "RQ2", "evidenceType": "past_behaviour",
+      "observed": "Described the last handoff: pasted the list into the team's review checklist template and re-typed the clause numbers by hand.",
+      "quotation": null,
+      "taskResult": null,
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-05", "sessionId": "ses-03", "questionId": "RQ3", "evidenceType": "observed_task",
+      "observed": "Reached the 20-minute limit without a decision and said the list would have to be redone from the contract. Had found the liability-cap discrepancy but could not tell which definition applied.",
+      "quotation": null,
+      "taskResult": { "taskPackId": "TP-A", "completion": "not_completed", "assistanceCount": 1, "interpretationErrors": 1, "trustConcerns": 2, "acceptable": false, "minutesToAcceptable": null },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-06", "sessionId": "ses-03", "questionId": "RQ1", "evidenceType": "past_behaviour",
+      "observed": "On the last review, read the definitions clause first and the liability clauses second, before opening the issues list.",
+      "quotation": null,
+      "taskResult": null,
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-07", "sessionId": "ses-04", "questionId": "RQ2", "evidenceType": "past_behaviour",
+      "observed": "Reported that reviewers in the team annotate the issues list in place and keep no separate checklist.",
+      "quotation": null,
+      "taskResult": null,
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-08", "sessionId": "ses-04", "questionId": "RQ5", "evidenceType": "opinion_on_proposal",
+      "observed": "Shown the proposed handoff note, said a section listing the clauses that were not checked would be read first.",
+      "quotation": null,
+      "taskResult": null,
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-09", "sessionId": "ses-01", "questionId": "RQ2", "evidenceType": "past_behaviour",
+      "observed": "On the last handoff received, copied the issues into a personal checklist before reading the contract.",
+      "quotation": null,
+      "taskResult": null,
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-10", "sessionId": "ses-05", "questionId": "RQ3", "evidenceType": "observed_task",
+      "observed": "Opened the controlling definition from the liability-cap item and sent the list back with the cap issue corrected after 11 minutes.",
+      "quotation": null,
+      "taskResult": { "taskPackId": "TP-B", "completion": "completed_unaided", "assistanceCount": 0, "interpretationErrors": 0, "trustConcerns": 0, "acceptable": true, "minutesToAcceptable": 11 },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-11", "sessionId": "ses-06", "questionId": "RQ3", "evidenceType": "observed_task",
+      "observed": "Needed one prompt to find where the definition is attached to the item. Reached an acceptable result after 14 minutes.",
+      "quotation": null,
+      "taskResult": { "taskPackId": "TP-B", "completion": "completed_with_assistance", "assistanceCount": 1, "interpretationErrors": 0, "trustConcerns": 1, "acceptable": true, "minutesToAcceptable": 14 },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-12", "sessionId": "ses-07", "questionId": "RQ3", "evidenceType": "observed_task",
+      "observed": "With the status legend visible, asked twice whether 'checked' includes cross-referenced clauses. Reached an acceptable result after 19 minutes.",
+      "quotation": null,
+      "taskResult": { "taskPackId": "TP-B", "completion": "completed_with_assistance", "assistanceCount": 2, "interpretationErrors": 2, "trustConcerns": 0, "acceptable": true, "minutesToAcceptable": 19 },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-13", "sessionId": "ses-08", "questionId": "RQ3", "evidenceType": "observed_task",
+      "observed": "Read the status legend, then treated two unchecked items as reviewed. Needed three prompts. Reached an acceptable result after 20 minutes.",
+      "quotation": null,
+      "taskResult": { "taskPackId": "TP-B", "completion": "completed_with_assistance", "assistanceCount": 3, "interpretationErrors": 2, "trustConcerns": 1, "acceptable": true, "minutesToAcceptable": 20 },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-14", "sessionId": "ses-03", "questionId": "RQ1", "evidenceType": "past_behaviour",
+      "observed": "On the last data-processing agreement, replaced the checklist items drawn from US privacy frameworks by hand before starting the review.",
+      "quotation": null,
+      "taskResult": null,
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "obs-15", "sessionId": "ses-09", "questionId": "RQ3", "evidenceType": "observed_task",
+      "observed": "Completed the maintenance-agreement task unaided in 12 minutes with the jurisdiction profile switched on. The task contains no data-processing terms.",
+      "quotation": null,
+      "taskResult": { "taskPackId": "TP-B", "completion": "completed_unaided", "assistanceCount": 0, "interpretationErrors": 0, "trustConcerns": 0, "acceptable": true, "minutesToAcceptable": 12 },
+      "origin": { "kind": "synthetic_fixture" }
+    }
+  ],
+  "problems": [
+    {
+      "id": "prb-01",
+      "workflow": "Contract-review handoff",
+      "statement": "A flagged clause reaches the reviewer without the definition that controls it.",
+      "interpretation": "Two reviewers failed the task at the same point, and one reads definitions first by habit. The list item probably needs to carry the controlling definition; whether that alone prevents a wrong sign-off is untested.",
+      "interpretedByRole": "Legal engineer (synthetic)",
+      "class": "quality_control",
+      "supportingObservationIds": ["obs-01", "obs-05", "obs-06"],
+      "contradictingObservationIds": [],
+      "feedbackItemIds": ["fb-001"],
+      "feedbackThemes": [],
+      "accountIds": ["acct-001"],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "prb-02",
+      "workflow": "Contract-review handoff",
+      "statement": "The status 'checked' on a list item is read as covering more than it does.",
+      "interpretation": "The misreading came from a junior producer and from a reviewer. It may be a wording problem or a missing definition of the status; the observations do not separate the two.",
+      "interpretedByRole": "Legal engineer (synthetic)",
+      "class": "workflow_fit",
+      "supportingObservationIds": ["obs-03", "obs-05"],
+      "contradictingObservationIds": [],
+      "feedbackItemIds": [],
+      "feedbackThemes": ["Hard to onboard associates"],
+      "accountIds": [],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "prb-03",
+      "workflow": "Contract-review handoff",
+      "statement": "List items name no clause, so the reviewer searches the contract by keyword to verify them.",
+      "interpretation": "One observed task and two account feedback items point the same way. The observation is from a single senior reviewer.",
+      "interpretedByRole": "Legal engineer (synthetic)",
+      "class": "quality_control",
+      "supportingObservationIds": ["obs-02"],
+      "contradictingObservationIds": [],
+      "feedbackItemIds": ["fb-007", "fb-008"],
+      "feedbackThemes": ["Citations not always traceable to the source"],
+      "accountIds": ["acct-003"],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "prb-04",
+      "workflow": "AI-assisted editing",
+      "statement": "There is no exportable record of who changed what after an AI-assisted edit.",
+      "interpretation": "Raised in account interviews as a condition for internal sign-off. No study session has observed the review in which the record is needed.",
+      "interpretedByRole": "Product manager (synthetic)",
+      "class": "quality_control",
+      "supportingObservationIds": [],
+      "contradictingObservationIds": [],
+      "feedbackItemIds": [],
+      "feedbackThemes": ["No audit trail for AI-assisted edits"],
+      "accountIds": [],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "prb-05",
+      "workflow": "Matter approval",
+      "statement": "Approval of sensitive matters cannot be restricted by role or practice group.",
+      "interpretation": "Raised in two account interviews. No study observation.",
+      "interpretedByRole": "Product manager (synthetic)",
+      "class": "quality_control",
+      "supportingObservationIds": [],
+      "contradictingObservationIds": [],
+      "feedbackItemIds": [],
+      "feedbackThemes": ["Can't restrict who approves sensitive matters"],
+      "accountIds": [],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "prb-06",
+      "workflow": "Contract-review handoff",
+      "statement": "Reviewers rebuild the issues list in their own checklist before sign-off.",
+      "interpretation": "Two reports of past behaviour support assumption A1 and one contradicts it. Team practice seems to differ. Nobody was observed doing it.",
+      "interpretedByRole": "Legal engineer (synthetic)",
+      "class": "workflow_fit",
+      "supportingObservationIds": ["obs-04", "obs-09"],
+      "contradictingObservationIds": ["obs-07"],
+      "feedbackItemIds": [],
+      "feedbackThemes": [],
+      "accountIds": ["acct-005"],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "prb-07",
+      "workflow": "Adoption reporting",
+      "statement": "Champions cannot obtain usage figures without asking the vendor.",
+      "interpretation": "A planning inconvenience for the customer's own rollout. No workflow is blocked by it.",
+      "interpretedByRole": "Product manager (synthetic)",
+      "class": "convenience",
+      "supportingObservationIds": [],
+      "contradictingObservationIds": [],
+      "feedbackItemIds": ["fb-003", "fb-010"],
+      "feedbackThemes": ["No weekly usage visibility"],
+      "accountIds": ["acct-001", "acct-004"],
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "prb-08",
+      "workflow": "Data-processing agreement review",
+      "statement": "The review checklist for data-processing agreements follows US privacy frameworks.",
+      "interpretation": "One report of past behaviour and one account feedback item. The reviewer corrected the checklist by hand, so the cost is rework rather than a wrong result.",
+      "interpretedByRole": "Legal engineer (synthetic)",
+      "class": "workflow_fit",
+      "supportingObservationIds": ["obs-14"],
+      "contradictingObservationIds": [],
+      "feedbackItemIds": ["fb-004"],
+      "feedbackThemes": [],
+      "accountIds": ["acct-002"],
+      "origin": { "kind": "synthetic_fixture" }
+    }
+  ],
+  "changes": [
+    {
+      "id": "chg-001",
+      "problemId": "prb-01",
+      "title": "Attach the controlling definition to each flagged clause",
+      "hypothesis": "If a list item shows the definition that controls its clause, reviewers will catch a scope error in the liability cap without re-reading the definitions clause.",
+      "proposedChange": "Resolve cross-referenced definitions before a clause is listed and show the controlling definition on the list item.",
+      "ownerRole": "Product manager, review (synthetic)",
+      "decision": { "status": "prioritised", "confidence": "medium", "rationale": "A wrong sign-off was observed in one of three task sessions and a failed task in another. Quality and control failures are reviewed first regardless of the size of the accounts that raised them.", "decidedOn": "2026-03-24", "decidedByRole": "Product lead (synthetic)", "revisitOn": null },
+      "acceptanceCriteria": [
+        { "id": "ac-001-1", "text": "On a contract where a definition changes the scope of a later clause, the list item shows that definition." },
+        { "id": "ac-001-2", "text": "A reviewer can open the definition from the item without searching the contract." }
+      ],
+      "criteriaRecordedOn": "2026-03-24",
+      "delivery": {
+        "status": "released", "recordedOn": "2026-05-26", "implementationRef": "synthetic-tracker/REV-31", "startedOn": "2026-04-07",
+        "release": { "releasedOn": "2026-05-26", "evidenceKind": "release_note", "evidenceRef": "synthetic-release-notes/2026-05#controlling-definitions", "criteriaVerified": ["ac-001-1", "ac-001-2"] }
+      },
+      "followUp": { "dueOn": "2026-06-12", "taskPackId": "TP-B", "comparability": "TP-B seeds the same defect type in a different agreement. Its definitions clause is shorter than TP-A's.", "baselineObservationIds": ["obs-01", "obs-05"], "followUpObservationIds": ["obs-10", "obs-11"] },
+      "outcome": { "result": "supported", "assessedOn": "2026-06-18", "rationale": "Both reviewers who failed on TP-A reached an acceptable result on TP-B and opened the definition from the item. The hypothesis is supported for these two cases.", "alternativeExplanations": ["Both participants had met the defect type once before.", "TP-B's definitions clause is shorter."] },
+      "nextDecision": { "question": "Repeat with reviewers who have not seen TP-A before treating the problem as closed?", "ownerRole": "Legal engineer (synthetic)", "dueOn": "2026-09-15" },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "chg-002",
+      "problemId": "prb-02",
+      "title": "Status legend on the issues list",
+      "hypothesis": "If the list explains what 'checked' covers, producers and reviewers will need fewer prompts and misread the status less often.",
+      "proposedChange": "Show a short legend for item statuses at the top of every issues list.",
+      "ownerRole": "Product manager, review (synthetic)",
+      "decision": { "status": "prioritised", "confidence": "low", "rationale": "Cheap to try. The observations do not show whether wording or a missing definition causes the misreading.", "decidedOn": "2026-03-24", "decidedByRole": "Product lead (synthetic)", "revisitOn": null },
+      "acceptanceCriteria": [{ "id": "ac-002-1", "text": "The legend states for each status which clauses were read and which were not." }],
+      "criteriaRecordedOn": "2026-03-24",
+      "delivery": {
+        "status": "released", "recordedOn": "2026-05-26", "implementationRef": "synthetic-tracker/REV-34", "startedOn": "2026-04-21",
+        "release": { "releasedOn": "2026-05-26", "evidenceKind": "release_note", "evidenceRef": "synthetic-release-notes/2026-05#status-legend", "criteriaVerified": ["ac-002-1"] }
+      },
+      "followUp": { "dueOn": "2026-06-19", "taskPackId": "TP-B", "comparability": "Same defect types as TP-A. One of the two follow-up participants is new to the study.", "baselineObservationIds": ["obs-03"], "followUpObservationIds": ["obs-12", "obs-13"] },
+      "outcome": { "result": "contradicted", "assessedOn": "2026-06-23", "rationale": "With the legend visible, both producers still misread the status twice and needed two and three prompts. Prompts and misreadings did not fall.", "alternativeExplanations": ["The legend may not have been read: one participant scrolled past it.", "One baseline session is a thin comparison."] },
+      "nextDecision": { "question": "Withdraw the legend and test a status that names the clauses read on each item?", "ownerRole": "Product manager, review (synthetic)", "dueOn": "2026-08-14" },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "chg-003",
+      "problemId": "prb-04",
+      "title": "Exportable audit log of AI-assisted edits",
+      "hypothesis": "If risk teams can export who changed what and when, internal sign-off of the tool will no longer stall on that point.",
+      "proposedChange": "Append-only log of every AI-assisted edit with author, time and change, exportable by an administrator.",
+      "ownerRole": "Product manager, platform (synthetic)",
+      "decision": { "status": "prioritised", "confidence": "medium", "rationale": "A control failure raised by three accounts and first in the commercial ranking. No study observation yet shows how the record is used in a review.", "decidedOn": "2026-04-14", "decidedByRole": "Product lead (synthetic)", "revisitOn": null },
+      "acceptanceCriteria": [
+        { "id": "ac-003-1", "text": "An administrator exports all AI-assisted edits of a document with author, timestamp and change." },
+        { "id": "ac-003-2", "text": "An exported record cannot be altered in the product afterwards." }
+      ],
+      "criteriaRecordedOn": "2026-04-14",
+      "delivery": { "status": "in_progress", "recordedOn": "2026-07-21", "implementationRef": "synthetic-tracker/AUD-12", "startedOn": "2026-06-02", "release": null },
+      "followUp": null,
+      "outcome": null,
+      "nextDecision": { "question": "Do the two risk teams that raised the point accept the export format?", "ownerRole": "Product manager, platform (synthetic)", "dueOn": "2026-08-21" },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "chg-004",
+      "problemId": "prb-05",
+      "title": "Role-based approval permissions",
+      "hypothesis": "If approval can be limited by role and practice group, customers will route sensitive matters through the tool.",
+      "proposedChange": "Approval permissions scoped by practice group and matter value.",
+      "ownerRole": "Product manager, platform (synthetic)",
+      "decision": { "status": "prioritised", "confidence": "low", "rationale": "A control gap raised by two accounts. The rule customers need (role, group, value) is not yet specified by any of them.", "decidedOn": "2026-04-14", "decidedByRole": "Product lead (synthetic)", "revisitOn": null },
+      "acceptanceCriteria": [{ "id": "ac-004-1", "text": "A user without the approver role for a practice group cannot approve a matter of that group." }],
+      "criteriaRecordedOn": "2026-04-14",
+      "delivery": { "status": "not_started", "recordedOn": "2026-04-14", "implementationRef": null, "startedOn": null, "release": null },
+      "followUp": null,
+      "outcome": null,
+      "nextDecision": { "question": "Which approval rule do the two accounts need: by role, by group or by matter value?", "ownerRole": "Legal engineer (synthetic)", "dueOn": "2026-08-21" },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "chg-005",
+      "problemId": "prb-07",
+      "title": "Self-serve usage export",
+      "hypothesis": "If champions can pull usage by group themselves, they will plan rollouts without a support request.",
+      "proposedChange": "Export of active users and runs by practice group and period.",
+      "ownerRole": "Product manager, admin (synthetic)",
+      "decision": { "status": "deferred", "confidence": "medium", "rationale": "A convenience item. No blocked workflow was observed, and the two quality and control items take the same team's capacity.", "decidedOn": "2026-04-14", "decidedByRole": "Product lead (synthetic)", "revisitOn": "2026-10-01" },
+      "acceptanceCriteria": [],
+      "criteriaRecordedOn": null,
+      "delivery": { "status": "deferred", "recordedOn": "2026-04-14", "implementationRef": null, "startedOn": null, "release": null },
+      "followUp": null,
+      "outcome": null,
+      "nextDecision": { "question": "Revisit once the audit log is released.", "ownerRole": "Product lead (synthetic)", "dueOn": "2026-10-01" },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "chg-006",
+      "problemId": "prb-06",
+      "title": "Handoff note with checked and unchecked sections",
+      "hypothesis": "If the producer hands over a note stating what was and was not checked, reviewers will stop rebuilding the list.",
+      "proposedChange": "A structured handoff note generated with the issues list.",
+      "ownerRole": "Legal engineer (synthetic)",
+      "decision": { "status": "needs_evidence", "confidence": "low", "rationale": "Reports of past behaviour conflict, and the only evidence on the note itself is one opinion about a proposal. Nobody was observed rebuilding a list.", "decidedOn": "2026-03-24", "decidedByRole": "Product lead (synthetic)", "revisitOn": "2026-09-15" },
+      "acceptanceCriteria": [],
+      "criteriaRecordedOn": null,
+      "delivery": { "status": "not_started", "recordedOn": "2026-03-24", "implementationRef": null, "startedOn": null, "release": null },
+      "followUp": null,
+      "outcome": null,
+      "nextDecision": { "question": "Observe a real handoff between a producer and a reviewer in the next round before deciding.", "ownerRole": "Legal engineer (synthetic)", "dueOn": "2026-09-15" },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "chg-007",
+      "problemId": "prb-06",
+      "title": "Accept low-risk items without review",
+      "hypothesis": "If items the model rates as low risk skip review, the reviewer has less to rebuild.",
+      "proposedChange": "Mark low-risk items as accepted automatically.",
+      "ownerRole": "Product lead (synthetic)",
+      "decision": { "status": "rejected", "confidence": "high", "rationale": "It removes the mandatory review point. An unreviewed item was signed off wrongly in an observed task; skipping review would repeat that by design.", "decidedOn": "2026-03-24", "decidedByRole": "Product lead (synthetic)", "revisitOn": null },
+      "acceptanceCriteria": [],
+      "criteriaRecordedOn": null,
+      "delivery": { "status": "rejected", "recordedOn": "2026-03-24", "implementationRef": null, "startedOn": null, "release": null },
+      "followUp": null,
+      "outcome": null,
+      "nextDecision": { "question": "None. The rejection stands while a qualified lawyer must review every item.", "ownerRole": "Product lead (synthetic)", "dueOn": null },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "chg-008",
+      "problemId": "prb-08",
+      "title": "Jurisdiction profile for data-processing agreement review",
+      "hypothesis": "If the review checklist follows the selected jurisdiction, reviewers will stop replacing checklist items by hand.",
+      "proposedChange": "A jurisdiction setting that switches the review checklist.",
+      "ownerRole": "Product manager, review (synthetic)",
+      "decision": { "status": "prioritised", "confidence": "medium", "rationale": "Concentrated in one account, where it causes rework on every agreement of this type.", "decidedOn": "2026-04-14", "decidedByRole": "Product lead (synthetic)", "revisitOn": null },
+      "acceptanceCriteria": [{ "id": "ac-008-1", "text": "With the EU profile selected, the checklist contains no item drawn from a US privacy framework." }],
+      "criteriaRecordedOn": "2026-04-14",
+      "delivery": {
+        "status": "released", "recordedOn": "2026-06-23", "implementationRef": "synthetic-tracker/REV-40", "startedOn": "2026-05-05",
+        "release": { "releasedOn": "2026-06-23", "evidenceKind": "release_note", "evidenceRef": "synthetic-release-notes/2026-06#jurisdiction-profile", "criteriaVerified": ["ac-008-1"] }
+      },
+      "followUp": { "dueOn": "2026-07-10", "taskPackId": "TP-B", "comparability": "Not comparable. The baseline is a report of past behaviour, and TP-B contains no data-processing terms.", "baselineObservationIds": ["obs-14"], "followUpObservationIds": ["obs-15"] },
+      "outcome": { "result": "inconclusive", "assessedOn": "2026-07-14", "rationale": "The follow-up task did not exercise the changed checklist and there is no baseline task to compare with.", "alternativeExplanations": [] },
+      "nextDecision": { "question": "Prepare a synthetic data-processing agreement task and repeat the follow-up?", "ownerRole": "Legal engineer (synthetic)", "dueOn": "2026-08-28" },
+      "origin": { "kind": "synthetic_fixture" }
+    },
+    {
+      "id": "chg-009",
+      "problemId": "prb-03",
+      "title": "Clause reference on every list item",
+      "hypothesis": "If every item names and links its clause, reviewers will verify items without searching the contract.",
+      "proposedChange": "Each list item carries the clause number and a link to the clause.",
+      "ownerRole": "Product manager, review (synthetic)",
+      "decision": { "status": "prioritised", "confidence": "medium", "rationale": "A verification gap seen in one task session and raised by two account feedback items.", "decidedOn": "2026-04-14", "decidedByRole": "Product lead (synthetic)", "revisitOn": null },
+      "acceptanceCriteria": [
+        { "id": "ac-009-1", "text": "Every list item names the clause it rests on." },
+        { "id": "ac-009-2", "text": "Selecting the reference opens the clause in the contract." }
+      ],
+      "criteriaRecordedOn": "2026-04-14",
+      "delivery": {
+        "status": "released", "recordedOn": "2026-07-14", "implementationRef": "synthetic-tracker/REV-44", "startedOn": "2026-06-09",
+        "release": { "releasedOn": "2026-07-14", "evidenceKind": "release_note", "evidenceRef": "synthetic-release-notes/2026-07#clause-references", "criteriaVerified": ["ac-009-1"] }
+      },
+      "followUp": { "dueOn": "2026-07-28", "taskPackId": "TP-B", "comparability": "TP-B seeds an item without a source reference, as TP-A does.", "baselineObservationIds": ["obs-02"], "followUpObservationIds": [] },
+      "outcome": null,
+      "nextDecision": { "question": "Hold the overdue follow-up session, then assess.", "ownerRole": "Legal engineer (synthetic)", "dueOn": "2026-08-07" },
+      "origin": { "kind": "synthetic_fixture" }
+    }
+  ]
+}

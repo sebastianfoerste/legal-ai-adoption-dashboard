@@ -7,6 +7,9 @@ const nav = [
   { href: "/", label: "Account Health" },
   { href: "/blockers", label: "Adoption Blockers" },
   { href: "/feedback", label: "Product Feedback" },
+  { href: "/research", label: "Research to Change" },
+  { href: "/interventions", label: "Interventions" },
+  { href: "/manager", label: "Manager Decisions" },
   { href: "/insights", label: "Adoption Insights" },
   { href: "/benchmarks", label: "Benchmarks" },
 ];
