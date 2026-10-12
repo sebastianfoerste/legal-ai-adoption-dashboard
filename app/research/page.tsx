@@ -7,7 +7,6 @@ import { SyntheticNotice } from "@/components/SyntheticNotice";
 import { ChangeChain } from "@/components/evidence/ChangeEvidence";
 
 const REMAINING_STEPS = [
-  "Create the private research store: an encrypted local folder outside the repository, opened only by the study owner.",
   "Have the information sheet and consent form reviewed, and fill their open fields.",
   "Authorise recruitment, then send the invitation draft.",
   "Run a timed dry run of task pack TP-A with a colleague outside the sample.",
