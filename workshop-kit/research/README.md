@@ -77,10 +77,10 @@ it happens.
 
 The owner decided on 6 October 2026:
 
-- Recruitment does not start yet. It waits for the legal review below and for the private
-  store to exist.
+- Recruitment does not start yet. It waits for the legal review below.
 - The private research store is an encrypted local folder outside `~/Developer`, opened
-  only by the owner. See [data-handling.md](data-handling.md), section 7.
+  only by the owner. See [data-handling.md](data-handling.md), section 7. The owner
+  created it on 7 October 2026. It is empty.
 - Consent item 5 (follow-up contact) stays in the consent form.
 - Seeded defects stay undisclosed to returning participants until after the follow-up
   session.

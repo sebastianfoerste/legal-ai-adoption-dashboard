@@ -4,8 +4,8 @@
 need to know where each kind of record lives, who may open it, how long it is kept and who
 approves its use.
 
-Status: proposal. No store has been created and no real record exists. Every rule below
-takes effect only when the owner approves it. The participant documents
+Status: proposal. The store was created on 7 October 2026 and is empty: no real record
+exists. Every rule below takes effect only when the owner approves it. The participant documents
 ([information-sheet.md](information-sheet.md), [consent-form.md](consent-form.md)) repeat
 these rules and must be changed with them.
 
@@ -15,7 +15,7 @@ these rules and must be changed with them.
 |---|---|---|
 | Holds | Synthetic fixtures, this pack, code, tests | Participant records and original observations |
 | Record origin | `synthetic_fixture`, or `approved_aggregate` with an approval reference | `participant_session` |
-| Location | This repository | `{{private_store_location}}`: an encrypted local folder outside `~/Developer` |
+| Location | This repository | `{{private_store_location}}`: an encrypted disk image outside `~/Developer`, reachable only while the owner has it open |
 | Readers | Anyone | The people named in section 3 |
 
 A real observation is never marked synthetic to fit a schema. The evidence format
@@ -59,7 +59,9 @@ only link between them.
 The denylist holds the name of every participant, of each employer, and of any client or
 matter a participant mentioned. Add to it on the day of each session. The boundary check
 reads it when the environment variable `PRIVATE_RESEARCH_DENYLIST` holds its absolute
-path, and it refuses a list kept inside the repository. A match is reported as "matches
+path, `{{private_store_location}}/identity/denylist.txt`, and it refuses a list
+kept inside the repository. The check can therefore read the list only while the store
+is open. A match is reported as "matches
 denylist entry 3", so the name never reaches a terminal or a build log. The list catches
 the names you know. It cannot recognise a name nobody entered, so the reading in section 6
 still decides.
@@ -150,9 +152,10 @@ No percentage is published from a round of four to eight sessions.
 Taken by the owner on 6 October 2026:
 
 1. The private store is an encrypted local folder outside `~/Developer`, opened only by
-   the study owner. The folder has not been created; its path replaces
-   `{{private_store_location}}` once it exists. Anyone added later as a reader needs a
-   new decision.
+   the study owner. The owner created it on 7 October 2026 as an encrypted disk image
+   holding the folders `identity`, `analysis`, `recordings` and `approvals`, all empty.
+   Its path stays out of this repository; `{{private_store_location}}` stands for it.
+   Anyone added later as a reader needs a new decision.
 2. Consent item 5 (follow-up contact) is kept, so contact details of participants who
    opt in are held until `{{follow_up_contact_deadline}}`.
 3. The seeded defects are explained to returning participants only after the follow-up
