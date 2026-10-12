@@ -1,18 +1,18 @@
 import { describe, expect, it } from "vitest";
 
 import {
-  answerCommandCenterQuestion,
-  buildCommandCenterReport,
-  commandCenterSnapshot,
+  answerAdoptionInsightsQuestion,
+  buildAdoptionInsightsReport,
+  adoptionInsightsSnapshot,
   recommendCapabilities,
-} from "./command-center";
+} from "./adoption-insights";
 import { adoptionCockpitReport } from "./adoption-cockpit";
-import { GET as downloadReport } from "../app/command-center/report/route";
+import { GET as downloadReport } from "../app/insights/report/route";
 
-describe("command center", () => {
+describe("adoption insights", () => {
   it("answers supported questions with evidence and review controls", () => {
     const report = adoptionCockpitReport();
-    const answer = answerCommandCenterQuestion(report, "What is the verified output rate?");
+    const answer = answerAdoptionInsightsQuestion(report, "What is the verified output rate?");
     expect(answer.status).toBe("answered");
     expect(answer.evidence.some((item) => item.metric === "Verification rate")).toBe(true);
     expect(answer.reviewRequired).toBe(true);
@@ -20,7 +20,7 @@ describe("command center", () => {
   });
 
   it("declines unsupported questions without inventing evidence", () => {
-    const answer = answerCommandCenterQuestion(adoptionCockpitReport(), "Forecast next year's legal budget");
+    const answer = answerAdoptionInsightsQuestion(adoptionCockpitReport(), "Forecast next year's legal budget");
     expect(answer.status).toBe("unsupported_question");
     expect(answer.evidence).toEqual([]);
   });
@@ -35,16 +35,16 @@ describe("command center", () => {
   it("generates a filterable leadership report with blocked external action", () => {
     const report = adoptionCockpitReport();
     const practiceGroup = report.practiceGroupUsage[0].practiceGroup;
-    const output = buildCommandCenterReport(report, { practiceGroups: [practiceGroup] });
+    const output = buildAdoptionInsightsReport(report, { practiceGroups: [practiceGroup] });
     expect(output.filters.practiceGroups).toEqual([practiceGroup]);
-    expect(output.markdown).toContain("# Synthetic Legal AI Command Center Report");
+    expect(output.markdown).toContain("# Synthetic Legal AI Adoption Insights Report");
     expect(output.generatedFormat).toBe("markdown");
     expect(output.reviewedConversionTargets).toEqual(["pdf", "pptx"]);
     expect(output.externalActionAllowed).toBe(false);
   });
 
-  it("builds the complete command center snapshot", () => {
-    const snapshot = commandCenterSnapshot();
+  it("builds the complete adoption insights snapshot", () => {
+    const snapshot = adoptionInsightsSnapshot();
     expect(snapshot.answer.evidence.length).toBeGreaterThan(0);
     expect(snapshot.recommendations.length).toBeGreaterThan(0);
     expect(snapshot.leadershipReport.sections).toHaveLength(4);
@@ -53,7 +53,7 @@ describe("command center", () => {
   it("serves the generated Markdown report as a reviewable download", async () => {
     const response = downloadReport();
     expect(response.headers.get("content-type")).toContain("text/markdown");
-    expect(response.headers.get("content-disposition")).toContain("synthetic-legal-ai-command-center-report.md");
-    expect(await response.text()).toContain("# Synthetic Legal AI Command Center Report");
+    expect(response.headers.get("content-disposition")).toContain("synthetic-legal-ai-adoption-insights-report.md");
+    expect(await response.text()).toContain("# Synthetic Legal AI Adoption Insights Report");
   });
 });
