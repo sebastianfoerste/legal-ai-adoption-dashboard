@@ -37,10 +37,11 @@
 
 
 
-Enablement materials for legal AI adoption: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.
+Enablement materials for rolling out a legal-AI tool in a law firm or an in-house legal team: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.
+
+The kit is for the people who run such a rollout: Legal Engineers, Customer Success Managers and innovation leads who prepare the sessions, work with the partners and associates who will use the tool, and report friction back to the product team.
 
 All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice.
-Portfolio proof contract: [`docs/portfolio-proof.json`](../docs/portfolio-proof.json).
 
 ## Run it
 
