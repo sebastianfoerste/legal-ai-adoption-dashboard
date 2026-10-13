@@ -6,7 +6,7 @@ scenarios, use [DEMO_GUIDE.md](DEMO_GUIDE.md).
 1. **Run it.** `pnpm install && pnpm dev`, then open `http://localhost:3000`.
 2. **Account Health (`/`).** Five synthetic accounts. Note the colored health badge on
    each and the review recommendation beneath the account name. Brightmoor & Associates
-   is "Healthy" and carries "Adjust"; Stadtwerke Aurich is "Steady" and carries "Expand".
+   is "Healthy" and carries "Adjust"; Stadtwerke Musterstadt is "Steady" and carries "Expand".
 3. **Why those scores?** Open `lib/health.ts`. The score is a weighted mix of licence
    use, usage trend and the share of outputs a human reviewer verified, minus a penalty
    for open blockers. No machine learning, nothing hidden. Feedback forwarded to Product

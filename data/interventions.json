@@ -2,7 +2,7 @@
   {
     "id": "int-001",
     "accountId": "acct-005",
-    "workflowId": "wf-aurich-supplier-review",
+    "workflowId": "wf-musterstadt-supplier-review",
     "practiceGroup": "Corporate",
     "blockerId": "blk-011",
     "observedProblem": "Repeat use fell from 5 of 8 eligible lawyers in the onboarding period to 1 of 8 two periods later, although 7 of 8 had activated after training.",
@@ -10,12 +10,12 @@
       {
         "kind": "adoption_metric",
         "summary": "Repeat users 5, then 2, then 1 of 8 eligible lawyers across the first three reporting periods.",
-        "ref": "data/adoption-periods.json#series-aurich-supplier-review"
+        "ref": "data/adoption-periods.json#series-musterstadt-supplier-review"
       },
       {
         "kind": "value_measurement",
         "summary": "Median 167.5 active minutes per signed-off issues list (median of per-task totals, 10 accepted of 12 attempts) against a team estimate of 140 minutes without the tool; 5 of 10 sampled results went back for a second correction round.",
-        "ref": "data/value-measurements.json#vm-aurich-supplier-review"
+        "ref": "data/value-measurements.json#vm-musterstadt-supplier-review"
       },
       {
         "kind": "specialist_observation",
@@ -102,7 +102,7 @@
   {
     "id": "int-003",
     "accountId": "acct-005",
-    "workflowId": "wf-aurich-supplier-review",
+    "workflowId": "wf-musterstadt-supplier-review",
     "practiceGroup": "Employment",
     "blockerId": null,
     "observedProblem": "Employment has no checklist-mapped review workflow. The General Counsel asked for the Corporate playbook to be extended.",

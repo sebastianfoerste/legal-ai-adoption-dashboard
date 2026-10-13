@@ -96,7 +96,7 @@ Pages:
 8. **Adoption Cockpit review summary** (`/`): synthetic product-surface coverage, review gates, deck package readiness and blocked external action status.
 9. **Adoption Insights** (`/insights`): constrained adoption analytics, review-gated capability recommendations, the customer review reports and a filterable leadership report package.
 
-The two scenarios are Stadtwerke Aurich (`/accounts/acct-005`, scenario A) and Brightmoor & Associates (`/accounts/acct-004`, scenario B). [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) walks through both in ten minutes.
+The two scenarios are Stadtwerke Musterstadt (`/accounts/acct-005`, scenario A) and Brightmoor & Associates (`/accounts/acct-004`, scenario B). [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) walks through both in ten minutes.
 
 ## How the scores and recommendations work
 
@@ -129,7 +129,7 @@ See [`data/README.md`](data/README.md).
 ## How a Legal Engineer would use this in a customer meeting
 
 Open the customer review for the account at the start of a quarterly review. For the
-synthetic Stadtwerke Aurich account it shows three objectives met, repeat use at six to
+synthetic Stadtwerke Musterstadt account it shows three objectives met, repeat use at six to
 seven of eight eligible lawyers over three complete periods, and median time to a
 signed-off result down from 167.5 to 90 active minutes with fewer quality failures
 and 30 of 31 attempts accepted against 10 of 12 before. You say what

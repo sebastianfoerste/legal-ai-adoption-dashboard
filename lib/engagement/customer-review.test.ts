@@ -100,7 +100,7 @@ describe("report route", () => {
     expect(response.headers.get("content-disposition")).toContain(
       "synthetic-customer-review-acct-005.md",
     );
-    expect(await response.text()).toContain("# Synthetic customer review: Stadtwerke Aurich");
+    expect(await response.text()).toContain("# Synthetic customer review: Stadtwerke Musterstadt");
   });
 
   it("returns 404 for an unknown account", async () => {
@@ -137,9 +137,9 @@ describe("product feedback and evidence in the customer review", () => {
   });
 
   it("keeps product evidence out of the expansion decision", () => {
-    const aurich = review("acct-005");
-    expect(aurich.productEvidence.map((view) => view.deliveryStatus)).toEqual(["not_started", "rejected"]);
-    expect(aurich.expansion.recommendation).toBe("expand");
-    expect(aurich.expansion.criteria.map((c) => c.key)).not.toContain("product_evidence");
+    const musterstadt = review("acct-005");
+    expect(musterstadt.productEvidence.map((view) => view.deliveryStatus)).toEqual(["not_started", "rejected"]);
+    expect(musterstadt.expansion.recommendation).toBe("expand");
+    expect(musterstadt.expansion.criteria.map((c) => c.key)).not.toContain("product_evidence");
   });
 });
