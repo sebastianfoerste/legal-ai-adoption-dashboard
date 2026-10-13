@@ -381,7 +381,8 @@
 cd legal-ai-workshop-kit
 make generate-pilot</code></pre>
 <h2 id="readme--what the demo produces">What the demo produces</h2>
-<p>The demo scores candidate workflows through a prioritization matrix and recommends a first pilot based on impact, frequency, AI fit, and review feasibility.</p>
+<p><code>make generate-pilot</code> reads the synthetic discovery intake in <a href="../examples/synthetic-input.json"><code>examples/synthetic-input.json</code></a> and writes <a href="../examples/generated-pilot-plan.md"><code>examples/generated-pilot-plan.md</code></a>. The script ranks the candidate workflows by estimated hours saved per week (time per instance minus verification time, multiplied by frequency), takes the top one, and fills in a staged enablement plan and communication templates for it. On the synthetic intake it selects NDA first-pass review at an estimated 7.3 hours per week. The time figures are the intake's estimates, not measurements.</p>
+<p>Scoring the candidates through the prioritization matrix on impact, frequency, AI fit and review feasibility is a separate, manual step. <a href="../examples/sample-output.md"><code>examples/sample-output.md</code></a> works it through for the same intake:</p>
 <pre><code class="language-text"># Sample output: prioritization result
 
 | Candidate workflow | Impact | Frequency | AI fit | Review feasibility | Total |
