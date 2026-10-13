@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml)
 
-CI: passing. Deterministic tests cover health scoring, adoption denominators, intervention states, the value verdict, expansion decisions, Adoption Cockpit analytics and synthetic data contracts.
+Deterministic tests cover health scoring, adoption denominators, intervention states, the value verdict, expansion decisions, Adoption Cockpit analytics and synthetic data contracts.
 
 See [CASE_STUDY.md](CASE_STUDY.md) for what the project demonstrates and its limits, and [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for a ten-minute walk-through.
 
