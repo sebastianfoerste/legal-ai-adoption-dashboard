@@ -10,4 +10,4 @@ The dashboard repository is the canonical working repository for adoption analyt
 
 The contract allows synthetic operational metadata only. Raw document text, prompts, comments, legal conclusions, client identifiers and personal data remain outside the allowlist. The dashboard cannot mutate permissions or workflow state in another application.
 
-The former workshop repository remains a read-only public release surface. Run `make workshop-export` to create a local path-export branch after the combined gate passes. The script never pushes.
+The former standalone workshop repository, [legal-ai-workshop-kit](https://github.com/sebastianfoerste/legal-ai-workshop-kit), is archived and receives no further releases. The kit is maintained only in `workshop-kit/`.

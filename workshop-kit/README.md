@@ -1,4 +1,4 @@
-# legal-ai-workshop-kit
+# Legal AI workshop kit
 
 Enablement materials for rolling out a legal-AI tool in a law firm or an in-house legal team: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.
 
@@ -9,8 +9,8 @@ All examples are synthetic. The repository is a public-safe portfolio project an
 ## Run it
 
 ```bash
-git clone https://github.com/sebastianfoerste/legal-ai-workshop-kit
-cd legal-ai-workshop-kit
+git clone https://github.com/sebastianfoerste/legal-ai-adoption-dashboard
+cd legal-ai-adoption-dashboard/workshop-kit
 make generate-pilot
 ```
 

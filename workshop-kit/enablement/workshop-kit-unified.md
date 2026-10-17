@@ -6,7 +6,7 @@
 
 ## Table of Contents
 
-- [legal-ai-workshop-kit](#readme)
+- [Legal AI workshop kit](#readme)
 - [What this proves](#what-this-proves)
 - [Reviewer guide](#docs-reviewer-guide)
 - [Customer workflow](#docs-customer-workflow)
@@ -33,7 +33,7 @@
 <div id="readme">
 
 
-## legal-ai-workshop-kit
+## Legal AI workshop kit
 
 
 
@@ -46,8 +46,8 @@ All examples are synthetic. The repository is a public-safe portfolio project an
 ## Run it
 
 ```bash
-git clone https://github.com/sebastianfoerste/legal-ai-workshop-kit
-cd legal-ai-workshop-kit
+git clone https://github.com/sebastianfoerste/legal-ai-adoption-dashboard
+cd legal-ai-adoption-dashboard/workshop-kit
 make generate-pilot
 ```
 
@@ -113,7 +113,7 @@ All examples are generic or synthetic. No real client, firm, matter, or personal
 
 Building a legal-AI tool is only the start. Adoption depends on whether a skeptical
 partnership can see the workflow, the review gate, and the commercial reason to use it.
-This repo packages that adoption layer.
+This kit packages that adoption layer.
 
 | Document | Responsibility it demonstrates |
 | --- | --- |

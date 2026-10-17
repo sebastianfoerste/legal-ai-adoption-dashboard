@@ -1,4 +1,4 @@
-# Case study — legal-ai-workshop-kit
+# Case study — Legal AI workshop kit
 
 > Adoption starts with a credible room: partners and associates who leave a workshop with a prioritised plan, not a wow moment. Synthetic data only; not legal advice.
 
