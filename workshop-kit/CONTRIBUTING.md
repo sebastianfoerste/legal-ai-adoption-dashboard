@@ -11,7 +11,7 @@ This is a personal, public-safe prototype. Issues and corrections are welcome.
 
 ## Where the kit is maintained
 
-The kit is maintained in [`workshop-kit/`](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/tree/main/workshop-kit) of the legal-ai-adoption-dashboard repository. The standalone [legal-ai-workshop-kit](https://github.com/sebastianfoerste/legal-ai-workshop-kit) repository receives releases from there. Open issues and pull requests against the dashboard repository.
+The kit is maintained in [`workshop-kit/`](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/tree/main/workshop-kit) of the legal-ai-adoption-dashboard repository. The standalone [legal-ai-workshop-kit](https://github.com/sebastianfoerste/legal-ai-workshop-kit) repository is archived and no longer receives updates. Open issues and pull requests against the dashboard repository.
 
 ## Working on it
 
