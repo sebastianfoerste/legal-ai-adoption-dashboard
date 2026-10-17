@@ -2,11 +2,13 @@
 
 [![CI](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/actions/workflows/ci.yml)
 
-CI: passing. Deterministic tests cover health scoring, adoption denominators, intervention states, the value verdict, expansion decisions, Adoption Cockpit analytics and synthetic data contracts.
+Deterministic tests cover health scoring, adoption denominators, intervention states, the value verdict, expansion decisions, Adoption Cockpit analytics and synthetic data contracts.
 
 See [CASE_STUDY.md](CASE_STUDY.md) for what the project demonstrates and its limits, and [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for a ten-minute walk-through.
 
-![demo](docs/demo.png)
+![Top of the Account Health page: navigation, framing questions, filters and the portfolio status strip](docs/demo.png)
+
+*Screenshot of the running app (`pnpm build && pnpm start`), top of the Account Health page (`/`), synthetic data.*
 
 A mock dashboard for steering legal-AI adoption inside a law firm or in-house team.
 It shows how a Customer Success Manager, Legal Engineer, or Innovation lead watches
@@ -96,7 +98,7 @@ Pages:
 8. **Adoption Cockpit review summary** (`/`): synthetic product-surface coverage, review gates, deck package readiness and blocked external action status.
 9. **Adoption Insights** (`/insights`): constrained adoption analytics, review-gated capability recommendations, the customer review reports and a filterable leadership report package.
 
-The two scenarios are Stadtwerke Aurich (`/accounts/acct-005`, scenario A) and Brightmoor & Associates (`/accounts/acct-004`, scenario B). [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) walks through both in ten minutes.
+The two scenarios are Stadtwerke Musterstadt (`/accounts/acct-005`, scenario A) and Brightmoor & Associates (`/accounts/acct-004`, scenario B). [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) walks through both in ten minutes.
 
 ## How the scores and recommendations work
 
@@ -108,15 +110,17 @@ The two scenarios are Stadtwerke Aurich (`/accounts/acct-005`, scenario A) and B
 
 ## Screenshots
 
-**Account Health**
+Screenshots of the running app (`pnpm build && pnpm start`) with the synthetic data in `data/`, captured on 13 October 2026.
+
+**Account Health** (`/`), per-account cards; the Adoption Cockpit panel above them is not shown
 
 ![Account Health](docs/screenshots/account-health.png)
 
-**Adoption Blockers**
+**Adoption Blockers** (`/blockers`), full page
 
 ![Adoption Blockers](docs/screenshots/blockers.png)
 
-**Product Feedback Queue**
+**Product Feedback Queue** (`/feedback`), full page
 
 ![Product Feedback Queue](docs/screenshots/feedback.png)
 
@@ -129,7 +133,7 @@ See [`data/README.md`](data/README.md).
 ## How a Legal Engineer would use this in a customer meeting
 
 Open the customer review for the account at the start of a quarterly review. For the
-synthetic Stadtwerke Aurich account it shows three objectives met, repeat use at six to
+synthetic Stadtwerke Musterstadt account it shows three objectives met, repeat use at six to
 seven of eight eligible lawyers over three complete periods, and median time to a
 signed-off result down from 167.5 to 90 active minutes with fewer quality failures
 and 30 of 31 attempts accepted against 10 of 12 before. You say what

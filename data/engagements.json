@@ -163,7 +163,7 @@
     },
     "expansionCase": {
       "proposedScope": "Extend the supplier-contract review playbook to Employment and add six seats for procurement counsel, after a one-period pilot with three Employment lawyers.",
-      "basedOnWorkflowId": "wf-aurich-supplier-review",
+      "basedOnWorkflowId": "wf-musterstadt-supplier-review",
       "targetGroups": ["Employment"],
       "additionalDeliveryHoursPerWeek": 4
     },
@@ -171,21 +171,21 @@
       {
         "id": "obj-a1",
         "statement": "At least 6 of the 8 eligible Corporate lawyers use the supplier-contract review in two or more weeks of each reporting period.",
-        "workflowId": "wf-aurich-supplier-review",
+        "workflowId": "wf-musterstadt-supplier-review",
         "metric": "repeat_users_min",
         "target": 6
       },
       {
         "id": "obj-a2",
         "statement": "Median time to a signed-off issues list stays below 100 minutes, review and correction included.",
-        "workflowId": "wf-aurich-supplier-review",
+        "workflowId": "wf-musterstadt-supplier-review",
         "metric": "median_minutes_max",
         "target": 100
       },
       {
         "id": "obj-a3",
         "statement": "Quality failures on no more than 10% of sampled results.",
-        "workflowId": "wf-aurich-supplier-review",
+        "workflowId": "wf-musterstadt-supplier-review",
         "metric": "quality_failure_rate_max",
         "target": 0.1
       }

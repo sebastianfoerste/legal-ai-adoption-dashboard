@@ -1,6 +1,6 @@
-# legal-ai-workshop-kit
+# Legal AI workshop kit
 
-A content repo, not an application. It holds the deliverables for running a legal-AI
+A content folder in the legal-ai-adoption-dashboard repository, not an application. It holds the deliverables for running a legal-AI
 rollout with a law firm or in-house team: session agendas, discovery tools, objection
 handling, and feedback templates. No code to run.
 
@@ -19,5 +19,6 @@ handling, and feedback templates. No code to run.
 - Each document opens with a one-line "Use this when…" so a non-developer routes correctly.
 
 ## Check
-`make check` verifies every required document exists and that none contains placeholder
-markers. It is the only gate; run it before committing.
+`make check` in this folder verifies every required document exists and that none contains
+placeholder markers. Run it, and the repository's root `make check` (which includes it and the
+private-data boundary check), before committing.

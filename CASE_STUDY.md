@@ -66,7 +66,7 @@ review dates. It renders as a page and downloads as Markdown.
 
 ## Two scenarios
 
-**Scenario A, Stadtwerke Aurich (in-house).** Seven of eight eligible lawyers activated
+**Scenario A, Stadtwerke Musterstadt (in-house).** Seven of eight eligible lawyers activated
 after training; two periods later one of eight was a repeat user. Shadowed reviews and a
 time sample showed that lawyers rebuilt the output into their own checklist, so the tool
 saved no time. The specialist mapped the output to that checklist and ran two clinics.
