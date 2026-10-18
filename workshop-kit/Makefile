@@ -1,11 +1,15 @@
-.PHONY: check generate-pilot compile
+PYTHON ?= python3
+.PHONY: check test generate-pilot compile
 
 generate-pilot:
-	python scripts/generate_pilot_plan.py examples/synthetic-input.json examples/generated-pilot-plan.md
+	$(PYTHON) scripts/generate_pilot_plan.py examples/synthetic-input.json examples/generated-pilot-plan.md
 
 compile:
-	python scripts/compile_kit.py
+	$(PYTHON) scripts/compile_kit.py
 
-check: generate-pilot compile
+test:
+	PYTHONPATH=scripts $(PYTHON) -m unittest discover -s tests -q
+
+check: test generate-pilot compile
 	sh scripts/check.sh
-	python scripts/link_checker.py
+	$(PYTHON) scripts/link_checker.py

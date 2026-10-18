@@ -47,8 +47,12 @@ jobs:
       - name: Run feedback-loop tests and output check
         run: make feedback-check
 
-      - name: Run workshop-kit check
-        run: make workshop-check
+      # The check regenerates the pilot plan and the unified kit; the committed files must match.
+      - name: Run workshop-kit check and output check
+        run: |
+          make workshop-check
+          git diff --exit-code -- workshop-kit/examples/generated-pilot-plan.md workshop-kit/enablement/workshop-kit-unified.md workshop-kit/enablement/workshop-kit-unified.html \
+            || { echo "STALE: regenerated workshop-kit files differ from the committed ones; run make workshop-check and commit them"; exit 1; }
 
       # The build must not need network access: no font or asset is fetched at build time.
       - name: Run Next.js build

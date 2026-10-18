@@ -16,7 +16,7 @@ The kit is maintained in [`workshop-kit/`](https://github.com/sebastianfoerste/l
 ## Working on it
 
 ```bash
-make check    # regenerates examples/generated-pilot-plan.md and the unified kit, then checks files and links
+make check    # runs the unit test, regenerates examples/generated-pilot-plan.md and the unified kit, then checks files and links
 ```
 
 Commit the regenerated files with your change. `make check` must pass before any PR.
