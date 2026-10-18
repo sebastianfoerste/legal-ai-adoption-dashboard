@@ -2,8 +2,9 @@
 > counted reach twice, and any "Status" it prints was assigned by rank with no delivery record
 > behind it; no requirement named here was shipped. Corrected output:
 > [`product-feedback-loop/examples/product-memo.md`](../product-feedback-loop/examples/product-memo.md).
-> `prioritized-backlog.json` in this folder is the output of the same superseded run, unchanged
-> except that its synthetic account names were renamed Firm A to Firm E on 18 October 2026.
+> The memo below and `prioritized-backlog.json` in this folder are the output of the same
+> superseded run, unchanged except that their synthetic account names were renamed Firm A to
+> Firm E on 18 October 2026.
 
 # What we heard, what we changed
 
