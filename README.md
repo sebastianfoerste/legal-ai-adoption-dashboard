@@ -28,7 +28,6 @@ of it: an account whose stalled adoption was diagnosed and recovered, and a heav
 account where expansion is inappropriate.
 
 **Public-safety posture:** synthetic account data only, source provenance for dashboard inputs, review-gated legal outputs, and no legal advice.
-Portfolio proof contract: [`docs/portfolio-proof.json`](docs/portfolio-proof.json).
 
 **Live demo:** https://legal-ai-adoption-dashboard.vercel.app
 
