@@ -6,7 +6,7 @@ The top themes we heard, the requirement each maps to, and its recorded status. 
 
 ## 1. No audit trail for AI-assisted edits
 
-- **What we heard:** “Without an exportable audit log this fails our internal review.” (raised by 3 accounts: Globex LLP (synthetic), Initech Legal (synthetic), Soylent Partners (synthetic))
+- **What we heard:** “Without an exportable audit log this fails our internal review.” (raised by 3 accounts: Firm A (synthetic), Firm B (synthetic), Firm D (synthetic))
 - **Class / severity / reach:** quality control, blocker, 3 accounts · score 21.6
 - **Requirement (chg-003):** Append-only log of every AI-assisted edit with author, time and change, exportable by an administrator.
 - **Decision:** prioritised, confidence medium. A control failure raised by three accounts and first in the commercial ranking. No study observation yet shows how the record is used in a review.
@@ -16,7 +16,7 @@ The top themes we heard, the requirement each maps to, and its recorded status. 
 
 ## 2. Can't restrict who approves sensitive matters
 
-- **What we heard:** “We need approval permissions by practice group.” (raised by 2 accounts: Initech Legal (synthetic), Soylent Partners (synthetic))
+- **What we heard:** “We need approval permissions by practice group.” (raised by 2 accounts: Firm B (synthetic), Firm D (synthetic))
 - **Class / severity / reach:** quality control, high, 2 accounts · score 11.4
 - **Requirement (chg-004):** Approval permissions scoped by practice group and matter value.
 - **Decision:** prioritised, confidence low. A control gap raised by two accounts. The rule customers need (role, group, value) is not yet specified by any of them.
@@ -26,7 +26,7 @@ The top themes we heard, the requirement each maps to, and its recorded status. 
 
 ## 3. Citations not always traceable to the source
 
-- **What we heard:** “I can't trust a summary I can't click through to the clause.” (raised by 2 accounts: Hooli Chambers (synthetic), Umbrella Legal (synthetic))
+- **What we heard:** “I can't trust a summary I can't click through to the clause.” (raised by 2 accounts: Firm C (synthetic), Firm E (synthetic))
 - **Class / severity / reach:** quality control, medium, 2 accounts · score 5.3
 - **Requirement (chg-009):** Each list item carries the clause number and a link to the clause.
 - **Decision:** prioritised, confidence medium. A verification gap seen in one task session and raised by two account feedback items.

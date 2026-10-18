@@ -10,9 +10,9 @@
       "requirement": "Exportable, append-only audit log of every AI-assisted edit (who, what, when).",
       "representative_quote": "Without an exportable audit log this fails our internal review.",
       "raised_by": [
-        "Globex LLP (synthetic)",
-        "Initech Legal (synthetic)",
-        "Soylent Partners (synthetic)"
+        "Firm A (synthetic)",
+        "Firm B (synthetic)",
+        "Firm D (synthetic)"
       ]
     },
     {
@@ -24,8 +24,8 @@
       "requirement": "Role-based approval permissions, scoped by practice group and matter value.",
       "representative_quote": "We need approval permissions by practice group.",
       "raised_by": [
-        "Initech Legal (synthetic)",
-        "Soylent Partners (synthetic)"
+        "Firm B (synthetic)",
+        "Firm D (synthetic)"
       ]
     },
     {
@@ -37,8 +37,8 @@
       "requirement": "Guided in-product onboarding flow with role-specific first tasks.",
       "representative_quote": "The first session is great, then people drift back to old habits.",
       "raised_by": [
-        "Globex LLP (synthetic)",
-        "Hooli Chambers (synthetic)"
+        "Firm A (synthetic)",
+        "Firm C (synthetic)"
       ]
     },
     {
@@ -50,8 +50,8 @@
       "requirement": "Click-through citation grounding: every cited passage links to the source location.",
       "representative_quote": "I can't trust a summary I can't click through to the clause.",
       "raised_by": [
-        "Hooli Chambers (synthetic)",
-        "Umbrella Legal (synthetic)"
+        "Firm C (synthetic)",
+        "Firm E (synthetic)"
       ]
     },
     {
@@ -63,7 +63,7 @@
       "requirement": "Weekly per-team usage view with low-usage warnings.",
       "representative_quote": "I'd like to see which teams are actually using it each week.",
       "raised_by": [
-        "Umbrella Legal (synthetic)"
+        "Firm E (synthetic)"
       ]
     }
   ]

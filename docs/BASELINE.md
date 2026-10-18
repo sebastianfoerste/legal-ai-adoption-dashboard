@@ -41,7 +41,7 @@ extended, not rebuilt.
 
 ## 4. Disconnected records
 
-- The feedback pipeline ranked five accounts (Globex, Initech and others) that do not exist
+- The feedback pipeline ranked five accounts (Firm A to Firm E, synthetic) that do not exist
   in the dashboard, whose five accounts (Meridian & Cole and others) it never read.
 - A dashboard feedback item had no problem statement, no decision, no acceptance criteria
   and no delivery record. Its trail ended at "shared with Product".

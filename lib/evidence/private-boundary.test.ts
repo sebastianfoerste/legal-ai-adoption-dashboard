@@ -225,11 +225,11 @@ describe("repository", () => {
   });
 
   it("fails on a denylisted name in a tracked file, without printing the name", () => {
-    // "Globex LLP" is an invented account in the synthetic interviews.
-    const result = run(listFile("hit.txt", "Nobody Atall\nglobex llp\n"));
+    // "Firm A (synthetic)" is an invented account in the synthetic interviews.
+    const result = run(listFile("hit.txt", "Nobody Atall\nfirm a (synthetic)\n"));
     expect(result.status).toBe(1);
     expect(result.stderr).toContain("product-feedback-loop/data/interviews.json: matches denylist entry 2");
-    expect(result.stderr.toLowerCase()).not.toContain("globex");
+    expect(result.stderr).not.toMatch(/\bfirm a\b/i);
   });
 
   it("refuses a denylist kept inside the repository, and an empty one", () => {
