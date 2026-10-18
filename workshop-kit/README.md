@@ -60,4 +60,4 @@ All examples are generic or synthetic. No real client, firm, matter, or personal
 
 ## Check
 
-`make check` verifies that the required materials exist.
+`make check` regenerates `examples/generated-pilot-plan.md` and the unified kit, checks that the required documents exist and contain no placeholder markers, and checks relative links. Commit the regenerated files with your change.

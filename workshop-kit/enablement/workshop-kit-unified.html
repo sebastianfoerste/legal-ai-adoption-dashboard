@@ -414,7 +414,7 @@ make generate-pilot</code></pre>
 <h2 id="readme--data statement">Data statement</h2>
 <p>All examples are generic or synthetic. No real client, firm, matter, or personal data appears anywhere in this repo.</p>
 <h2 id="readme--check">Check</h2>
-<p><code>make check</code> verifies that the required materials exist.</p>
+<p><code>make check</code> regenerates <code>examples/generated-pilot-plan.md</code> and the unified kit, checks that the required documents exist and contain no placeholder markers, and checks relative links. Commit the regenerated files with your change.</p>
         </section>
         
 
@@ -489,7 +489,7 @@ make generate-pilot</code></pre>
 </ol>
 <p>the floor rule: never pilot a workflow you cannot cheaply verify, regardless of impact. That single rule captures the trust-first judgment behind the whole kit.</p>
 <p>What to check: the content is usable as-is, the human-review gate is explicit everywhere, and nothing frames the tool as replacing a lawyer.</p>
-<p>Run <code>make check</code> to confirm every document is present and none is left half-written.</p>
+<p>Run <code>make check</code> to regenerate the generated pilot plan and the unified kit, and to confirm every document is present, none is left half-written and every relative link resolves.</p>
         </section>
         
 

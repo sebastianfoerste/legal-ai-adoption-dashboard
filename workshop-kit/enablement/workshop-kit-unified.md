@@ -97,7 +97,7 @@ All examples are generic or synthetic. No real client, firm, matter, or personal
 
 ## Check
 
-`make check` verifies that the required materials exist.
+`make check` regenerates `examples/generated-pilot-plan.md` and the unified kit, checks that the required documents exist and contain no placeholder markers, and checks relative links. Commit the regenerated files with your change.
 
 
 </div>
@@ -159,7 +159,8 @@ A five-minute path for a reviewer who is not going to read every document.
 What to check: the content is usable as-is, the human-review gate is explicit everywhere,
 and nothing frames the tool as replacing a lawyer.
 
-Run `make check` to confirm every document is present and none is left half-written.
+Run `make check` to regenerate the generated pilot plan and the unified kit, and to confirm
+every document is present, none is left half-written and every relative link resolves.
 
 
 </div>
