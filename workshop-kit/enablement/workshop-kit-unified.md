@@ -53,7 +53,7 @@ make generate-pilot
 
 ## What the demo produces
 
-`make generate-pilot` reads the synthetic discovery intake in [`examples/synthetic-input.json`](../examples/synthetic-input.json) and writes [`examples/generated-pilot-plan.md`](../examples/generated-pilot-plan.md). The script ranks the candidate workflows by estimated hours saved per week (time per instance minus verification time, multiplied by frequency), takes the top one, and fills in a staged enablement plan and communication templates for it. On the synthetic intake it selects NDA first-pass review at an estimated 7.3 hours per week. The time figures are the intake's estimates, not measurements.
+`make generate-pilot` reads the synthetic discovery intake in [`examples/synthetic-input.json`](../examples/synthetic-input.json) and writes [`examples/generated-pilot-plan.md`](../examples/generated-pilot-plan.md). The script ranks the candidate workflows by estimated hours saved per week (time per instance minus verification time, multiplied by frequency), takes the top one, and fills in a staged enablement plan and communication templates for it. On the synthetic intake it selects NDA first-pass review at an estimated 7.3 hours per week. A frequency of "daily" with no count is read as five instances per week, one per working day, which puts Document / issue summary at 0.8 hours per week. The time figures are the intake's estimates, not measurements.
 
 Scoring the candidates through the prioritization matrix on impact, frequency, AI fit and review feasibility is a separate, manual step. [`examples/sample-output.md`](../examples/sample-output.md) works it through for the same intake. Its heading and score table:
 

@@ -4,15 +4,23 @@ import re
 import sys
 from pathlib import Path
 
+WORKING_DAYS_PER_WEEK = 5.0
+
 def parse_frequency(freq_str):
+    """Return the estimated number of instances per week."""
     freq_str = freq_str.lower()
+    # "daily", "per day", "every working day"; not "days" or "Monday".
+    is_daily = re.search(r'\b(daily|day)\b', freq_str) is not None
     # Extract numbers (handles ranges like "10-15" or single values like "8")
     numbers = [float(x) for x in re.findall(r'\d+\.?\d*', freq_str)]
     if not numbers:
-        return 0.0
+        # Assumption: a frequency of "daily" with no count means one instance
+        # per working day, so 5 instances per week. Any other text without a
+        # number cannot be estimated and counts as 0.
+        return WORKING_DAYS_PER_WEEK if is_daily else 0.0
     avg = sum(numbers) / len(numbers)
-    if "daily" in freq_str or "day" in freq_str:
-        return avg * 5.0  # 5 working days in a week
+    if is_daily:
+        return avg * WORKING_DAYS_PER_WEEK
     return avg
 
 def parse_duration_to_mins(dur_str):

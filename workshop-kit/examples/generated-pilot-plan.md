@@ -30,7 +30,7 @@ We analyzed the candidate workflows submitted in the discovery intake and select
    * Impact: 2.0 hours/week saved
 5. **Document / issue summary**
    * Frequency: daily | Net saving: 10 mins/instance
-   * Impact: 0.0 hours/week saved
+   * Impact: 0.8 hours/week saved
 
 ---
 
