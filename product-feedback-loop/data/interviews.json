@@ -4,7 +4,7 @@
   "interviews": [
     {
       "origin": { "kind": "synthetic_fixture" },
-      "account": "Globex LLP (synthetic)",
+      "account": "Firm A (synthetic)",
       "role": "Knowledge & Innovation Partner",
       "arr_band": "250k-1m",
       "renewal_risk": "medium",
@@ -15,7 +15,7 @@
     },
     {
       "origin": { "kind": "synthetic_fixture" },
-      "account": "Initech Legal (synthetic)",
+      "account": "Firm B (synthetic)",
       "role": "Director of Legal Operations",
       "arr_band": ">1m",
       "renewal_risk": "high",
@@ -26,7 +26,7 @@
     },
     {
       "origin": { "kind": "synthetic_fixture" },
-      "account": "Hooli Chambers (synthetic)",
+      "account": "Firm C (synthetic)",
       "role": "Managing Associate",
       "arr_band": "50k-250k",
       "renewal_risk": "low",
@@ -37,7 +37,7 @@
     },
     {
       "origin": { "kind": "synthetic_fixture" },
-      "account": "Soylent Partners (synthetic)",
+      "account": "Firm D (synthetic)",
       "role": "General Counsel",
       "arr_band": ">1m",
       "renewal_risk": "medium",
@@ -48,7 +48,7 @@
     },
     {
       "origin": { "kind": "synthetic_fixture" },
-      "account": "Umbrella Legal (synthetic)",
+      "account": "Firm E (synthetic)",
       "role": "Innovation Lead",
       "arr_band": "50k-250k",
       "renewal_risk": "low",

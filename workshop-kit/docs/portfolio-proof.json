@@ -1,8 +1,8 @@
 {
   "schema_version": "portfolio-proof.v1",
-  "repository": "legal-ai-workshop-kit",
-  "github_url": "https://github.com/sebastianfoerste/legal-ai-workshop-kit",
-  "pinned_on_github": true,
+  "repository": "legal-ai-adoption-dashboard/workshop-kit",
+  "github_url": "https://github.com/sebastianfoerste/legal-ai-adoption-dashboard/tree/main/workshop-kit",
+  "pinned_on_github": false,
   "reviewer_path": [
     "README.md",
     "docs/reviewer-guide.md",

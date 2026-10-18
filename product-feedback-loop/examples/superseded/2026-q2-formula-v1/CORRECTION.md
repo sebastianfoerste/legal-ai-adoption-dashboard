@@ -2,7 +2,7 @@
 
 **Use this when** you need to see what the feedback pipeline reported before the correction of 6 October 2026.
 
-The three files in this folder are the outputs of formula version 1, unchanged except for the correction note at the top of the two Markdown files. `prioritized-backlog.json` is byte-identical to the earlier output.
+The three files in this folder are the outputs of formula version 1, unchanged except for the correction note at the top of the two Markdown files and the synthetic account names. On 18 October 2026 the five placeholder accounts were renamed Firm A to Firm E (synthetic), in the input and in the two outputs that list them; apart from those names, `prioritized-backlog.json` is byte-identical to the earlier output.
 
 What was wrong:
 

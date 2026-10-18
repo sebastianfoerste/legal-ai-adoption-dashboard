@@ -8,7 +8,7 @@ const measurement = (id: string): ValueMeasurement => {
   if (!found) throw new Error(`missing fixture ${id}`);
   return found;
 };
-const aurich = () => measurement("vm-aurich-supplier-review");
+const musterstadt = () => measurement("vm-musterstadt-supplier-review");
 const brightmoor = () => measurement("vm-brightmoor-spa-draft");
 const hanseatic = () => measurement("vm-hanseatic-dpa-review");
 
@@ -58,10 +58,10 @@ describe("median of per-task totals", () => {
   });
 
   it("differs from the earlier sum of component medians on the scenario fixtures", () => {
-    const baseline = summarizePhase(aurich().baseline);
+    const baseline = summarizePhase(musterstadt().baseline);
     expect(baseline.componentMedians).toEqual({ producing: 25, humanReview: 70, correction: 55 });
     expect(baseline.medianActiveMinutes).toBe(167.5); // reported as 150 before the correction
-    expect(summarizePhase(aurich().followUp as PhaseMeasurement).medianActiveMinutes).toBe(90);
+    expect(summarizePhase(musterstadt().followUp as PhaseMeasurement).medianActiveMinutes).toBe(90);
   });
 
   it("leaves a task without a complete time record out of the median and says so", () => {
@@ -76,7 +76,7 @@ describe("median of per-task totals", () => {
     expect(summary.accepted).toBe(3);
     expect(summary.timedResults).toBe(2);
     expect(summary.medianActiveMinutes).toBe(65);
-    const value = assessValue({ ...aurich(), baseline: phaseOf([task("a", [1, 1, 1])]) });
+    const value = assessValue({ ...musterstadt(), baseline: phaseOf([task("a", [1, 1, 1])]) });
     expect(value.verdict).toBe("unknown");
   });
 
@@ -87,7 +87,7 @@ describe("median of per-task totals", () => {
     expect(summary.duplicatesIgnored).toBe(1);
     expect(summary.medianActiveMinutes).toBe(65);
 
-    const source = aurich();
+    const source = musterstadt();
     const duplicated = assessValue({
       ...source,
       followUp: withTasks(source.followUp, (tasks) => [...tasks, tasks[0], tasks[1]]),
@@ -125,10 +125,10 @@ describe("denominators", () => {
   });
 
   it("separates waiting from active effort", () => {
-    const summary = summarizePhase(aurich().baseline);
+    const summary = summarizePhase(musterstadt().baseline);
     expect(summary.elapsedKnown).toBe(9);
     expect(summary.medianElapsedMinutes).toBeGreaterThan(summary.medianActiveMinutes as number);
-    const value = assessValue(aurich());
+    const value = assessValue(musterstadt());
     expect(value.caveats).toContain(
       "Before the intervention: elapsed and waiting time recorded for 9 of 10 accepted results.",
     );
@@ -166,7 +166,7 @@ describe("component summaries", () => {
   });
 
   it("cannot demonstrate value against a per-task follow-up either", () => {
-    const value = assessValue({ ...aurich(), baseline: { ...hanseatic().baseline, label: "Summary baseline" } });
+    const value = assessValue({ ...musterstadt(), baseline: { ...hanseatic().baseline, label: "Summary baseline" } });
     expect(value.verdict).toBe("unknown");
     expect(value.observedChangeMinutes).toBeNull();
   });
@@ -174,7 +174,7 @@ describe("component summaries", () => {
 
 describe("value verdict", () => {
   it("reports the observed change with both sample sizes", () => {
-    const value = assessValue(aurich());
+    const value = assessValue(musterstadt());
     expect(value.observedChangeMinutes).toBe(-77.5);
     expect(value.observedChangeRatio).toBeCloseTo(-0.463, 3);
     expect(value.observed[0]).toContain("167.5 minutes (10 results)");
@@ -183,7 +183,7 @@ describe("value verdict", () => {
   });
 
   it("is demonstrated when time falls and quality does not get worse", () => {
-    const value = assessValue(aurich());
+    const value = assessValue(musterstadt());
     expect(value).toMatchObject({ verdict: "demonstrated", productivity: "improved", quality: "not_worse" });
     expect(value.baseline.qualityFailureRate).toBeCloseTo(0.3);
     expect(value.followUp?.qualityFailureRate).toBeCloseTo(0.067, 3);
@@ -203,7 +203,7 @@ describe("value verdict", () => {
   });
 
   it("does not count a faster result as value when quality failures rise", () => {
-    const source = aurich();
+    const source = musterstadt();
     const fasterButWorse = assessValue({
       ...source,
       followUp: withTasks(source.followUp, (tasks) =>
@@ -216,7 +216,7 @@ describe("value verdict", () => {
   });
 
   it("does not count a faster median as value when more attempts are abandoned", () => {
-    const source = aurich();
+    const source = musterstadt();
     const abandoned = Array.from({ length: 12 }, (_, index) =>
       task(`extra-${index}`, [20, 20, 0], { status: "abandoned", reworked: null, qualityFailure: null }),
     );
@@ -230,14 +230,14 @@ describe("value verdict", () => {
   });
 
   it("is unknown without a follow-up measurement", () => {
-    const value = assessValue({ ...aurich(), followUp: null });
+    const value = assessValue({ ...musterstadt(), followUp: null });
     expect(value.verdict).toBe("unknown");
     expect(value.missingEvidence).toContain("Follow-up measurement of time to an acceptable result");
     expect(value.financial.status).toBe("not_calculated");
   });
 
   it("is unknown when a sample is too small to compare medians", () => {
-    const source = aurich();
+    const source = musterstadt();
     const value = assessValue({
       ...source,
       baseline: withTasks(source.baseline, (tasks) => tasks.filter((row) => row.status === "accepted").slice(0, 6)),
@@ -247,7 +247,7 @@ describe("value verdict", () => {
   });
 
   it("is unknown when quality failures were not captured", () => {
-    const source = aurich();
+    const source = musterstadt();
     const value = assessValue({
       ...source,
       baseline: withTasks(source.baseline, (tasks) => tasks.map((row) => ({ ...row, qualityFailure: null }))),
@@ -259,7 +259,7 @@ describe("value verdict", () => {
 
 describe("attribution and financial illustration", () => {
   it("states that causation is an assumption without a comparison group", () => {
-    const value = assessValue(aurich());
+    const value = assessValue(musterstadt());
     expect(value.attribution.status).toBe("not_established");
     expect(value.attribution.statement).toContain("assumption, not a finding");
     expect(value.attribution.confounders).toHaveLength(2);
@@ -267,14 +267,14 @@ describe("attribution and financial illustration", () => {
 
   it("reports a comparison group when one exists", () => {
     const value = assessValue({
-      ...aurich(),
+      ...musterstadt(),
       comparisonGroup: { description: "Employment kept the old workflow and did not change." },
     });
     expect(value.attribution.status).toBe("supported_by_comparison");
   });
 
   it("shows the formula and every assumption behind the financial figure", () => {
-    const { financial } = assessValue(aurich());
+    const { financial } = assessValue(musterstadt());
     expect(financial.status).toBe("illustrated");
     // 77.5 / 60 * 380 * 95 = 46,629.17, rounded to the nearest 100
     expect(financial.annualValueEur).toBe(46600);
@@ -284,7 +284,7 @@ describe("attribution and financial illustration", () => {
   });
 
   it("calculates no financial figure without recorded assumptions or without demonstrated value", () => {
-    expect(assessValue({ ...aurich(), financialAssumptions: null }).financial).toMatchObject({
+    expect(assessValue({ ...musterstadt(), financialAssumptions: null }).financial).toMatchObject({
       status: "not_calculated",
       annualValueEur: null,
     });

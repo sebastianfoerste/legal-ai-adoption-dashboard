@@ -1,8 +1,8 @@
 [
   {
-    "id": "vm-aurich-supplier-review",
+    "id": "vm-musterstadt-supplier-review",
     "accountId": "acct-005",
-    "workflowId": "wf-aurich-supplier-review",
+    "workflowId": "wf-musterstadt-supplier-review",
     "workflowName": "Supplier contract first-pass review",
     "practiceGroup": "Corporate",
     "acceptableResultDefinition": "An issues list for one supplier contract that the responsible lawyer signs off without further correction.",

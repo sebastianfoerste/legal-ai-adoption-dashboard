@@ -1,8 +1,8 @@
 [
   {
-    "id": "series-aurich-supplier-review",
+    "id": "series-musterstadt-supplier-review",
     "accountId": "acct-005",
-    "workflowId": "wf-aurich-supplier-review",
+    "workflowId": "wf-musterstadt-supplier-review",
     "workflowName": "Supplier contract first-pass review",
     "practiceGroup": "Corporate",
     "trainingCohort": { "trainedOn": "2026-01-07", "size": 8 },

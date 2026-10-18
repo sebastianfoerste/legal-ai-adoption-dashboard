@@ -345,7 +345,7 @@
         <div class="sidebar-subtitle">Workshop Kit Playbook</div>
         <nav>
             <ul>
-                <li><a href="#readme" id="link-readme">legal-ai-workshop-kit</a></li>
+                <li><a href="#readme" id="link-readme">Legal AI workshop kit</a></li>
 <li><a href="#what-this-proves" id="link-what-this-proves">What this proves</a></li>
 <li><a href="#docs-reviewer-guide" id="link-docs-reviewer-guide">Reviewer guide</a></li>
 <li><a href="#docs-customer-workflow" id="link-docs-customer-workflow">Customer workflow</a></li>
@@ -372,22 +372,26 @@
     <main>
         
         <section id="readme">
-            <h1>legal-ai-workshop-kit</h1>
-            <p>Enablement materials for legal AI adoption: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.</p>
-<p>All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice. Portfolio proof contract: <a href="../docs/portfolio-proof.json"><code>docs/portfolio-proof.json</code></a>.</p>
+            <h1>Legal AI workshop kit</h1>
+            <p>Enablement materials for rolling out a legal-AI tool in a law firm or an in-house legal team: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.</p>
+<p>The kit is for the people who run such a rollout: Legal Engineers, Customer Success Managers and innovation leads who prepare the sessions, work with the partners and associates who will use the tool, and report friction back to the product team.</p>
+<p>All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice.</p>
 <h2 id="readme--run it">Run it</h2>
-<pre><code class="language-text">git clone https://github.com/sebastianfoerste/legal-ai-workshop-kit
-cd legal-ai-workshop-kit
+<pre><code class="language-text">git clone https://github.com/sebastianfoerste/legal-ai-adoption-dashboard
+cd legal-ai-adoption-dashboard/workshop-kit
 make generate-pilot</code></pre>
 <h2 id="readme--what the demo produces">What the demo produces</h2>
-<p>The demo scores candidate workflows through a prioritization matrix and recommends a first pilot based on impact, frequency, AI fit, and review feasibility.</p>
-<pre><code class="language-text"># Sample output: prioritization result
+<p><code>make generate-pilot</code> reads the synthetic discovery intake in <a href="../examples/synthetic-input.json"><code>examples/synthetic-input.json</code></a> and writes <a href="../examples/generated-pilot-plan.md"><code>examples/generated-pilot-plan.md</code></a>. The script ranks the candidate workflows by estimated hours saved per week (time per instance minus verification time, multiplied by frequency), takes the top one, and fills in a staged enablement plan and communication templates for it. On the synthetic intake it selects NDA first-pass review at an estimated 7.3 hours per week. A frequency of "daily" with no count is read as five instances per week, one per working day, which puts Document / issue summary at 0.8 hours per week. A count per day, per workday or per weekday is multiplied by five, so "2 per workday" and "twice daily" both read as ten per week. The time figures are the intake's estimates, not measurements.</p>
+<p>Scoring the candidates through the prioritization matrix on impact, frequency, AI fit and review feasibility is a separate, manual step. <a href="../examples/sample-output.md"><code>examples/sample-output.md</code></a> works it through for the same intake. Its heading and score table:</p>
+<pre><code class="language-text"># Sample output — prioritization result
 
 | Candidate workflow | Impact | Frequency | AI fit | Review feasibility | Total |
 |---|---:|---:|---:|---:|---:|
 | NDA first-pass review | 4 | 5 | 5 | 5 | **19** |
 | Clause comparison across versions | 4 | 4 | 5 | 5 | **18** |
-| Document / issue summary | 3 | 5 | 4 | 4 | **16** |</code></pre>
+| Document / issue summary | 3 | 5 | 4 | 4 | **16** |
+| DPA review (GDPR) | 4 | 3 | 3 | 3 | **13** |
+| Litigation research memo | 5 | 3 | 3 | 2 | **13** |</code></pre>
 <h2 id="readme--pilot-to-adoption path">Pilot-to-adoption path</h2>
 <p>This is the legal-AI rollout reviewer path:</p>
 <ol>
@@ -412,13 +416,13 @@ make generate-pilot</code></pre>
 <h2 id="readme--data statement">Data statement</h2>
 <p>All examples are generic or synthetic. No real client, firm, matter, or personal data appears anywhere in this repo.</p>
 <h2 id="readme--check">Check</h2>
-<p><code>make check</code> verifies that the required materials exist.</p>
+<p><code>make check</code> regenerates <code>examples/generated-pilot-plan.md</code> and the unified kit, checks that the required documents exist and contain no placeholder markers, and checks relative links. Commit the regenerated files with your change.</p>
         </section>
         
 
         <section id="what-this-proves">
             <h1>What this proves</h1>
-            <p>Building a legal-AI tool is only the start. Adoption depends on whether a skeptical partnership can see the workflow, the review gate, and the commercial reason to use it. This repo packages that adoption layer.</p>
+            <p>Building a legal-AI tool is only the start. Adoption depends on whether a skeptical partnership can see the workflow, the review gate, and the commercial reason to use it. This kit packages that adoption layer.</p>
 <div class="table-container"><table>
 <thead><tr>
 <th>Document</th>
@@ -487,7 +491,7 @@ make generate-pilot</code></pre>
 </ol>
 <p>the floor rule: never pilot a workflow you cannot cheaply verify, regardless of impact. That single rule captures the trust-first judgment behind the whole kit.</p>
 <p>What to check: the content is usable as-is, the human-review gate is explicit everywhere, and nothing frames the tool as replacing a lawyer.</p>
-<p>Run <code>make check</code> to confirm every document is present and none is left half-written.</p>
+<p>Run <code>make check</code> to regenerate the generated pilot plan and the unified kit, and to confirm every document is present, none is left half-written and every relative link resolves.</p>
         </section>
         
 

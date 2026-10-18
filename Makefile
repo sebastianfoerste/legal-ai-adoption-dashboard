@@ -1,4 +1,4 @@
-.PHONY: install dev test lint build check dashboard-check contract-check boundary-check feedback-check workshop-check workshop-export
+.PHONY: install dev test lint build check dashboard-check contract-check boundary-check feedback-check workshop-check
 
 install: ; pnpm install
 dev: ; pnpm dev
@@ -21,8 +21,5 @@ feedback-check:
 
 workshop-check:
 	$(MAKE) -C workshop-kit check
-
-workshop-export:
-	scripts/export-workshop-kit.sh
 
 check: dashboard-check contract-check boundary-check feedback-check workshop-check

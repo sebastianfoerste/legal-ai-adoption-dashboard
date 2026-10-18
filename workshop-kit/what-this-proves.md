@@ -2,7 +2,7 @@
 
 Building a legal-AI tool is only the start. Adoption depends on whether a skeptical
 partnership can see the workflow, the review gate, and the commercial reason to use it.
-This repo packages that adoption layer.
+This kit packages that adoption layer.
 
 | Document | Responsibility it demonstrates |
 | --- | --- |

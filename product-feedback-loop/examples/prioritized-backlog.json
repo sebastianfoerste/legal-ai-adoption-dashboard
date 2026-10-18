@@ -45,9 +45,9 @@
       "requirement": "Append-only log of every AI-assisted edit with author, time and change, exportable by an administrator.",
       "representative_quote": "Without an exportable audit log this fails our internal review.",
       "raised_by": [
-        "Globex LLP (synthetic)",
-        "Initech Legal (synthetic)",
-        "Soylent Partners (synthetic)"
+        "Firm A (synthetic)",
+        "Firm B (synthetic)",
+        "Firm D (synthetic)"
       ],
       "changes": [
         {
@@ -81,8 +81,8 @@
       "requirement": "Approval permissions scoped by practice group and matter value.",
       "representative_quote": "We need approval permissions by practice group.",
       "raised_by": [
-        "Initech Legal (synthetic)",
-        "Soylent Partners (synthetic)"
+        "Firm B (synthetic)",
+        "Firm D (synthetic)"
       ],
       "changes": [
         {
@@ -116,8 +116,8 @@
       "requirement": "Each list item carries the clause number and a link to the clause.",
       "representative_quote": "I can't trust a summary I can't click through to the clause.",
       "raised_by": [
-        "Hooli Chambers (synthetic)",
-        "Umbrella Legal (synthetic)"
+        "Firm C (synthetic)",
+        "Firm E (synthetic)"
       ],
       "changes": [
         {
@@ -151,8 +151,8 @@
       "requirement": "Show a short legend for item statuses at the top of every issues list.",
       "representative_quote": "The first session is great, then people drift back to old habits.",
       "raised_by": [
-        "Globex LLP (synthetic)",
-        "Hooli Chambers (synthetic)"
+        "Firm A (synthetic)",
+        "Firm C (synthetic)"
       ],
       "changes": [
         {
@@ -186,7 +186,7 @@
       "requirement": "Export of active users and runs by practice group and period.",
       "representative_quote": "I'd like to see which teams are actually using it each week.",
       "raised_by": [
-        "Umbrella Legal (synthetic)"
+        "Firm E (synthetic)"
       ],
       "changes": [
         {

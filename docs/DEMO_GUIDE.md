@@ -30,7 +30,7 @@ For the research-to-change part of the product, continue with the
 Five accounts with a health band each. Point to two tiles in the status strip: one account
 is "Healthy", and one account has "Expansion evidence met". Scroll to the account cards and
 show that these are different accounts. Brightmoor & Associates is healthy at 81 and carries
-the recommendation "Adjust". Stadtwerke Aurich is steady at 67 and carries "Expand".
+the recommendation "Adjust". Stadtwerke Musterstadt is steady at 67 and carries "Expand".
 
 The point to make: the health score measures use and reviewed output. It is a triage aid
 and is not an input to the expansion recommendation.

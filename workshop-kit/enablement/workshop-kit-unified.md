@@ -6,7 +6,7 @@
 
 ## Table of Contents
 
-- [legal-ai-workshop-kit](#readme)
+- [Legal AI workshop kit](#readme)
 - [What this proves](#what-this-proves)
 - [Reviewer guide](#docs-reviewer-guide)
 - [Customer workflow](#docs-customer-workflow)
@@ -33,35 +33,40 @@
 <div id="readme">
 
 
-## legal-ai-workshop-kit
+## Legal AI workshop kit
 
 
 
-Enablement materials for legal AI adoption: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.
+Enablement materials for rolling out a legal-AI tool in a law firm or an in-house legal team: partner briefings, associate hands-on sessions, adoption questionnaires, workflow discovery, prioritization matrices, product-feedback templates, and rollout follow-up materials.
+
+The kit is for the people who run such a rollout: Legal Engineers, Customer Success Managers and innovation leads who prepare the sessions, work with the partners and associates who will use the tool, and report friction back to the product team.
 
 All examples are synthetic. The repository is a public-safe portfolio project and does not provide legal advice.
-Portfolio proof contract: [`docs/portfolio-proof.json`](../docs/portfolio-proof.json).
 
 ## Run it
 
 ```bash
-git clone https://github.com/sebastianfoerste/legal-ai-workshop-kit
-cd legal-ai-workshop-kit
+git clone https://github.com/sebastianfoerste/legal-ai-adoption-dashboard
+cd legal-ai-adoption-dashboard/workshop-kit
 make generate-pilot
 ```
 
 ## What the demo produces
 
-The demo scores candidate workflows through a prioritization matrix and recommends a first pilot based on impact, frequency, AI fit, and review feasibility.
+`make generate-pilot` reads the synthetic discovery intake in [`examples/synthetic-input.json`](../examples/synthetic-input.json) and writes [`examples/generated-pilot-plan.md`](../examples/generated-pilot-plan.md). The script ranks the candidate workflows by estimated hours saved per week (time per instance minus verification time, multiplied by frequency), takes the top one, and fills in a staged enablement plan and communication templates for it. On the synthetic intake it selects NDA first-pass review at an estimated 7.3 hours per week. A frequency of "daily" with no count is read as five instances per week, one per working day, which puts Document / issue summary at 0.8 hours per week. A count per day, per workday or per weekday is multiplied by five, so "2 per workday" and "twice daily" both read as ten per week. The time figures are the intake's estimates, not measurements.
+
+Scoring the candidates through the prioritization matrix on impact, frequency, AI fit and review feasibility is a separate, manual step. [`examples/sample-output.md`](../examples/sample-output.md) works it through for the same intake. Its heading and score table:
 
 ```markdown
-# Sample output: prioritization result
+# Sample output — prioritization result
 
 | Candidate workflow | Impact | Frequency | AI fit | Review feasibility | Total |
 |---|---:|---:|---:|---:|---:|
 | NDA first-pass review | 4 | 5 | 5 | 5 | **19** |
 | Clause comparison across versions | 4 | 4 | 5 | 5 | **18** |
 | Document / issue summary | 3 | 5 | 4 | 4 | **16** |
+| DPA review (GDPR) | 4 | 3 | 3 | 3 | **13** |
+| Litigation research memo | 5 | 3 | 3 | 2 | **13** |
 ```
 
 ## Pilot-to-adoption path
@@ -94,7 +99,7 @@ All examples are generic or synthetic. No real client, firm, matter, or personal
 
 ## Check
 
-`make check` verifies that the required materials exist.
+`make check` regenerates `examples/generated-pilot-plan.md` and the unified kit, checks that the required documents exist and contain no placeholder markers, and checks relative links. Commit the regenerated files with your change.
 
 
 </div>
@@ -110,7 +115,7 @@ All examples are generic or synthetic. No real client, firm, matter, or personal
 
 Building a legal-AI tool is only the start. Adoption depends on whether a skeptical
 partnership can see the workflow, the review gate, and the commercial reason to use it.
-This repo packages that adoption layer.
+This kit packages that adoption layer.
 
 | Document | Responsibility it demonstrates |
 | --- | --- |
@@ -156,7 +161,8 @@ A five-minute path for a reviewer who is not going to read every document.
 What to check: the content is usable as-is, the human-review gate is explicit everywhere,
 and nothing frames the tool as replacing a lawyer.
 
-Run `make check` to confirm every document is present and none is left half-written.
+Run `make check` to regenerate the generated pilot plan and the unified kit, and to confirm
+every document is present, none is left half-written and every relative link resolves.
 
 
 </div>

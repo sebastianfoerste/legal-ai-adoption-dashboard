@@ -15,7 +15,7 @@ const series = (id: string): AdoptionSeries => {
   if (!found) throw new Error(`missing fixture ${id}`);
   return found;
 };
-const aurich = () => seriesMetrics(series("series-aurich-supplier-review"), AS_OF);
+const musterstadt = () => seriesMetrics(series("series-musterstadt-supplier-review"), AS_OF);
 const brightmoor = () => seriesMetrics(series("series-brightmoor-spa-draft"), AS_OF);
 
 describe("rate", () => {
@@ -45,7 +45,7 @@ describe("rate", () => {
 
 describe("denominators", () => {
   it("separates licensed, eligible and active users", () => {
-    const stalled = aurich().periods[2];
+    const stalled = musterstadt().periods[2];
     expect(stalled.licensedUsers).toBe(10);
     expect(stalled.eligibleUsers).toBe(8);
     expect(stalled.activeUsers).toBe(3);
@@ -54,7 +54,7 @@ describe("denominators", () => {
   });
 
   it("uses eligible users, not active users, as the repeat-use denominator", () => {
-    const stalled = aurich().periods[2];
+    const stalled = musterstadt().periods[2];
     // 1 repeat user of 3 active would read 33%; of 8 eligible it is 13%.
     expect(stalled.repeatUse).toMatchObject({ numerator: 1, denominator: 8, value: 0.125 });
   });
@@ -66,20 +66,20 @@ describe("denominators", () => {
   });
 
   it("measures drop-off against the training cohort", () => {
-    const [onboarding, , stalled] = aurich().periods;
+    const [onboarding, , stalled] = musterstadt().periods;
     expect(onboarding.dropOffAfterTraining).toMatchObject({ numerator: 1, denominator: 8 });
     expect(stalled.dropOffAfterTraining).toMatchObject({ numerator: 5, denominator: 8, value: 0.625 });
   });
 
   it("reports no drop-off for a series without a training cohort", () => {
-    const noCohort = seriesMetrics({ ...series("series-aurich-supplier-review"), trainingCohort: null }, AS_OF);
+    const noCohort = seriesMetrics({ ...series("series-musterstadt-supplier-review"), trainingCohort: null }, AS_OF);
     expect(noCohort.periods.every((period) => period.dropOffAfterTraining.value === null)).toBe(true);
   });
 });
 
 describe("missing data and reporting periods", () => {
   it("shows uncaptured counts as unknown", () => {
-    expect(aurich().periods[0].completion.value).toBeNull();
+    expect(musterstadt().periods[0].completion.value).toBeNull();
     const gap = brightmoor().periods[2];
     expect(gap.repeatUse.value).toBeNull();
     expect(gap.dropOffAfterTraining.value).toBeNull();
@@ -88,28 +88,28 @@ describe("missing data and reporting periods", () => {
   });
 
   it("marks the period containing the as-of date as incomplete", () => {
-    const periods = aurich().periods;
+    const periods = musterstadt().periods;
     const current = periods.at(-1);
     expect(current?.complete).toBe(false);
     expect(current?.repeatUse.caveats).toContain("incomplete_period");
     expect(periods.slice(0, -1).every((period) => period.complete)).toBe(true);
-    expect(latestCompletePeriod(aurich())?.end).toBe("2026-07-19");
+    expect(latestCompletePeriod(musterstadt())?.end).toBe("2026-07-19");
   });
 
   it("treats a period as complete only after its last day", () => {
-    const onLastDay = seriesMetrics(series("series-aurich-supplier-review"), "2026-07-19");
+    const onLastDay = seriesMetrics(series("series-musterstadt-supplier-review"), "2026-07-19");
     expect(onLastDay.periods.at(-1)?.end).toBe("2026-07-19");
     expect(onLastDay.periods.at(-1)?.complete).toBe(false);
   });
 
   it("leaves out periods that have not begun", () => {
-    expect(seriesMetrics(series("series-aurich-supplier-review"), "2026-03-15").periods).toHaveLength(3);
+    expect(seriesMetrics(series("series-musterstadt-supplier-review"), "2026-03-15").periods).toHaveLength(3);
   });
 });
 
 describe("sustained use", () => {
   it("is met after three complete periods at or above half of eligible users", () => {
-    const result = sustainedUse(aurich());
+    const result = sustainedUse(musterstadt());
     expect(result.status).toBe("met");
     expect(result.caveats).toContain("small_cohort");
     expect(result.detail).not.toContain("16 Aug"); // the incomplete period is not counted
@@ -122,7 +122,7 @@ describe("sustained use", () => {
   });
 
   it("is not met when a known period is below the threshold, even with gaps elsewhere", () => {
-    const stalled = sustainedUse(seriesMetrics(series("series-aurich-supplier-review"), "2026-04-27"));
+    const stalled = sustainedUse(seriesMetrics(series("series-musterstadt-supplier-review"), "2026-04-27"));
     expect(stalled.status).toBe("not_met");
   });
 
@@ -152,7 +152,7 @@ describe("cohort changes", () => {
   });
 
   it("leaves the unchanged fixtures unflagged", () => {
-    const all = [...aurich().periods, ...brightmoor().periods].flatMap((p) => p.activation.caveats);
+    const all = [...musterstadt().periods, ...brightmoor().periods].flatMap((p) => p.activation.caveats);
     expect(all).not.toContain("cohort_changed");
   });
 });
