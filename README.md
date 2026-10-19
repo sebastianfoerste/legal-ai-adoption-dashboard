@@ -19,7 +19,7 @@ The adopted legal-AI product gates every output behind a named lawyer's review; 
 
 ## Quick start
 
-Needs Node.js 20.9 or later, pnpm and, for `make check`, Python 3.10 or later.
+Needs Node.js 20.9 or later, pnpm 10 or later and, for `make check`, Python 3.10 or later.
 
 ```bash
 pnpm install
@@ -44,7 +44,7 @@ The guide follows two synthetic scenarios: an account whose stalled adoption was
 
 - [Docs index](docs/README.md): every guide
 - [Overview](docs/overview.md): framing questions, adoption path, problem, target user, [what this proves](docs/overview.md#what-this-proves), a customer meeting, [limitations](docs/overview.md#limitations) and stack
-- [Features](docs/FEATURES.md): the [demo path](docs/FEATURES.md#demo-path), the main pages and their code
+- [Features](docs/FEATURES.md): the [demo path](docs/FEATURES.md#demo-path), the main features and their code
 - [How it works](docs/how-it-works.md): health score, expansion readiness and renewal
 - [Screenshots](docs/screenshots.md): blockers, feedback queue and account cards
 - [Reviewer guide](docs/reviewer-guide.md): a five-minute path
