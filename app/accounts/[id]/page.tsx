@@ -215,7 +215,15 @@ export default async function AccountDetailPage({
 
         {/* Practice Group Usage Grid */}
         <section aria-labelledby="pg-title">
-          <h3 id="pg-title" className="mb-4 text-base font-semibold text-gray-900">Practice Groups</h3>
+          <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+            <h3 id="pg-title" className="text-base font-semibold text-gray-900">Practice Groups</h3>
+            <a
+              href={`/accounts/${account.id}/usage.csv${asOfState.source === "query" ? `?asOf=${asOf}` : ""}`}
+              className="text-xs font-semibold text-link underline hover:text-link-hover focus:outline-none focus:ring-2 focus:ring-focus"
+            >
+              Download practice-group usage (CSV, {account.practiceGroups[0]?.weeklyActiveUsers.length ?? 0} weeks to {formatDate(asOf)})
+            </a>
+          </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {account.practiceGroups.map((g) => {
               const groupHealth = computeHealth({

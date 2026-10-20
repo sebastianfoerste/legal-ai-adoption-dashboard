@@ -24,7 +24,8 @@ export function ExportButton({ accounts }: ExportButtonProps) {
 
     const rows = accounts.map((a) => {
       const health = accountHealth(a.id);
-      const utilization = a.seats > 0 ? (a.activeUsers / a.seats).toFixed(4) : "0.0000";
+      // No seats means no rate: an empty cell, not 0.
+      const utilization = a.seats > 0 ? (a.activeUsers / a.seats).toFixed(4) : "";
       return [
         a.id,
         `"${a.name.replace(/"/g, '""')}"`,
