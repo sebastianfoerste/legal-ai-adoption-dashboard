@@ -29,7 +29,7 @@ export default function RootLayout({
         </nav>
         <div className="flex-1">{children}</div>
         <footer className="border-t border-gray-200">
-          <div className="mx-auto max-w-5xl px-6 py-4 text-xs text-gray-400">
+          <div className="mx-auto max-w-5xl px-6 py-4 text-xs text-muted">
             Synthetic demonstration data — no real client, firm, or personal data.
           </div>
         </footer>

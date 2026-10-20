@@ -19,7 +19,7 @@ const caveatMark: Record<Caveat, string> = { small_cohort: "a", incomplete_perio
 
 function RateCell({ rate }: { rate: Rate }) {
   if (rate.value === null) {
-    return <td className="px-3 py-2 italic text-gray-400">Unknown</td>;
+    return <td className="px-3 py-2 italic text-muted">Unknown</td>;
   }
   return (
     <td className="px-3 py-2 text-gray-700">
@@ -35,7 +35,7 @@ function RateCell({ rate }: { rate: Rate }) {
 }
 
 const count = (value: number | null) =>
-  value === null ? <span className="italic text-gray-400">Unknown</span> : value;
+  value === null ? <span className="italic text-muted">Unknown</span> : value;
 
 export function AdoptionTrendTable({ metrics }: { metrics: SeriesMetrics }) {
   const { series, periods } = metrics;
@@ -58,13 +58,13 @@ export function AdoptionTrendTable({ metrics }: { metrics: SeriesMetrics }) {
             ` Training cohort: ${series.trainingCohort.size} users, trained ${formatDate(series.trainingCohort.trainedOn)}.`}
         </p>
       </div>
-      <p className="px-3 pt-2 text-xs text-gray-400 md:hidden">Scroll sideways for all columns.</p>
-      <div className="overflow-x-auto">
+      <p className="px-3 pt-2 text-xs text-muted md:hidden">Scroll sideways for all columns.</p>
+      <div tabIndex={0} className="overflow-x-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
         <table className="w-full min-w-[860px] text-sm">
           <caption className="sr-only">
             Adoption over time for {series.workflowName}, with numerator and denominator per rate
           </caption>
-          <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+          <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
             <tr>
               <th className="px-3 py-2 font-medium">Period</th>
               <th className="px-3 py-2 font-medium">Licensed</th>

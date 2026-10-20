@@ -6,7 +6,7 @@ export function TrendBar({ series }: { series: number[] }) {
       {series.map((v, i) => (
         <div
           key={i}
-          className="w-3 rounded-sm bg-blue-500"
+          className="w-3 rounded-sm bg-chart"
           title={`week ${i + 1}: ${v} active`}
           style={{ height: `${(v / max) * 100}%` }}
         />

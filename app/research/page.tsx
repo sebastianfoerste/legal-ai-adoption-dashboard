@@ -47,7 +47,7 @@ export default async function ResearchPage({
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <a
             href={`/research/backlog?asOf=${asOfState.date}`}
-            className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-focus"
           >
             Download evidence-linked backlog (Markdown)
           </a>
@@ -70,7 +70,7 @@ export default async function ResearchPage({
               ["Sessions completed", String(study.sessionsCompleted)],
             ].map(([label, value]) => (
               <div key={label}>
-                <dt className="text-xs uppercase tracking-wide text-gray-400">{label}</dt>
+                <dt className="text-xs uppercase tracking-wide text-muted">{label}</dt>
                 <dd className="mt-0.5 font-semibold text-gray-900">{value}</dd>
               </div>
             ))}
@@ -128,9 +128,9 @@ export default async function ResearchPage({
           Every observation cited above, with its session. Participant codes are study codes; no
           person stands behind a code in this file.
         </p>
-        <div className="overflow-x-auto rounded-lg border border-gray-200">
+        <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <table className="w-full min-w-[760px] text-sm">
-            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
               <tr>
                 <th className="px-3 py-2 font-medium">Observation</th>
                 <th className="px-3 py-2 font-medium">Session</th>

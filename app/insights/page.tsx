@@ -18,7 +18,7 @@ export default async function AdoptionInsightsPage({ searchParams }: { searchPar
   return (
     <main className="mx-auto max-w-5xl space-y-6 px-6 py-8">
       <header>
-        <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Adoption Insights</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-link">Adoption Insights</p>
         <h1 className="mt-1 text-2xl font-semibold">Adoption intelligence and recommendations</h1>
         <p className="mt-2 max-w-3xl text-sm text-gray-600">
           Ask constrained questions over synthetic adoption data, prioritize reviewed capability rollouts and prepare a leadership report package.
@@ -34,7 +34,7 @@ export default async function AdoptionInsightsPage({ searchParams }: { searchPar
             <article key={item.metric} className="rounded-md bg-gray-50 p-3">
               <p className="text-xs text-gray-500">{item.metric}</p>
               <p className="mt-1 font-semibold">{item.value}</p>
-              <p className="mt-1 text-xs text-gray-400">{item.sourceRef}</p>
+              <p className="mt-1 text-xs text-muted">{item.sourceRef}</p>
             </article>
           ))}
         </div>
@@ -75,9 +75,9 @@ export default async function AdoptionInsightsPage({ searchParams }: { searchPar
         <p className="mt-1 text-sm text-gray-600">
           One synthetic review per account: objectives, adoption trends, intervention outcomes, quality evidence, unresolved problems and a reasoned recommendation with owners and review dates.
         </p>
-        <div className="mt-4 overflow-x-auto">
+        <div tabIndex={0} className="mt-4 overflow-x-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <table className="w-full min-w-[680px] text-sm">
-            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
               <tr>
                 <th className="px-3 py-2 font-medium">Account</th>
                 <th className="px-3 py-2 font-medium">Recommendation</th>
@@ -94,9 +94,9 @@ export default async function AdoptionInsightsPage({ searchParams }: { searchPar
                   <td className="whitespace-nowrap px-3 py-3 text-gray-600">{engagement ? formatDate(engagement.nextReviewDate) : "Unknown"}</td>
                   <td className="px-3 py-3 text-gray-600">{engagement ? specialistLabel(engagement.reviewOwnerId) : "Unknown"}</td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <a className="font-medium text-blue-700 underline" href={`/accounts/${account.id}/review`}>Open</a>
+                    <a className="font-medium text-link underline hover:text-link-hover" href={`/accounts/${account.id}/review`}>Open</a>
                     <span className="mx-2 text-gray-300">|</span>
-                    <a className="font-medium text-blue-700 underline" href={`/insights/report?account=${account.id}`}>Markdown</a>
+                    <a className="font-medium text-link underline hover:text-link-hover" href={`/insights/report?account=${account.id}`}>Markdown</a>
                   </td>
                 </tr>
               ))}
@@ -124,7 +124,7 @@ export default async function AdoptionInsightsPage({ searchParams }: { searchPar
             <article key={section.heading} className="rounded-md border border-gray-200 p-4">
               <h3 className="font-medium">{section.heading}</h3>
               <p className="mt-1 text-sm text-gray-600">{section.takeaway}</p>
-              <p className="mt-2 text-xs text-gray-400">{section.evidence.length} evidence item(s)</p>
+              <p className="mt-2 text-xs text-muted">{section.evidence.length} evidence item(s)</p>
             </article>
           ))}
         </div>

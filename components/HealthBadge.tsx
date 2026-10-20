@@ -34,7 +34,7 @@ export function HealthBadge({
       >
         {bandLabel[health.band]} · {health.score}
       </span>
-      {breakdown && <span className="text-xs text-gray-400">{caption(breakdown)}</span>}
+      {breakdown && <span className="text-xs text-muted">{caption(breakdown)}</span>}
     </div>
   );
 }

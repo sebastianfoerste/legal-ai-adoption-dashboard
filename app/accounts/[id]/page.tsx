@@ -93,13 +93,13 @@ export default async function AccountDetailPage({
         <div className="mt-4 flex flex-wrap gap-2">
           <Link
             href={`/accounts/${account.id}/review`}
-            className="inline-flex items-center rounded-lg bg-violet-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="inline-flex items-center rounded-lg bg-violet-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-focus"
           >
             Open customer review
           </Link>
           <a
             href={`/insights/report?account=${account.id}`}
-            className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-focus"
           >
             Download review (Markdown)
           </a>
@@ -235,7 +235,7 @@ export default async function AccountDetailPage({
                     {g.queriesPerWeek} queries per week
                   </p>
                   <div className="mt-3">
-                    <span className="text-xs text-gray-400">Weekly active trend</span>
+                    <span className="text-xs text-muted">Weekly active trend</span>
                     <TrendBar series={g.weeklyActiveUsers} />
                   </div>
                 </div>
@@ -280,7 +280,7 @@ export default async function AccountDetailPage({
                       <p className="mt-1 text-sm text-gray-600">
                         <strong className="text-gray-900">Workshop Follow-up:</strong> {b.workshopFollowUp}
                       </p>
-                      <p className="mt-1 text-xs text-gray-400">
+                      <p className="mt-1 text-xs text-muted">
                         Affected practice groups: {b.affectedGroups.join(", ")}
                       </p>
                     </div>
@@ -309,7 +309,7 @@ export default async function AccountDetailPage({
                     <blockquote className="mt-2 border-l-2 border-gray-200 pl-3 italic text-sm text-gray-600">
                       &ldquo;{f.text}&rdquo;
                     </blockquote>
-                    <div className="mt-3 flex items-center justify-between text-xs text-gray-400">
+                    <div className="mt-3 flex items-center justify-between text-xs text-muted">
                       <span>Product Area: <span className="capitalize">{f.productArea}</span></span>
                       <span className="capitalize">Status: {f.status.replaceAll("_", " ")}</span>
                     </div>

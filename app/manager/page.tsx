@@ -104,7 +104,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
                         </span>
                         <span className="min-w-0 flex-1 basis-72 text-gray-700">
                           {reason.detail}{" "}
-                          <span className="font-mono text-xs text-gray-400">{reason.evidenceRef}</span>
+                          <span className="font-mono text-xs text-muted">{reason.evidenceRef}</span>
                         </span>
                       </li>
                     ))}
@@ -148,7 +148,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
                   aria-label={`${used}% of assignable hours planned`}
                 >
                   <div
-                    className={`h-2 rounded-full ${used >= 90 ? "bg-amber-500" : "bg-blue-500"}`}
+                    className={`h-2 rounded-full ${used >= 90 ? "bg-amber-500" : "bg-chart"}`}
                     style={{ width: `${used}%` }}
                   />
                 </div>
@@ -221,7 +221,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
                     <span className="font-medium text-gray-900">
                       {accountName(commitment.accountId)}
                     </span>
-                    <span className="font-mono text-xs text-gray-400">{commitment.id}</span>
+                    <span className="font-mono text-xs text-muted">{commitment.id}</span>
                   </div>
                   <p className="mt-1 text-gray-700">{commitment.description}</p>
                   <p className="text-xs text-gray-500">
@@ -248,7 +248,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
                     <span className="font-medium text-gray-900">
                       {accountName(escalation.accountId)}
                     </span>
-                    <span className="font-mono text-xs text-gray-400">{escalation.id}</span>
+                    <span className="font-mono text-xs text-muted">{escalation.id}</span>
                   </div>
                   <p className="mt-1 text-gray-700">{escalation.topic}</p>
                   <p className="mt-1 text-gray-700">
@@ -310,9 +310,9 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
           Six evidence criteria per account. The health band is shown beside the recommendation
           because the two can disagree: heavy use is not demonstrated value.
         </p>
-        <div className="mt-4 overflow-x-auto rounded-lg border border-gray-200">
+        <div tabIndex={0} className="mt-4 overflow-x-auto rounded-lg border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <table className="w-full min-w-[760px] text-sm">
-            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
               <tr>
                 <th className="px-3 py-2 font-medium">Account</th>
                 <th className="px-3 py-2 font-medium">Adoption health</th>

@@ -14,11 +14,11 @@ const verdictText: Record<ValueAssessment["verdict"], string> = {
 };
 
 const minutes = (value: number | null) =>
-  value === null ? <span className="italic text-gray-400">Unknown</span> : `${value} min`;
+  value === null ? <span className="italic text-muted">Unknown</span> : `${value} min`;
 
 const share = (part: number | null, whole: number, rate: number | null) =>
   part === null || rate === null ? (
-    <span className="italic text-gray-400">Unknown</span>
+    <span className="italic text-muted">Unknown</span>
   ) : (
     `${part} of ${whole} (${Math.round(rate * 100)}%)`
   );
@@ -30,7 +30,7 @@ function PhaseColumn({ phase }: { phase: PhaseSummary | null }) {
     return (
       <>
         {Array.from({ length: PHASE_COLUMNS }, (_, row) => (
-          <td key={row} className="px-3 py-2 italic text-gray-400">
+          <td key={row} className="px-3 py-2 italic text-muted">
             Unknown
           </td>
         ))}
@@ -43,7 +43,7 @@ function PhaseColumn({ phase }: { phase: PhaseSummary | null }) {
         {phase.attempts === null ? (
           <>
             {phase.accepted} results
-            <span className="block text-xs italic text-gray-400">attempts unknown</span>
+            <span className="block text-xs italic text-muted">attempts unknown</span>
           </>
         ) : (
           <>
@@ -67,7 +67,7 @@ function PhaseColumn({ phase }: { phase: PhaseSummary | null }) {
           minutes(phase.medianActiveMinutes)
         ) : (
           <>
-            <span className="italic font-normal text-gray-400">Unknown</span>
+            <span className="italic font-normal text-muted">Unknown</span>
             {phase.componentMedianSum !== null && (
               <span className="block text-xs font-normal text-amber-700">
                 Component medians sum to {phase.componentMedianSum} min. That is not a median.
@@ -129,14 +129,14 @@ export function ValuePanel({ value }: { value: ValueAssessment }) {
         </div>
       </div>
 
-      <p className="px-3 pt-2 text-xs text-gray-400 md:hidden">Scroll sideways for all columns.</p>
-      <div className="overflow-x-auto">
+      <p className="px-3 pt-2 text-xs text-muted md:hidden">Scroll sideways for all columns.</p>
+      <div tabIndex={0} className="overflow-x-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
         <table className="w-full min-w-[980px] text-sm">
           <caption className="sr-only">
             Attempts, median active time per accepted result, elapsed time, quality failures and
             rework, before and after
           </caption>
-          <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+          <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
             <tr>
               <th className="px-3 py-2 font-medium">Phase</th>
               <th className="px-3 py-2 font-medium">Accepted of attempts</th>
