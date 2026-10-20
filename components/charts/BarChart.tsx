@@ -87,26 +87,29 @@ export function BarChart({
           </g>
         ))}
       </svg>
-      <table className="sr-only">
-        <caption>{title}</caption>
-        <thead>
-          <tr>
-            <th scope="col">{labelHeader}</th>
-            <th scope="col">{valueHeader}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bars.map((bar) => (
-            <tr key={bar.index}>
-              <th scope="row">{bar.label}</th>
-              <td>
-                {bar.text}
-                {bar.incomplete ? " (incomplete period)" : ""}
-              </td>
+      {/* sr-only on the wrapper: a table cannot shrink to 1px, so it would widen the page. */}
+      <div className="sr-only">
+        <table>
+          <caption>{title}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{labelHeader}</th>
+              <th scope="col">{valueHeader}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {bars.map((bar) => (
+              <tr key={bar.index}>
+                <th scope="row">{bar.label}</th>
+                <td>
+                  {bar.text}
+                  {bar.incomplete ? " (incomplete period)" : ""}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </figure>
   );
 }
