@@ -28,6 +28,15 @@ Every guide in `docs/` and the main project files. The [README](../README.md) co
 - [docs/CASE_STUDY_TEMPLATE.md](CASE_STUDY_TEMPLATE.md): a template for a case study from approved records
 - [docs/BASELINE.md](BASELINE.md): the baseline before the evidence-loop work and the extension that connects its components
 
+## Competitive research and decisions
+
+- [docs/research/2026-10-competitive-landscape.md](research/2026-10-competitive-landscape.md): method, searches, products, context and the sources that were not reachable
+- [docs/research/feature-matrix.csv](research/feature-matrix.csv): one row per researched product across fourteen capability areas
+- [docs/research/design-teardown.md](research/design-teardown.md): patterns from eight products and a decision per dashboard surface
+- [docs/research/adaptation-plan.md](research/adaptation-plan.md): baseline, scores, anti-patterns, positioning, specs and the decisions left to the owner
+- [docs/adr/README.md](adr/README.md): architecture decision records for charts, navigation, dark mode, exports and saved views
+- [CHANGELOG.md](../CHANGELOG.md): what changed and when
+
 ## Project files
 
 - [data/README.md](../data/README.md): the synthetic data statement and the engagement and evidence-loop data files
