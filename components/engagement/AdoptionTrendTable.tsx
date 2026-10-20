@@ -1,6 +1,8 @@
+import { BarChart } from "@/components/charts/BarChart";
 import {
   METRIC_DEFINITIONS,
   caveatLabel,
+  rateChartData,
   type Caveat,
   type Rate,
   type SeriesMetrics,
@@ -56,6 +58,31 @@ export function AdoptionTrendTable({ metrics }: { metrics: SeriesMetrics }) {
           Four-week reporting periods, as of {formatDate(metrics.asOf)}.
           {series.trainingCohort &&
             ` Training cohort: ${series.trainingCohort.size} users, trained ${formatDate(series.trainingCohort.trainedOn)}.`}
+        </p>
+      </div>
+      <div className="flex flex-wrap gap-x-8 gap-y-3 px-3 pt-3">
+        {(["activation", "repeatUse"] as const).map((key) => (
+          <div key={key}>
+            <p className="text-xs font-medium text-gray-700">
+              {key === "activation" ? "Activation" : "Repeat use"} per period, 0 to 100%
+            </p>
+            <BarChart
+              className="mt-1"
+              title={`${key === "activation" ? "Activation" : "Repeat use"} per reporting period, ${series.workflowName}`}
+              data={rateChartData(metrics, key)}
+              max={1}
+              barWidth={22}
+              gap={6}
+              height={40}
+              ticks={periods.map((_, i) => `P${i + 1}`)}
+              labelHeader="Reporting period"
+              valueHeader={key === "activation" ? "Activation" : "Repeat use"}
+            />
+          </div>
+        ))}
+        <p className="basis-full text-xs text-gray-600">
+          Dashed outline: not captured (Unknown). Light bar: incomplete period. P1 is the oldest
+          period; the table below has the dates.
         </p>
       </div>
       <p className="px-3 pt-2 text-xs text-muted md:hidden">Scroll sideways for all columns.</p>

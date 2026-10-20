@@ -1,4 +1,5 @@
 import { REVIEW_AS_OF, daysBetween, formatDate } from "./as-of";
+import type { ChartDatum } from "../charts";
 import type { AdoptionPeriod, AdoptionSeries } from "./schema";
 
 /** Below this denominator a percentage moves by 10 points or more per person. */
@@ -190,4 +191,22 @@ export function sustainedUse(metrics: SeriesMetrics): SustainedUse {
     missing: [],
     caveats,
   };
+}
+
+export type ChartedRate = "activation" | "repeatUse";
+
+/**
+ * One rate per reporting period, ready for a bar chart. An unknown rate stays `null`, so the
+ * chart draws a gap; the readout keeps the numerator and denominator in view.
+ */
+export function rateChartData(metrics: SeriesMetrics, key: ChartedRate): ChartDatum[] {
+  return metrics.periods.map((period) => {
+    const r = period[key];
+    return {
+      label: period.label,
+      value: r.value,
+      display: r.value === null ? undefined : formatRate(r),
+      incomplete: !period.complete,
+    };
+  });
 }

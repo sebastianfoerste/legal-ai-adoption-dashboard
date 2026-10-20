@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Meter } from "@/components/charts/Meter";
 import { getAccounts } from "@/lib/data";
 import { accountHealth } from "@/lib/aggregate";
 import { formatDate, resolveAsOf } from "@/lib/engagement/as-of";
@@ -142,15 +143,8 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
                   </span>{" "}
                   assignable hours planned · {workload.headroomHours} headroom
                 </p>
-                <div
-                  className="mt-1.5 h-2 rounded-full bg-gray-100"
-                  role="img"
-                  aria-label={`${used}% of assignable hours planned`}
-                >
-                  <div
-                    className={`h-2 rounded-full ${used >= 90 ? "bg-amber-500" : "bg-chart"}`}
-                    style={{ width: `${used}%` }}
-                  />
+                <div className="mt-1.5">
+                  <Meter value={used} label={`${used}% of assignable hours planned`} />
                 </div>
                 <p className="mt-1.5 text-xs text-gray-500">{workload.specialist.capacityBasis}</p>
 
