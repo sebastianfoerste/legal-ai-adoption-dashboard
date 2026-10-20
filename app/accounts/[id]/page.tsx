@@ -9,6 +9,7 @@ import { buildCustomerReview } from "@/lib/engagement/customer-review";
 import { specialistLabel, getEngagement } from "@/lib/engagement/data";
 import { assessComplexity } from "@/lib/engagement/capacity";
 import { AsOfNote } from "@/components/AsOfNote";
+import { HealthExplanation } from "@/components/HealthExplanation";
 import { HealthBadge } from "@/components/HealthBadge";
 import { TrendBar } from "@/components/TrendBar";
 import { PageHeader } from "@/components/PageHeader";
@@ -84,6 +85,7 @@ export default async function AccountDetailPage({
           </span>
           <span className="text-sm text-gray-500">Renewal: {formatDate(account.renewalDate)}</span>
         </div>
+        <HealthExplanation health={health} previousScore={account.previousHealthScore} />
         <p className="mt-3 text-sm text-gray-600">
           Lead: {specialistLabel(engagement.reviewOwnerId)} · {complexity.band} complexity
           {complexity.drivers.length > 0 && ` (${complexity.drivers.join(", ")})`} · next review{" "}

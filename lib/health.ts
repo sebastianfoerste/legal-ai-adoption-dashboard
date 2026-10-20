@@ -25,6 +25,9 @@ export interface HealthResult {
   unknownComponents: HealthComponent[];
 }
 
+/** The lowest score in each band above "at risk". Shown to users by lib/health-explain.ts. */
+export const BAND_FLOORS = { needs_attention: 40, steady: 60, healthy: 80 } as const;
+
 const clamp = (x: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, x));
 
 /**
@@ -72,7 +75,13 @@ export function computeHealth(input: HealthInput, config = healthConfig): Health
   const score = Math.round(clamp(base - penalty, 0, 100));
 
   const band: HealthBand =
-    score < 40 ? "at_risk" : score < 60 ? "needs_attention" : score < 80 ? "steady" : "healthy";
+    score < BAND_FLOORS.needs_attention
+      ? "at_risk"
+      : score < BAND_FLOORS.steady
+        ? "needs_attention"
+        : score < BAND_FLOORS.healthy
+          ? "steady"
+          : "healthy";
 
   return {
     score,
