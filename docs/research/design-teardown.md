@@ -16,6 +16,7 @@ none is in the repository.
 - **Trust.** Space Analytics is aggregate only and never shows prompt or thread content.
 - **Gap.** Counts queries, not reviewed output; no stated lag or partial-period marker found.
 - **Take.** Aggregate-only, content-free analytics is already this dashboard's posture. Keep.
+- **Not captured: network-limited.** Design language (navigation, type, colour, density, data viz, empty states, microcopy, accessibility), pricing and integrations: no page or product could be opened, and search summaries did not describe them. Complaints: not mined.
 - Source: <https://help.harvey.ai/articles/usage-dashboard>,
   <https://help.harvey.ai/articles/using-space-analytics>
 
@@ -27,6 +28,7 @@ none is in the repository.
   (Inferred).
 - **Take.** Say the window and the lag next to the number. The new usage CSV names its
   window in every row.
+- **Not captured: network-limited.** Design language (navigation, type, colour, density, data viz, empty states, microcopy, accessibility), pricing and integrations: no page or product could be opened, and search summaries did not describe them. Complaints: not mined.
 - Source: <https://www.thomsonreuters.com/en-us/help/cocounsel/legal/administration/usage-analytics>
 
 ### Legora Metrics (legal AI, Claimed)
@@ -35,6 +37,7 @@ none is in the repository.
   month, filtered by department, role or group.
 - **Standout.** "Work product creation" is counted apart from AI responses (January 2026).
 - **Take.** Range and grouping controls are table stakes for saved views (H4, not built).
+- **Not captured: network-limited.** Design language (navigation, type, colour, density, data viz, empty states, microcopy, accessibility), pricing and integrations: no page or product could be opened, and search summaries did not describe them. Complaints: not mined.
 - Source: <https://support.legora.com/en/articles/270082-viewing-usage-statistics>
 
 ### Gainsight CS (customer success, Claimed)
@@ -45,6 +48,7 @@ none is in the repository.
   looks like a customer change. Closing a CTA is treated as its evaluation.
 - **Take.** Measure-level drill-down, yes. Rule-closed success, no: the dashboard's
   intervention stays "not evaluated" until an outcome is recorded.
+- **Not captured: network-limited.** Design language (navigation, type, colour, density, data viz, empty states, microcopy, accessibility), pricing and integrations: no page or product could be opened, and search summaries did not describe them. Complaints: setup and admin burden, learning curve, slow interface ([review mining](2026-10-competitive-landscape.md#review-mining)).
 - Source: <https://support.gainsight.com/Gainsight_NXT/05Scorecards/03User_Guides/View_and_Update_Scorecards_in_360>,
   <https://communities.gainsight.com/deliver-customer-success-9/making-a-major-change-to-the-health-scoring-is-it-identified-in-the-health-trend-3494>
 
@@ -56,6 +60,7 @@ none is in the repository.
   as `computeHealth` already does.
 - **Take.** Show the rescaled weights explicitly, which Vitally was not seen doing. Built in
   the "How this score is built" panel.
+- **Not captured: network-limited.** Design language (navigation, type, colour, density, data viz, empty states, microcopy, accessibility), pricing and integrations: no page or product could be opened, and search summaries did not describe them. Complaints: setup and learning curve, playbook limits, missing filters ([review mining](2026-10-competitive-landscape.md#review-mining)).
 - Source: <https://docs.vitally.io/account-health-scores-and-metrics/health-scores>
 
 ### Planhat (customer success, Claimed)
@@ -65,6 +70,7 @@ none is in the repository.
 - **Conflict.** Health-based forecasts, expansion-ready alerts and close probabilities.
 - **Take.** Additive points are easy to read, and the dashboard's breakdown already uses
   points. Reject the expansion link (rule 4).
+- **Not captured: network-limited.** Design language (navigation, type, colour, density, data viz, empty states, microcopy, accessibility), pricing and integrations: no page or product could be opened, and search summaries did not describe them. Complaints: opaque pricing, needs a strong admin; thin evidence ([review mining](2026-10-competitive-landscape.md#review-mining)).
 - Source: <https://help.planhat.com/en/articles/9590704-how-health-is-calculated>,
   <https://www.planhat.com/products/opportunity-pipeline>
 
@@ -75,6 +81,7 @@ none is in the repository.
 - **Privacy.** Group threshold default 10, minimum 5, admin-set, also for comparisons.
 - **Take.** The threshold matches `SMALL_COHORT_THRESHOLD`. The difference is suppression
   versus a caveat; see research question 2 in the [plan](adaptation-plan.md).
+- **Not captured: network-limited.** Design language (navigation, type, colour, density, data viz, empty states, microcopy, accessibility) and integrations: no page or product could be opened, and search summaries did not describe them. Pricing: dashboard free, customisation needs paid Viva Insights (Claimed). Complaints: not mined.
 - Source: <https://learn.microsoft.com/en-ca/Viva/insights/org-team-insights/copilot-dashboard>
 
 ### copilot-metrics-viewer (OSS, MIT, Observed)
@@ -86,6 +93,7 @@ none is in the repository.
   browser clock, not an as-of date; canvas charts carry no text alternative.
 - **Take.** Unused-seat counts are a good idea; every defect above is one this repository's
   rules prevent.
+- **Design language (Observed in source).** Vuetify light and dark themes; Chart.js canvas charts with a hard-coded palette and no text alternative; aria-labels only on navigation buttons. Free (MIT), self-hosted. Not captured: empty states and microcopy beyond the tooltips quoted above. Complaints: not mined.
 - Source: <https://github.com/github-copilot-resources/copilot-metrics-viewer>
 
 ## Per surface
@@ -100,7 +108,7 @@ fits but not built in this budget.
 | Stat tile with denominator and period | Gemini reports, Copilot Dashboard | matrix rows | Adapt later: tiles already show counts; denominators parked with H4 | 3 |
 | Filters stack and every panel updates | Vercel Web Analytics | <https://vercel.com/docs/analytics/filtering> | Park (H4 saved views) | none |
 | Score-sorted portfolio with churn probability | Planhat, Pendo Predict | matrix rows | Reject | 4 |
-| Grouped sidebar instead of a wrapping top bar | Linear, Vercel (Inferred from their docs) | <https://linear.app/docs/customer-requests> | Adapt (built, D2) | 7 |
+| Grouped sidebar instead of a wrapping top bar | Common dashboard pattern (Inferred; no product page was opened to confirm it) | n/a | Adapt (built, D2) | 7 |
 
 ### `/accounts/[id]`
 
@@ -163,7 +171,7 @@ fits but not built in this budget.
 | Pattern | Product | Source | Decision | Rule touched |
 | --- | --- | --- | --- | --- |
 | Light and dark `--chart-*` tokens | shadcn/ui | <https://github.com/shadcn-ui/ui> | Adapt as semantic tokens (built, D1); dark mode parked (ADR 0003) | 7 |
-| Command palette | Linear (Inferred) | n/a | Reject for now: needs client JS for eight routes | 7 |
+| Command palette | Common dashboard pattern (Inferred) | n/a | Reject for now: needs client JS for eight routes | 7 |
 | Skip link, `error`, `not-found` | framework convention | `node_modules/next/dist/docs/` | Adapt (built, D2); `loading` rejected: it streams and turns a 404 into 200 | 10 |
 | Charts as canvas with one aria-label | PostHog, copilot-metrics-viewer | matrix rows | Reject: SVG with title, desc and a table instead | 3 |
 | Keyboard tooltip across points (`role="application"`) | Recharts 3 | npm package source | Reject: a hidden table is simpler and needs no JS | 7 |

@@ -30,8 +30,9 @@ the [feature matrix](feature-matrix.csv), the [design teardown](design-teardown.
 
 ## Searches
 
-About 67 distinct web searches ran: 31 for legal-AI and AI-adoption analytics, 35 for
-customer-success and feedback tools, one network preflight. A selection, with language:
+About 75 distinct web searches ran: 31 for legal-AI and AI-adoption analytics, 35 for
+customer-success and feedback tools, one network preflight, and eight on 2026-10-21 in the
+review follow-up (vendor URLs for seven products, and HighQ). A selection, with language:
 
 | # | Query | Language |
 | --- | --- | --- |
@@ -58,7 +59,7 @@ customer-success and feedback tools, one network preflight. A selection, with la
 
 ## Products
 
-43 products are in the [matrix](feature-matrix.csv): 15 direct, 18 adjacent, 10 donors. In
+45 products are in the [matrix](feature-matrix.csv): 16 direct, 19 adjacent, 10 donors. In
 brief:
 
 - **Legal-AI vendors.** Harvey, CoCounsel Legal and Legora publish admin usage analytics
@@ -66,12 +67,14 @@ brief:
   Luminance and Spellbook no adoption analytics turned up. Robin AI sought a buyer in October
   2025 and its 2026 status is unconfirmed, so it is marked `unknown`.
 - **Customer-success platforms.** Gainsight, ChurnZero, Vitally, Planhat, Totango (merged
-  with Catalyst in 2024), Custify, ClientSuccess and HubSpot's customer-success workspace.
+  with Catalyst in 2024), Custify, ClientSuccess, HubSpot's customer-success workspace and
+  Customerscore.io (status unknown; seen only on a review listing).
   All score health; several trigger plays or forecast churn and expansion (Claimed).
 - **AI-adoption analytics.** Microsoft's Copilot Dashboard, Google's Gemini reports,
   Worklytics, Larridin, DX, Jellyfish, Pendo Agent Analytics, Cortex, Langdock (Claimed).
 - **Feedback tools.** Productboard, Canny, Linear Customer Requests, Featurebase (Claimed).
-- **Legal adjacent.** Litera Foundation dashboards and Intapp Celeste's ethical walls for AI
+- **Legal adjacent.** Litera Foundation dashboards, Intapp Celeste's ethical walls for AI, and
+  HighQ, whose help docs cover dashboards and KPI charts but no AI-adoption analytics
   (Claimed).
 - **Code read (Observed).** copilot-metrics-viewer (MIT), Tremor (Apache-2.0), shadcn/ui's
   chart (MIT) on Recharts 3.10.1, PostHog's chart package (MIT outside `ee/`), Langfuse (MIT
@@ -127,7 +130,8 @@ None of this enters the UI, the data or the exports.
 8. **Agents act without review by configuration.** ChurnZero agents can act alone; Canny's
    Autopilot can publish without approval; Gainsight's renewal service acts within
    guardrails (Claimed). ChurnZero's Retrospective agent, which a CSM saves, is the
-   review-gated exception.
+   review-gated exception. Sources for findings 7 and 8 are in the plan's
+   [anti-pattern table](adaptation-plan.md#anti-patterns).
 9. **Accessible charts cost client JavaScript or need hand work.** Recharts 3.10.1 is about
    155 KB gzipped as a full UMD bundle, Tremor on Recharts 2 about 150 to 200 KB (Observed
    and Inferred). Neither ships a hidden data table. A server-rendered SVG adds none.
@@ -174,8 +178,8 @@ token set; see [Needs owner decision](adaptation-plan.md#needs-owner-decision).
 
 | Target | Result |
 | --- | --- |
-| 15 or more products in the matrix | 43 |
-| 8 or more deep teardowns, 2+ legal-AI vendors, 2+ CS platforms | 8 (Harvey, CoCounsel, Legora; Gainsight, Vitally, Planhat; Copilot Dashboard; copilot-metrics-viewer). **Shortfall:** seven of the eight rest on Claimed search summaries, not live observation |
+| 15 or more products in the matrix | 45 |
+| 8 or more deep teardowns, 2+ legal-AI vendors, 2+ CS platforms | 8 (Harvey, CoCounsel, Legora; Gainsight, Vitally, Planhat; Copilot Dashboard; copilot-metrics-viewer). **Shortfall:** seven of the eight rest on Claimed search summaries, not live observation, and for those seven the design language (navigation, type, colour, density, data viz, empty states, microcopy, accessibility) and integrations were not captured; pricing only for the Copilot Dashboard; complaints only for Gainsight, Vitally and Planhat |
 | Code read for 3 or more OSS projects | 7 (copilot-metrics-viewer, Tremor, shadcn/ui, Recharts, PostHog, Langfuse, Evidence) |
 | Review mining for 3 or more products | 4, but **shortfall:** fewer than 20 reviews each |
-| 12 or more searches in English, German and French | About 67, with German and French queries |
+| 12 or more searches in English, German and French | About 75, with German and French queries |

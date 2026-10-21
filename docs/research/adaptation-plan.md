@@ -84,21 +84,24 @@ record.
 
 ## Anti-patterns
 
-| Anti-pattern | Who does it (Claimed unless marked) | Rule it breaks |
-| --- | --- | --- |
-| People leaderboards or per-person KPIs | Gainsight CSM Performance (CTAs closed, timeline entries per CSM) | 5: specialists are never ranked |
-| Churn or renewal probabilities | Planhat close probabilities; Pendo Predict; Customerscore.io; ChurnZero confidence score | 4: renewal gets no probability |
-| Score-triggered plays | Totango SuccessPlays on a health change; Gainsight Rules Engine; Planhat expansion-ready alerts | 4: expansion never follows from health |
-| Agents acting without review | ChurnZero autonomous mode; Canny Autopilot automated mode; Gainsight renewal service within guardrails; Pendo "act on it automatically" | 2: never auto-actioned |
-| Completion counted as success | Gainsight rule-closed CTAs | 6: completed is not successful until evaluated |
-| Zero-filled gaps | copilot-metrics-viewer `?? 0` (Observed) | 3: missing is Unknown, never 0 |
-| Showing query content | Not seen: Harvey explicitly hides it | 1, 11 (kept) |
-| Summing vendor-native metrics | Worklytics adds tools together; definitions differ by vendor (Inferred from Q1) | 3: a sum of different "active" definitions has no denominator |
-| Public boards naming customers | Canny and Featurebase portals (whether names show: unknown) | 1, 9 |
-| Session replay | Pendo | 10 |
-| In-app surveys | Pendo, WalkMe, Whatfix, Formbricks | 10 |
-| Per-user tracking | Pendo, Amplitude, Mixpanel event analytics | 1, 10 |
-| Unflagged scoring-rule changes | Gainsight (history does not mark them) | 11: the panel says what it cannot attribute |
+Every attribution carries its source and tag; sources were accessed on 2026-10-20 unless
+marked 2026-10-21. Where no source was seen, the cell says "not observed".
+
+| Anti-pattern | Who does it | Source | Rule it breaks |
+| --- | --- | --- | --- |
+| People leaderboards or per-person KPIs | Gainsight CSM Performance dashboard: CTAs closed and timeline entries per CSM (Claimed) | <https://www.gainsight.com/marketplace/csm-performance-dashboard> | 5: specialists are never ranked |
+| Churn or renewal probabilities | Planhat close-probability modelling (Claimed); Pendo Predict claims to predict churn and expansion (Claimed); Customerscore.io scores churn risk (Claimed); ChurnZero's Retrospective agent attaches a confidence score (Claimed) | <https://www.planhat.com/products/opportunity-pipeline> ; <https://www.pendo.io/why-choose-pendo-predict/> ; <https://www.capterra.fr/software/1072389/Customerscore-io> ; <https://churnzero.com/press-release/churnzero-launches-retrospective-ai-churn-analysis-agent/> | 4: renewal gets no probability |
+| Score-triggered plays | Totango SuccessPlays fire on a health change (Claimed); Gainsight Rules Engine raises CTAs from rule conditions (Claimed); Planhat expansion-ready alerts (Claimed) | <https://pipeline.zoominfo.com/sales/totango-review> ; <https://support.gainsight.com/Gainsight_NXT/04Cockpit_and_Playbooks/03Admin_Guides/Creating_and_Closing_CTAs_from_Rules_Engine> ; <https://www.planhat.com/products/opportunity-pipeline> | 4: expansion never follows from health |
+| Agents acting without review | ChurnZero agents in act-alone mode (Claimed); Canny Autopilot in automated mode (Claimed); Gainsight's managed renewal service acts within guardrails (Claimed); Pendo Predict claims to act on predictions automatically (Claimed) | <https://www.cmswire.com/the-wire/churnzero-launches-retrospective-an-ai-churn-analysis-agent-expanding-its-agentic-essentials-02/> ; <https://intercom.help/canny/en/articles/13172055-canny-ideas-what-s-changing> ; <https://www.gainsight.com/press/gainsight-announces-new-ai-native-services-business/> ; <https://www.pendo.io/why-choose-pendo-predict/> | 2: never auto-actioned |
+| Completion counted as success | Gainsight Close CTA action can set Closed Success by rule (Claimed) | <https://support.gainsight.com/gainsight_nxt/03Rules_Engine/Rules_Engine_(Horizon_Experience)/Set_Up_Rules_Action_Types/Close_CTA_Action_Type> | 6: completed is not successful until evaluated |
+| Zero-filled gaps | copilot-metrics-viewer turns missing counts into 0 with `?? 0` (Observed) | <https://github.com/github-copilot-resources/copilot-metrics-viewer> | 3: missing is Unknown, never 0 |
+| Showing query content | Not observed. Harvey states it hides prompts and thread content (Claimed) | <https://help.harvey.ai/articles/using-space-analytics> | 1, 11 (kept) |
+| Summing vendor-native metrics | Worklytics reports usage across several AI tools (Claimed); that it adds differently defined "active" counts together is Inferred from research question 1 | <https://www.worklytics.co/resources/best-employee-ai-usage-analytics-by-team-worklytics-vs-4-alternatives-2025> | 3: a sum of different "active" definitions has no single denominator |
+| Public boards naming customers | Canny and Featurebase run public portals and roadmaps (Claimed); whether customer names appear: not observed | <https://intercom.help/canny/en/articles/13172055-canny-ideas-what-s-changing> ; <https://featurebase.app/blog/uservoice-alternatives> | 1, 9 |
+| Session replay | Pendo, DOM-based with 30-day default retention (Claimed); Mixpanel lists Session Replay among its tools (Claimed, 2026-10-21) | <https://userpilot.com/blog/pendo-vs-walkme> ; <https://docs.mixpanel.com/guides/mixpanel-introduction> | 10 |
+| In-app surveys and guides | Formbricks: targeted in-app surveys (Observed, README); Pendo no-code guides, WalkMe and Whatfix in-app guidance overlays (Claimed, 2026-10-21) | <https://github.com/formbricks/formbricks> ; <https://userpilot.com/blog/pendo-vs-walkme> ; <https://support.walkme.com/knowledge-base/what-is-walkme/> ; <https://whatfix.com/support/faq/> | 10 |
+| Per-user tracking | Amplitude event tracking with user properties joined across devices; Mixpanel per-person user profiles (both Claimed, 2026-10-21) | <https://amplitude.com/docs/en/get-started/what-is-amplitude> ; <https://docs.mixpanel.com/guides/mixpanel-introduction> | 1, 10 |
+| Unflagged scoring-rule changes | Gainsight score history does not mark rule or weight changes (Claimed, community thread) | <https://communities.gainsight.com/deliver-customer-success-9/making-a-major-change-to-the-health-scoring-is-it-identified-in-the-health-trend-3494> | 11: the panel says what it cannot attribute |
 
 ## Positioning
 
