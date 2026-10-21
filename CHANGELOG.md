@@ -31,3 +31,7 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 - The portfolio CSV wrote `0.0000` utilisation for an account without seats; it is now empty.
 - `/benchmarks` peer-median metrics sit in a description list (axe `dlitem`).
+- Review of the first draft: unknown accounts answer 404 again (a root `loading.tsx` had
+  turned them into a streamed 200, so it is removed); the score explanation reconciles its
+  rounded points with the score; only Unknown is dashed and grey in charts; shorter weekly
+  series line up with the as-of week in the usage CSV; the portfolio CSV builder is tested.

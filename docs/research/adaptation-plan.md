@@ -28,8 +28,8 @@ the sum of decoded `script` response bodies in a fresh browser context per route
 
 | Route | axe violations (rule: nodes) before | after | Client JS before | after |
 | --- | --- | --- | --- | --- |
-| `/` | color-contrast 57, scrollable-region-focusable 5 | none | 831,332 B | 832,876 B |
-| `/?band=at_risk` | color-contrast 42, scrollable-region-focusable 5 | none | 831,332 B | 832,876 B |
+| `/` | color-contrast 57, scrollable-region-focusable 5 | none | 831,332 B | 832,990 B |
+| `/?band=at_risk` | color-contrast 42, scrollable-region-focusable 5 | none | 831,332 B | 832,990 B |
 | `/accounts/acct-004` | color-contrast 54, scrollable-region-focusable 1 | none | 521,362 B | 522,917 B |
 | `/accounts/acct-005` | color-contrast 61, scrollable-region-focusable 1 | none | 521,362 B | 522,917 B |
 | `/accounts/acct-005/review` | color-contrast 29, scrollable-region-focusable 1 | none | 521,362 B | 522,917 B |
@@ -42,8 +42,8 @@ the sum of decoded `script` response bodies in a fresh browser context per route
 | `/insights` | color-contrast 13 | none | 521,362 B | 522,917 B |
 | `/benchmarks` | color-contrast 16, dlitem 6 | none | 521,362 B | 522,917 B |
 
-Almost every contrast failure was `text-gray-400` (2.6:1 on white). After: 253 Vitest tests in
-25 files; client components are `ExportButton`, `NavLinks` and `app/error.tsx` (error
+Almost every contrast failure was `text-gray-400` (2.6:1 on white). After (re-measured on 2026-10-21, after the review fixes): 269 Vitest tests in 26 files;
+`/accounts/unknown-id` returns 404 before and after; client components are `ExportButton`, `NavLinks` and `app/error.tsx` (error
 boundaries must be client components); the navigation is a sidebar at 1280px; no route
 scrolls sideways at 375px. Client JS grew by about 1.5 KB per route; the charts add none.
 
