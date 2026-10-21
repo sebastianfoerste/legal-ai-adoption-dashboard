@@ -35,7 +35,7 @@ function StatusPipeline({ status }: { status: FeedbackItem["status"] }) {
         <span
           key={s}
           className={`rounded-full px-2 py-0.5 text-xs ${
-            i <= idx ? "bg-sky-100 text-sky-800" : "bg-gray-100 text-gray-400"
+            i <= idx ? "bg-sky-100 text-sky-800" : "bg-gray-100 text-gray-600"
           }`}
         >
           {statusLabel[s]}
@@ -98,7 +98,7 @@ export default async function FeedbackPage({
           <Card key={area}>
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold">{areaLabel[area]}</h2>
-              <span className="text-xs text-gray-400">{items.length} item(s)</span>
+              <span className="text-xs text-muted">{items.length} item(s)</span>
             </div>
             <ul className="mt-4 space-y-4">
               {items.map((f) => (

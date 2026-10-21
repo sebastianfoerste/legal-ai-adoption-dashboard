@@ -36,6 +36,19 @@ Implementation:
 3. `lib/portfolio.ts`
 4. `lib/data.ts`
 
+## Health-score explanation
+
+On `/accounts/[id]`, "How this score is built" shows each component's points against its
+maximum, the configured weights and, when reviewed output is unknown, the weights rescaled
+without it. It lists the blocker penalty rule and the band cut-offs. The change since the
+last QBR is shown as a number only: the previous breakdown is not stored, so no component is
+credited with the move. The score is not an input to expansion and does not predict renewal.
+
+Implementation:
+
+1. `lib/health-explain.ts`
+2. `components/HealthExplanation.tsx`
+
 ## Adoption Cockpit
 
 `legal-ai-adoption.adoption-cockpit.v1` aggregates local synthetic JSON into active
@@ -83,6 +96,33 @@ Implementation:
 1. `lib/engagement/adoption-trend.ts`
 2. `components/engagement/AdoptionTrendTable.tsx`
 3. `data/adoption-periods.json`
+
+## Charts
+
+Activation and repeat use per period, the weekly-active trend and specialist capacity are
+SVG drawn on the server, with no client JavaScript. Each chart has a title, a description
+listing every value and a visually hidden table. A value that was not captured is a dashed
+grey gap labelled Unknown, never a zero bar; a true zero is a violet baseline mark; an
+incomplete period is a light violet bar with a solid edge. Only Unknown is dashed and grey. See [ADR 0001](adr/0001-charts.md).
+
+Implementation:
+
+1. `lib/charts.ts`
+2. `components/charts/BarChart.tsx`
+3. `components/charts/Meter.tsx`
+
+## Practice-group usage export
+
+`/accounts/<id>/usage.csv` downloads one row per practice group: seats, active users, seat
+utilisation, queries per week and each weekly active-user count. The window is stated in
+every row as the weeks ending on the as-of date; the synthetic counts are undated, so no
+calendar quarter is claimed. A missing value is an empty cell. The file name starts with
+`synthetic-` and every row is a draft for account-owner review.
+
+Implementation:
+
+1. `lib/exports/practice-group-usage.ts`
+2. `app/accounts/[id]/usage.csv/route.ts`
 
 ## Customer value
 
@@ -156,3 +196,19 @@ Implementation:
 1. `app/feedback/page.tsx`
 2. `data/feedback.json`
 3. `docs/product-feedback-notes.md`
+
+## App shell
+
+A sidebar grouped by job (Portfolio, Adoption signals, Product loop) from the `lg`
+breakpoint, a skip link, and pages for errors and unknown addresses (the latter still
+returns HTTP 404). Colours are
+semantic tokens (`muted`, `link`, `focus`, `chart`, `unknown`) that pass WCAG AA. See
+[ADR 0002](adr/0002-navigation.md) and the [competitive research](research/adaptation-plan.md)
+behind these changes.
+
+Implementation:
+
+1. `app/layout.tsx`
+2. `lib/navigation.ts`
+3. `app/globals.css`
+4. `app/error.tsx`, `app/not-found.tsx`

@@ -60,7 +60,7 @@ export function ChangeEvidenceSummary({ view }: { view: ChangeView }) {
       <div className="flex flex-wrap items-start justify-between gap-2">
         <Link
           href={`/research#${change.id}`}
-          className="font-medium text-violet-700 hover:text-violet-800 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          className="font-medium text-violet-700 hover:text-violet-800 focus:outline-none focus:ring-2 focus:ring-focus"
         >
           {change.id}: {change.title}
         </Link>
@@ -139,10 +139,10 @@ function ComparisonTable({ view }: { view: ChangeView }) {
   return (
     <>
       <p className="mb-2 text-xs text-gray-600">{comparison.comparability}</p>
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
+      <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
         <table className="w-full min-w-[420px] text-sm">
           <caption className="sr-only">Baseline and follow-up task measures for {view.change.id}</caption>
-          <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+          <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
             <tr>
               <th className="px-3 py-2 font-medium">Measure</th>
               <th className="px-3 py-2 font-medium">Baseline</th>

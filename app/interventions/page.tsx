@@ -71,12 +71,12 @@ export default async function InterventionsPage({ searchParams }: { searchParams
           return (
             <section key={stage} aria-labelledby={`stage-${stage}`}>
               <h2 id={`stage-${stage}`} className="text-lg font-semibold text-gray-900">
-                {stageLabel[stage]} <span className="font-normal text-gray-400">({inStage.length})</span>
+                {stageLabel[stage]} <span className="font-normal text-muted">({inStage.length})</span>
               </h2>
               <p className="mt-1 text-sm text-gray-600">{stageMeaning[stage]}</p>
               <div className="mt-4 space-y-4">
                 {inStage.length === 0 && (
-                  <p className="text-sm italic text-gray-400">No intervention in this stage.</p>
+                  <p className="text-sm italic text-muted">No intervention in this stage.</p>
                 )}
                 {inStage.map((intervention) => (
                   <div key={intervention.id}>

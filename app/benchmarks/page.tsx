@@ -7,7 +7,7 @@ import { getAccounts } from "@/lib/data";
 const bandStyle = {
   leading: "bg-emerald-100 text-emerald-800",
   mid: "bg-amber-100 text-amber-800",
-  lagging: "bg-rose-100 text-rose-800",
+  lagging: "bg-red-100 text-red-800",
 };
 
 export default function BenchmarksPage() {
@@ -19,11 +19,11 @@ export default function BenchmarksPage() {
       <PageHeader title="Practice-Group Benchmarks" subtitle="Internal cohort bands and adoption trends derived from synthetic usage data, with account-owner review required." />
       <Card>
         <h2 className="text-sm font-semibold text-gray-900">Internal peer median</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+        <dl className="mt-4 grid gap-4 sm:grid-cols-3">
           <Metric label="Workflow runs" value={benchmark.internalMedian.workflowRuns.toFixed(0)} />
           <Metric label="Active users" value={benchmark.internalMedian.activeUsers.toFixed(0)} />
           <Metric label="Verified outputs" value={`${(benchmark.internalMedian.verifiedShare * 100).toFixed(0)}%`} />
-        </div>
+        </dl>
         <p className="mt-4 text-xs text-gray-500">{benchmark.reviewGate.note}</p>
       </Card>
       <div className="mt-6 space-y-4">
@@ -48,5 +48,5 @@ export default function BenchmarksPage() {
 }
 
 function Metric({ label, value }: { label: string; value: string }) {
-  return <div><dt className="text-xs uppercase tracking-wide text-gray-400">{label}</dt><dd className="mt-1 font-semibold text-gray-900">{value}</dd></div>;
+  return <div><dt className="text-xs uppercase tracking-wide text-muted">{label}</dt><dd className="mt-1 font-semibold text-gray-900">{value}</dd></div>;
 }
