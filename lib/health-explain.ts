@@ -39,6 +39,8 @@ export interface HealthExplanation {
   rescaled: boolean;
   bands: BandRow[];
   change: { previous: number; current: number; delta: number } | null;
+  /** Points minus penalty before rounding, and how the shown score follows from it. */
+  total: { unrounded: number; limited: "floor" | "ceiling" | null; score: number };
   notes: string[];
 }
 
@@ -70,6 +72,8 @@ const DEFINITIONS: Record<ExplainedComponent, { label: string; measures: string 
 
 export const CHANGE_NOTE =
   "Only the previous total is stored, not its breakdown, so this view does not say which component moved.";
+export const ROUNDING_NOTE =
+  "Points are rounded for display, so they may not add up exactly to the score. The score is the unrounded total, kept between 0 and 100, rounded once.";
 export const EXPANSION_NOTE =
   "The score is a triage aid. It is not an input to expansion readiness and does not predict renewal.";
 
@@ -111,8 +115,10 @@ export function explainHealth(
             .join(" and ")} was not captured, so it is left out and the other weights are rescaled to 100. A missing measurement neither raises nor lowers the score.`,
         ]
       : []),
+    ROUNDING_NOTE,
     EXPANSION_NOTE,
   ];
+  const unrounded = components.reduce((sum, c) => sum + (c.points ?? 0), 0) - result.breakdown.penalty;
 
   const p = config.penalties;
   return {
@@ -128,6 +134,11 @@ export function explainHealth(
       previousScore === undefined || previousScore === null
         ? null
         : { previous: previousScore, current: result.score, delta: result.score - previousScore },
+    total: {
+      unrounded,
+      limited: unrounded < 0 ? "floor" : unrounded > 100 ? "ceiling" : null,
+      score: result.score,
+    },
     notes,
   };
 }

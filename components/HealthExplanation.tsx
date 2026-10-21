@@ -52,6 +52,16 @@ export function HealthExplanation({ health, previousScore }: { health: HealthRes
                 <td className="py-1.5 pr-3">Penalty</td>
                 <td className="py-1.5 whitespace-nowrap">−{pts(e.penalty.points)}</td>
               </tr>
+              <tr>
+                <th scope="row" className="py-1.5 pr-3 font-medium text-gray-900">Score</th>
+                <td className="py-1.5 pr-3">
+                  Total before rounding: {e.total.unrounded.toFixed(1)}
+                  {e.total.limited === "floor" && ", raised to 0: the score cannot fall below 0"}
+                  {e.total.limited === "ceiling" && ", capped at 100"}. Rounded once.
+                </td>
+                <td className="py-1.5 pr-3" />
+                <td className="py-1.5 whitespace-nowrap font-semibold text-gray-900">{e.total.score}</td>
+              </tr>
             </tbody>
           </table>
         </div>

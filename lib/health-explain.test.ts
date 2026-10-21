@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import healthConfig from "../data/health-config.json";
 import { BAND_FLOORS, computeHealth, type HealthInput } from "./health";
-import { CHANGE_NOTE, EXPANSION_NOTE, HEALTH_BANDS, explainHealth } from "./health-explain";
+import { accountHealth } from "./aggregate";
+import { getAccounts } from "./data";
+import { CHANGE_NOTE, EXPANSION_NOTE, HEALTH_BANDS, ROUNDING_NOTE, explainHealth } from "./health-explain";
 
 const base: HealthInput = {
   seats: 20,
@@ -60,5 +62,24 @@ describe("explainHealth", () => {
     const result = computeHealth(base);
     const row = HEALTH_BANDS.find((b) => result.score >= b.from && result.score <= b.to);
     expect(row?.band).toBe(result.band);
+  });
+
+  it.each(getAccounts().map((a) => a.id))("reconciles the shown total with the score for %s", (id) => {
+    const health = accountHealth(id);
+    const e = explainHealth(health);
+    expect(Math.round(Math.min(100, Math.max(0, e.total.unrounded)))).toBe(health.score);
+    expect(e.total.score).toBe(health.score);
+    expect(e.total.limited).toBe(e.total.unrounded < 0 ? "floor" : e.total.unrounded > 100 ? "ceiling" : null);
+    // Rounded parts need not add up to the score, so the panel always says how it rounds.
+    expect(e.notes).toContain(ROUNDING_NOTE);
+  });
+
+  it("names the floor when blockers push the total below 0", () => {
+    const e = explainHealth(
+      computeHealth({ seats: 10, activeUsers: 1, weeklyActiveUsers: [5, 1], openBlockers: ["high", "high", "high"] }),
+    );
+    expect(e.total.unrounded).toBeLessThan(0);
+    expect(e.total.limited).toBe("floor");
+    expect(e.total.score).toBe(0);
   });
 });
