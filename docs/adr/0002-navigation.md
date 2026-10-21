@@ -10,8 +10,15 @@
 - **Decision.** From the `lg` breakpoint the nav is a sticky sidebar, grouped by job:
   Portfolio, Adoption signals, Product loop. Below it the same list wraps as a row. A skip
   link jumps to `#content`. `lib/navigation.ts` holds the groups, and a test fails when a
-  top-level route is missing. `app/not-found.tsx` and `app/loading.tsx` are Server
-  Components; `app/error.tsx` is a client component, as Next requires, retries with
-  `unstable_retry` and sends nothing anywhere.
-- **Consequences.** A third client component (`app/error.tsx`). The content column keeps
+  top-level route is missing. `app/not-found.tsx` is a Server Component; `app/error.tsx` is
+  a client component, as Next requires, retries with `unstable_retry` and sends nothing
+  anywhere.
+- **No `loading.tsx` (amended after review, 2026-10-21).** A root `app/loading.tsx` shipped
+  first. It wraps every page in Suspense, so the response streams and `notFound()` can no
+  longer set the status: `/accounts/unknown-id` returned 200 instead of 404 (Next's
+  `loading.md` and `not-found.md` describe this). Every page reads bundled JSON, so a loading
+  state shows nothing useful. It is removed, and `lib/navigation.test.ts` fails if a
+  `loading.tsx` is placed above a route that calls `notFound()`.
+- **Consequences.** A third client component (`app/error.tsx`). Unknown accounts return 404
+  again, checked against `next start`. The content column keeps
   `max-w-5xl` and fits beside the sidebar at 1280px. Nested routes highlight their section.

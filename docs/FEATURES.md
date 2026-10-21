@@ -200,7 +200,8 @@ Implementation:
 ## App shell
 
 A sidebar grouped by job (Portfolio, Adoption signals, Product loop) from the `lg`
-breakpoint, a skip link, and pages for loading, errors and unknown addresses. Colours are
+breakpoint, a skip link, and pages for errors and unknown addresses (the latter still
+returns HTTP 404). Colours are
 semantic tokens (`muted`, `link`, `focus`, `chart`, `unknown`) that pass WCAG AA. See
 [ADR 0002](adr/0002-navigation.md) and the [competitive research](research/adaptation-plan.md)
 behind these changes.
@@ -210,4 +211,4 @@ Implementation:
 1. `app/layout.tsx`
 2. `lib/navigation.ts`
 3. `app/globals.css`
-4. `app/loading.tsx`, `app/error.tsx`, `app/not-found.tsx`
+4. `app/error.tsx`, `app/not-found.tsx`

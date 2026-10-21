@@ -164,7 +164,7 @@ fits but not built in this budget.
 | --- | --- | --- | --- | --- |
 | Light and dark `--chart-*` tokens | shadcn/ui | <https://github.com/shadcn-ui/ui> | Adapt as semantic tokens (built, D1); dark mode parked (ADR 0003) | 7 |
 | Command palette | Linear (Inferred) | n/a | Reject for now: needs client JS for eight routes | 7 |
-| Skip link, `loading`, `error`, `not-found` | framework convention | `node_modules/next/dist/docs/` | Adapt (built, D2) | 10 |
+| Skip link, `error`, `not-found` | framework convention | `node_modules/next/dist/docs/` | Adapt (built, D2); `loading` rejected: it streams and turns a 404 into 200 | 10 |
 | Charts as canvas with one aria-label | PostHog, copilot-metrics-viewer | matrix rows | Reject: SVG with title, desc and a table instead | 3 |
 | Keyboard tooltip across points (`role="application"`) | Recharts 3 | npm package source | Reject: a hidden table is simpler and needs no JS | 7 |
 | Tracker blocks reachable by mouse only | Tremor | <https://github.com/tremorlabs/tremor> | Reject | none |

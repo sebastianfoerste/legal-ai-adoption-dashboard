@@ -178,8 +178,9 @@ admin consoles would firm it up.
 ### D2. App shell (built)
 
 - A sticky sidebar from the `lg` breakpoint, grouped Portfolio, Adoption signals and Product
-  loop; a wrapping row below it. A skip link. `app/loading.tsx`, `app/error.tsx` and
-  `app/not-found.tsx`. `lib/navigation.ts` holds the list; `lib/navigation.test.ts` fails
+  loop; a wrapping row below it. A skip link. `app/error.tsx` and `app/not-found.tsx`; no
+  `loading.tsx`, which would turn the unknown-account 404 into a streamed 200 (found in
+  review, see ADR 0002). `lib/navigation.ts` holds the list; `lib/navigation.test.ts` fails
   when a top-level route is missing from it. ADR: [0002](../adr/0002-navigation.md).
 
 ### C4. Feedback themes (not built: budget)
@@ -265,7 +266,7 @@ admin consoles would firm it up.
   column fits beside the sidebar. Wider content was not needed for any table tested.
 - **Data viz.** One grammar: `BarChart` and `Meter`, SVG, hidden table, stated denominator in
   the readout, Unknown as a dashed grey gap.
-- **States.** Plain hedged copy: "Loading synthetic data…", "This page could not be shown.
+- **States.** Plain hedged copy: "This page could not be shown.
   Nothing was changed", "No page or synthetic account matches this address".
 - **Acceptance met.** Text 4.5:1 or more for every text token on white and gray-50; bars and
   focus ring 3:1 or more; sidebar at 1280px; no horizontal page scroll at 375px.

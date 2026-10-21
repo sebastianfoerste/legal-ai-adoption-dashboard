@@ -17,7 +17,7 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
   attributed to a component.
 - `/accounts/<id>/usage.csv`: per-practice-group usage over the weeks ending on the as-of
   date, with empty cells for missing values. ([ADR 0004](docs/adr/0004-exports.md))
-- A sidebar grouped by job, a skip link, and loading, error and not-found pages.
+- A sidebar grouped by job, a skip link, and error and not-found pages.
   ([ADR 0002](docs/adr/0002-navigation.md))
 - Competitive research, a feature matrix, a design teardown and five ADRs under `docs/`.
 
