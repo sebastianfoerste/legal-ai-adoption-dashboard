@@ -2,6 +2,7 @@
 
 import type { Account } from "@/lib/schema";
 import { accountHealth } from "@/lib/aggregate";
+import { PORTFOLIO_CSV_FILENAME, portfolioCsv } from "@/lib/exports/portfolio";
 
 interface ExportButtonProps {
   accounts: Account[];
@@ -9,45 +10,12 @@ interface ExportButtonProps {
 
 export function ExportButton({ accounts }: ExportButtonProps) {
   const handleExport = () => {
-    const headers = [
-      "Account ID",
-      "Account Name",
-      "Account Type",
-      "Total Seats",
-      "Active Users",
-      "Utilization Rate",
-      "Health Score",
-      "Health Band",
-      "Renewal Date",
-      "Data Class",
-    ];
-
-    const rows = accounts.map((a) => {
-      const health = accountHealth(a.id);
-      // No seats means no rate: an empty cell, not 0.
-      const utilization = a.seats > 0 ? (a.activeUsers / a.seats).toFixed(4) : "";
-      return [
-        a.id,
-        `"${a.name.replace(/"/g, '""')}"`,
-        a.type,
-        a.seats,
-        a.activeUsers,
-        utilization,
-        health.score,
-        health.band,
-        a.renewalDate,
-        "synthetic",
-      ];
-    });
-
-    const csvContent =
-      "data:text/csv;charset=utf-8," +
-      [headers.join(","), ...rows.map((e) => e.join(","))].join("\n");
+    const csvContent = "data:text/csv;charset=utf-8," + portfolioCsv(accounts, accountHealth);
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "synthetic_legal_ai_adoption_accounts_export.csv");
+    link.setAttribute("download", PORTFOLIO_CSV_FILENAME);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
