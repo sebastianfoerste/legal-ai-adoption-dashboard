@@ -17,6 +17,19 @@ export const csvCell = (value: string | number | null | undefined): string => {
   return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 };
 
+/** The window, in weeks, that the export and the link to it both state. */
+export const usageWindowWeeks = (account: Account): number =>
+  Math.max(0, ...account.practiceGroups.map((g) => g.weeklyActiveUsers.length));
+
+/**
+ * The last count of every series is the week ending on the as-of date, so a shorter series
+ * is padded at the oldest end. Weeks a group has no count for are empty, never 0.
+ */
+export function alignToLatest(series: number[], weeks: number): (number | null)[] {
+  const pad = Math.max(0, weeks - series.length);
+  return [...Array<null>(pad).fill(null), ...series.slice(-weeks)];
+}
+
 export interface UsageExport {
   filename: string;
   csv: string;
@@ -25,7 +38,7 @@ export interface UsageExport {
 }
 
 export function practiceGroupUsageCsv(account: Account, asOf: string): UsageExport {
-  const weeks = Math.max(0, ...account.practiceGroups.map((g) => g.weeklyActiveUsers.length));
+  const weeks = usageWindowWeeks(account);
   const window = `${weeks} weeks ending ${asOf} (oldest first)`;
   const weekHeaders = Array.from({ length: weeks }, (_, i) =>
     `weekly_active_users_week_${i + 1}${i === 0 ? "_oldest" : i === weeks - 1 ? "_latest" : ""}`,
@@ -52,7 +65,7 @@ export function practiceGroupUsageCsv(account: Account, asOf: string): UsageExpo
     // No seats means no rate: an empty cell, not 0.
     g.seats > 0 ? (g.activeUsers / g.seats).toFixed(4) : null,
     g.queriesPerWeek,
-    ...Array.from({ length: weeks }, (_, i) => g.weeklyActiveUsers[i] ?? null),
+    ...alignToLatest(g.weeklyActiveUsers, weeks),
     REVIEW_NOTE,
   ]);
   const csv = [header, ...rows].map((row) => row.map(csvCell).join(",")).join("\r\n") + "\r\n";

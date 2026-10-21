@@ -10,6 +10,7 @@ import { specialistLabel, getEngagement } from "@/lib/engagement/data";
 import { assessComplexity } from "@/lib/engagement/capacity";
 import { AsOfNote } from "@/components/AsOfNote";
 import { HealthExplanation } from "@/components/HealthExplanation";
+import { usageWindowWeeks } from "@/lib/exports/practice-group-usage";
 import { HealthBadge } from "@/components/HealthBadge";
 import { TrendBar } from "@/components/TrendBar";
 import { PageHeader } from "@/components/PageHeader";
@@ -221,7 +222,7 @@ export default async function AccountDetailPage({
               href={`/accounts/${account.id}/usage.csv${asOfState.source === "query" ? `?asOf=${asOf}` : ""}`}
               className="text-xs font-semibold text-link underline hover:text-link-hover focus:outline-none focus:ring-2 focus:ring-focus"
             >
-              Download practice-group usage (CSV, {account.practiceGroups[0]?.weeklyActiveUsers.length ?? 0} weeks to {formatDate(asOf)})
+              Download practice-group usage (CSV, {usageWindowWeeks(account)} weeks to {formatDate(asOf)})
             </a>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getAccounts } from "../data";
 import type { Account } from "../schema";
-import { REVIEW_NOTE, csvCell, practiceGroupUsageCsv } from "./practice-group-usage";
+import { REVIEW_NOTE, alignToLatest, csvCell, practiceGroupUsageCsv, usageWindowWeeks } from "./practice-group-usage";
 
 const account = getAccounts().find((a) => a.id === "acct-001")!;
 const parse = (csv: string) => csv.trimEnd().split("\r\n").map((line) => line.split(","));
@@ -40,14 +40,25 @@ describe("practiceGroupUsageCsv", () => {
     };
     const [, employment, finance] = parse(practiceGroupUsageCsv(sparse, "2026-07-31").csv);
     expect(employment[6]).toBe(""); // no seats, no utilisation
-    expect(employment[10]).toBe(""); // the third week was not recorded for this group
+    // A shorter series ends at the as-of date too: its oldest week is the one missing.
+    expect(employment.slice(8, 11)).toEqual(["", "1", "2"]);
+    expect(finance.slice(8, 11)).toEqual(["1", "2", "3"]);
     expect(finance[6]).toBe("0.5000");
-    expect(finance[10]).toBe("3");
   });
 
   it("quotes a cell that holds a comma or quote and leaves null empty", () => {
     expect(csvCell('Tax, "Private"')).toBe('"Tax, ""Private"""');
     expect(csvCell(null)).toBe("");
     expect(csvCell(0)).toBe("0");
+  });
+
+  it("puts each group's latest count in the latest column", () => {
+    expect(alignToLatest([4, 5, 6], 5)).toEqual([null, null, 4, 5, 6]);
+    expect(alignToLatest([1, 2, 3, 4, 5], 5)).toEqual([1, 2, 3, 4, 5]);
+    expect(alignToLatest([], 2)).toEqual([null, null]);
+  });
+
+  it("states the same window in the file as the account page link uses", () => {
+    expect(practiceGroupUsageCsv(account, "2026-07-31").weeks).toBe(usageWindowWeeks(account));
   });
 });
