@@ -55,7 +55,7 @@ export function HealthExplanation({ health, previousScore }: { health: HealthRes
               <tr>
                 <th scope="row" className="py-1.5 pr-3 font-medium text-gray-900">Score</th>
                 <td className="py-1.5 pr-3">
-                  Total before rounding: {e.total.unrounded.toFixed(1)}
+                  Total before rounding: {e.total.unrounded.toFixed(1).replace("-", "−")}
                   {e.total.limited === "floor" && ", raised to 0: the score cannot fall below 0"}
                   {e.total.limited === "ceiling" && ", capped at 100"}. Rounded once.
                 </td>
