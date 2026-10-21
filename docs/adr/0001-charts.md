@@ -12,7 +12,9 @@
   tested. `components/charts/BarChart.tsx` and `Meter.tsx` render SVG on the server: `<title>`
   and `<desc>`, a visually hidden table of every value, and a native tooltip per bar. A
   missing value is a dashed grey outline labelled Unknown, never a zero-height bar; a true
-  zero is a baseline mark; an incomplete period is a lighter bar with a dashed edge. Colours
+  zero is a violet baseline mark; an incomplete period is a light violet bar with a solid edge.
+  Only Unknown is dashed and grey (amended after review: incomplete bars were dashed too, and
+  zero was drawn in the Unknown grey). Colours
   come from the `chart`, `chart-track` and `unknown` tokens.
 - **Consequences.** No client JavaScript for charts and no dependency. No hover cards, zoom or
   brushing; if those are ever needed, a `Proposed` ADR must weigh a library against its

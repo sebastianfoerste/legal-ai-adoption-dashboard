@@ -81,8 +81,9 @@ export function AdoptionTrendTable({ metrics }: { metrics: SeriesMetrics }) {
           </div>
         ))}
         <p className="basis-full text-xs text-gray-600">
-          Dashed outline: not captured (Unknown). Light bar: incomplete period. P1 is the oldest
-          period; the table below has the dates.
+          Grey dashed outline: not captured (Unknown). Light violet bar: incomplete period.
+          Violet line on the baseline: zero. P1 is the oldest period; the table below has the
+          dates.
         </p>
       </div>
       <p className="px-3 pt-2 text-xs text-muted md:hidden">Scroll sideways for all columns.</p>

@@ -124,8 +124,9 @@ admin consoles would firm it up.
   chart gaps at NaN; Tremor Tracker and SparkChart; shadcn `--chart-*` tokens (all Observed).
 - **Adapted.** Gaps for missing values; SVG `<title>` and `<desc>`; a token for the bar
   colour. **Different.** Server-rendered with no client JS; a visually hidden table instead
-  of a keyboard tooltip; a dashed grey outline for Unknown, a baseline mark for a true zero,
-  a lighter dashed bar for an incomplete period.
+  of a keyboard tooltip; a dashed grey outline for Unknown, a violet baseline mark for a true
+  zero, a light violet bar with a solid edge for an incomplete period. Only Unknown is dashed
+  and grey.
 - **Acceptance.** Null never becomes a zero-height bar or "0" in text; every chart has a
   title, a description listing every value and a hidden table; bars reach 3:1 against white
   and against the track; no new client component.

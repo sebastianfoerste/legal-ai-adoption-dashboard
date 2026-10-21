@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { UNKNOWN_TEXT, describeSeries, layoutBars, type ChartDatum } from "./charts";
+import { UNKNOWN_TEXT, barEncoding, describeSeries, layoutBars, type ChartDatum } from "./charts";
 
 const opts = { width: 100, height: 40, gap: 0 };
 
@@ -58,5 +58,31 @@ describe("describeSeries", () => {
 
   it("never reads a missing value as 0", () => {
     expect(describeSeries([{ label: "W1", value: null }])).not.toMatch(/\b0\b/);
+  });
+});
+
+describe("barEncoding", () => {
+  it("draws only Unknown dashed and grey", () => {
+    const encodings = [
+      barEncoding({ kind: "unknown", incomplete: false }),
+      barEncoding({ kind: "unknown", incomplete: true }),
+      barEncoding({ kind: "zero", incomplete: false }),
+      barEncoding({ kind: "zero", incomplete: true }),
+      barEncoding({ kind: "value", incomplete: false }),
+      barEncoding({ kind: "value", incomplete: true }),
+    ];
+    const dashedOrGrey = encodings.filter((e) => e.dashed || e.stroke === "unknown");
+    expect(dashedOrGrey).toEqual([
+      { fill: "none", stroke: "unknown", dashed: true },
+      { fill: "none", stroke: "unknown", dashed: true },
+    ]);
+  });
+
+  it("draws a true zero in the chart colour, apart from Unknown", () => {
+    expect(barEncoding({ kind: "zero", incomplete: false }).fill).toBe("chart");
+  });
+
+  it("marks an incomplete period with a light fill and a solid edge", () => {
+    expect(barEncoding({ kind: "value", incomplete: true })).toEqual({ fill: "chart-light", stroke: "chart", dashed: false });
   });
 });

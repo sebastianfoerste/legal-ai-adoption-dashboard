@@ -2,8 +2,9 @@
  * Geometry and text for the dashboard's bar charts. Pure, so the rules the charts must keep
  * are tested here rather than in the markup:
  * - a missing value is drawn as an "Unknown" gap, never as a zero-height bar;
- * - a true zero is drawn as a baseline mark, so it differs from Unknown;
- * - an incomplete period is marked, because its count will still rise;
+ * - a true zero is drawn as a baseline mark in the chart colour, so it differs from Unknown;
+ * - an incomplete period is a light bar with a solid edge, because its count will still rise;
+ * - only Unknown is dashed and grey, so no other mark can be read as missing;
  * - every chart has a text alternative that lists every value, Unknown included.
  */
 
@@ -71,4 +72,19 @@ export function describeSeries(data: ChartDatum[]): string {
   const unknown = data.filter((d) => d.value === null).length;
   const note = unknown > 0 ? ` ${unknown} of ${data.length} not captured, shown as gaps.` : "";
   return `${parts.join("; ")}.${note}`;
+}
+
+/** How a bar is drawn. Colours are the `chart` and `unknown` tokens. */
+export interface BarEncoding {
+  fill: "chart" | "chart-light" | "none";
+  stroke: "chart" | "unknown" | null;
+  dashed: boolean;
+}
+
+export function barEncoding(bar: Pick<Bar, "kind" | "incomplete">): BarEncoding {
+  if (bar.kind === "unknown") return { fill: "none", stroke: "unknown", dashed: true };
+  if (bar.kind === "zero") return { fill: "chart", stroke: null, dashed: false };
+  return bar.incomplete
+    ? { fill: "chart-light", stroke: "chart", dashed: false }
+    : { fill: "chart", stroke: null, dashed: false };
 }

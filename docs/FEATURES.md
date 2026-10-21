@@ -102,8 +102,8 @@ Implementation:
 Activation and repeat use per period, the weekly-active trend and specialist capacity are
 SVG drawn on the server, with no client JavaScript. Each chart has a title, a description
 listing every value and a visually hidden table. A value that was not captured is a dashed
-grey gap labelled Unknown, never a zero bar; an incomplete period is a lighter bar with a
-dashed edge. See [ADR 0001](adr/0001-charts.md).
+grey gap labelled Unknown, never a zero bar; a true zero is a violet baseline mark; an
+incomplete period is a light violet bar with a solid edge. Only Unknown is dashed and grey. See [ADR 0001](adr/0001-charts.md).
 
 Implementation:
 
