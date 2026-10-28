@@ -36,9 +36,11 @@ or personal data.
   or anything from the private store, into this repository.
 - `app/` — Server-Component routes: `/`, `/accounts/[id]`, `/accounts/[id]/review`,
   `/blockers`, `/feedback`, `/research` (and the Markdown route `/research/backlog`), `/interventions`, `/manager`, `/insights`, and the
-  Markdown route `/insights/report` (`?account=<id>` for a customer review).
+  Markdown route `/insights/report` (`?account=<id>` for a customer review), and the CSV route
+  `/accounts/[id]/usage.csv`.
 - `components/` — presentational Server Components; `components/engagement/` holds the
-  panels for the manager layer. `ExportButton` and `NavLinks` are the only client components.
+  panels for the manager layer; `components/charts/` holds the SVG charts (no chart library).
+  `ExportButton`, `NavLinks` and `app/error.tsx` are the only client components.
 
 ## Conventions
 - TypeScript strict. Any `any` needs an inline justification.

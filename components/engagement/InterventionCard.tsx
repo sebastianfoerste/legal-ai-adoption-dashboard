@@ -38,7 +38,7 @@ const bearingTone = { supports: "good", contradicts: "bad", mixed: "warn" } as c
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <dt className="text-xs uppercase tracking-wide text-gray-400">{label}</dt>
+      <dt className="text-xs uppercase tracking-wide text-muted">{label}</dt>
       <dd className="mt-0.5 text-sm text-gray-700">{children}</dd>
     </div>
   );
@@ -100,22 +100,22 @@ export function InterventionCard({
       </dl>
 
       <div className="mt-4">
-        <h4 className="text-xs uppercase tracking-wide text-gray-400">Supporting evidence</h4>
+        <h4 className="text-xs uppercase tracking-wide text-muted">Supporting evidence</h4>
         <ul className="mt-1 space-y-1 text-sm text-gray-700">
           {intervention.supportingEvidence.map((item) => (
             <li key={item.summary}>
               <span className="font-medium text-gray-900">{evidenceKind[item.kind]}:</span>{" "}
               {item.summary}
-              {item.ref && <span className="ml-1 font-mono text-xs text-gray-400">{item.ref}</span>}
+              {item.ref && <span className="ml-1 font-mono text-xs text-muted">{item.ref}</span>}
             </li>
           ))}
         </ul>
       </div>
 
       <div className="mt-4">
-        <h4 className="text-xs uppercase tracking-wide text-gray-400">Follow-up observations</h4>
+        <h4 className="text-xs uppercase tracking-wide text-muted">Follow-up observations</h4>
         {intervention.followUpObservations.length === 0 ? (
-          <p className="mt-1 text-sm italic text-gray-400">None recorded yet.</p>
+          <p className="mt-1 text-sm italic text-muted">None recorded yet.</p>
         ) : (
           <ul className="mt-1 space-y-1.5 text-sm text-gray-700">
             {intervention.followUpObservations.map((observation) => (

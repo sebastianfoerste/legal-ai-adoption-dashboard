@@ -3,6 +3,7 @@ import {
   formatRate,
   latestCompletePeriod,
   rate,
+  rateChartData,
   seriesMetrics,
   sustainedUse,
 } from "./adoption-trend";
@@ -154,5 +155,26 @@ describe("cohort changes", () => {
   it("leaves the unchanged fixtures unflagged", () => {
     const all = [...musterstadt().periods, ...brightmoor().periods].flatMap((p) => p.activation.caveats);
     expect(all).not.toContain("cohort_changed");
+  });
+});
+
+describe("rateChartData", () => {
+  it("keeps an uncaptured rate as null for the chart, never 0", () => {
+    const data = rateChartData(brightmoor(), "repeatUse");
+    const unknown = data.filter((d) => d.value === null);
+    expect(unknown).toHaveLength(1);
+    expect(unknown[0].display).toBeUndefined();
+    expect(data.every((d) => d.value === null || d.value > 0)).toBe(true);
+  });
+
+  it("reads each known rate out with its numerator and denominator", () => {
+    const [first] = rateChartData(musterstadt(), "activation");
+    expect(first.display).toBe("7 of 8 (88%)");
+  });
+
+  it("marks the period still running on the as-of date as incomplete", () => {
+    const data = rateChartData(brightmoor(), "activation");
+    expect(data.at(-1)?.incomplete).toBe(true);
+    expect(data.slice(0, -1).every((d) => !d.incomplete)).toBe(true);
   });
 });

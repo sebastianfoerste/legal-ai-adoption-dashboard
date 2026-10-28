@@ -73,18 +73,18 @@ export default function BlockersPage() {
                   <div className="flex flex-wrap items-center gap-2">
                     <SeverityTag severity={b.severity} />
                     <span className="text-sm font-medium">{accountName(b.accountId)}</span>
-                    <span className="text-xs text-gray-400">{b.affectedGroups.join(", ")}</span>
+                    <span className="text-xs text-muted">{b.affectedGroups.join(", ")}</span>
                     {b.status === "in_progress" && (
-                      <span className="text-xs font-medium text-sky-600">in progress</span>
+                      <span className="text-xs font-medium text-sky-700">in progress</span>
                     )}
                   </div>
                   <dl className="mt-2 grid gap-2 text-sm sm:grid-cols-2">
                     <div>
-                      <dt className="text-xs uppercase tracking-wide text-gray-400">Re-engagement</dt>
+                      <dt className="text-xs uppercase tracking-wide text-muted">Re-engagement</dt>
                       <dd className="text-gray-700">{b.reEngagementAction}</dd>
                     </div>
                     <div>
-                      <dt className="text-xs uppercase tracking-wide text-gray-400">
+                      <dt className="text-xs uppercase tracking-wide text-muted">
                         Workshop follow-up
                       </dt>
                       <dd className="text-gray-700">{b.workshopFollowUp}</dd>

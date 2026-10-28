@@ -12,6 +12,28 @@ components.
 open and close with a synthetic notice. The route reads bundled JSON and has no
 side effects.
 
+## Usage export route
+
+`GET /accounts/<id>/usage.csv` returns one account's per-practice-group usage as
+`synthetic-practice-group-usage-<id>-<asOf>.csv`, or 404 (plain text) for an unknown
+account. Columns: `data_class` (always `synthetic`), `account_id`, `practice_group`,
+`window`, `seats`, `active_users`, `seat_utilisation` (four decimals), `queries_per_week`,
+one `weekly_active_users_week_<n>` column per week from `_oldest` to `_latest`, and
+`review_status` (a draft for account-owner review).
+
+- **Window.** The synthetic weekly counts are undated, so the window is the N weeks ending
+  on the as-of date, stated in every row as `<N> weeks ending <asOf> (oldest first)`, never
+  a calendar quarter. N is the longest series in the account. Each group's last count sits
+  in the `_latest` column; a shorter series is padded at the oldest end.
+- **Missing values.** An empty cell, never 0: a week a group has no count for, and the
+  utilisation of a group without seats.
+- **As-of date.** `?asOf=YYYY-MM-DD` sets the date in the window and the file name; an
+  invalid value is ignored, as on the pages (`resolveAsOf`).
+
+The builder is `practiceGroupUsageCsv` in `lib/exports/practice-group-usage.ts`. The route
+reads bundled JSON and has no side effects. It is a download, like the report route, not
+an API.
+
 ## Customer Review
 
 `buildCustomerReview(accountId)` in `lib/engagement/customer-review.ts` returns

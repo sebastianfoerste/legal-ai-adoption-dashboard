@@ -130,7 +130,7 @@ export default async function AccountHealthPage({
             name="search"
             defaultValue={search}
             placeholder="e.g. Meridian"
-            className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-focus"
           />
         </div>
         <div>
@@ -139,7 +139,7 @@ export default async function AccountHealthPage({
             id="type"
             name="type"
             defaultValue={type}
-            className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-focus"
           >
             <option value="">All Types</option>
             <option value="law_firm">Law Firm</option>
@@ -153,7 +153,7 @@ export default async function AccountHealthPage({
               id="band"
               name="band"
               defaultValue={band}
-              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-focus"
             >
               <option value="">All Bands</option>
               <option value="at_risk">At Risk</option>
@@ -165,14 +165,14 @@ export default async function AccountHealthPage({
           <div className="flex gap-2">
             <button
               type="submit"
-              className="inline-flex items-center rounded-lg bg-violet-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 cursor-pointer transition-colors"
+              className="inline-flex items-center rounded-lg bg-violet-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-focus cursor-pointer transition-colors"
             >
               Apply
             </button>
             {(search || type || band) && (
               <Link
                 href="/"
-                className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-violet-500 transition-colors"
+                className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-focus transition-colors"
               >
                 Reset
               </Link>
@@ -262,9 +262,9 @@ export default async function AccountHealthPage({
                 Sources: {adoptionCockpit.adoptionControls.generatedFrom.join(", ")}
               </p>
             </div>
-            <div className="overflow-x-auto">
+            <div tabIndex={0} className="overflow-x-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
               <table className="w-full min-w-[720px] text-sm">
-                <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+                <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
                   <tr>
                     <th className="px-3 py-2 font-medium">Surface</th>
                     <th className="px-3 py-2 font-medium">Status</th>
@@ -292,12 +292,12 @@ export default async function AccountHealthPage({
         </div>
 
         <div className="mt-6 grid gap-5 lg:grid-cols-2">
-          <div className="overflow-x-auto rounded-lg border border-gray-100">
+          <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
             <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
               <h3 className="text-sm font-semibold text-gray-900">Synthetic peer benchmarks</h3>
             </div>
             <table className="w-full min-w-[720px] text-sm">
-              <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+              <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
                 <tr>
                   <th className="px-3 py-2 font-medium">Metric</th>
                   <th className="px-3 py-2 font-medium">Firm</th>
@@ -324,12 +324,12 @@ export default async function AccountHealthPage({
             </table>
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-gray-100">
+          <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
             <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
               <h3 className="text-sm font-semibold text-gray-900">Release and access actions</h3>
             </div>
             <table className="w-full min-w-[720px] text-sm">
-              <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+              <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
                 <tr>
                   <th className="px-3 py-2 font-medium">Release</th>
                   <th className="px-3 py-2 font-medium">Status</th>
@@ -361,9 +361,9 @@ export default async function AccountHealthPage({
         <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
           {/* min-w-0: a grid item otherwise grows to its widest table and pushes the page sideways. */}
           <div className="min-w-0 space-y-5">
-            <div className="overflow-x-auto rounded-lg border border-gray-100">
+            <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
               <table className="w-full min-w-[760px] text-sm">
-                <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+                <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
                   <tr>
                     <th className="px-3 py-2 font-medium">Product</th>
                     <th className="px-3 py-2 font-medium">Runs</th>
@@ -388,12 +388,12 @@ export default async function AccountHealthPage({
               </table>
             </div>
 
-            <div className="overflow-x-auto rounded-lg border border-gray-100">
+            <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
               <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
                 <h3 className="text-sm font-semibold text-gray-900">Practice group usage</h3>
               </div>
               <table className="w-full min-w-[760px] text-sm">
-                <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+                <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
                   <tr>
                     <th className="px-3 py-2 font-medium">Practice</th>
                     <th className="px-3 py-2 font-medium">Users</th>
@@ -510,7 +510,7 @@ export default async function AccountHealthPage({
           </div>
         </div>
 
-        <div className="mt-6 overflow-x-auto rounded-lg border border-gray-100">
+        <div tabIndex={0} className="mt-6 overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
             <h3 className="text-sm font-semibold text-gray-900">Prompt improvement backlog</h3>
             <p className="mt-1 text-xs text-gray-600">
@@ -518,7 +518,7 @@ export default async function AccountHealthPage({
             </p>
           </div>
           <table className="w-full min-w-[860px] text-sm">
-            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+            <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
               <tr>
                 <th className="px-3 py-2 font-medium">Workflow</th>
                 <th className="px-3 py-2 font-medium">Account</th>
@@ -577,7 +577,7 @@ export default async function AccountHealthPage({
                     </p>
                     <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs">
                       <span className="text-gray-500">Renewal: {renewalStatus.formattedDate}</span>
-                      <span className={`font-medium ${renewalStatus.daysLeft <= 90 ? "text-amber-600 font-semibold" : "text-gray-500"}`}>
+                      <span className={`font-medium ${renewalStatus.daysLeft <= 90 ? "text-amber-700 font-semibold" : "text-gray-500"}`}>
                         ({renewalStatus.daysLeft > 0 ? `in ${renewalStatus.daysLeft} days` : `expired ${Math.abs(renewalStatus.daysLeft)} days ago`})
                       </span>
                       <span className={`inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] font-semibold ${deltaClass}`}>
@@ -604,7 +604,7 @@ export default async function AccountHealthPage({
 
                 <div className="mt-4 flex items-center gap-6">
                   <div>
-                    <p className="text-xs uppercase tracking-wide text-gray-400">Weekly active users</p>
+                    <p className="text-xs uppercase tracking-wide text-muted">Weekly active users</p>
                     <TrendBar series={account.weeklyActiveUsers} />
                   </div>
                 </div>
@@ -639,7 +639,7 @@ export default async function AccountHealthPage({
                   <table className="mt-2 w-full text-sm">
                     <caption className="sr-only">Persona adoption for {account.name}</caption>
                     <thead>
-                      <tr className="text-left text-xs uppercase tracking-wide text-gray-400">
+                      <tr className="text-left text-xs uppercase tracking-wide text-muted">
                         <th className="py-1 font-medium">Role</th>
                         <th className="py-1 font-medium">Seats</th>
                         <th className="py-1 font-medium">Adoption</th>

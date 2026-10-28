@@ -46,3 +46,6 @@ next-env.d.ts
 # private research store: participant records never enter this repository
 /private-research/
 *.private.json
+
+# Competitive-research captures stay local (may contain third-party screenshots)
+/research/_captures/

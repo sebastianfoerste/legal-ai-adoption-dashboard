@@ -1,6 +1,8 @@
+import { BarChart } from "@/components/charts/BarChart";
 import {
   METRIC_DEFINITIONS,
   caveatLabel,
+  rateChartData,
   type Caveat,
   type Rate,
   type SeriesMetrics,
@@ -19,7 +21,7 @@ const caveatMark: Record<Caveat, string> = { small_cohort: "a", incomplete_perio
 
 function RateCell({ rate }: { rate: Rate }) {
   if (rate.value === null) {
-    return <td className="px-3 py-2 italic text-gray-400">Unknown</td>;
+    return <td className="px-3 py-2 italic text-muted">Unknown</td>;
   }
   return (
     <td className="px-3 py-2 text-gray-700">
@@ -35,7 +37,7 @@ function RateCell({ rate }: { rate: Rate }) {
 }
 
 const count = (value: number | null) =>
-  value === null ? <span className="italic text-gray-400">Unknown</span> : value;
+  value === null ? <span className="italic text-muted">Unknown</span> : value;
 
 export function AdoptionTrendTable({ metrics }: { metrics: SeriesMetrics }) {
   const { series, periods } = metrics;
@@ -58,13 +60,39 @@ export function AdoptionTrendTable({ metrics }: { metrics: SeriesMetrics }) {
             ` Training cohort: ${series.trainingCohort.size} users, trained ${formatDate(series.trainingCohort.trainedOn)}.`}
         </p>
       </div>
-      <p className="px-3 pt-2 text-xs text-gray-400 md:hidden">Scroll sideways for all columns.</p>
-      <div className="overflow-x-auto">
+      <div className="flex flex-wrap gap-x-8 gap-y-3 px-3 pt-3">
+        {(["activation", "repeatUse"] as const).map((key) => (
+          <div key={key}>
+            <p className="text-xs font-medium text-gray-700">
+              {key === "activation" ? "Activation" : "Repeat use"} per period, 0 to 100%
+            </p>
+            <BarChart
+              className="mt-1"
+              title={`${key === "activation" ? "Activation" : "Repeat use"} per reporting period, ${series.workflowName}`}
+              data={rateChartData(metrics, key)}
+              max={1}
+              barWidth={22}
+              gap={6}
+              height={40}
+              ticks={periods.map((_, i) => `P${i + 1}`)}
+              labelHeader="Reporting period"
+              valueHeader={key === "activation" ? "Activation" : "Repeat use"}
+            />
+          </div>
+        ))}
+        <p className="basis-full text-xs text-gray-600">
+          Grey dashed outline: not captured (Unknown). Light violet bar: incomplete period.
+          Violet line on the baseline: zero. P1 is the oldest period; the table below has the
+          dates.
+        </p>
+      </div>
+      <p className="px-3 pt-2 text-xs text-muted md:hidden">Scroll sideways for all columns.</p>
+      <div tabIndex={0} className="overflow-x-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
         <table className="w-full min-w-[860px] text-sm">
           <caption className="sr-only">
             Adoption over time for {series.workflowName}, with numerator and denominator per rate
           </caption>
-          <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+          <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
             <tr>
               <th className="px-3 py-2 font-medium">Period</th>
               <th className="px-3 py-2 font-medium">Licensed</th>

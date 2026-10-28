@@ -1,16 +1,18 @@
-export function TrendBar({ series }: { series: number[] }) {
-  const max = Math.max(1, ...series);
-  const label = `Weekly active users over ${series.length} weeks: ${series.join(", ")}`;
+import { BarChart } from "@/components/charts/BarChart";
+
+// Weekly counts are undated in the synthetic data, so the weeks are numbered, oldest first.
+export function TrendBar({ series }: { series: (number | null)[] }) {
+  const data = series.map((value, i) => ({
+    label: `Week ${i + 1}${i === 0 ? " (oldest)" : i === series.length - 1 ? " (latest)" : ""}`,
+    value,
+    display: value === null ? undefined : `${value} active`,
+  }));
   return (
-    <div className="flex h-12 items-end gap-1" role="img" aria-label={label}>
-      {series.map((v, i) => (
-        <div
-          key={i}
-          className="w-3 rounded-sm bg-blue-500"
-          title={`week ${i + 1}: ${v} active`}
-          style={{ height: `${(v / max) * 100}%` }}
-        />
-      ))}
-    </div>
+    <BarChart
+      title={`Weekly active users over the last ${series.length} weeks`}
+      data={data}
+      labelHeader="Week"
+      valueHeader="Weekly active users"
+    />
   );
 }

@@ -30,7 +30,7 @@ function Section({
   return (
     <section aria-labelledby={`section-${number}`}>
       <h2 id={`section-${number}`} className="mb-4 text-lg font-semibold text-gray-900">
-        <span className="mr-2 text-gray-400">{number}.</span>
+        <span className="mr-2 text-muted">{number}.</span>
         {title}
       </h2>
       {children}
@@ -86,7 +86,7 @@ export default async function CustomerReviewPage({
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <a
             href={`/insights/report?account=${review.accountId}&asOf=${review.asOf}`}
-            className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-focus"
           >
             Download Markdown
           </a>
@@ -236,9 +236,9 @@ export default async function CustomerReviewPage({
         </Section>
 
         <Section number={7} title="Owners and next review dates">
-          <div className="overflow-x-auto rounded-lg border border-gray-200">
+          <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
             <table className="w-full min-w-[640px] text-sm">
-              <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-gray-400">
+              <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
                 <tr>
                   <th className="px-3 py-2 font-medium">Item</th>
                   <th className="px-3 py-2 font-medium">Owner</th>

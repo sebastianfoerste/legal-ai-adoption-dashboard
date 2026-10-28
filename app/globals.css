@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 /* Every component is styled for a light surface, so the page stays light when the
-   system prefers dark. A dark background under gray-900 headings is unreadable. */
+   system prefers dark. A dark background under gray-900 headings is unreadable.
+   Dark mode is proposed, not built: see docs/adr/0003-dark-mode.md. */
 :root {
   color-scheme: light;
   --background: #ffffff;
@@ -13,10 +14,26 @@
   --color-foreground: var(--foreground);
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Semantic roles. Components use these names, not raw palette steps, so one colour means
+     one thing everywhere. Contrast on white and on gray-50 is recorded in
+     docs/adr/0003-dark-mode.md; every text role passes 4.5:1. */
+  --color-muted: var(--color-gray-500); /* secondary text and table headers; gray-400 failed AA */
+  --color-link: var(--color-violet-700);
+  --color-link-hover: var(--color-violet-800);
+  --color-focus: var(--color-violet-500); /* the one focus ring */
+  --color-chart: var(--color-violet-600); /* bars and meters; 3:1 or more against white */
+  --color-chart-track: var(--color-gray-200);
+  --color-unknown: var(--color-gray-500); /* Unknown is always grey */
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+/* Figures line up in columns. */
+table {
+  font-variant-numeric: tabular-nums;
 }
