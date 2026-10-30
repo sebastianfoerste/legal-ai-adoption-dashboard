@@ -200,10 +200,12 @@ admin consoles would firm it up.
   against the problems' own `feedbackThemes`, which use a different vocabulary. A theme no
   change record covers reads "No change record: delivery unknown", and partly covered themes
   name how many items are uncited.
-- **Not built.** A triage-only `duplicate` status. It would change `feedbackItemSchema`, and
-  near-duplicate themes in the fixtures ("Citation and context handling" and "Citation
-  Grounding & Hallucination Gate") are a triage call for the owner, not something to merge
-  automatically.
+- **Not built.** A triage-only `duplicate` status; it would change `feedbackItemSchema`.
+- **Owner decision taken (2026-10-30).** The two near-duplicate citation themes in the
+  fixtures were merged in the data: the two generated items that read "Citation Grounding &
+  Hallucination Gate" now carry "Citation and context handling", with their text, severity and
+  routing unchanged. The change record that covers that theme (chg-001) cites only fb-001, so
+  the two folded-in items still show no delivery status.
 
 ### C5. Saved views (not built: budget)
 

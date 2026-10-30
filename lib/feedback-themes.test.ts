@@ -93,4 +93,14 @@ describe("summarizeThemes", () => {
   it("reports the highest severity raised", () => {
     expect(theme("Trust and grounding").highestSeverity).toBe("high");
   });
+
+  it("folds the generated citation items into one citation theme", () => {
+    const citation = theme("Citation and context handling");
+    expect(citation.itemIds).toEqual(["fb-001", "fb-gen-20260623_003235-1", "fb-gen-20260623_003235-2"]);
+    expect(formatCount(citation.accounts, "accounts")).toBe("2 of 5 accounts");
+    expect(citation.changes.map((c) => c.changeId)).toEqual(["chg-001"]);
+    // chg-001 cites fb-001 only, so the two folded-in items still have no delivery status.
+    expect(citation.itemsWithoutChange).toEqual(["fb-gen-20260623_003235-1", "fb-gen-20260623_003235-2"]);
+    expect(themes.some((t) => /hallucination/i.test(t.theme))).toBe(false);
+  });
 });
