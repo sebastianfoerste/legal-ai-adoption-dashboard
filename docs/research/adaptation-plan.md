@@ -57,7 +57,7 @@ fails. Effort S, M or L. Evidence is the strongest tag behind the pattern.
 | F1 | Accessible SVG charts with Unknown gaps and period curves (H1, part of H5) | 4 | pass (3, 7, 10) | M | Observed | Differentiator | Built |
 | F2 | Health-score explainability (H7) | 4 | pass (4, 11) | S | Claimed | Differentiator | Built |
 | F3 | Per-practice-group usage CSV (H8) | 4 | pass (1, 3) | S | Claimed | Table stakes | Built |
-| C4 | Feedback themes with account and persona counts (H6) | 3 | pass (6) | M | Claimed | Differentiator | Not built: budget |
+| C4 | Feedback themes with account and persona counts (H6) | 3 | pass (6) | S | Claimed | Differentiator | Built in a follow-up (2026-10-30) |
 | C5 | Saved views and filters on every list (H4) | 3 | pass | M | Claimed | Table stakes | Not built: budget |
 | C6 | Adopters vs non-adopters, cohort curves (H5) | 3 | pass only with a labelled synthetic comparison group (1) | M | Claimed | Table stakes | Needs owner decision |
 | C7 | Unused and inactive seat counts per account | 3 | pass (3) if the data held last-activity dates; it does not | M | Observed | Table stakes | Not built: budget (needs data) |
@@ -187,14 +187,25 @@ admin consoles would firm it up.
   review, see ADR 0002). `lib/navigation.ts` holds the list; `lib/navigation.test.ts` fails
   when a top-level route is missing from it. ADR: [0002](../adr/0002-navigation.md).
 
-### C4. Feedback themes (not built: budget)
+### C4. Feedback themes (built in a follow-up, 2026-10-30)
 
-- Items carry `theme`; change records already carry `feedbackItemIds` and `feedbackThemes`
-  in `lib/evidence/schema.ts`. "Votes" are the accounts and personas raising a theme, shown
-  as "3 of 5 accounts" with the denominator and never as a rank. Routing statuses stay
-  `new | triaged | shared_with_product`; a triage-only `duplicate` may be added. Delivery
-  shows from the linked change record. Needs a schema change mirrored in
-  `packages/evidence-loop-contract/` and the Python module, so it is an M.
+- **Correction to the estimate.** No schema change was needed: feedback items already carry
+  `theme`, and the evidence store's problems already cite items by `feedbackItemIds`, so the
+  effort was S, not M. The contract package and the Python module are untouched.
+- **Built.** A Themes table on `/feedback` (`lib/feedback-themes.ts`,
+  `components/FeedbackThemes.tsx`). "Votes" are the distinct accounts and persona roles
+  raising a theme, shown as "2 of 5 accounts" and "1 of 5 persona roles". Themes are listed
+  by name, never by count. Routing stays triage only. Delivery and outcome come only from the
+  change records whose problems cite the theme's item ids; theme names are not matched
+  against the problems' own `feedbackThemes`, which use a different vocabulary. A theme no
+  change record covers reads "No change record: delivery unknown", and partly covered themes
+  name how many items are uncited.
+- **Not built.** A triage-only `duplicate` status; it would change `feedbackItemSchema`.
+- **Owner decision taken (2026-10-30).** The two near-duplicate citation themes in the
+  fixtures were merged in the data: the two generated items that read "Citation Grounding &
+  Hallucination Gate" now carry "Citation and context handling", with their text, severity and
+  routing unchanged. The change record that covers that theme (chg-001) cites only fb-001, so
+  the two folded-in items still show no delivery status.
 
 ### C5. Saved views (not built: budget)
 
@@ -210,7 +221,7 @@ admin consoles would firm it up.
 | H3 | **Modified.** Tokens built (D1); dark mode ADR only, now with an owner decision on the shared design system. | axe baseline; ADR 0003 |
 | H4 | **Parked.** Fits; not built in this budget. | Vercel, Legora, Linear (Claimed) |
 | H5 | **Modified.** Activation and repeat-use curves per period are built into F1; adopters versus non-adopters needs a synthetic comparison group, which is an owner decision. | Cortex, Jellyfish (Claimed) |
-| H6 | **Parked.** Confirmed as valuable; schema change across three consumers. | Canny, Linear, Productboard (Claimed) |
+| H6 | **Confirmed, built in a follow-up (C4).** No schema change was needed; the `duplicate` status is not built. | Canny, Linear, Productboard (Claimed) |
 | H7 | **Confirmed, built (F2).** | Vitally, Gainsight, Planhat (Claimed) |
 | H8 | **Confirmed in part.** CSV built (F3); PDF/PPTX ADR proposes a print stylesheet. | Evidence (Observed) |
 
@@ -277,7 +288,7 @@ admin consoles would firm it up.
 
 ## Not built: budget
 
-C4 feedback themes, C5 saved views, C7 unused-seat counts, C8 window and lag beside every
+C5 saved views, C7 unused-seat counts, C8 window and lag beside every
 count, D3 type scale.
 
 ## Needs owner decision
