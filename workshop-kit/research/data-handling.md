@@ -111,9 +111,14 @@ individual records are still deleted on request where that is possible; the comb
 findings stay.
 
 The consent form is kept apart from the notes and matched through the study code and the
-consent reference. This departs from the GOV.UK advice to keep the consent record with the
-data it covers, in favour of separating identities from analysis. The owner decides whether
-to keep that choice.
+consent reference. This departs from what an earlier draft of this kit called the GOV.UK
+advice to keep the consent record with the data it covers, in favour of separating
+identities from analysis. That reference is unsourced: a search on 2026-10-31 found no
+gov.uk page that says so. The nearest official guidance found, the ICO's page on recording
+consent, lists what a consent record must show (who consented, when, what they were told,
+how, and any withdrawal) and does not say where the record is kept
+([ICO, how should we obtain, record and manage consent?](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/consent/how-should-we-obtain-record-and-manage-consent),
+accessed 2026-10-31). The owner decides whether to keep that choice.
 
 ## 5. Import of real observations
 

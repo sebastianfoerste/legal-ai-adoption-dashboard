@@ -18,6 +18,17 @@ Checked on 7 October 2026 against the published text:
 | Section 201 of the German Criminal Code (StGB) | gesetze-im-internet.de | Recording another person's non-public spoken word without authority is an offence under subsection 1 no. 1. |
 | Section 43a(2) of the Federal Lawyers' Act (BRAO) | gesetze-im-internet.de | A lawyer's duty of confidentiality covers everything learned in the course of practice. |
 
+**Re-checked 2026-10-30** (run completed 2026-10-31; every source below was accessed on
+2026-10-31). The table above is kept as it stood on 7 October 2026; this table records what
+changed and what did not.
+
+| Source | Where | Result on 2026-10-31 |
+|---|---|---|
+| Regulation (EU) 2016/679 (GDPR) | EUR-Lex was not readable in this run (empty page); the two pending proposals were checked on the European Parliament's Legislative Observatory | No amending act found; the text is still unamended. COM(2025) 837 (Digital Omnibus, data part; procedure 2025/0360(COD)): the Council agreed its negotiating mandate, reported for 21 October 2026 (Council press release URL dated 2026-10-21, HTTP 403 in this run; [IAPP, 22 October 2026](https://iapp.org/news/a/eu-member-states-finalize-digital-omnibus-negotiating-stance)); the Legislative Observatory lists the file as "Awaiting committee decision" and records no Parliament position ([OEIL 2025/0360(COD)](https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2025/0360(COD))). COM(2025) 501 (Omnibus IV, Article 30; procedure 2025/0130(COD)): committee approval of the text agreed in first-reading negotiations on 2 July 2026, status "Awaiting Parliament's position in 1st reading", indicative plenary date 23 November 2026, so not adopted as of 2026-10-31 ([OEIL 2025/0130(COD)](https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2025/0130(COD))). Both proposals still change nothing. |
+| Regulation (EU) 2025/2518 (additional procedural rules for the cross-border enforcement of the GDPR) | Commission note on Futurium; EUR-Lex `eli/reg/2025/2518/oj` returned an empty page | Published in the Official Journal on 12 December 2025 and applies from 2 April 2027, "while not changing the GDPR's substantive data protection rights" ([Commission, Futurium, 22 December 2025](https://futurium.ec.europa.eu/mt/border-focal-point-network/news/new-eu-regulation-harmonises-cross-border-enforcement-data-protection-across-union)). No change to the Article 13 information duties mapped below was found; the Official Journal text itself was not read in this run. |
+| Section 201 of the German Criminal Code (StGB) | [gesetze-im-internet.de](https://www.gesetze-im-internet.de/stgb/__201.html) | Still reads as summarised above: subsection 1 no. 1 covers whoever, without authority, records another person's non-public spoken word on a sound carrier. |
+| Section 43a(2) of the Federal Lawyers' Act (BRAO) | [gesetze-im-internet.de](https://www.gesetze-im-internet.de/brao/__43a.html) | Still reads as summarised above: the duty covers everything that became known in the course of practice (sentence 2); obvious facts and facts that need no secrecy are excepted (sentence 3). |
+
 Not checked: the Federal Data Protection Act, state data protection law, professional rules
 for in-house counsel, and the law of any other country a participant may sit in.
 

@@ -94,12 +94,38 @@ None of this enters the UI, the data or the exports.
   [Cooley](https://cdp.cooley.com/digital-ai-omnibus-delays-key-deadlines-introduces-new-rules/)).
   **Unverified:** EUR-Lex was unreachable, so the citation is not checked against the
   primary source and must not be relied on.
+  - **Re-checked 2026-10-30** (run completed 2026-10-31; every source below accessed
+    2026-10-31). The Commission's news page states "On 27 July 2026, the AI Omnibus enters
+    into force across the EU" and links the final text as EUR-Lex `OJ:L_202601744`, the
+    identifier of Regulation (EU) 2026/1744
+    ([Commission, AI Omnibus enters into force](https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force),
+    page dated 27 July 2026, last updated 31 July 2026). The same page: Annex III high-risk
+    rules apply from 2 December 2027, Annex I (product-embedded) rules from 2 August 2028,
+    and a new prohibition covers AI systems that generate non-consensual sexually explicit
+    or intimate content or child sexual abuse material. The Commission's AI Act policy page
+    says that prohibition "comes into effect in December 2026"
+    ([Commission, regulatory framework for AI](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai),
+    last updated 19 October 2026); a secondary source gives 2 December 2026 for the
+    prohibition and 24 July 2026 for the Official Journal publication (Claimed:
+    [nicfab, 24 July 2026](https://www.nicfab.eu/en/posts/digital-omnibus-ai-official-journal/)).
+    Article 4(1) as amended reads "Providers and deployers of AI systems shall take measures
+    to support the development of AI literacy", without a guaranteed level (Claimed:
+    [artificialintelligenceact.eu, Article 4](https://artificialintelligenceact.eu/article/4/);
+    the Commission news page says the AI-literacy requirement "is simplified"). The OJ text
+    at [EUR-Lex OJ:L_202601744](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202601744)
+    returned an empty page in this run, so the amended articles were not read in the primary
+    source. The tag above is left as written.
 - **Legal Tech Monitor 2026.** Reported on 17 September 2026: about 73% of in-house lawyers
   would consolidate mandates with firms that demonstrate AI savings, and nearly 40% already
   ask advisers for evidence of AI use (Claimed:
   [beck-aktuell](https://www.beck-aktuell.de/rechtsbranche/anwaltschaft/legal-tech-monitor-2026-ki-tools-2026-09-17),
   [DIS](https://www.disarb.org/wissen/dis-newsletter/newsletter-3/2026/legal-tech-monitor-2026)).
   This supports the dashboard's emphasis on reviewed output over raw activity.
+  - **Re-checked 2026-10-30** (run completed 2026-10-31; source accessed 2026-10-31): the
+    beck-aktuell article dated 17 September 2026 reports "73%" of the surveyed in-house
+    lawyers and "fast 40%"
+    ([beck-aktuell](https://www.beck-aktuell.de/rechtsbranche/anwaltschaft/legal-tech-monitor-2026-ki-tools-2026-09-17)).
+    The Claimed tag above is left as written.
 
 ## Top findings
 
@@ -168,6 +194,7 @@ summaries listed in the matrix.
 | `learn.microsoft.com` | WebFetch DNS `ENOTFOUND` | 2026-10-20 |
 | `www.vitally.io` | WebFetch DNS `ENOTFOUND` | 2026-10-20 |
 | `eur-lex.europa.eu` | WebFetch DNS `ENOTFOUND`; every legal citation is unverified | 2026-10-20 |
+| `eur-lex.europa.eu` (follow-up to the 2026-10-30 re-check) | `OJ:L_202601744` (Regulation (EU) 2026/1744) and `eli/reg/2025/2518/oj` both returned an empty page, so no Official Journal text was read. Readable in the same run: digital-strategy.ec.europa.eu, futurium.ec.europa.eu, oeil.europarl.europa.eu, gesetze-im-internet.de, beck-aktuell.de, iapp.org, nicfab.eu, artificialintelligenceact.eu. Not readable: consilium.europa.eu press releases (HTTP 403), whitecase.com (HTTP 403). | 2026-10-31 |
 | Other vendor sites, G2, Capterra, bundlephobia | Not fetched: the preflight showed non-GitHub hosts failing, so only search summaries were used | 2026-10-20 |
 | Live products, demo videos | Not used: no login, trial or demo request is allowed | 2026-10-20 |
 
