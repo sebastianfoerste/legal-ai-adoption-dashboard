@@ -130,7 +130,9 @@ The rendered pages were inspected at 1280 and 375 pixels.
 - The decision rule is fixed and simple. It orders evidence for a human decision and has
   not been compared with real expansion or renewal outcomes.
 - No specialist team has used the manager view and no customer has seen a report.
-- There is no persistence, authentication or multi-tenancy, and one fixed as-of date.
+- There is no persistence, authentication or multi-tenancy. The as-of date is a demo
+  default (31 July 2026) that `?asOf=YYYY-MM-DD` or `ADOPTION_AS_OF` overrides
+  (`lib/engagement/as-of.ts`); nothing advances it on its own.
 
 ## Next steps
 

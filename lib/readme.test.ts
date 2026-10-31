@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -102,6 +103,27 @@ describe("README", () => {
     for (const file of [...MOVED_SECTION_DOCS, "CASE_STUDY.md", "docs/DEMO_GUIDE.md", "data/README.md", "LICENSE"]) {
       expect(targets).toContain(file);
     }
+  });
+});
+
+// Every tracked Markdown file outside workshop-kit/, which has its own link checker
+// (workshop-kit/scripts/link_checker.py). Read from git so an untracked draft is not checked.
+const trackedMarkdown = (): string[] =>
+  execFileSync("git", ["ls-files", "-z", "--", "*.md", "**/*.md"], { cwd: ROOT, encoding: "utf8" })
+    .split("\0")
+    .filter((file) => file.endsWith(".md") && !file.startsWith("workshop-kit/"));
+
+describe("every tracked Markdown file outside workshop-kit/", () => {
+  const files = trackedMarkdown();
+
+  it("is a list this test actually read", () => {
+    expect(files.length).toBeGreaterThan(30);
+    expect(files).toContain("CASE_STUDY.md");
+    expect(files).toContain("docs/API.md");
+  });
+
+  it.each(files)("%s has relative links that resolve to existing files and headings", (file) => {
+    expect(brokenLinks(file)).toEqual([]);
   });
 });
 
