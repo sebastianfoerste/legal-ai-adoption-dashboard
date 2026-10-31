@@ -1,33 +1,19 @@
-"use client";
+import type { AccountFilter } from "@/lib/portfolio-filter";
+import { portfolioCsvHref } from "@/lib/portfolio-filter";
 
-import type { Account } from "@/lib/schema";
-import { accountHealth } from "@/lib/aggregate";
-import { PORTFOLIO_CSV_FILENAME, portfolioCsv } from "@/lib/exports/portfolio";
-
-interface ExportButtonProps {
-  accounts: Account[];
-}
-
-export function ExportButton({ accounts }: ExportButtonProps) {
-  const handleExport = () => {
-    const csvContent = "data:text/csv;charset=utf-8," + portfolioCsv(accounts, accountHealth);
-
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", PORTFOLIO_CSV_FILENAME);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
+// A Server Component: a plain download link to the /accounts.csv route handler. The CSV used
+// to be built in the browser from the whole data layer, which put Zod and every synthetic
+// record into the client bundle of `/`.
+export function ExportButton({ filter = {} }: { filter?: AccountFilter }) {
   return (
-    <button
-      onClick={handleExport}
-      className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-focus transition-colors cursor-pointer"
+    <a
+      href={portfolioCsvHref(filter)}
+      download
+      className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-focus transition-colors"
       title="Export portfolio accounts as CSV"
     >
       <svg
+        aria-hidden="true"
         className="h-3.5 w-3.5 text-gray-500"
         fill="none"
         viewBox="0 0 24 24"
@@ -41,6 +27,6 @@ export function ExportButton({ accounts }: ExportButtonProps) {
         />
       </svg>
       Export CSV
-    </button>
+    </a>
   );
 }

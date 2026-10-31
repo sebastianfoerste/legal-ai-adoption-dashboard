@@ -12,6 +12,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
+    "test:a11y": "playwright test",
     "verify:quick": "tsc --noEmit && vitest run",
     "telemetry:validate": "node scripts/validate-telemetry.mjs",
     "contract:test": "vitest run packages/legal-workflow-contract/src/index.test.ts",
@@ -25,6 +26,8 @@
     "zod": "^4.6.6"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^24",
     "@types/react": "^19",

@@ -1,4 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+
+// The root segment: layout.tsx's title template does not apply to the page of the same segment.
+export const metadata: Metadata = { title: "Account Health · Legal AI Adoption Dashboard" };
 import { getAccounts, getBlockers } from "@/lib/data";
 import { accountHealth } from "@/lib/aggregate";
 import { portfolioSummary } from "@/lib/portfolio";
@@ -182,8 +187,8 @@ export default async function AccountHealthPage({
       </form>
 
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-sm font-medium text-gray-500">Portfolio Status</h3>
-        <ExportButton accounts={filteredAccounts} />
+        <h2 className="text-sm font-medium text-gray-500">Portfolio Status</h2>
+        <ExportButton filter={{ search, type, band }} />
       </div>
 
       <section
@@ -661,8 +666,8 @@ export default async function AccountHealthPage({
                   <div className="rounded-lg border border-violet-100 bg-violet-50/50 p-4">
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
-                        <h4 className="text-[10px] font-bold uppercase tracking-wider text-violet-600">Recommended Next Play</h4>
-                        <h5 className="mt-1 text-sm font-bold text-gray-900">{action.title}</h5>
+                        <h3 className="text-[10px] font-bold uppercase tracking-wider text-violet-600">Recommended Next Play</h3>
+                        <h4 className="mt-1 text-sm font-bold text-gray-900">{action.title}</h4>
                         <p className="mt-1 text-xs text-gray-600">{action.description}</p>
                       </div>
                       <div className="shrink-0">

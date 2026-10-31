@@ -39,6 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# playwright (pnpm test:a11y)
+/test-results/
+/playwright-report/
+/blob-report/
 .gstack/
 # local agent worktrees and preview configuration
 /.claude/

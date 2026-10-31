@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import nextConfig, { securityHeaders } from "../next.config";
+import nextConfig, { resolveBuildCommit, securityHeaders } from "../next.config";
 
 /** The hardening in next.config.ts is a stated property of the deployment; keep it pinned. */
 describe("next.config.ts hardening", () => {
@@ -35,6 +35,14 @@ describe("next.config.ts hardening", () => {
     expect(directives).toContain("img-src 'self' data:");
     // Outside the dev server no directive may allow eval.
     expect(csp).not.toContain("unsafe-eval");
+  });
+
+  it("stamps the build with a commit SHA or 'unknown', without any network call", () => {
+    expect(nextConfig.env?.BUILD_COMMIT_SHA).toMatch(/^[0-9a-f]{40}$|^unknown$/);
+    expect(nextConfig.env?.BUILD_DATE).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(resolveBuildCommit({ VERCEL_GIT_COMMIT_SHA: "a".repeat(40) })).toBe("a".repeat(40));
+    expect(resolveBuildCommit({ GITHUB_SHA: "b".repeat(40) })).toBe("b".repeat(40));
+    expect(resolveBuildCommit({ VERCEL_GIT_COMMIT_SHA: "c".repeat(40), GITHUB_SHA: "b".repeat(40) })).toBe("c".repeat(40));
   });
 
   it("exports the same header list it serves", async () => {

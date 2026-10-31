@@ -105,15 +105,21 @@ const qualityText: Record<ValueAssessment["quality"], string> = {
   unknown: "Quality: unknown",
 };
 
-export function ValuePanel({ value }: { value: ValueAssessment }) {
+/**
+ * `headingLevel` is the level of the panel's title; the pages place the panel under an h2
+ * (customer review) or an h3 (account page), and the outline must not skip a level.
+ */
+export function ValuePanel({ value, headingLevel = 4 }: { value: ValueAssessment; headingLevel?: 3 | 4 }) {
   const { measurement, financial } = value;
+  const Title: "h3" | "h4" = headingLevel === 3 ? "h3" : "h4";
+  const Sub: "h4" | "h5" = headingLevel === 3 ? "h4" : "h5";
   return (
     <div className="rounded-lg border border-gray-200">
       <div className="flex flex-wrap items-start justify-between gap-2 border-b border-gray-100 bg-gray-50 px-3 py-2">
         <div>
-          <h4 className="text-sm font-semibold text-gray-900">
+          <Title className="text-sm font-semibold text-gray-900">
             {measurement.workflowName} · {measurement.practiceGroup}
-          </h4>
+          </Title>
           <p className="mt-0.5 text-xs text-gray-600">
             Acceptable result: {measurement.acceptableResultDefinition}
           </p>
@@ -179,7 +185,7 @@ export function ValuePanel({ value }: { value: ValueAssessment }) {
 
       <div className="grid gap-0 border-t border-gray-100 md:grid-cols-2">
         <div className="p-3 md:border-r md:border-gray-100">
-          <h5 className="text-xs font-bold uppercase tracking-wider text-emerald-700">Observed</h5>
+          <Sub className="text-xs font-bold uppercase tracking-wider text-emerald-700">Observed</Sub>
           <ul className="mt-1 space-y-1 text-sm text-gray-700">
             {value.observed.map((item) => (
               <li key={item}>{item}</li>
@@ -197,9 +203,9 @@ export function ValuePanel({ value }: { value: ValueAssessment }) {
           </ul>
         </div>
         <div className="border-t border-gray-100 bg-amber-50/40 p-3 md:border-t-0">
-          <h5 className="text-xs font-bold uppercase tracking-wider text-amber-800">
+          <Sub className="text-xs font-bold uppercase tracking-wider text-amber-800">
             Assumed, not established
-          </h5>
+          </Sub>
           <ul className="mt-1 space-y-1 text-sm text-gray-700">
             <li>{value.attribution.statement}</li>
             {value.attribution.confounders.map((item) => (
@@ -213,9 +219,9 @@ export function ValuePanel({ value }: { value: ValueAssessment }) {
       </div>
 
       <div className="border-t border-gray-100 p-3">
-        <h5 className="text-xs font-bold uppercase tracking-wider text-gray-500">
+        <Sub className="text-xs font-bold uppercase tracking-wider text-gray-500">
           Financial illustration
-        </h5>
+        </Sub>
         {financial.status === "illustrated" ? (
           <>
             <p className="mt-1 text-sm text-gray-700">

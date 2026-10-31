@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import { formatDate, resolveAsOf } from "@/lib/engagement/as-of";
+
+
+export const metadata: Metadata = { title: "Research to Change" };
 import { EVIDENCE_SOURCE_FILE, getEvidenceStore, practitionerEvidence } from "@/lib/evidence/data";
 import { evidenceTypeLabel, summarizeLoop, viewChanges } from "@/lib/evidence/loop";
 import { AsOfNote } from "@/components/AsOfNote";
@@ -130,13 +134,14 @@ export default async function ResearchPage({
         </p>
         <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <table className="w-full min-w-[760px] text-sm">
+            <caption className="sr-only">Every observation with its session, question and evidence type</caption>
             <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
               <tr>
-                <th className="px-3 py-2 font-medium">Observation</th>
-                <th className="px-3 py-2 font-medium">Session</th>
-                <th className="px-3 py-2 font-medium">Question</th>
-                <th className="px-3 py-2 font-medium">Evidence type</th>
-                <th className="px-3 py-2 font-medium">Observed</th>
+                <th scope="col" className="px-3 py-2 font-medium">Observation</th>
+                <th scope="col" className="px-3 py-2 font-medium">Session</th>
+                <th scope="col" className="px-3 py-2 font-medium">Question</th>
+                <th scope="col" className="px-3 py-2 font-medium">Evidence type</th>
+                <th scope="col" className="px-3 py-2 font-medium">Observed</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">

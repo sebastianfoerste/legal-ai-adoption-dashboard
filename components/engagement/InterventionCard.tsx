@@ -100,7 +100,7 @@ export function InterventionCard({
       </dl>
 
       <div className="mt-4">
-        <h4 className="text-xs uppercase tracking-wide text-muted">Supporting evidence</h4>
+        <h3 className="text-xs uppercase tracking-wide text-muted">Supporting evidence</h3>
         <ul className="mt-1 space-y-1 text-sm text-gray-700">
           {intervention.supportingEvidence.map((item) => (
             <li key={item.summary}>
@@ -113,7 +113,7 @@ export function InterventionCard({
       </div>
 
       <div className="mt-4">
-        <h4 className="text-xs uppercase tracking-wide text-muted">Follow-up observations</h4>
+        <h3 className="text-xs uppercase tracking-wide text-muted">Follow-up observations</h3>
         {intervention.followUpObservations.length === 0 ? (
           <p className="mt-1 text-sm italic text-muted">None recorded yet.</p>
         ) : (

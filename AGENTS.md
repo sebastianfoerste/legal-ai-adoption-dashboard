@@ -35,12 +35,15 @@ or personal data.
   denylist kept in the private store (`PRIVATE_RESEARCH_DENYLIST`); never copy that list,
   or anything from the private store, into this repository.
 - `app/` — Server-Component routes: `/`, `/accounts/[id]`, `/accounts/[id]/review`,
-  `/blockers`, `/feedback`, `/research` (and the Markdown route `/research/backlog`), `/interventions`, `/manager`, `/insights`, and the
-  Markdown route `/insights/report` (`?account=<id>` for a customer review), and the CSV route
-  `/accounts/[id]/usage.csv`.
+  `/blockers`, `/feedback`, `/research` (and the Markdown route `/research/backlog`),
+  `/interventions`, `/manager`, `/insights`, `/benchmarks`, the Markdown route
+  `/insights/report` (`?account=<id>` for a customer review), and the CSV routes
+  `/accounts.csv` (the portfolio export; takes the `/` filters) and `/accounts/[id]/usage.csv`.
 - `components/` — presentational Server Components; `components/engagement/` holds the
   panels for the manager layer; `components/charts/` holds the SVG charts (no chart library).
-  `ExportButton`, `NavLinks` and `app/error.tsx` are the only client components.
+  `NavLinks` and `app/error.tsx` are the only client components; `lib/client-boundary.test.ts`
+  fails if a client component imports the data layer (`ExportButton` is a Server Component
+  linking to `/accounts.csv`).
 
 ## Conventions
 - TypeScript strict. Any `any` needs an inline justification.
