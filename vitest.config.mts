@@ -6,6 +6,7 @@ export default defineConfig({
     include: ["**/*.test.ts"],
     // .claude/worktrees holds other checkouts of this repository; their tests are not ours.
     // e2e/ holds the Playwright accessibility gate (pnpm test:a11y), not Vitest tests.
+    // (.mts: this file is ESM; Vite no longer warns about loading it as CommonJS.)
     exclude: ["**/node_modules/**", ".next/**", ".claude/**", "e2e/**"],
   },
 });
