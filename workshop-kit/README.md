@@ -56,6 +56,31 @@ This is the legal-AI rollout reviewer path:
 
 [`research/`](research/README.md) prepares a first qualitative study round on the contract-review handoff with four to eight practitioners. It is preparation only: no invitation has been sent and no session has been held. Predictive statements elsewhere in the kit are worded as hypotheses that the study and later adoption data can check.
 
+## Regulatory context (as of 30 October 2026)
+
+Orientation only, not legal advice. Each point was read on 31 October 2026 at the source
+linked; the firm's own professional-conduct review decides what applies to its rollout.
+
+- **AI literacy, Article 4 of the AI Act.** Article 4 of Regulation (EU) 2024/1689, as
+  amended by Regulation (EU) 2026/1744 (the Digital Omnibus on AI), requires providers and
+  deployers of AI systems to take measures to support the development of AI literacy. The
+  AI-literacy obligation has applied since 2 February 2025; the amending regulation entered
+  into force on 27 July 2026 ([Commission, AI Act timeline](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai);
+  [Commission, AI Omnibus enters into force](https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force);
+  amended wording as reproduced at [artificialintelligenceact.eu](https://artificialintelligenceact.eu/article/4/),
+  the Official Journal text at EUR-Lex `OJ:L_202601744` was not readable in that check). A
+  firm that deploys a legal-AI tool can document the sessions in this kit as such measures.
+- **Germany: KI-MIG.** The "KI-Marktüberwachungs-und-Innovationsförderungs-Gesetz vom
+  22. Juli 2026 (BGBl. 2026 I Nr. 223)" has been in force since 29 July 2026. Under § 2
+  Abs. 1 the Bundesnetzagentur is the market-surveillance authority for compliance with
+  Regulation (EU) 2024/1689 ([gesetze-im-internet.de](https://www.gesetze-im-internet.de/ki-mig/BJNR0DF0B0026.html)).
+- **Germany: BRAK guidance.** The Bundesrechtsanwaltskammer's "Hinweise zum Einsatz von
+  künstlicher Intelligenz (KI)" are dated 12/2024; brak.de listed no newer version on
+  31 October 2026 ([BRAK, Handlungshinweise und Leitfäden](https://www.brak.de/publikationen/handlungshinweise/)).
+  The CCBE adopted a guide for lawyers on generative AI in October 2025
+  ([BRAK newsletter 18/2025 of 24 October 2025](https://www.brak.de/newsroom/newsletter/nachrichten-aus-bruessel/2025/ausgabe-18-2025-v-24102025/leitfaden-fuer-die-anwaltschaft-zum-umgang-mit-generativer-kuenstlicher-intelligenz-ccbe/)).
+  Check both for updates before a session.
+
 ## Data statement
 
 All examples are generic or synthetic. No real client, firm, matter, or personal data appears anywhere in this repo.

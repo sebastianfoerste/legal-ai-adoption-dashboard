@@ -38,7 +38,7 @@ carries the judgment. The tool changes who produces the draft, not who is respon
 
 Answer the two questions a partner always has, before they ask:
 
-- **Confidentiality.** No client data goes into an untrusted system. The rollout uses the approved environment, and the workshops run on synthetic documents. Spell out the data path in one sentence.
+- **Confidentiality.** Client data reaches a provider only on the lawful disclosure path: as far as the service requires it, under a written confidentiality contract, with comparable protection where the service is performed abroad, and with the client's consent where the service directly serves a single matter (for a German firm, §§ 43a and 43e BRAO and § 203 StGB; the [German briefing](30-min-partner-briefing-de.md) sets this out). Until that path is approved, every workshop and the pilot run on synthetic documents modelled on the firm's matters. Spell out the data path in one sentence: which environment, which contract, where the data is stored, in which country.
 - **Reliability.** Every output passes a human-review gate before reliance. The tool produces a first pass; a named lawyer checks each claim against its source and signs off. A wrong citation is caught at review, not at filing.
 
 If the firm has a professional-responsibility or risk committee, name that this rollout is

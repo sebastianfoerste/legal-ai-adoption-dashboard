@@ -11,9 +11,15 @@ from, and an ungrounded citation is struck. The workshop drills this until it is
 The tool produces a first pass; it does not get the last word.
 
 ## 2. "Our client data cannot go into these systems."
-Agreed, and it does not. The rollout uses the approved environment, and every workshop runs
-on synthetic documents. The data path is mapped before a single session. Confidentiality is
-a design constraint here, not an afterthought.
+Agreed: nothing enters a system until the data path is approved. Every workshop and the
+pilot run on synthetic documents modelled on your matters. Client data reaches a provider
+only on the lawful disclosure path: as far as the service requires it, under a written
+confidentiality contract, with comparable protection where the service is performed abroad,
+and with the client's consent where the service directly serves a single matter (for a
+German firm, §§ 43a and 43e BRAO and § 203 StGB; the
+[German briefing](../sessions/30-min-partner-briefing-de.md) sets this out). The data path
+is mapped before a single session. Confidentiality is a design constraint here, not an
+afterthought.
 
 ## 3. "This cannibalizes the billable hour."
 The work that disappears is the work clients already resist paying for — the long first
@@ -41,7 +47,8 @@ associate starts from, not against your final sign-off. On that comparison it is
 ## 7. "We tried an AI tool before and it was useless."
 That is worth taking seriously; a burned first experience is real. Tell me what failed, and
 we will design the pilot around it. We start with one frequent, easy-to-verify workflow and
-prove it on your documents before we ask for trust on anything harder.
+prove it on synthetic documents modelled on your matters before we ask for trust on
+anything harder.
 
 ## 8. "This is a malpractice risk."
 The risk is using output without review — which is the one thing the workflow forbids. The
@@ -57,4 +64,5 @@ attached. The time cost to you is the half hour we are in.
 ---
 
 **After any objection:** return to the ask. "Given that — would you sponsor a four-week
-pilot on one workflow, so we can show you on your own documents rather than argue it?"
+pilot on one workflow, so we can show you on synthetic documents modelled on your matters
+rather than argue it?"

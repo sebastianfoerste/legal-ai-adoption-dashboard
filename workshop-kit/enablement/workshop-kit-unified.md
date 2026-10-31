@@ -93,6 +93,31 @@ This is the legal-AI rollout reviewer path:
 
 [`research/`](#readme) prepares a first qualitative study round on the contract-review handoff with four to eight practitioners. It is preparation only: no invitation has been sent and no session has been held. Predictive statements elsewhere in the kit are worded as hypotheses that the study and later adoption data can check.
 
+## Regulatory context (as of 30 October 2026)
+
+Orientation only, not legal advice. Each point was read on 31 October 2026 at the source
+linked; the firm's own professional-conduct review decides what applies to its rollout.
+
+- **AI literacy, Article 4 of the AI Act.** Article 4 of Regulation (EU) 2024/1689, as
+  amended by Regulation (EU) 2026/1744 (the Digital Omnibus on AI), requires providers and
+  deployers of AI systems to take measures to support the development of AI literacy. The
+  AI-literacy obligation has applied since 2 February 2025; the amending regulation entered
+  into force on 27 July 2026 ([Commission, AI Act timeline](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai);
+  [Commission, AI Omnibus enters into force](https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force);
+  amended wording as reproduced at [artificialintelligenceact.eu](https://artificialintelligenceact.eu/article/4/),
+  the Official Journal text at EUR-Lex `OJ:L_202601744` was not readable in that check). A
+  firm that deploys a legal-AI tool can document the sessions in this kit as such measures.
+- **Germany: KI-MIG.** The "KI-Marktüberwachungs-und-Innovationsförderungs-Gesetz vom
+  22. Juli 2026 (BGBl. 2026 I Nr. 223)" has been in force since 29 July 2026. Under § 2
+  Abs. 1 the Bundesnetzagentur is the market-surveillance authority for compliance with
+  Regulation (EU) 2024/1689 ([gesetze-im-internet.de](https://www.gesetze-im-internet.de/ki-mig/BJNR0DF0B0026.html)).
+- **Germany: BRAK guidance.** The Bundesrechtsanwaltskammer's "Hinweise zum Einsatz von
+  künstlicher Intelligenz (KI)" are dated 12/2024; brak.de listed no newer version on
+  31 October 2026 ([BRAK, Handlungshinweise und Leitfäden](https://www.brak.de/publikationen/handlungshinweise/)).
+  The CCBE adopted a guide for lawyers on generative AI in October 2025
+  ([BRAK newsletter 18/2025 of 24 October 2025](https://www.brak.de/newsroom/newsletter/nachrichten-aus-bruessel/2025/ausgabe-18-2025-v-24102025/leitfaden-fuer-die-anwaltschaft-zum-umgang-mit-generativer-kuenstlicher-intelligenz-ccbe/)).
+  Check both for updates before a session.
+
 ## Data statement
 
 All examples are generic or synthetic. No real client, firm, matter, or personal data appears anywhere in this repo.
@@ -637,7 +662,7 @@ carries the judgment. The tool changes who produces the draft, not who is respon
 
 Answer the two questions a partner always has, before they ask:
 
-- **Confidentiality.** No client data goes into an untrusted system. The rollout uses the approved environment, and the workshops run on synthetic documents. Spell out the data path in one sentence.
+- **Confidentiality.** Client data reaches a provider only on the lawful disclosure path: as far as the service requires it, under a written confidentiality contract, with comparable protection where the service is performed abroad, and with the client's consent where the service directly serves a single matter (for a German firm, §§ 43a and 43e BRAO and § 203 StGB; the [German briefing](#sessions-30-min-partner-briefing-de) sets this out). Until that path is approved, every workshop and the pilot run on synthetic documents modelled on the firm's matters. Spell out the data path in one sentence: which environment, which contract, where the data is stored, in which country.
 - **Reliability.** Every output passes a human-review gate before reliance. The tool produces a first pass; a named lawyer checks each claim against its source and signs off. A wrong citation is caught at review, not at filing.
 
 If the firm has a professional-responsibility or risk committee, name that this rollout is
@@ -861,14 +886,17 @@ den Entwurf bleibt beim Anwalt.
 
 Beantworte die beiden Fragen, die jeder Partner hat, bevor er sie stellt.
 
-- **Verschwiegenheit.** Der Rechtsanwalt ist zur Verschwiegenheit verpflichtet (§ 43a Abs. 2 BRAO). Er darf einem Dienstleister den Zugang zu Mandatsgeheimnissen eröffnen, soweit dies für die Inanspruchnahme der Dienstleistung erforderlich ist (§ 43e Abs. 1 BRAO). Der Vertrag mit dem Dienstleister bedarf der Textform (§ 43e Abs. 3 BRAO). Strafrechtlich knüpft § 203 Abs. 3 Satz 2 StGB an dieselbe Erforderlichkeit an. Beschreibe den Weg der Daten in einem Satz: welche Umgebung, welcher Vertrag, welcher Speicherort. Die Workshops arbeiten ausschließlich mit synthetischen Dokumenten.
+- **Verschwiegenheit.** Der Rechtsanwalt ist zur Verschwiegenheit verpflichtet (§ 43a Abs. 2 BRAO). Er darf einem Dienstleister den Zugang zu Mandatsgeheimnissen eröffnen, soweit dies für die Inanspruchnahme der Dienstleistung erforderlich ist (§ 43e Abs. 1 BRAO). Der Vertrag mit dem Dienstleister bedarf der Textform (§ 43e Abs. 3 BRAO). Strafrechtlich knüpft § 203 Abs. 3 Satz 2 StGB an dieselbe Erforderlichkeit an. Der Rechtsanwalt muss den Dienstleister sorgfältig auswählen und die Zusammenarbeit unverzüglich beenden, wenn die Einhaltung der Vorgaben nach § 43e Abs. 3 BRAO nicht gewährleistet ist (§ 43e Abs. 2 BRAO). Wird die Dienstleistung im Ausland erbracht, darf er den Zugang zu fremden Geheimnissen nur eröffnen, wenn der dortige Schutz dem inländischen vergleichbar ist, es sei denn, der Schutz der Geheimnisse gebietet dies nicht (§ 43e Abs. 4 BRAO). Dient die Dienstleistung unmittelbar einem einzelnen Mandat, ist vor dem Zugang die Einwilligung des Mandanten erforderlich (§ 43e Abs. 5 BRAO). Die Vorschriften zum Schutz personenbezogener Daten bleiben unberührt (§ 43e Abs. 8 BRAO). Beschreibe den Weg der Daten in einem Satz: welche Umgebung, welcher Vertrag, welcher Speicherort, welcher Staat. Die Workshops arbeiten ausschließlich mit synthetischen Dokumenten.
 - **Verlässlichkeit.** Auf ein Ergebnis darf sich niemand stützen, bevor ein namentlich benannter Anwalt es geprüft hat. Das Werkzeug liefert eine Erstdurchsicht. Der Anwalt gleicht jede Aussage mit ihrer Fundstelle ab und gibt sie frei. Ein falsches Zitat fällt so bei der Prüfung auf und nicht erst im Schriftsatz.
 
 Hat die Kanzlei einen Berufsrechts- oder Risikoausschuss, sage, ob das Vorhaben mit dessen
 Vorgaben vereinbar ist. Andernfalls kündige an, dass Du es dort zuerst vorlegst.
 
-Dieser Abschnitt gibt den Gesetzeswortlaut verkürzt wieder und ersetzt keine berufsrechtliche
-Prüfung der konkreten Einführung.
+Dieser Abschnitt gibt den Gesetzeswortlaut verkürzt wieder (Stand der Lektüre auf
+gesetze-im-internet.de: 31. Oktober 2026) und ersetzt keine berufsrechtliche Prüfung der
+konkreten Einführung. Ob ein bestimmtes KI-Werkzeug unmittelbar einem einzelnen Mandat dient
+und ob der Schutz im Sitzstaat des Anbieters dem inländischen vergleichbar ist, entscheidet
+diese Prüfung, nicht dieses Briefing.
 
 ## 0:24 bis 0:30: Die Entscheidung
 
@@ -1000,9 +1028,15 @@ from, and an ungrounded citation is struck. The workshop drills this until it is
 The tool produces a first pass; it does not get the last word.
 
 ## 2. "Our client data cannot go into these systems."
-Agreed, and it does not. The rollout uses the approved environment, and every workshop runs
-on synthetic documents. The data path is mapped before a single session. Confidentiality is
-a design constraint here, not an afterthought.
+Agreed: nothing enters a system until the data path is approved. Every workshop and the
+pilot run on synthetic documents modelled on your matters. Client data reaches a provider
+only on the lawful disclosure path: as far as the service requires it, under a written
+confidentiality contract, with comparable protection where the service is performed abroad,
+and with the client's consent where the service directly serves a single matter (for a
+German firm, §§ 43a and 43e BRAO and § 203 StGB; the
+[German briefing](#sessions-30-min-partner-briefing-de) sets this out). The data path
+is mapped before a single session. Confidentiality is a design constraint here, not an
+afterthought.
 
 ## 3. "This cannibalizes the billable hour."
 The work that disappears is the work clients already resist paying for — the long first
@@ -1030,7 +1064,8 @@ associate starts from, not against your final sign-off. On that comparison it is
 ## 7. "We tried an AI tool before and it was useless."
 That is worth taking seriously; a burned first experience is real. Tell me what failed, and
 we will design the pilot around it. We start with one frequent, easy-to-verify workflow and
-prove it on your documents before we ask for trust on anything harder.
+prove it on synthetic documents modelled on your matters before we ask for trust on
+anything harder.
 
 ## 8. "This is a malpractice risk."
 The risk is using output without review — which is the one thing the workflow forbids. The
@@ -1046,7 +1081,8 @@ attached. The time cost to you is the half hour we are in.
 ---
 
 **After any objection:** return to the ask. "Given that — would you sponsor a four-week
-pilot on one workflow, so we can show you on your own documents rather than argue it?"
+pilot on one workflow, so we can show you on synthetic documents modelled on your matters
+rather than argue it?"
 
 
 </div>
