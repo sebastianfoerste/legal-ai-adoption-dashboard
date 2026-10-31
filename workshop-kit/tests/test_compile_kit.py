@@ -62,7 +62,7 @@ class FormulaTest(unittest.TestCase):
         self.assertNotIn("\\text", html)
 
     def test_escaped_dollar_signs_are_plain_in_html(self):
-        self.assertEqual(parse_inline(r"costs \$300 to \$450", {}), "costs $300 to $450")
+        self.assertEqual(parse_inline(r"from \$1 to \$2", {}), "from $1 to $2")
 
 
 class CompiledHtmlTest(unittest.TestCase):
