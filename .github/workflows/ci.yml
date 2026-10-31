@@ -73,6 +73,27 @@ jobs:
       - name: Run Next.js build
         run: pnpm run build
 
+  # The Python modules on their declared floor (requires-python >= 3.11); the main job uses 3.12.
+  python-floor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.11"
+
+      - name: Run feedback-loop tests and output check on the floor version
+        run: make feedback-check
+
+      - name: Run workshop-kit check on the floor version
+        run: make workshop-check
+
   # Accessibility gate: axe-core (WCAG 2.2 AA plus heading rules) on every HTML route of the
   # built app at 1280 px and 375 px, and distinct page titles. See e2e/a11y.spec.ts.
   accessibility:
