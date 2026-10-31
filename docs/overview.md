@@ -21,7 +21,7 @@ account where expansion is inappropriate.
 
 **Public-safety posture:** synthetic account data only, source provenance for dashboard inputs, review-gated legal outputs, and no legal advice.
 
-**Live demo:** https://legal-ai-adoption-dashboard.vercel.app
+**Live demo** (an earlier build; the footer shows its commit): https://legal-ai-adoption-dashboard.vercel.app
 
 **Run locally:** `pnpm install && pnpm dev`.
 
@@ -103,7 +103,7 @@ The versioned contract is maintained in `packages/legal-workflow-contract`. Dash
 - Practice-group health uses licence use and trend only. Reviewed output is not captured per group, so that component is unknown and left out.
 - The engagement thresholds are uncalibrated judgment calls: ten for a small cohort or sample, 50% of eligible users over three periods for sustained use, 10% for a time improvement. Medians are compared without a significance test.
 - A before-and-after comparison cannot establish that an intervention caused a change. The reports say so; they cannot repair it.
-- Capacity hours and complexity points are planning assumptions. The engagement views use one fixed as-of date, 31 July 2026.
+- Capacity hours and complexity points are planning assumptions. The engagement views share one as-of date: the demo default is 31 July 2026, overridable per request with `?asOf=YYYY-MM-DD` or for the whole app with `ADOPTION_AS_OF` (`lib/engagement/as-of.ts`).
 - Data is static JSON. There is no persistence, auth, or multi-tenancy. This is an MVP that demonstrates the workflow, not a product. See [CASE_STUDY.md](../CASE_STUDY.md) for the full list of limits.
 
 ## Stack
