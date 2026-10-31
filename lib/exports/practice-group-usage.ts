@@ -11,11 +11,19 @@ import type { Account } from "../schema";
 
 export const REVIEW_NOTE = "Draft for account-owner review; synthetic data";
 
+/**
+ * One CSV cell. A string that a spreadsheet would read as a formula (it starts with =, +, -,
+ * @, tab, CR or LF) is prefixed with a single quote inside a quoted field, as OWASP
+ * recommends against CSV injection; numbers pass through unchanged.
+ */
 export const csvCell = (value: string | number | null | undefined): string => {
   if (value === null || value === undefined) return "";
-  const text = String(value);
-  return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+  if (typeof value === "number") return String(value);
+  const text = FORMULA_START.test(value) ? `'${value}` : value;
+  return /[",\n\r]/.test(text) || text !== value ? `"${text.replace(/"/g, '""')}"` : text;
 };
+
+const FORMULA_START = /^[=+\-@\t\r\n]/;
 
 /** The window, in weeks, that the export and the link to it both state. */
 export const usageWindowWeeks = (account: Account): number =>

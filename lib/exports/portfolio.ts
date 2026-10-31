@@ -38,5 +38,6 @@ export function portfolioCsv(accounts: Account[], healthOf: (accountId: string) 
       "synthetic",
     ];
   });
-  return [HEADERS, ...rows].map((row) => row.map(csvCell).join(",")).join("\n");
+  // CRLF line ends, as RFC 4180 and the usage CSV.
+  return [HEADERS, ...rows].map((row) => row.map(csvCell).join(",")).join("\r\n");
 }

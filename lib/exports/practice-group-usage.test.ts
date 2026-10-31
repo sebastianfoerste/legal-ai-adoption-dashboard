@@ -52,6 +52,24 @@ describe("practiceGroupUsageCsv", () => {
     expect(csvCell(0)).toBe("0");
   });
 
+  it("neutralises a string cell that starts like a spreadsheet formula (OWASP)", () => {
+    expect(csvCell("=SUM(A1:A9)")).toBe("\"'=SUM(A1:A9)\"");
+    expect(csvCell("+1")).toBe("\"'+1\"");
+    expect(csvCell("-x")).toBe("\"'-x\"");
+    expect(csvCell("@cmd")).toBe("\"'@cmd\"");
+    expect(csvCell("\tlead")).toBe("\"'\tlead\"");
+    expect(csvCell("\rlead")).toBe("\"'\rlead\"");
+    expect(csvCell("\nlead")).toBe("\"'\nlead\"");
+    expect(csvCell("=a,\"b\"")).toBe("\"'=a,\"\"b\"\"\"");
+  });
+
+  it("passes numbers through unchanged, negative ones included", () => {
+    expect(csvCell(-5)).toBe("-5");
+    expect(csvCell(0.25)).toBe("0.25");
+    expect(csvCell("plain text")).toBe("plain text");
+    expect(csvCell("2026-07-31")).toBe("2026-07-31");
+  });
+
   it("puts each group's latest count in the latest column", () => {
     expect(alignToLatest([4, 5, 6], 5)).toEqual([null, null, 4, 5, 6]);
     expect(alignToLatest([1, 2, 3, 4, 5], 5)).toEqual([1, 2, 3, 4, 5]);
