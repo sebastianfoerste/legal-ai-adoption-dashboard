@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import { adoptionInsightsSnapshot } from "@/lib/adoption-insights";
+
+
+export const metadata: Metadata = { title: "Adoption Insights" };
 import { workflowGovernanceSnapshot } from "@/lib/workflow-governance";
 import { getAccounts } from "@/lib/data";
 import { formatDate, resolveAsOf } from "@/lib/engagement/as-of";
@@ -77,13 +81,14 @@ export default async function AdoptionInsightsPage({ searchParams }: { searchPar
         </p>
         <div tabIndex={0} className="mt-4 overflow-x-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <table className="w-full min-w-[680px] text-sm">
+            <caption className="sr-only">Customer review reports per account</caption>
             <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
               <tr>
-                <th className="px-3 py-2 font-medium">Account</th>
-                <th className="px-3 py-2 font-medium">Recommendation</th>
-                <th className="px-3 py-2 font-medium">Next review</th>
-                <th className="px-3 py-2 font-medium">Owner</th>
-                <th className="px-3 py-2 font-medium">Report</th>
+                <th scope="col" className="px-3 py-2 font-medium">Account</th>
+                <th scope="col" className="px-3 py-2 font-medium">Recommendation</th>
+                <th scope="col" className="px-3 py-2 font-medium">Next review</th>
+                <th scope="col" className="px-3 py-2 font-medium">Owner</th>
+                <th scope="col" className="px-3 py-2 font-medium">Report</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">

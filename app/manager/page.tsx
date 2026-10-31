@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+
+export const metadata: Metadata = { title: "Manager Decisions" };
 import { Meter } from "@/components/charts/Meter";
 import { getAccounts } from "@/lib/data";
 import { accountHealth } from "@/lib/aggregate";
@@ -306,15 +310,16 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
         </p>
         <div tabIndex={0} className="mt-4 overflow-x-auto rounded-lg border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <table className="w-full min-w-[760px] text-sm">
+            <caption className="sr-only">Expansion readiness per account: six evidence criteria</caption>
             <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
               <tr>
-                <th className="px-3 py-2 font-medium">Account</th>
-                <th className="px-3 py-2 font-medium">Adoption health</th>
-                <th className="px-3 py-2 font-medium">Recommendation</th>
-                <th className="px-3 py-2 font-medium">Met</th>
-                <th className="px-3 py-2 font-medium">Not met</th>
-                <th className="px-3 py-2 font-medium">Unknown</th>
-                <th className="px-3 py-2 font-medium">Evidence missing</th>
+                <th scope="col" className="px-3 py-2 font-medium">Account</th>
+                <th scope="col" className="px-3 py-2 font-medium">Adoption health</th>
+                <th scope="col" className="px-3 py-2 font-medium">Recommendation</th>
+                <th scope="col" className="px-3 py-2 font-medium">Met</th>
+                <th scope="col" className="px-3 py-2 font-medium">Not met</th>
+                <th scope="col" className="px-3 py-2 font-medium">Unknown</th>
+                <th scope="col" className="px-3 py-2 font-medium">Evidence missing</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">

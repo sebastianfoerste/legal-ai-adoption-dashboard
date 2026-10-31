@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import { getAccounts, getBlockers } from "@/lib/data";
+
+
+export const metadata: Metadata = { title: "Adoption Blockers" };
 import { accountHealth } from "@/lib/aggregate";
 import { HealthBadge } from "@/components/HealthBadge";
 import { SeverityTag } from "@/components/SeverityTag";

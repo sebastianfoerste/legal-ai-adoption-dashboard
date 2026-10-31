@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+
+export const metadata: Metadata = { title: "Interventions" };
 import { getAccounts } from "@/lib/data";
 import { formatDate, resolveAsOf } from "@/lib/engagement/as-of";
 import { getInterventions } from "@/lib/engagement/data";

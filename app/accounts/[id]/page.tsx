@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAccounts, getBlockers, getFeedback } from "@/lib/data";
@@ -30,6 +31,12 @@ function Unknown({ children }: { children: React.ReactNode }) {
       Unknown: {children}
     </p>
   );
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const account = getAccounts().find((a) => a.id === id);
+  return { title: account ? account.name : "Not found" };
 }
 
 export default async function AccountDetailPage({
@@ -123,10 +130,10 @@ export default async function AccountDetailPage({
             <div className="rounded-lg border border-violet-100 bg-violet-50/50 p-4">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <h3 id="recommended-action-title" className="text-xs font-bold uppercase tracking-wider text-violet-600">
+                  <h2 id="recommended-action-title" className="text-xs font-bold uppercase tracking-wider text-violet-600">
                     Recommended Next Play
-                  </h3>
-                  <h4 className="mt-1 text-base font-bold text-gray-900">{action.title}</h4>
+                  </h2>
+                  <h3 className="mt-1 text-base font-bold text-gray-900">{action.title}</h3>
                   <p className="mt-1 text-sm text-gray-600">{action.description}</p>
                 </div>
                 <div>

@@ -14,6 +14,9 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Local agent worktrees are separate checkouts with their own build output.
     ".claude/**",
+    // Playwright output (pnpm test:a11y).
+    "test-results/**",
+    "playwright-report/**",
   ]),
 ]);
 

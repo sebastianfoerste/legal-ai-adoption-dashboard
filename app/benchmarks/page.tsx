@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import { Card } from "@/components/Card";
+
+
+export const metadata: Metadata = { title: "Practice-Group Benchmarks" };
 import { PageHeader } from "@/components/PageHeader";
 import { adoptionCockpitReport } from "@/lib/adoption-cockpit";
 import { buildPracticeGroupBenchmark, type PracticeGroupTrend } from "@/lib/benchmarking";

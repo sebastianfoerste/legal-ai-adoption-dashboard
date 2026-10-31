@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
 import { NavLinks } from "@/components/NavLinks";
+import { buildStamp } from "@/lib/build-info";
 import "./globals.css";
 
 // No next/font/google: it downloads the font at build time, so the build failed without
 // network access and was not reproducible. The font stacks are defined in globals.css.
 
 export const metadata: Metadata = {
-  title: "Legal AI Adoption Dashboard",
+  // Every page sets its own title; the template appends the app name (WCAG 2.4.2).
+  title: {
+    default: "Legal AI Adoption Dashboard",
+    template: "%s · Legal AI Adoption Dashboard",
+  },
   description: "Mock post-sales dashboard for steering legal-AI adoption. Synthetic data.",
 };
+
+// Resolved at build time in next.config.ts (platform variable, CI variable, git, or "unknown").
+const build = buildStamp(process.env.BUILD_COMMIT_SHA, process.env.BUILD_DATE);
 
 export default function RootLayout({
   children,
@@ -42,8 +50,23 @@ export default function RootLayout({
             {children}
           </div>
           <footer className="border-t border-gray-200">
-            <div className="mx-auto max-w-5xl px-6 py-4 text-xs text-muted">
-              Synthetic demonstration data — no real client, firm, or personal data.
+            <div className="mx-auto flex max-w-5xl flex-wrap justify-between gap-x-6 gap-y-1 px-6 py-4 text-xs text-muted">
+              <span>Synthetic demonstration data — no real client, firm, or personal data.</span>
+              <span>
+                Build{" "}
+                {build.url ? (
+                  <a
+                    href={build.url}
+                    className="font-mono underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-focus"
+                    title={`Commit ${build.sha} on GitHub`}
+                  >
+                    {build.short}
+                  </a>
+                ) : (
+                  <span className="font-mono">{build.short}</span>
+                )}
+                {build.date ? ` (${build.date})` : ""}
+              </span>
             </div>
           </footer>
         </div>

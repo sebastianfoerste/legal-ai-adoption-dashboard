@@ -39,7 +39,9 @@ function RateCell({ rate }: { rate: Rate }) {
 const count = (value: number | null) =>
   value === null ? <span className="italic text-muted">Unknown</span> : value;
 
-export function AdoptionTrendTable({ metrics }: { metrics: SeriesMetrics }) {
+/** `headingLevel`: the title's level; the pages place the table under an h2 or an h3. */
+export function AdoptionTrendTable({ metrics, headingLevel = 4 }: { metrics: SeriesMetrics; headingLevel?: 3 | 4 }) {
+  const Title: "h3" | "h4" = headingLevel === 3 ? "h3" : "h4";
   const { series, periods } = metrics;
   const caveats = [
     ...new Set(
@@ -51,9 +53,9 @@ export function AdoptionTrendTable({ metrics }: { metrics: SeriesMetrics }) {
   return (
     <div className="rounded-lg border border-gray-200">
       <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
-        <h4 className="text-sm font-semibold text-gray-900">
+        <Title className="text-sm font-semibold text-gray-900">
           {series.workflowName} · {series.practiceGroup}
-        </h4>
+        </Title>
         <p className="mt-0.5 text-xs text-gray-600">
           Four-week reporting periods, as of {formatDate(metrics.asOf)}.
           {series.trainingCohort &&

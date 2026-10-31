@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/PageHeader";
+
+export const metadata: Metadata = { title: "Not found" };
 
 // Shown for an unknown route and for an account id the synthetic data does not hold.
 export default function NotFound() {
