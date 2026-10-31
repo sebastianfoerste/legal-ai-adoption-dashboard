@@ -1,6 +1,7 @@
 # pnpm 10+ reads overrides here, not from the package.json "pnpm" field.
-# postcss <8.5.10 has a moderate XSS advisory (GHSA-qx2v-qp2m-jg93), pulled in
-# transitively via next; pin it to the patched line.
+# postcss <=8.5.22 has a high path-traversal advisory (GHSA-f88m-g3jw-g9cj) and
+# <8.5.10 a moderate XSS advisory (GHSA-qx2v-qp2m-jg93); both are pulled in
+# transitively via next. Pin it to the patched line (next 16.4.3 pins 8.5.23).
 packages:
   - "."
   - "packages/legal-workflow-contract"
@@ -10,5 +11,13 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
 
+# Transitive dev-tooling packages with open high advisories; raised to the patched
+# lines so that the `pnpm audit --audit-level=high` CI gate stays clean.
 overrides:
-  postcss: '>=8.5.10'
+  postcss: '>=8.5.23'
+  'brace-expansion@1': '>=1.1.20 <2'
+  'brace-expansion@>=3': '>=5.0.11'
+  browserslist: '>=4.28.7'
+  js-yaml@4: '>=4.3.2 <5'
+  source-map-js: '>=1.2.2'
+  vite@8: '>=8.1.6'
