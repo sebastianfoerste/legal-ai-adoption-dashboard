@@ -1,0 +1,29 @@
+# Dependabot version updates: weekly, grouped, no auto-merge.
+# Security updates are governed by the repository's Dependabot settings, not by this file.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Wait a few days after a release before proposing it (a maintainer-withdrawn or
+    # compromised release is usually caught within that window).
+    cooldown:
+      default-days: 5
+    groups:
+      npm-minor-and-patch:
+        applies-to: version-updates
+        update-types: ["minor", "patch"]
+    # Major upgrades (ESLint 10, TypeScript 7, Vitest 5, React 19.3 and the like) arrive as
+    # separate PRs for the owner to decide on.
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 5
+    groups:
+      actions-minor-and-patch:
+        applies-to: version-updates
+        update-types: ["minor", "patch"]
