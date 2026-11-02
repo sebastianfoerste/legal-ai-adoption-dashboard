@@ -8,6 +8,10 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Added
 
+- Feedback themes on `/feedback`: per theme, the accounts and persona roles that raised it
+  as counts with their denominators, listed by name and never ranked; routing kept as triage;
+  delivery and outcome read only from linked change records.
+
 - Accessible SVG charts with no client JavaScript: a missing value is a dashed grey Unknown
   gap, never a zero bar, and every chart has a title, a description and a hidden data table.
   Activation and repeat use now show as bars per reporting period.

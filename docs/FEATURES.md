@@ -189,13 +189,20 @@ Implementation:
 
 ## Product Feedback Queue
 
-Synthetic user friction routed to product areas and product requirements.
+Synthetic user friction routed to product areas and product requirements. A Themes table
+groups the items: each theme shows how many distinct accounts and persona roles raised it,
+out of every account and role in the portfolio ("2 of 5 accounts"). Themes are listed by name,
+never ranked by count. Routing is shown as triage only; delivery and outcome come from the
+change records whose problems cite the theme's items, and a theme without one reads
+"No change record: delivery unknown".
 
 Implementation:
 
 1. `app/feedback/page.tsx`
-2. `data/feedback.json`
-3. `docs/product-feedback-notes.md`
+2. `lib/feedback-themes.ts`
+3. `components/FeedbackThemes.tsx`
+4. `data/feedback.json`
+5. `docs/product-feedback-notes.md`
 
 ## App shell
 

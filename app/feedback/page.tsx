@@ -9,6 +9,9 @@ import { getEvidenceStore } from "@/lib/evidence/data";
 import { changesForFeedbackItem, viewChanges } from "@/lib/evidence/loop";
 import { AsOfNote } from "@/components/AsOfNote";
 import { ChangeEvidenceSummary } from "@/components/evidence/ChangeEvidence";
+import { FeedbackThemes } from "@/components/FeedbackThemes";
+import { summarizeThemes } from "@/lib/feedback-themes";
+import { personaSchema } from "@/lib/schema";
 
 const areaLabel: Record<FeedbackItem["productArea"], string> = {
   drafting: "Drafting",
@@ -56,6 +59,11 @@ export default async function FeedbackPage({
   const accountName = (id: string) => accounts.find((a) => a.id === id)?.name ?? id;
   const feedback = getFeedback();
 
+  const themes = summarizeThemes(feedback, evidence, {
+    accounts: accounts.length,
+    personaRoles: personaSchema.shape.role.options.length,
+  });
+
   const byArea = new Map<FeedbackItem["productArea"], FeedbackItem[]>();
   for (const f of feedback) {
     const list = byArea.get(f.productArea) ?? [];
@@ -93,11 +101,14 @@ export default async function FeedbackPage({
         </div>
       </PageHeader>
 
+      <FeedbackThemes themes={themes} accountName={accountName} />
+
+      <h2 className="mb-4 text-lg font-semibold text-gray-900">Items by product area</h2>
       <div className="space-y-6">
         {[...byArea.entries()].map(([area, items]) => (
           <Card key={area}>
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">{areaLabel[area]}</h2>
+              <h3 className="text-lg font-semibold">{areaLabel[area]}</h3>
               <span className="text-xs text-muted">{items.length} item(s)</span>
             </div>
             <ul className="mt-4 space-y-4">
