@@ -43,12 +43,14 @@ describe("countWindow", () => {
     expect(countWindow("weekly_series", ctx).window).toBe("5 weeks ending 31 Jul 2026, oldest first");
     expect(countWindow("series_total", ctx).window).toBe("total over the 5 weeks ending 31 Jul 2026");
     expect(countWindow("trailing_30_days", ctx).window).toBe("30 days to 31 Jul 2026");
+    expect(countWindow("first_week", ctx).window).toBe("first week of the 5 weeks ending 31 Jul 2026");
   });
 
   it("states no window rather than guess one", () => {
     expect(countWindow("not_dated", ctx).window).toBeNull();
     expect(countWindow("weekly_series", { ...ctx, weeks: null }).window).toBeNull();
     expect(countWindow("series_total", { ...ctx, weeks: null }).window).toBeNull();
+    expect(countWindow("first_week", { ...ctx, weeks: null }).window).toBeNull();
   });
 
   it("never reports a lag of 0 when none is recorded", () => {

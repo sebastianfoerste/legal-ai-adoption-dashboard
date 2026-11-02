@@ -111,6 +111,19 @@ Implementation:
 2. `components/charts/BarChart.tsx`
 3. `components/charts/Meter.tsx`
 
+## Seat use
+
+On `/accounts/[id]`, a table counts the seats without an active user in the latest week and in
+the first week of the series, per practice group and for the account ("32 of 40 seats").
+Whether an idle seat was never used or has lapsed needs a last-activity date per seat, which
+is not captured, so that column reads Unknown. Idle seats are context for the account owner,
+not a seat-removal recommendation and not an input to expansion or renewal.
+
+Implementation:
+
+1. `lib/seat-use.ts`
+2. `components/SeatUse.tsx`
+
 ## Practice-group usage export
 
 `/accounts/<id>/usage.csv` downloads one row per practice group: seats, active users, seat

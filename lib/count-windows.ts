@@ -21,6 +21,7 @@ import { formatDate } from "./engagement/as-of";
 export type CountSource =
   | "latest_week"
   | "weekly_series"
+  | "first_week"
   | "series_total"
   | "trailing_30_days"
   | "reporting_period"
@@ -57,6 +58,8 @@ export function countWindow(source: CountSource, { asOf, weeks }: WindowContext)
       return { window: `week ending ${end}`, lagDays };
     case "weekly_series":
       return { window: weeks === null ? null : `${weeks} weeks ending ${end}, oldest first`, lagDays };
+    case "first_week":
+      return { window: weeks === null ? null : `first week of the ${weeks} weeks ending ${end}`, lagDays };
     case "series_total":
       return { window: weeks === null ? null : `total over the ${weeks} weeks ending ${end}`, lagDays };
     case "trailing_30_days":
@@ -126,6 +129,11 @@ export const PANEL_COUNTS = {
     { label: "Active users", source: "latest_week" },
     { label: "Weekly active trend", source: "weekly_series" },
     { label: "Queries per week", source: "not_dated" },
+  ],
+  seatUse: [
+    { label: "Seats", source: "licences" },
+    { label: "Idle, latest week", source: "latest_week" },
+    { label: "Idle, week 1", source: "first_week" },
   ],
   personaAdoption: [
     { label: "Seats per role", source: "licences" },
