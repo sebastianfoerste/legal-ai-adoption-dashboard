@@ -15,6 +15,7 @@ Every record in this folder is **synthetic**. It was generated for demonstration
 | `interventions.json` | Interventions from observed problem to outcome |
 | `adoption-periods.json` | Per-workflow counts in four-week reporting periods |
 | `value-measurements.json` | Baseline and follow-up time to an acceptable result, quality failures, rework, financial assumptions |
+| `views.json` | Named saved views: a label, a page and a query string of that page's filters, validated by `lib/views.ts` |
 
 | `evidence-loop.json` | Research questions, sessions, observations, problems and product changes with their decision, delivery record, follow-up and outcome (`legal-ai-adoption.evidence-loop.v1`) |
 

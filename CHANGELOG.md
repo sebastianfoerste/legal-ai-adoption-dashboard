@@ -8,6 +8,13 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Added
 
+- Filters and saved views:
+  - GET filters on `/blockers`, `/feedback` and `/interventions`.
+  - Six named views in `data/views.json`, shown as links on their page and on `/`.
+  - Unknown filter values are reported as ignored.
+  - No filter or view can rank or select people.
+  ([ADR 0005](docs/adr/0005-saved-views.md))
+
 - Feedback themes on `/feedback`: per theme, the accounts and persona roles that raised it
   as counts with their denominators, listed by name and never ranked; routing kept as triage;
   delivery and outcome read only from linked change records.

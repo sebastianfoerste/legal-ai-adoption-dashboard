@@ -204,6 +204,26 @@ Implementation:
 4. `data/feedback.json`
 5. `docs/product-feedback-notes.md`
 
+## Filters and saved views
+
+`/blockers`, `/feedback` and `/interventions` have GET filters, read on the server:
+- `/blockers`: account, severity and category.
+- `/feedback`: account, severity, product area and routing.
+- `/interventions`: account and stage.
+
+A filtered list is a URL, so it can be bookmarked or shared. A value that is not one of a
+filter's options is reported as ignored, not matched to an empty list. Filters apply to the
+list; summary panels stay portfolio-wide, and each page says so. Named views from
+`data/views.json` appear as links on their page and on `/`. There is no owner, specialist or
+sort filter, and a health-band view cannot be presented as an expansion list. See
+[ADR 0005](adr/0005-saved-views.md).
+
+Implementation:
+
+1. `lib/list-filters.ts`
+2. `lib/views.ts` and `data/views.json`
+3. `components/ListFilters.tsx` and `components/SavedViewLinks.tsx`
+
 ## App shell
 
 A sidebar grouped by job (Portfolio, Adoption signals, Product loop) from the `lg`
