@@ -10,6 +10,7 @@ import { buildCustomerReview } from "@/lib/engagement/customer-review";
 import { specialistLabel, getEngagement } from "@/lib/engagement/data";
 import { assessComplexity } from "@/lib/engagement/capacity";
 import { AsOfNote } from "@/components/AsOfNote";
+import { SeatUseTable } from "@/components/SeatUse";
 import { HealthExplanation } from "@/components/HealthExplanation";
 import { usageWindowWeeks } from "@/lib/exports/practice-group-usage";
 import { HealthBadge } from "@/components/HealthBadge";
@@ -265,6 +266,8 @@ export default async function AccountDetailPage({
             so that component is unknown and left out.
           </p>
         </section>
+
+        <SeatUseTable account={account} />
 
         {/* Blockers */}
         <section aria-labelledby="blockers-title">
