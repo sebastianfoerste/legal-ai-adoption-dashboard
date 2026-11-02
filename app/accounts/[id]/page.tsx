@@ -13,6 +13,8 @@ import { AsOfNote } from "@/components/AsOfNote";
 import { HealthExplanation } from "@/components/HealthExplanation";
 import { usageWindowWeeks } from "@/lib/exports/practice-group-usage";
 import { HealthBadge } from "@/components/HealthBadge";
+import { CountWindows } from "@/components/CountWindows";
+import { commonWeeks } from "@/lib/count-windows";
 import { TrendBar } from "@/components/TrendBar";
 import { PageHeader } from "@/components/PageHeader";
 import { Card } from "@/components/Card";
@@ -84,7 +86,7 @@ export default async function AccountDetailPage({
 
       <PageHeader
         title={account.name}
-        subtitle={`${account.type === "law_firm" ? "Law firm" : "In-house team"} · ${account.activeUsers}/${account.seats} licensed seats active (${pct(utilization)})`}
+        subtitle={`${account.type === "law_firm" ? "Law firm" : "In-house team"} · ${account.activeUsers}/${account.seats} licensed seats active in the week ending ${formatDate(asOf)} (${pct(utilization)})`}
       >
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <HealthBadge health={health} breakdown={health.breakdown} />
@@ -260,6 +262,11 @@ export default async function AccountDetailPage({
               );
             })}
           </div>
+          <CountWindows
+            panel="accountUsage"
+            asOf={asOf}
+            weeks={commonWeeks([account.weeklyActiveUsers, ...account.practiceGroups.map((g) => g.weeklyActiveUsers)])}
+          />
           <p className="mt-2 text-xs text-gray-500">
             Group scores use licence use and trend only. Reviewed output is not captured per group,
             so that component is unknown and left out.

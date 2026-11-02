@@ -1,5 +1,6 @@
 import type { HealthResult } from "../health";
 import type { Account } from "../schema";
+import { RECORDED_LAG_DAYS } from "../count-windows";
 import { csvCell } from "./practice-group-usage";
 
 export const PORTFOLIO_CSV_FILENAME = "synthetic_legal_ai_adoption_accounts_export.csv";
@@ -14,15 +15,22 @@ const HEADERS = [
   "Health Score",
   "Health Band",
   "Renewal Date",
+  "Active Users Window",
+  "Lag Days",
   "Data Class",
 ];
 
 /**
  * The portfolio CSV behind the Export CSV button on `/`. Pure: the caller supplies each
  * account's health. An account without seats has no utilisation rate, so the cell is empty,
- * never 0.
+ * never 0. Active users are the latest week's count, so each row states that week; no lag is
+ * recorded, so `Lag Days` is empty, never 0.
  */
-export function portfolioCsv(accounts: Account[], healthOf: (accountId: string) => HealthResult): string {
+export function portfolioCsv(
+  accounts: Account[],
+  healthOf: (accountId: string) => HealthResult,
+  asOf: string,
+): string {
   const rows = accounts.map((a) => {
     const health = healthOf(a.id);
     return [
@@ -35,6 +43,8 @@ export function portfolioCsv(accounts: Account[], healthOf: (accountId: string) 
       health.score,
       health.band,
       a.renewalDate,
+      `week ending ${asOf}`,
+      RECORDED_LAG_DAYS,
       "synthetic",
     ];
   });

@@ -8,6 +8,10 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Added
 
+- The window and lag of every count, stated beside it on `/`, the account pages and
+  `/benchmarks`, in the reports and in both CSVs. Where the data states no window it reads
+  "window not captured"; no lag is recorded, so lag reads "not captured", never 0.
+
 - Feedback themes on `/feedback`: per theme, the accounts and persona roles that raised it
   as counts with their denominators, listed by name and never ranked; routing kept as triage;
   delivery and outcome read only from linked change records.

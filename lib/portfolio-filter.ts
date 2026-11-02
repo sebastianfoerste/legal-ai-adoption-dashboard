@@ -26,12 +26,14 @@ export function filterAccounts(
 export const PORTFOLIO_CSV_PATH = "/accounts.csv";
 
 /** The export link for the current filters; no query string when nothing is filtered. */
-export function portfolioCsvHref(filter: AccountFilter): string {
+/** `asOf`: passed on only when the page was given one, so the file states the same window. */
+export function portfolioCsvHref(filter: AccountFilter, asOf?: string): string {
   const params = new URLSearchParams();
   for (const key of ["search", "type", "band"] as const) {
     const value = filter[key];
     if (value) params.set(key, value);
   }
+  if (asOf) params.set("asOf", asOf);
   const query = params.toString();
   return query ? `${PORTFOLIO_CSV_PATH}?${query}` : PORTFOLIO_CSV_PATH;
 }

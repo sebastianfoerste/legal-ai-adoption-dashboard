@@ -14,6 +14,8 @@ or personal data.
 - `data/*.json` — synthetic accounts, blockers, feedback. Validated by Zod at load.
 - `lib/schema.ts` — Zod schemas and inferred types (single source of truth for shapes).
 - `lib/health.ts` — the adoption health score. Pure, transparent formula. Unit-tested.
+- `lib/count-windows.ts` — the window and lag stated beside every count. A window the data
+  does not state, and every lag, reads "not captured", never 0 or a guess.
 - `lib/data.ts` / `lib/aggregate.ts` — typed data access and per-account aggregation.
 - `lib/engagement/` — the manager layer, one small module per concern: `schema.ts` (strict
   Zod, every record `synthetic: true`), `interventions.ts`, `adoption-trend.ts`, `value.ts`,

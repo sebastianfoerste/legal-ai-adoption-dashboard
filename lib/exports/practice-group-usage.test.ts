@@ -28,6 +28,9 @@ describe("practiceGroupUsageCsv", () => {
     const corporate = rows.find((r) => r[2] === "Corporate")!;
     expect(corporate.slice(8, 13)).toEqual(["10", "12", "14", "16", "17"]);
     expect(rows.every((r) => r[0] === "synthetic" && r.at(-1) === REVIEW_NOTE)).toBe(true);
+    expect(header.slice(13, 15)).toEqual(["active_users_window", "lag_days"]);
+    // Active users are the latest week; no lag is recorded, so the cell is empty, never 0.
+    expect(rows.every((r) => r[13] === "week ending 2026-07-31" && r[14] === "")).toBe(true);
   });
 
   it("leaves a missing value empty, never 0", () => {

@@ -1,3 +1,4 @@
+import { RECORDED_LAG_DAYS } from "../count-windows";
 import type { Account } from "../schema";
 
 /**
@@ -61,6 +62,8 @@ export function practiceGroupUsageCsv(account: Account, asOf: string): UsageExpo
     "seat_utilisation",
     "queries_per_week",
     ...weekHeaders,
+    "active_users_window",
+    "lag_days",
     "review_status",
   ];
   const rows = account.practiceGroups.map((g) => [
@@ -74,6 +77,9 @@ export function practiceGroupUsageCsv(account: Account, asOf: string): UsageExpo
     g.seats > 0 ? (g.activeUsers / g.seats).toFixed(4) : null,
     g.queriesPerWeek,
     ...alignToLatest(g.weeklyActiveUsers, weeks),
+    `week ending ${asOf}`,
+    // No capture or refresh delay is recorded: an empty cell, never 0.
+    RECORDED_LAG_DAYS,
     REVIEW_NOTE,
   ]);
   const csv = [header, ...rows].map((row) => row.map(csvCell).join(",")).join("\r\n") + "\r\n";

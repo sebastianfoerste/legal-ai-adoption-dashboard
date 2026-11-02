@@ -1,4 +1,6 @@
 import { getAccounts, getBenchmarkRows, getBlockers, getWorkflowUsage } from "./data";
+import { PANEL_COUNTS, commonWeeks, describeCounts } from "./count-windows";
+import { REVIEW_AS_OF } from "./engagement/as-of";
 
 export type ReviewGate = {
   requiredReviewer: "account_owner";
@@ -698,8 +700,12 @@ export function renderAdoptionCockpitMarkdown({
     "## Product Usage",
     ...productUsage.slice(0, 5).map((item) => `- ${item.product}: ${item.runs} run(s), ${item.reviewTables} table(s)`),
     "",
+    describeCounts(PANEL_COUNTS.workflowUsage, countWindowContext()),
+    "",
     "## Benchmarks",
     ...benchmarks.map((item) => `- ${item.metric}: ${item.firmValue} vs peer ${item.peerMedian}, ${item.status}`),
+    "",
+    describeCounts(PANEL_COUNTS.peerBenchmarks, countWindowContext()),
     "",
     "## Power Users",
     ...powerUserGroups.map((item) => `- ${item.accountName}, ${item.practiceGroup}: ${item.runs} run(s)`),
@@ -1016,4 +1022,9 @@ function buildAdoptionControls({
     reviewNotice:
       "Local synthetic Adoption Cockpit evidence only. Account actions remain blocked until owner review.",
   };
+}
+
+/** The report has no per-request date, so it states its windows on the configured as-of date. */
+function countWindowContext() {
+  return { asOf: REVIEW_AS_OF, weeks: commonWeeks(getWorkflowUsage().map((w) => w.weeklyRuns)) };
 }
