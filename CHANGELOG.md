@@ -8,6 +8,10 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Added
 
+- Seat use on each account: seats without an active user in the latest and first week of the
+  series, per practice group, as counts with their seat totals. The never-used versus lapsed
+  split reads Unknown because no per-seat last-activity date is captured.
+
 - Feedback themes on `/feedback`: per theme, the accounts and persona roles that raised it
   as counts with their denominators, listed by name and never ranked; routing kept as triage;
   delivery and outcome read only from linked change records.

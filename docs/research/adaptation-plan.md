@@ -60,7 +60,7 @@ fails. Effort S, M or L. Evidence is the strongest tag behind the pattern.
 | C4 | Feedback themes with account and persona counts (H6) | 3 | pass (6) | S | Claimed | Differentiator | Built in a follow-up (2026-10-30) |
 | C5 | Saved views and filters on every list (H4) | 3 | pass | M | Claimed | Table stakes | Not built: budget |
 | C6 | Adopters vs non-adopters, cohort curves (H5) | 3 | pass only with a labelled synthetic comparison group (1) | M | Claimed | Table stakes | Needs owner decision |
-| C7 | Unused and inactive seat counts per account | 3 | pass (3) if the data held last-activity dates; it does not | M | Observed | Table stakes | Not built: budget (needs data) |
+| C7 | Unused and inactive seat counts per account | 3 | pass (3) for idle-seat counts; the never-used versus lapsed split needs last-activity dates the data lacks | S | Observed | Table stakes | Built in a follow-up (2026-11-02), idle counts only |
 | C8 | Window and lag stated beside every count | 3 | pass (3) | S | Claimed | Differentiator | Not built: budget |
 | C9 | Leadership PDF or PPTX (H8) | 3 | pass for print; a new dependency fails (7) | M | Observed | Table stakes | ADR only |
 | C10 | Dark mode (H3) | 2 | pass (7) | M | Observed | Table stakes | ADR only |
@@ -212,6 +212,20 @@ admin consoles would firm it up.
 - GET filters on `/blockers`, `/feedback` and `/interventions` like `/`, and named views as a
   committed `data/views.json` of query strings. ADR: [0005](../adr/0005-saved-views.md).
 
+### C7. Seat use (built in a follow-up, 2026-11-02)
+
+- **What the data supports.** An account's `activeUsers` is its latest weekly active-user count,
+  and practice-group seats and active users sum to the account. So seats without an active user
+  in the latest week, and in the first week of the series, are a subtraction, per account and
+  per practice group (`lib/seat-use.ts`, the Seat use table on `/accounts/[id]`).
+- **What it does not.** The reference viewer splits idle seats into never used and inactive
+  for 7 or 30 days from a per-seat last-activity date. The synthetic data has no such date, so
+  that split is shown as Unknown, never 0 and never estimated. A week where active users exceed
+  seats makes the affected figure Unknown rather than negative.
+- **Rules.** Counts only, never a list of people. The page states that idle seats are context
+  for the account owner, not a recommendation to remove seats and not an input to expansion or
+  renewal.
+
 ## Hypothesis verdicts
 
 | # | Verdict | Evidence |
@@ -288,7 +302,7 @@ admin consoles would firm it up.
 
 ## Not built: budget
 
-C5 saved views, C7 unused-seat counts, C8 window and lag beside every
+C5 saved views, C8 window and lag beside every
 count, D3 type scale.
 
 ## Needs owner decision
