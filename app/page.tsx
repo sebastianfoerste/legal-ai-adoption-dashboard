@@ -14,6 +14,9 @@ import { HealthBadge } from "@/components/HealthBadge";
 import { TrendBar } from "@/components/TrendBar";
 import { PageHeader } from "@/components/PageHeader";
 import { Card } from "@/components/Card";
+import { SavedViewLinks } from "@/components/SavedViewLinks";
+import { listHref } from "@/lib/list-filters";
+import { getSavedViews } from "@/lib/views";
 import { ExportButton } from "@/components/ExportButton";
 import { RecommendationPill } from "@/components/engagement/ExpansionPanel";
 import { resolveAsOf } from "@/lib/engagement/as-of";
@@ -185,6 +188,9 @@ export default async function AccountHealthPage({
           </div>
         </div>
       </form>
+      <div className="-mt-6 mb-8">
+        <SavedViewLinks views={getSavedViews("/")} currentHref={listHref("/", { search, type, band })} />
+      </div>
 
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-sm font-medium text-gray-500">Portfolio Status</h2>

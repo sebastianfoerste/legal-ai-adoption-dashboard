@@ -1,0 +1,50 @@
+[
+  {
+    "id": "at-risk-accounts",
+    "label": "At-risk accounts",
+    "description": "Accounts in the at-risk band, for triage. The band is not an expansion or renewal signal.",
+    "path": "/",
+    "query": { "band": "at_risk" },
+    "synthetic": true
+  },
+  {
+    "id": "high-severity-blockers",
+    "label": "High-severity open blockers",
+    "description": "Open and in-progress blockers rated high severity, across all accounts.",
+    "path": "/blockers",
+    "query": { "severity": "high" },
+    "synthetic": true
+  },
+  {
+    "id": "trust-in-output-blockers",
+    "label": "Trust-in-output blockers",
+    "description": "Open blockers about whether users trust the output, the category the review gate depends on.",
+    "path": "/blockers",
+    "query": { "category": "trust_in_output" },
+    "synthetic": true
+  },
+  {
+    "id": "feedback-awaiting-triage",
+    "label": "Feedback awaiting triage",
+    "description": "Feedback items still at routing status New.",
+    "path": "/feedback",
+    "query": { "routing": "new" },
+    "synthetic": true
+  },
+  {
+    "id": "high-severity-review-feedback",
+    "label": "High-severity review feedback",
+    "description": "High-severity feedback about the review product area.",
+    "path": "/feedback",
+    "query": { "area": "review", "severity": "high" },
+    "synthetic": true
+  },
+  {
+    "id": "completed-not-evaluated",
+    "label": "Completed, not yet evaluated",
+    "description": "Interventions delivered but without an evaluated outcome: delivery alone does not show they worked.",
+    "path": "/interventions",
+    "query": { "stage": "completed" },
+    "synthetic": true
+  }
+]
