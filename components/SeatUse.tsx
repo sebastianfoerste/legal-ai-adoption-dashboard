@@ -27,7 +27,7 @@ export function SeatUseTable({ account, asOf }: { account: Account; asOf: string
   const inconsistent = [use.account, ...use.groups].some((s) => s.inconsistent);
   return (
     <section aria-labelledby="seat-use-title">
-      <h3 id="seat-use-title" className="mb-2 text-base font-semibold text-gray-900">Seat use</h3>
+      <h3 id="seat-use-title" className="mb-2 text-heading font-semibold text-gray-900">Seat use</h3>
       <p className="mb-4 max-w-3xl text-sm text-gray-600">
         Seats with no active user in a week, from the weekly active-user counts. {SEAT_CONTEXT_NOTE}
       </p>

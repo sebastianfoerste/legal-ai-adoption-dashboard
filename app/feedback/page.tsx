@@ -103,12 +103,12 @@ export default async function FeedbackPage({
 
       <FeedbackThemes themes={themes} accountName={accountName} />
 
-      <h2 className="mb-4 text-lg font-semibold text-gray-900">Items by product area</h2>
+      <h2 className="mb-4 text-title font-semibold text-gray-900">Items by product area</h2>
       <div className="space-y-6">
         {[...byArea.entries()].map(([area, items]) => (
           <Card key={area}>
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold">{areaLabel[area]}</h3>
+              <h3 className="text-title font-semibold">{areaLabel[area]}</h3>
               <span className="text-xs text-muted">{items.length} item(s)</span>
             </div>
             <ul className="mt-4 space-y-4">

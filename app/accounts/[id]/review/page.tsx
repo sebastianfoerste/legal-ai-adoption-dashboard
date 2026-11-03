@@ -30,7 +30,7 @@ function Section({
 }) {
   return (
     <section aria-labelledby={`section-${number}`}>
-      <h2 id={`section-${number}`} className="mb-4 text-lg font-semibold text-gray-900">
+      <h2 id={`section-${number}`} className="mb-4 text-title font-semibold text-gray-900">
         <span className="mr-2 text-muted">{number}.</span>
         {title}
       </h2>
@@ -216,9 +216,9 @@ export default async function CustomerReviewPage({
 
         <Section number={5} title="Unresolved problems">
           <BulletList items={review.unresolved} empty="None recorded." />
-          <h3 className="mb-2 mt-5 text-sm font-semibold text-gray-900">Evidence gaps</h3>
+          <h3 className="mb-2 mt-5 text-label font-semibold text-gray-900">Evidence gaps</h3>
           <BulletList items={review.evidenceGaps} empty="None recorded." />
-          <h3 className="mb-1 mt-5 text-sm font-semibold text-gray-900">Product feedback and evidence</h3>
+          <h3 className="mb-1 mt-5 text-label font-semibold text-gray-900">Product feedback and evidence</h3>
           <p className="mb-3 text-sm text-gray-600">
             Changes recorded against problems this account raised. A release is not an outcome, and
             none of this enters the recommendation below.

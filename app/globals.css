@@ -27,6 +27,24 @@
   --color-unknown: var(--color-gray-500); /* Unknown is always grey */
 }
 
+/* Type scale (plan item D3). Headings take a role, not a raw size, so one size means one
+   level everywhere; lib/type-scale.test.ts fails if a heading uses a raw size class. The
+   smallest step is 12px: the 10px badge text it replaces was below a comfortable minimum. */
+@theme {
+  --text-display: 1.5rem; /* the page title, h1 */
+  --text-display--line-height: 2rem;
+  --text-figure: 1.5rem; /* a headline number in a stat tile */
+  --text-figure--line-height: 2rem;
+  --text-title: 1.125rem; /* a section on the page */
+  --text-title--line-height: 1.75rem;
+  --text-heading: 1rem; /* a card or sub-section */
+  --text-heading--line-height: 1.5rem;
+  --text-label: 0.875rem; /* a heading inside a card, table or panel */
+  --text-label--line-height: 1.25rem;
+  --text-eyebrow: 0.75rem; /* an uppercase kicker above a heading */
+  --text-eyebrow--line-height: 1rem;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

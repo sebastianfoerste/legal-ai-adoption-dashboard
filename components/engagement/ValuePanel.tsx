@@ -117,7 +117,7 @@ export function ValuePanel({ value, headingLevel = 4 }: { value: ValueAssessment
     <div className="rounded-lg border border-gray-200">
       <div className="flex flex-wrap items-start justify-between gap-2 border-b border-gray-100 bg-gray-50 px-3 py-2">
         <div>
-          <Title className="text-sm font-semibold text-gray-900">
+          <Title className="text-label font-semibold text-gray-900">
             {measurement.workflowName} · {measurement.practiceGroup}
           </Title>
           <p className="mt-0.5 text-xs text-gray-600">
