@@ -5,7 +5,7 @@ import { Card } from "@/components/Card";
 export const metadata: Metadata = { title: "Practice-Group Benchmarks" };
 import { PageHeader } from "@/components/PageHeader";
 import { adoptionCockpitReport } from "@/lib/adoption-cockpit";
-import { buildPracticeGroupBenchmark, type PracticeGroupTrend } from "@/lib/benchmarking";
+import { SUPPRESSION_NOTE, buildPracticeGroupBenchmark, type PracticeGroupTrend } from "@/lib/benchmarking";
 import { getAccounts, getWorkflowUsage } from "@/lib/data";
 import { CountWindows } from "@/components/CountWindows";
 import { commonWeeks } from "@/lib/count-windows";
@@ -42,6 +42,7 @@ export default async function BenchmarksPage({
           weeks={commonWeeks([...getWorkflowUsage().map((w) => w.weeklyRuns), ...trends.map((t) => t.weeklyActiveUsers)])}
           className="mt-4"
         />
+        <p className="mt-2 text-xs text-gray-500">{SUPPRESSION_NOTE}</p>
         <p className="mt-2 text-xs text-gray-500">{benchmark.reviewGate.note}</p>
       </Card>
       <div className="mt-6 space-y-4">
@@ -58,6 +59,15 @@ export default async function BenchmarksPage({
               <Metric label="WAU trend (latest minus first week)" value={row.trendDelta >= 0 ? `+${row.trendDelta}` : String(row.trendDelta)} />
             </dl>
             {row.insights.length > 0 && <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-gray-600">{row.insights.map(insight => <li key={insight}>{insight}</li>)}</ul>}
+          </Card>
+        ))}
+        {benchmark.suppressed.map(group => (
+          <Card key={group.practiceGroup}>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-lg font-semibold">{group.practiceGroup}</h2>
+              <span className="rounded-full border border-dashed border-unknown px-3 py-1 text-xs font-semibold text-muted">suppressed</span>
+            </div>
+            <p className="mt-3 text-sm text-muted">{group.reason}</p>
           </Card>
         ))}
       </div>

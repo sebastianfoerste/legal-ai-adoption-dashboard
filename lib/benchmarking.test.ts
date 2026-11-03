@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { buildPracticeGroupBenchmark, type PracticeGroupTrend } from "./benchmarking";
+import { SUPPRESSION_NOTE, buildPracticeGroupBenchmark, type PracticeGroupTrend } from "./benchmarking";
+import { adoptionCockpitReport } from "./adoption-cockpit";
 import type { PracticeGroupUsageSummary } from "./adoption-cockpit";
 
 function usage(overrides: Partial<PracticeGroupUsageSummary> & { practiceGroup: string }): PracticeGroupUsageSummary {
@@ -9,7 +10,7 @@ const trends: PracticeGroupTrend[] = [{ practiceGroup: "Corporate", weeklyActive
 
 describe("practice group benchmarking", () => {
   it("computes medians and cohort bands", () => {
-    const report = buildPracticeGroupBenchmark({ usage: [usage({ practiceGroup: "Corporate", workflowRuns: 200, activeUsers: 20, verifiedOutputs: 90, draftOutputs: 5, blockedOutputs: 5 }), usage({ practiceGroup: "Litigation" }), usage({ practiceGroup: "Employment", workflowRuns: 20, activeUsers: 2, verifiedOutputs: 1, draftOutputs: 9, blockedOutputs: 0 })], trends });
+    const report = buildPracticeGroupBenchmark({ usage: [usage({ practiceGroup: "Corporate", workflowRuns: 200, activeUsers: 20, verifiedOutputs: 90, draftOutputs: 5, blockedOutputs: 5 }), usage({ practiceGroup: "Litigation", activeUsers: 15 }), usage({ practiceGroup: "Employment", workflowRuns: 20, activeUsers: 10, verifiedOutputs: 1, draftOutputs: 9, blockedOutputs: 0 })], trends });
     expect(report.rows.find(row => row.practiceGroup === "Corporate")?.band).toBe("leading");
     expect(report.rows.find(row => row.practiceGroup === "Employment")?.band).toBe("lagging");
     expect(report.internalMedian.workflowRuns).toBe(100);
@@ -27,6 +28,27 @@ describe("practice group benchmarking", () => {
     expect(insights).toContain("volume as value");
     expect(insights).toContain("declining");
     expect(report.externalActionAllowed).toBe(false);
+  });
+  it("suppresses a group below the small-cohort threshold and leaves it out of the medians", () => {
+    const report = buildPracticeGroupBenchmark({
+      usage: [
+        usage({ practiceGroup: "Corporate", workflowRuns: 200, activeUsers: 20 }),
+        usage({ practiceGroup: "Litigation", workflowRuns: 100, activeUsers: 10 }),
+        usage({ practiceGroup: "Employment", workflowRuns: 5, activeUsers: 9 }),
+      ],
+      trends,
+    });
+    expect(report.rows.map(row => row.practiceGroup)).not.toContain("Employment");
+    expect(report.suppressed).toEqual([{ practiceGroup: "Employment", reason: "Fewer than 10 active users: figures suppressed." }]);
+    expect(report.internalMedian.workflowRuns).toBe(150);
+    expect(report.internalMedian.activeUsers).toBe(15);
+    expect(JSON.stringify(report.suppressed)).not.toMatch(/\b[59]\b/);
+    expect(SUPPRESSION_NOTE).toMatch(/fewer than 10 active users/);
+  });
+  it("suppresses the synthetic Employment group, which has 8 active users", () => {
+    const report = buildPracticeGroupBenchmark({ usage: adoptionCockpitReport().practiceGroupUsage, trends: [] });
+    expect(report.suppressed.map(s => s.practiceGroup)).toEqual(["Employment"]);
+    expect(report.rows.every(row => row.activeUsers >= 10)).toBe(true);
   });
   it("handles empty input and zero denominators", () => {
     expect(buildPracticeGroupBenchmark({ usage: [], trends: [] }).internalMedian).toEqual({ workflowRuns: 0, activeUsers: 0, verifiedShare: 0 });
