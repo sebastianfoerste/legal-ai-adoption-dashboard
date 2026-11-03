@@ -1,3 +1,5 @@
+import { CountWindows } from "@/components/CountWindows";
+import { commonWeeks } from "@/lib/count-windows";
 import { SEAT_CONTEXT_NOTE, SEAT_SPLIT_NOTE, accountSeatUse, formatIdle, type SeatUse } from "@/lib/seat-use";
 import type { Account } from "@/lib/schema";
 
@@ -20,7 +22,7 @@ function Row({ use, total }: { use: SeatUse; total?: boolean }) {
 
 // Seats without an active user: counts only, with the split the data cannot support shown as
 // Unknown. Context for the account owner, never a seat-removal or expansion signal.
-export function SeatUseTable({ account }: { account: Account }) {
+export function SeatUseTable({ account, asOf }: { account: Account; asOf: string }) {
   const use = accountSeatUse(account);
   const inconsistent = [use.account, ...use.groups].some((s) => s.inconsistent);
   return (
@@ -49,6 +51,11 @@ export function SeatUseTable({ account }: { account: Account }) {
           </tbody>
         </table>
       </div>
+      <CountWindows
+        panel="seatUse"
+        asOf={asOf}
+        weeks={commonWeeks([account.weeklyActiveUsers, ...account.practiceGroups.map((g) => g.weeklyActiveUsers)])}
+      />
       <p className="mt-2 text-xs text-gray-600">
         {SEAT_SPLIT_NOTE}
         {inconsistent && " Some weekly counts exceed the seats held, so the affected figures are Unknown."}

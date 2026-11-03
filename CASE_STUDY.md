@@ -108,10 +108,11 @@ weights are rescaled. Expansion readiness is now a separate evidence model.
 
 ## Verification
 
-373 Vitest tests cover denominators, missing evidence, intervention states, health
+385 Vitest tests cover denominators, missing evidence, intervention states, health
 scoring, the value verdict, expansion decisions, manager ordering, the report, the
 charts' Unknown gaps, the health-score explanation, the usage export, the feedback
-themes, seat use and the saved views. A mutation spot-check broke seven rules one at a time (for example, counting unknown
+themes, seat use, the window and lag of each count and the saved views. A
+mutation spot-check broke seven rules one at a time (for example, counting unknown
 evidence as met, or dividing repeat use by active users) and the suite failed each time.
 The rendered pages were inspected at 1280 and 375 pixels.
 

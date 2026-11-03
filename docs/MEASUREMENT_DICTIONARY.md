@@ -12,6 +12,7 @@ are uncalibrated judgments and are marked as such.
 | Unknown is not success | Unknown evidence never produces "expand", "demonstrated", "supported" or a green status. |
 | Counts before percentages | Every rate is shown with numerator and denominator. Below 10 in the denominator the percentage is flagged. |
 | As-of date | Every view states its as-of date. Default `2026-07-31`, the date the demo fixtures were written for. Override per request with `?asOf=YYYY-MM-DD`, or for the whole server with `ADOPTION_AS_OF`. A malformed query value is ignored and reported; a malformed environment value stops the server. |
+| Window and lag | Every panel of counts says which window they cover and how late they arrive (`lib/count-windows.ts`). Active users are the latest week; weekly series end on the as-of date; workflow runs total that series; persona adoption covers 30 days. Where the data states no window (queries per week, workflow active users, review tables, outputs, peer medians) it reads "window not captured". No capture delay is recorded, so lag reads "not captured", never 0. |
 | Incomplete period | A reporting period whose last day has not passed on the as-of date. Its counts will still rise. It is shown, flagged, and excluded from sustained use and from objective checks. |
 | Observation and interpretation | What was seen or said is recorded apart from what someone concludes from it. The conclusion names its author's role. |
 

@@ -4,10 +4,10 @@ import { portfolioCsvHref } from "@/lib/portfolio-filter";
 // A Server Component: a plain download link to the /accounts.csv route handler. The CSV used
 // to be built in the browser from the whole data layer, which put Zod and every synthetic
 // record into the client bundle of `/`.
-export function ExportButton({ filter = {} }: { filter?: AccountFilter }) {
+export function ExportButton({ filter = {}, asOf }: { filter?: AccountFilter; asOf?: string }) {
   return (
     <a
-      href={portfolioCsvHref(filter)}
+      href={portfolioCsvHref(filter, asOf)}
       download
       className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-focus transition-colors"
       title="Export portfolio accounts as CSV"

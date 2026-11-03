@@ -4,7 +4,9 @@ import Link from "next/link";
 
 // The root segment: layout.tsx's title template does not apply to the page of the same segment.
 export const metadata: Metadata = { title: "Account Health · Legal AI Adoption Dashboard" };
-import { getAccounts, getBlockers } from "@/lib/data";
+import { getAccounts, getBlockers, getWorkflowUsage } from "@/lib/data";
+import { CountWindows } from "@/components/CountWindows";
+import { commonWeeks } from "@/lib/count-windows";
 import { accountHealth } from "@/lib/aggregate";
 import { portfolioSummary } from "@/lib/portfolio";
 import { computeHealth } from "@/lib/health";
@@ -66,6 +68,7 @@ export default async function AccountHealthPage({
   const blockers = getBlockers();
   const summary = portfolioSummary();
   const adoptionCockpit = adoptionCockpitReport();
+  const workflowWeeks = commonWeeks(getWorkflowUsage().map((w) => w.weeklyRuns));
 
   const stats: { label: string; value: number; tone: string }[] = [
     { label: "Accounts", value: summary.total, tone: "text-gray-900" },
@@ -194,7 +197,7 @@ export default async function AccountHealthPage({
 
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-sm font-medium text-gray-500">Portfolio Status</h2>
-        <ExportButton filter={{ search, type, band }} />
+        <ExportButton filter={{ search, type, band }} asOf={asOfState.source === "query" ? asOf : undefined} />
       </div>
 
       <section
@@ -233,6 +236,7 @@ export default async function AccountHealthPage({
           <CommandMetric label="Verified outputs" value={adoptionCockpit.verifiedOutputs} />
           <CommandMetric label="Blocked outputs" value={adoptionCockpit.blockedOutputs} tone="text-red-700" />
         </div>
+        <CountWindows panel="cockpit" asOf={asOf} weeks={workflowWeeks} />
 
         <div className="mt-6 overflow-hidden rounded-lg border border-gray-100">
           <div className="flex flex-wrap items-start justify-between gap-3 border-b border-gray-100 bg-gray-50 px-3 py-2">
@@ -333,6 +337,7 @@ export default async function AccountHealthPage({
                 ))}
               </tbody>
             </table>
+            <CountWindows panel="peerBenchmarks" asOf={asOf} weeks={workflowWeeks} className="border-t border-gray-100 px-3 py-2" />
           </div>
 
           <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
@@ -397,6 +402,7 @@ export default async function AccountHealthPage({
                   ))}
                 </tbody>
               </table>
+              <CountWindows panel="workflowUsage" asOf={asOf} weeks={workflowWeeks} className="border-t border-gray-100 px-3 py-2" />
             </div>
 
             <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
@@ -427,6 +433,7 @@ export default async function AccountHealthPage({
                   ))}
                 </tbody>
               </table>
+              <CountWindows panel="workflowUsage" asOf={asOf} weeks={workflowWeeks} className="border-t border-gray-100 px-3 py-2" />
             </div>
           </div>
 
@@ -643,6 +650,11 @@ export default async function AccountHealthPage({
                       );
                     })}
                   </div>
+                  <CountWindows
+                    panel="accountUsage"
+                    asOf={asOf}
+                    weeks={commonWeeks([account.weeklyActiveUsers, ...account.practiceGroups.map((g) => g.weeklyActiveUsers)])}
+                  />
                 </div>
 
                 <div className="mt-6">
@@ -666,6 +678,7 @@ export default async function AccountHealthPage({
                       ))}
                     </tbody>
                   </table>
+                  <CountWindows panel="personaAdoption" asOf={asOf} weeks={null} />
                 </div>
 
                 <div className="mt-6 border-t border-gray-100 pt-6">

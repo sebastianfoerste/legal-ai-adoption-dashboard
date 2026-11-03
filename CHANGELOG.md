@@ -8,6 +8,10 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Added
 
+- The window and lag of every count, stated beside it on `/`, the account pages and
+  `/benchmarks`, in the reports and in both CSVs. Where the data states no window it reads
+  "window not captured"; no lag is recorded, so lag reads "not captured", never 0.
+
 - Filters and saved views:
   - GET filters on `/blockers`, `/feedback` and `/interventions`.
   - Six named views in `data/views.json`, shown as links on their page and on `/`.

@@ -8,6 +8,7 @@ import {
   type SeriesMetrics,
 } from "@/lib/engagement/adoption-trend";
 import { formatDate } from "@/lib/engagement/as-of";
+import { LAG_SENTENCE } from "@/lib/count-windows";
 
 const phaseLabel: Record<SeriesMetrics["periods"][number]["phase"], string> = {
   onboarding: "Onboarding",
@@ -60,6 +61,7 @@ export function AdoptionTrendTable({ metrics, headingLevel = 4 }: { metrics: Ser
           Four-week reporting periods, as of {formatDate(metrics.asOf)}.
           {series.trainingCohort &&
             ` Training cohort: ${series.trainingCohort.size} users, trained ${formatDate(series.trainingCohort.trainedOn)}.`}
+          {` ${LAG_SENTENCE}`}
         </p>
       </div>
       <div className="flex flex-wrap gap-x-8 gap-y-3 px-3 pt-3">
