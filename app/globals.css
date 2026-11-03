@@ -37,3 +37,74 @@ body {
 table {
   font-variant-numeric: tabular-nums;
 }
+
+/* Print, and so PDF through the browser's print dialog (docs/adr/0004-exports.md, option 1).
+   Navigation, forms and download buttons drop out; the synthetic and review-gate notices stay
+   on the page, and every printed page carries the same line in its bottom margin (page
+   margin boxes; browsers without them still print the on-page notices). Print stays light. */
+@media print {
+  @page {
+    margin: 16mm 14mm 20mm;
+    @bottom-center {
+      content: "Synthetic data. Draft for account-owner review; not legal advice.";
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 8pt;
+      color: #4a5565;
+    }
+    @bottom-right {
+      content: counter(page) " / " counter(pages);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 8pt;
+      color: #4a5565;
+    }
+  }
+
+  html,
+  body {
+    background: #ffffff;
+  }
+
+  body {
+    display: block;
+    font-size: 10.5pt;
+  }
+
+  nav[aria-label="Main"],
+  a[href="#content"],
+  form,
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  main {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Scrolling table wrappers would clip on paper. */
+  .overflow-x-auto {
+    overflow: visible !important;
+  }
+
+  .shadow-sm {
+    box-shadow: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  tr,
+  figure,
+  aside,
+  li {
+    break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+}

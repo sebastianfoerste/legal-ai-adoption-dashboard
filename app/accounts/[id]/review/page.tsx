@@ -77,7 +77,7 @@ export default async function CustomerReviewPage({
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-10">
-      <div className="mb-6">
+      <div className="mb-6" data-print="hide">
         <Link
           href={`/accounts/${review.accountId}`}
           className="text-sm font-medium text-violet-600 hover:text-violet-700"
@@ -92,6 +92,7 @@ export default async function CustomerReviewPage({
       >
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <a
+            data-print="hide"
             href={`/insights/report?account=${review.accountId}&asOf=${review.asOf}`}
             className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-focus"
           >
@@ -102,6 +103,10 @@ export default async function CustomerReviewPage({
           </span>
         </div>
         <AsOfNote asOf={asOfState} />
+        <p className="mt-2 text-xs text-muted" data-print="hide">
+          For a PDF, print this page and choose &quot;Save as PDF&quot;. The print layout drops the
+          navigation and keeps the synthetic-data and review notices on every page.
+        </p>
         <div className="mt-6">
           <SyntheticNotice label={review.scenario?.label ?? "Synthetic scenario"}>
             {review.scenario ? `${review.scenario.summary} ` : ""}

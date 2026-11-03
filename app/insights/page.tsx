@@ -118,7 +118,7 @@ export default async function AdoptionInsightsPage({ searchParams }: { searchPar
             <p className="mt-1 text-sm text-gray-600">{leadershipReport.audience}</p>
           </div>
           <div className="flex items-center gap-2">
-            <a className="rounded-md border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700" href="/insights/report">
+            <a data-print="hide" className="rounded-md border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700" href="/insights/report">
               Download Markdown
             </a>
             <span className="rounded-full bg-amber-100 px-3 py-1 text-xs text-amber-800">account-owner review required</span>

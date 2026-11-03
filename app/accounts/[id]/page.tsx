@@ -79,7 +79,7 @@ export default async function AccountDetailPage({
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-10">
-      <div className="mb-6">
+      <div className="mb-6" data-print="hide">
         <Link href="/" className="text-sm font-medium text-violet-600 hover:text-violet-700">
           ← Back to portfolio
         </Link>
@@ -103,7 +103,7 @@ export default async function AccountDetailPage({
           {formatDate(engagement.nextReviewDate)}
         </p>
         <AsOfNote asOf={asOfState} />
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-2" data-print="hide">
           <Link
             href={`/accounts/${account.id}/review`}
             className="inline-flex items-center rounded-lg bg-violet-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-focus"
@@ -229,6 +229,7 @@ export default async function AccountDetailPage({
           <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
             <h3 id="pg-title" className="text-base font-semibold text-gray-900">Practice Groups</h3>
             <a
+              data-print="hide"
               href={`/accounts/${account.id}/usage.csv${asOfState.source === "query" ? `?asOf=${asOf}` : ""}`}
               className="text-xs font-semibold text-link underline hover:text-link-hover focus:outline-none focus:ring-2 focus:ring-focus"
             >
