@@ -34,6 +34,10 @@ Activation, repeat use, accepted completion and sustained use are reported separ
 are never combined into one adoption figure. With fewer than three complete periods,
 sustained use is unknown; a short observation window leaves it unproven.
 
+Within one account a small cohort is flagged, not hidden. Across accounts, on `/benchmarks`, a
+practice group with fewer than 10 active users is suppressed: named, not measured, and left
+out of the medians; below three measured groups none is banded.
+
 Caveats attached to a rate: `small_cohort` (denominator below 10), `incomplete_period`,
 `cohort_changed` (the number of eligible users differs from the previous period, so the two
 rates describe different groups).
