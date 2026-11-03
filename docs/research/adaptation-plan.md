@@ -61,7 +61,7 @@ fails. Effort S, M or L. Evidence is the strongest tag behind the pattern.
 | C5 | Saved views and filters on every list (H4) | 3 | pass | M | Claimed | Table stakes | Not built: budget |
 | C6 | Adopters vs non-adopters, cohort curves (H5) | 3 | pass only with a labelled synthetic comparison group (1) | M | Claimed | Table stakes | Needs owner decision |
 | C7 | Unused and inactive seat counts per account | 3 | pass (3) for idle-seat counts; the never-used versus lapsed split needs last-activity dates the data lacks | S | Observed | Table stakes | Built in a follow-up (2026-11-02), idle counts only |
-| C8 | Window and lag stated beside every count | 3 | pass (3) | S | Claimed | Differentiator | Not built: budget |
+| C8 | Window and lag stated beside every count | 3 | pass (3) | S | Claimed | Differentiator | Built (follow-up) |
 | C9 | Leadership PDF or PPTX (H8) | 3 | pass for print; a new dependency fails (7) | M | Observed | Table stakes | ADR only |
 | C10 | Dark mode (H3) | 2 | pass (7) | M | Observed | Table stakes | ADR only |
 | C11 | Recharts or Tremor charts | 3 | fail (7, 10: library and client JS) | M | Observed | Table stakes | Rejected |
@@ -207,6 +207,23 @@ admin consoles would firm it up.
   routing unchanged. The change record that covers that theme (chg-001) cites only fb-001, so
   the two folded-in items still show no delivery status.
 
+### C8. Window and lag beside every count (built in a follow-up, 2026-11-02)
+
+- **Built.** `lib/count-windows.ts` maps each panel's counts to the window the data
+  supports, and `components/CountWindows.tsx` states it in one line beside them on `/`,
+  `/accounts/[id]` and `/benchmarks`, for example "Active users: week ending 31 Jul 2026.
+  Workflow runs: total over the 5 weeks ending 31 Jul 2026. Review tables, Draft outputs,
+  Verified outputs and Blocked outputs: window not captured. Lag not captured for any of
+  these counts." The adoption tables, the leadership report and the customer review state
+  the lag too, and both CSVs gain the active-user week and an empty lag column.
+- **What the data supports.** Active users equal the last weekly value; workflow runs equal
+  the sum of the weekly runs; persona adoption is defined as the last 30 days. Tests pin each
+  of these to the fixtures, so a data change that breaks one fails the suite.
+- **What it does not.** Queries per week, workflow active users, review tables, outputs and
+  the peer medians have no stated window, and no count has a recorded lag. Those read "not
+  captured", never a guessed window or a lag of 0. Recording a lag would need a capture or
+  refresh timestamp per source.
+
 ### C5. Saved views (not built: budget)
 
 - GET filters on `/blockers`, `/feedback` and `/interventions` like `/`, and named views as a
@@ -302,8 +319,7 @@ admin consoles would firm it up.
 
 ## Not built: budget
 
-C5 saved views, C8 window and lag beside every
-count, D3 type scale.
+C5 saved views, D3 type scale.
 
 ## Needs owner decision
 

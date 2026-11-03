@@ -6,7 +6,10 @@ export const metadata: Metadata = { title: "Practice-Group Benchmarks" };
 import { PageHeader } from "@/components/PageHeader";
 import { adoptionCockpitReport } from "@/lib/adoption-cockpit";
 import { buildPracticeGroupBenchmark, type PracticeGroupTrend } from "@/lib/benchmarking";
-import { getAccounts } from "@/lib/data";
+import { getAccounts, getWorkflowUsage } from "@/lib/data";
+import { CountWindows } from "@/components/CountWindows";
+import { commonWeeks } from "@/lib/count-windows";
+import { resolveAsOf } from "@/lib/engagement/as-of";
 
 const bandStyle = {
   leading: "bg-emerald-100 text-emerald-800",
@@ -14,7 +17,12 @@ const bandStyle = {
   lagging: "bg-red-100 text-red-800",
 };
 
-export default function BenchmarksPage() {
+export default async function BenchmarksPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const asOf = resolveAsOf((await searchParams)?.asOf).date;
   const report = adoptionCockpitReport();
   const trends: PracticeGroupTrend[] = getAccounts().flatMap(account => account.practiceGroups.map(group => ({ practiceGroup: group.name, weeklyActiveUsers: group.weeklyActiveUsers })));
   const benchmark = buildPracticeGroupBenchmark({ usage: report.practiceGroupUsage, trends });
@@ -28,7 +36,13 @@ export default function BenchmarksPage() {
           <Metric label="Active users" value={benchmark.internalMedian.activeUsers.toFixed(0)} />
           <Metric label="Verified outputs" value={`${(benchmark.internalMedian.verifiedShare * 100).toFixed(0)}%`} />
         </dl>
-        <p className="mt-4 text-xs text-gray-500">{benchmark.reviewGate.note}</p>
+        <CountWindows
+          panel="practiceGroupBenchmarks"
+          asOf={asOf}
+          weeks={commonWeeks([...getWorkflowUsage().map((w) => w.weeklyRuns), ...trends.map((t) => t.weeklyActiveUsers)])}
+          className="mt-4"
+        />
+        <p className="mt-2 text-xs text-gray-500">{benchmark.reviewGate.note}</p>
       </Card>
       <div className="mt-6 space-y-4">
         {benchmark.rows.map(row => (
@@ -41,7 +55,7 @@ export default function BenchmarksPage() {
               <Metric label="Runs" value={String(row.workflowRuns)} />
               <Metric label="Active users" value={String(row.activeUsers)} />
               <Metric label="Verified" value={`${(row.verifiedShare * 100).toFixed(0)}%`} />
-              <Metric label="WAU trend" value={row.trendDelta >= 0 ? `+${row.trendDelta}` : String(row.trendDelta)} />
+              <Metric label="WAU trend (latest minus first week)" value={row.trendDelta >= 0 ? `+${row.trendDelta}` : String(row.trendDelta)} />
             </dl>
             {row.insights.length > 0 && <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-gray-600">{row.insights.map(insight => <li key={insight}>{insight}</li>)}</ul>}
           </Card>

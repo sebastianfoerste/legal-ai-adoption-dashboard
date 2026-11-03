@@ -32,5 +32,6 @@ describe("portfolioCsvHref", () => {
 
   it("carries the active filters, encoded", () => {
     expect(portfolioCsvHref({ band: "at_risk", search: "a & b" })).toBe("/accounts.csv?search=a+%26+b&band=at_risk");
+    expect(portfolioCsvHref({ band: "at_risk" }, "2026-08-31")).toBe("/accounts.csv?band=at_risk&asOf=2026-08-31");
   });
 });

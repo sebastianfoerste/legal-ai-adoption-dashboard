@@ -137,6 +137,20 @@ Implementation:
 1. `lib/exports/practice-group-usage.ts`
 2. `app/accounts/[id]/usage.csv/route.ts`
 
+## Window and lag
+
+Beside each panel of counts, one line says which window the counts cover and how late they
+arrive: active users are the week ending on the as-of date, the weekly trend is the series
+ending then, workflow runs total that series and persona adoption covers 30 days. Counts the
+data states without a window read "window not captured". No capture delay is recorded, so
+the lag reads "not captured", never 0. The CSVs carry the active-user week and an empty lag
+column.
+
+Implementation:
+
+1. `lib/count-windows.ts`
+2. `components/CountWindows.tsx`
+
 ## Customer value
 
 Baseline and follow-up time to an acceptable completed result (producing, human review,
