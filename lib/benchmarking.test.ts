@@ -16,13 +16,13 @@ describe("practice group benchmarking", () => {
     expect(report.internalMedian.workflowRuns).toBe(100);
   });
   it("orders leaders first and computes trend deltas", () => {
-    const report = buildPracticeGroupBenchmark({ usage: [usage({ practiceGroup: "Corporate", workflowRuns: 200, activeUsers: 20, verifiedOutputs: 90, draftOutputs: 5, blockedOutputs: 5 }), usage({ practiceGroup: "Litigation" })], trends });
+    const report = buildPracticeGroupBenchmark({ usage: [usage({ practiceGroup: "Corporate", workflowRuns: 200, activeUsers: 20, verifiedOutputs: 90, draftOutputs: 5, blockedOutputs: 5 }), usage({ practiceGroup: "Litigation" }), usage({ practiceGroup: "Finance", workflowRuns: 150 })], trends });
     expect(report.rows[0].practiceGroup).toBe("Corporate");
     expect(report.rows[0].trendDelta).toBe(4);
-    expect(report.rows[1].trendDelta).toBe(-5);
+    expect(report.rows.find(row => row.practiceGroup === "Litigation")?.trendDelta).toBe(-5);
   });
   it("emits review-gated insights", () => {
-    const report = buildPracticeGroupBenchmark({ usage: [usage({ practiceGroup: "Corporate", verifiedOutputs: 90, draftOutputs: 5, blockedOutputs: 5 }), usage({ practiceGroup: "Litigation", workflowRuns: 150, verifiedOutputs: 10, draftOutputs: 80, blockedOutputs: 10 })], trends });
+    const report = buildPracticeGroupBenchmark({ usage: [usage({ practiceGroup: "Corporate", verifiedOutputs: 90, draftOutputs: 5, blockedOutputs: 5 }), usage({ practiceGroup: "Litigation", workflowRuns: 150, verifiedOutputs: 10, draftOutputs: 80, blockedOutputs: 10 }), usage({ practiceGroup: "Finance", workflowRuns: 50 })], trends });
     const insights = report.rows.find(row => row.practiceGroup === "Litigation")?.insights.join(" ") ?? "";
     expect(insights).toContain("verification clinic");
     expect(insights).toContain("volume as value");
@@ -44,6 +44,12 @@ describe("practice group benchmarking", () => {
     expect(report.internalMedian.activeUsers).toBe(15);
     expect(JSON.stringify(report.suppressed)).not.toMatch(/\b[59]\b/);
     expect(SUPPRESSION_NOTE).toMatch(/fewer than 10 active users/);
+  });
+  it("bands no group when fewer than three are measured", () => {
+    const report = buildPracticeGroupBenchmark({ usage: [usage({ practiceGroup: "Corporate", workflowRuns: 200 }), usage({ practiceGroup: "Litigation" }), usage({ practiceGroup: "Employment", activeUsers: 4 })], trends });
+    expect(report.rows).toHaveLength(2);
+    expect(report.rows.every(row => row.band === null)).toBe(true);
+    expect(report.rows.flatMap(row => row.insights).join(" ")).not.toContain("median");
   });
   it("suppresses the synthetic Employment group, which has 8 active users", () => {
     const report = buildPracticeGroupBenchmark({ usage: adoptionCockpitReport().practiceGroupUsage, trends: [] });

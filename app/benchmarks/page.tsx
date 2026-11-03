@@ -5,7 +5,7 @@ import { Card } from "@/components/Card";
 export const metadata: Metadata = { title: "Practice-Group Benchmarks" };
 import { PageHeader } from "@/components/PageHeader";
 import { adoptionCockpitReport } from "@/lib/adoption-cockpit";
-import { SUPPRESSION_NOTE, buildPracticeGroupBenchmark, type PracticeGroupTrend } from "@/lib/benchmarking";
+import { SUPPRESSION_NOTE, UNBANDED_NOTE, buildPracticeGroupBenchmark, type PracticeGroupTrend } from "@/lib/benchmarking";
 import { getAccounts, getWorkflowUsage } from "@/lib/data";
 import { CountWindows } from "@/components/CountWindows";
 import { commonWeeks } from "@/lib/count-windows";
@@ -30,7 +30,7 @@ export default async function BenchmarksPage({
     <main className="mx-auto max-w-5xl px-6 py-10">
       <PageHeader title="Practice-Group Benchmarks" subtitle="Internal cohort bands and adoption trends derived from synthetic usage data, with account-owner review required." />
       <Card>
-        <h2 className="text-sm font-semibold text-gray-900">Internal peer median</h2>
+        <h2 className="text-label font-semibold text-gray-900">Internal peer median</h2>
         <dl className="mt-4 grid gap-4 sm:grid-cols-3">
           <Metric label="Workflow runs" value={benchmark.internalMedian.workflowRuns.toFixed(0)} />
           <Metric label="Active users" value={benchmark.internalMedian.activeUsers.toFixed(0)} />
@@ -43,14 +43,19 @@ export default async function BenchmarksPage({
           className="mt-4"
         />
         <p className="mt-2 text-xs text-gray-500">{SUPPRESSION_NOTE}</p>
+        {benchmark.rows.some(row => row.band === null) && <p className="mt-2 text-xs text-gray-500">{UNBANDED_NOTE}</p>}
         <p className="mt-2 text-xs text-gray-500">{benchmark.reviewGate.note}</p>
       </Card>
       <div className="mt-6 space-y-4">
         {benchmark.rows.map(row => (
           <Card key={row.practiceGroup}>
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-lg font-semibold">{row.practiceGroup}</h2>
-              <span className={`rounded-full px-3 py-1 text-xs font-semibold ${bandStyle[row.band]}`}>{row.band}</span>
+              <h2 className="text-title font-semibold">{row.practiceGroup}</h2>
+              {row.band === null ? (
+                <span className="rounded-full border border-dashed border-unknown px-3 py-1 text-xs font-semibold text-muted">not banded</span>
+              ) : (
+                <span className={`rounded-full px-3 py-1 text-xs font-semibold ${bandStyle[row.band]}`}>{row.band}</span>
+              )}
             </div>
             <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-4">
               <Metric label="Runs" value={String(row.workflowRuns)} />
@@ -64,7 +69,7 @@ export default async function BenchmarksPage({
         {benchmark.suppressed.map(group => (
           <Card key={group.practiceGroup}>
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-lg font-semibold">{group.practiceGroup}</h2>
+              <h2 className="text-title font-semibold">{group.practiceGroup}</h2>
               <span className="rounded-full border border-dashed border-unknown px-3 py-1 text-xs font-semibold text-muted">suppressed</span>
             </div>
             <p className="mt-3 text-sm text-muted">{group.reason}</p>

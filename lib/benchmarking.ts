@@ -3,7 +3,8 @@ import { SMALL_COHORT_THRESHOLD } from "./engagement/adoption-trend";
 
 export type CohortBand = "leading" | "mid" | "lagging";
 export type PracticeGroupTrend = { practiceGroup: string; weeklyActiveUsers: number[] };
-export type PracticeGroupBenchmarkRow = { practiceGroup: string; workflowRuns: number; activeUsers: number; verifiedShare: number; trendDelta: number; band: CohortBand; insights: string[] };
+/** `band` is null when too few groups are measured for a median to compare against. */
+export type PracticeGroupBenchmarkRow = { practiceGroup: string; workflowRuns: number; activeUsers: number; verifiedShare: number; trendDelta: number; band: CohortBand | null; insights: string[] };
 export type PracticeGroupBenchmarkReport = {
   schema: "legal-ai-adoption.practice-benchmark.v1";
   internalMedian: { workflowRuns: number; activeUsers: number; verifiedShare: number };
@@ -23,6 +24,10 @@ export type SuppressedGroup = { practiceGroup: string; reason: string };
  * medians the other groups are compared with.
  */
 export const SUPPRESSION_NOTE = `Groups with fewer than ${SMALL_COHORT_THRESHOLD} active users are named but not measured, and are left out of the medians.`;
+/** Below this many measured groups, a group is compared with little more than itself. */
+export const MIN_BANDED_GROUPS = 3;
+export const UNBANDED_NOTE = `Not banded: fewer than ${MIN_BANDED_GROUPS} groups are measured, too few for a median to compare against.`;
+
 export const isSuppressed = (row: Pick<PracticeGroupUsageSummary, "activeUsers">): boolean =>
   row.activeUsers < SMALL_COHORT_THRESHOLD;
 
@@ -58,15 +63,18 @@ export function buildPracticeGroupBenchmark(input: { usage: PracticeGroupUsageSu
   const rows = shown.map((row): PracticeGroupBenchmarkRow => {
     const verifiedShare = verifiedShareOf(row);
     const aboveMedian = [row.workflowRuns >= internalMedian.workflowRuns, row.activeUsers >= internalMedian.activeUsers, verifiedShare >= internalMedian.verifiedShare].filter(Boolean).length;
-    const band: CohortBand = aboveMedian === 3 ? "leading" : aboveMedian === 0 ? "lagging" : "mid";
+    const band: CohortBand | null =
+      shown.length < MIN_BANDED_GROUPS ? null : aboveMedian === 3 ? "leading" : aboveMedian === 0 ? "lagging" : "mid";
     const trendDelta = trendByGroup.get(row.practiceGroup) ?? 0;
     const insights: string[] = [];
-    if (verifiedShare < internalMedian.verifiedShare) insights.push("Verification rate below internal peer median, schedule a verification clinic before expanding access.");
-    if (row.workflowRuns >= internalMedian.workflowRuns && verifiedShare < internalMedian.verifiedShare) insights.push("High volume with below-median verification, review outputs before treating volume as value.");
+    const compared = band !== null;
+    if (compared && verifiedShare < internalMedian.verifiedShare) insights.push("Verification rate below internal peer median, schedule a verification clinic before expanding access.");
+    if (compared && row.workflowRuns >= internalMedian.workflowRuns && verifiedShare < internalMedian.verifiedShare) insights.push("High volume with below-median verification, review outputs before treating volume as value.");
     if (trendDelta < 0) insights.push("Weekly active use is declining, pair with an open re-engagement action from the blockers register.");
     return { practiceGroup: row.practiceGroup, workflowRuns: row.workflowRuns, activeUsers: row.activeUsers, verifiedShare, trendDelta, band, insights };
   });
-  rows.sort((a, b) => BAND_ORDER[a.band] - BAND_ORDER[b.band] || b.workflowRuns - a.workflowRuns);
+  const bandRank = (band: CohortBand | null) => (band === null ? 0 : BAND_ORDER[band]);
+  rows.sort((a, b) => bandRank(a.band) - bandRank(b.band) || b.workflowRuns - a.workflowRuns);
   return {
     schema: "legal-ai-adoption.practice-benchmark.v1", internalMedian, rows, suppressed,
     reviewGate: { requiredReviewer: "account_owner", state: "draft", externalActionAllowed: false, note: "Benchmark bands are drafts from synthetic data. Account-owner review required before any enablement decision." },
