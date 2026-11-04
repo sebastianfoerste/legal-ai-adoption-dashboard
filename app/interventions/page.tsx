@@ -71,7 +71,7 @@ export default async function InterventionsPage({ searchParams }: { searchParams
       >
         {stats.map((s) => (
           <div key={s.label} className="rounded-lg border border-gray-200 p-3 text-center">
-            <div className={`text-2xl font-semibold ${s.tone}`}>{s.value}</div>
+            <div className={`text-figure font-semibold ${s.tone}`}>{s.value}</div>
             <div className="mt-0.5 text-xs text-gray-500">{s.label}</div>
           </div>
         ))}
@@ -92,7 +92,7 @@ export default async function InterventionsPage({ searchParams }: { searchParams
           const inStage = shown.filter((i) => interventionStage(i) === stage);
           return (
             <section key={stage} aria-labelledby={`stage-${stage}`}>
-              <h2 id={`stage-${stage}`} className="text-lg font-semibold text-gray-900">
+              <h2 id={`stage-${stage}`} className="text-title font-semibold text-gray-900">
                 {stageLabel[stage]} <span className="font-normal text-muted">({inStage.length})</span>
               </h2>
               <p className="mt-1 text-sm text-gray-600">{stageMeaning[stage]}</p>

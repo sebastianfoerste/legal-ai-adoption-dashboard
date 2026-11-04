@@ -113,13 +113,13 @@ export default async function FeedbackPage({
         asOf={asOfState.source === "query" ? asOfState.date : undefined}
         note={`Showing ${shown.length} of ${feedback.length} items. The themes table and routing counts above cover all feedback.`}
       />
-      <h2 className="mb-4 text-lg font-semibold text-gray-900">Items by product area</h2>
+      <h2 className="mb-4 text-title font-semibold text-gray-900">Items by product area</h2>
       <div className="space-y-6">
         {shown.length === 0 && <p className="text-sm italic text-muted">No feedback item matches these filters.</p>}
         {[...byArea.entries()].map(([area, items]) => (
           <Card key={area}>
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold">{areaLabel[area]}</h3>
+              <h3 className="text-title font-semibold">{areaLabel[area]}</h3>
               <span className="text-xs text-muted">{items.length} item(s)</span>
             </div>
             <ul className="mt-4 space-y-4">

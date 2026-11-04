@@ -5,7 +5,7 @@ import type { SavedView } from "@/lib/views";
 export function SavedViewLinks({ views, currentHref }: { views: SavedView[]; currentHref: string }) {
   if (views.length === 0) return null;
   return (
-    <nav aria-label="Saved views" className="mt-2">
+    <nav aria-label="Saved views" className="mt-2" data-print="hide">
       <p className="text-xs font-semibold uppercase tracking-wide text-muted">Saved views</p>
       <ul className="mt-1 flex flex-wrap gap-2">
         {views.map((view) => {

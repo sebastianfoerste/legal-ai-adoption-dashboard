@@ -59,7 +59,7 @@ fails. Effort S, M or L. Evidence is the strongest tag behind the pattern.
 | F3 | Per-practice-group usage CSV (H8) | 4 | pass (1, 3) | S | Claimed | Table stakes | Built |
 | C4 | Feedback themes with account and persona counts (H6) | 3 | pass (6) | S | Claimed | Differentiator | Built in a follow-up (2026-10-30) |
 | C5 | Saved views and filters on every list (H4) | 3 | pass | M | Claimed | Table stakes | Built in a follow-up (2026-11-02) |
-| C6 | Adopters vs non-adopters, cohort curves (H5) | 3 | pass only with a labelled synthetic comparison group (1) | M | Claimed | Table stakes | Needs owner decision |
+| C6 | Adopters vs non-adopters, cohort curves (H5) | 3 | pass only with a labelled synthetic comparison group (1) | M | Claimed | Table stakes | Not built (owner decision 6) |
 | C7 | Unused and inactive seat counts per account | 3 | pass (3) for idle-seat counts; the never-used versus lapsed split needs last-activity dates the data lacks | S | Observed | Table stakes | Built in a follow-up (2026-11-02), idle counts only |
 | C8 | Window and lag stated beside every count | 3 | pass (3) | S | Claimed | Differentiator | Built (follow-up) |
 | C9 | Leadership PDF or PPTX (H8) | 3 | pass for print; a new dependency fails (7) | M | Observed | Table stakes | ADR only |
@@ -75,7 +75,7 @@ Design upgrades:
 | --- | --- | --- | --- | --- | --- | --- |
 | D1 | Semantic colour tokens, AA contrast, tabular numerals (H3) | 4 | pass (3, 7) | S | Observed (axe baseline) | Built |
 | D2 | Grouped sidebar, skip link, route states (H2) | 4 | pass (7, 10) | S | Observed (baseline nav rows) | Built |
-| D3 | Type scale and wider content | 2 | pass | M | Inferred | Not built: budget |
+| D3 | Type scale and wider content | 2 | pass | M | Inferred | Built (follow-up): type scale; width unchanged |
 
 Ranking within Fit-pass candidates is Impact, then Evidence, then Effort. F3 was scored 4
 rather than 3 because a customer asked for it on the record (`docs/product-feedback-notes.md`,
@@ -272,7 +272,7 @@ admin consoles would firm it up.
    (Claimed). Suppression protects individuals where an employer reads its staff's data. The
    dashboard flags below 10 and shows counts, which suits an account team reading its own
    adoption. Where the comparison crosses accounts, as on `/benchmarks`, suppression would be
-   safer. **Change nothing now;** listed under Needs owner decision.
+   safer. **Decided 2026-11-03:** suppressed below 10 on `/benchmarks` (owner decision 5).
 3. **Why a score moved.** Gainsight shows measure-level history; Vitally shows components on
    hover; Planhat shows factor points (Claimed). None was seen tying the move to a rule
    change, and Planhat ties health to expansion. F2 shows components and says what it cannot
@@ -310,8 +310,8 @@ admin consoles would firm it up.
 
 - **Tokens.** Violet accent, four bands and grey Unknown kept; they are now semantic roles.
   Research gave no reason to change the accent; the owner's shared design system would.
-- **Type.** System fonts kept (offline build). Tabular numerals in tables. A type scale is
-  D3, not built.
+- **Type.** System fonts kept (offline build). Tabular numerals in tables. A six-step type scale
+  (display, figure, title, heading, label, eyebrow) is D3, built 2026-11-03.
 - **Layout.** Sidebar at `lg` with the content column unchanged at `max-w-5xl`; at 1280px the
   column fits beside the sidebar. Wider content was not needed for any table tested.
 - **Data viz.** One grammar: `BarChart` and `Meter`, SVG, hidden table, stated denominator in
@@ -323,21 +323,32 @@ admin consoles would firm it up.
 
 ## Not built: budget
 
-D3 type scale.
+None.
 
-## Needs owner decision
+## Owner decisions
 
-1. **Shared design system.** `sebastianfoerste/legal-ai-design-system` (read-only, 2026-10-20)
-   defines two-theme tokens, a different accent and local fonts, vendored into each consuming
-   app. Adopting it would replace the violet accent and add font files. Decide whether this
-   dashboard joins it; ADR 0003 assumes not yet.
-2. **Dark mode** ([ADR 0003](../adr/0003-dark-mode.md), Proposed).
-3. **Leadership PDF/PPTX** ([ADR 0004](../adr/0004-exports.md), Proposed): a print stylesheet
-   first; any PPTX library is a new dependency.
-4. **Saved-view storage** ([ADR 0005](../adr/0005-saved-views.md), Proposed).
-5. **Small-cohort suppression on `/benchmarks`.** Keep `SMALL_COHORT_THRESHOLD` at 10; decide
-   whether cross-account rows below it should be suppressed rather than flagged.
-6. **Synthetic comparison group** for adopters versus non-adopters (H5): it would be invented
-   data and must be labelled as such everywhere it appears.
-7. **Charts library.** Rejected here; reopen only with a `Proposed` ADR if interaction needs
+Taken 2026-11-03: the owner asked for each item to follow the recommendation below.
+
+1. **Shared design system: not now.** `sebastianfoerste/legal-ai-design-system` (read-only,
+   2026-10-20) would replace the violet accent and add font files. The dashboard keeps its own
+   tokens and system fonts, which the offline build needs. Revisit if the other apps adopt it.
+2. **Dark mode: deferred** ([ADR 0003](../adr/0003-dark-mode.md)). It touches nearly every
+   component class and the right dark values depend on decision 1. The page stays light.
+3. **Leadership PDF: built as a print stylesheet; PPTX deferred**
+   ([ADR 0004](../adr/0004-exports.md), accepted for PDF). Printing any page, or saving it as
+   PDF, drops the navigation and controls and carries the synthetic-data and review notice on
+   every page. A PPTX writer would be a new dependency; build it when a customer asks.
+4. **Saved-view storage: committed presets plus URLs** ([ADR 0005](../adr/0005-saved-views.md)),
+   built in #21. No per-person storage.
+5. **Small groups on `/benchmarks`: suppressed.** A row there spans accounts, so a practice
+   group with fewer than `SMALL_COHORT_THRESHOLD` (10, unchanged) active users is named with the
+   reason and its figures are left out, including from the medians. With fewer than three
+   measured groups, no group is banded or compared with the median. In the synthetic data,
+   Employment (8 active users) is suppressed, so Corporate and Litigation show unbanded.
+   Per-account views keep flagging small cohorts rather than hiding them: there the account
+   team reads its own adoption.
+6. **Synthetic comparison group: not built.** Invented non-adopters would read as evidence that
+   adoption caused the difference. C6 stays unbuilt until real, consented comparison data
+   exists, and then outside this public repository.
+7. **Charts library: stays rejected.** Reopen only with a `Proposed` ADR if interaction needs
    grow beyond static bars.

@@ -196,7 +196,7 @@ export default async function AccountHealthPage({
       </div>
 
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-sm font-medium text-gray-500">Portfolio Status</h2>
+        <h2 className="text-label font-medium text-gray-500">Portfolio Status</h2>
         <ExportButton filter={{ search, type, band }} asOf={asOfState.source === "query" ? asOf : undefined} />
       </div>
 
@@ -206,7 +206,7 @@ export default async function AccountHealthPage({
       >
         {stats.map((s) => (
           <div key={s.label} className="rounded-lg border border-gray-200 p-3 text-center">
-            <div className={`text-2xl font-semibold ${s.tone}`}>{s.value}</div>
+            <div className={`text-figure font-semibold ${s.tone}`}>{s.value}</div>
             <div className="mt-0.5 text-xs text-gray-500">{s.label}</div>
           </div>
         ))}
@@ -216,7 +216,7 @@ export default async function AccountHealthPage({
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-violet-600">Adoption Cockpit</p>
-            <h2 id="adoption-cockpit-heading" className="mt-1 text-lg font-semibold text-gray-900">
+            <h2 id="adoption-cockpit-heading" className="mt-1 text-title font-semibold text-gray-900">
               Legal AI adoption intelligence
             </h2>
             <p className="mt-1 max-w-3xl text-sm text-gray-600">
@@ -241,7 +241,7 @@ export default async function AccountHealthPage({
         <div className="mt-6 overflow-hidden rounded-lg border border-gray-100">
           <div className="flex flex-wrap items-start justify-between gap-3 border-b border-gray-100 bg-gray-50 px-3 py-2">
             <div>
-              <h3 className="text-sm font-semibold text-gray-900">Adoption controls</h3>
+              <h3 className="text-label font-semibold text-gray-900">Adoption controls</h3>
               <p className="mt-1 text-xs text-gray-600">{adoptionCockpit.adoptionControls.reviewNotice}</p>
             </div>
             <div className="flex flex-wrap gap-2 text-xs">
@@ -309,7 +309,7 @@ export default async function AccountHealthPage({
         <div className="mt-6 grid gap-5 lg:grid-cols-2">
           <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
             <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
-              <h3 className="text-sm font-semibold text-gray-900">Synthetic peer benchmarks</h3>
+              <h3 className="text-label font-semibold text-gray-900">Synthetic peer benchmarks</h3>
             </div>
             <table className="w-full min-w-[720px] text-sm">
               <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
@@ -342,7 +342,7 @@ export default async function AccountHealthPage({
 
           <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
             <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
-              <h3 className="text-sm font-semibold text-gray-900">Release and access actions</h3>
+              <h3 className="text-label font-semibold text-gray-900">Release and access actions</h3>
             </div>
             <table className="w-full min-w-[720px] text-sm">
               <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
@@ -407,7 +407,7 @@ export default async function AccountHealthPage({
 
             <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
               <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
-                <h3 className="text-sm font-semibold text-gray-900">Practice group usage</h3>
+                <h3 className="text-label font-semibold text-gray-900">Practice group usage</h3>
               </div>
               <table className="w-full min-w-[760px] text-sm">
                 <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
@@ -438,12 +438,12 @@ export default async function AccountHealthPage({
           </div>
 
           <div className="min-w-0 rounded-lg border border-violet-100 bg-violet-50/50 p-4">
-            <h3 className="text-sm font-semibold text-gray-900">Ask Adoption Cockpit</h3>
+            <h3 className="text-label font-semibold text-gray-900">Ask Adoption Cockpit</h3>
             <p className="mt-2 text-sm leading-6 text-gray-700">
               {adoptionCockpit.leadershipBrief.headline}
             </p>
             <div className="mt-3 rounded-lg border border-violet-100 bg-white p-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-violet-700">
+              <h4 className="text-eyebrow font-bold uppercase tracking-wider text-violet-700">
                 {adoptionCockpit.leadershipBrief.title}
               </h4>
               <ul className="mt-2 space-y-1 text-xs text-gray-700">
@@ -456,12 +456,12 @@ export default async function AccountHealthPage({
             <div className="mt-3 rounded-lg border border-violet-100 bg-white p-3">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-violet-700">
+                  <h4 className="text-eyebrow font-bold uppercase tracking-wider text-violet-700">
                     Presentation package
                   </h4>
                   <p className="mt-1 text-xs text-gray-600">{adoptionCockpit.presentationDeck.audience}</p>
                 </div>
-                <span className="rounded border border-gray-200 bg-gray-50 px-2 py-1 font-mono text-[10px] text-gray-600">
+                <span className="rounded border border-gray-200 bg-gray-50 px-2 py-1 font-mono text-xs text-gray-600">
                   {adoptionCockpit.presentationDeck.schema}
                 </span>
               </div>
@@ -488,12 +488,12 @@ export default async function AccountHealthPage({
             <div className="mt-3 rounded-lg border border-violet-100 bg-white p-3">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-violet-700">
+                  <h4 className="text-eyebrow font-bold uppercase tracking-wider text-violet-700">
                     Governance panel
                   </h4>
                   <p className="mt-1 text-xs text-gray-600">{adoptionCockpit.governancePanel.schema}</p>
                 </div>
-                <span className="rounded border border-red-100 bg-red-50 px-2 py-1 text-[10px] font-semibold text-red-700">
+                <span className="rounded border border-red-100 bg-red-50 px-2 py-1 text-xs font-semibold text-red-700">
                   {adoptionCockpit.governancePanel.reviewGateControl.externalActionAllowed
                     ? "external allowed"
                     : "external blocked"}
@@ -530,7 +530,7 @@ export default async function AccountHealthPage({
 
         <div tabIndex={0} className="mt-6 overflow-x-auto rounded-lg border border-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
-            <h3 className="text-sm font-semibold text-gray-900">Prompt improvement backlog</h3>
+            <h3 className="text-label font-semibold text-gray-900">Prompt improvement backlog</h3>
             <p className="mt-1 text-xs text-gray-600">
               Structured prompt contracts for workflows that need stronger source hierarchy, failure conditions or review-table output.
             </p>
@@ -586,7 +586,7 @@ export default async function AccountHealthPage({
               <Card key={account.id}>
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <h2 className="text-lg font-semibold hover:text-violet-600 transition-colors">
+                    <h2 className="text-title font-semibold hover:text-violet-600 transition-colors">
                       <Link href={`/accounts/${account.id}`}>{account.name}</Link>
                     </h2>
                     <p className="text-sm text-gray-500">
@@ -598,12 +598,12 @@ export default async function AccountHealthPage({
                       <span className={`font-medium ${renewalStatus.daysLeft <= 90 ? "text-amber-700 font-semibold" : "text-gray-500"}`}>
                         ({renewalStatus.daysLeft > 0 ? `in ${renewalStatus.daysLeft} days` : `expired ${Math.abs(renewalStatus.daysLeft)} days ago`})
                       </span>
-                      <span className={`inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] font-semibold ${deltaClass}`}>
+                      <span className={`inline-flex items-center rounded border px-1.5 py-0.5 text-xs font-semibold ${deltaClass}`}>
                         {deltaText}
                       </span>
                       {renewal.reviewPriority !== "routine" && (
                         <span
-                          className="inline-flex items-center rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-amber-800 uppercase"
+                          className="inline-flex items-center rounded bg-amber-50 px-1.5 py-0.5 text-xs font-bold tracking-wider text-amber-800 uppercase"
                           title={renewal.disclaimer}
                         >
                           {reviewPriorityLabel[renewal.reviewPriority]}
@@ -628,7 +628,7 @@ export default async function AccountHealthPage({
                 </div>
 
                 <div className="mt-6">
-                  <h3 className="text-sm font-medium text-gray-900">Practice groups</h3>
+                  <h3 className="text-label font-medium text-gray-900">Practice groups</h3>
                   <div className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {account.practiceGroups.map((g) => {
                       const groupHealth = computeHealth({
@@ -658,7 +658,7 @@ export default async function AccountHealthPage({
                 </div>
 
                 <div className="mt-6">
-                  <h3 className="text-sm font-medium text-gray-900">Persona adoption</h3>
+                  <h3 className="text-label font-medium text-gray-900">Persona adoption</h3>
                   <table className="mt-2 w-full text-sm">
                     <caption className="sr-only">Persona adoption for {account.name}</caption>
                     <thead>
@@ -685,8 +685,8 @@ export default async function AccountHealthPage({
                   <div className="rounded-lg border border-violet-100 bg-violet-50/50 p-4">
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
-                        <h3 className="text-[10px] font-bold uppercase tracking-wider text-violet-600">Recommended Next Play</h3>
-                        <h4 className="mt-1 text-sm font-bold text-gray-900">{action.title}</h4>
+                        <h3 className="text-eyebrow font-bold uppercase tracking-wider text-violet-600">Recommended Next Play</h3>
+                        <h4 className="mt-1 text-label font-bold text-gray-900">{action.title}</h4>
                         <p className="mt-1 text-xs text-gray-600">{action.description}</p>
                       </div>
                       <div className="shrink-0">
@@ -717,7 +717,7 @@ function CommandMetric({
 }) {
   return (
     <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 text-center">
-      <div className={`text-2xl font-semibold ${tone}`}>{value}</div>
+      <div className={`text-figure font-semibold ${tone}`}>{value}</div>
       <div className="mt-0.5 text-xs text-gray-500">{label}</div>
     </div>
   );
@@ -726,7 +726,7 @@ function CommandMetric({
 function CommandList({ title, values }: { title: string; values: string[] }) {
   return (
     <div>
-      <h4 className="text-xs font-bold uppercase tracking-wider text-violet-700">{title}</h4>
+      <h4 className="text-eyebrow font-bold uppercase tracking-wider text-violet-700">{title}</h4>
       <ul className="mt-1 space-y-1 text-xs text-gray-700">
         {(values.length ? values : ["No items in this synthetic snapshot."]).slice(0, 4).map((value) => (
           <li key={value}>{value}</li>

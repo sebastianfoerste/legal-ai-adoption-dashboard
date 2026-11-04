@@ -16,7 +16,7 @@ export function FeedbackThemes({
 }) {
   return (
     <section aria-labelledby="themes-heading" className="mb-8">
-      <h2 id="themes-heading" className="text-lg font-semibold text-gray-900">
+      <h2 id="themes-heading" className="text-title font-semibold text-gray-900">
         Themes
       </h2>
       <p className="mt-1 max-w-3xl text-sm text-gray-600">

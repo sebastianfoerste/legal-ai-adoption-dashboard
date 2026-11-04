@@ -29,7 +29,7 @@ export function ListFilters({
   const active = Object.keys(parsed.values).length > 0;
   return (
     <section aria-labelledby="filters-heading" className="mb-8 rounded-lg border border-gray-200 bg-gray-50 p-4">
-      <h2 id="filters-heading" className="text-sm font-semibold text-gray-900">
+      <h2 id="filters-heading" className="text-label font-semibold text-gray-900">
         Filters
       </h2>
       <SavedViewLinks views={views} currentHref={currentHref} />
