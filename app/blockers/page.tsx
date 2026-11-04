@@ -52,7 +52,7 @@ export default function BlockersPage() {
 
       {atRisk.length > 0 && (
         <section className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-5">
-          <h2 className="text-sm font-semibold text-amber-900">Accounts needing attention</h2>
+          <h2 className="text-label font-semibold text-amber-900">Accounts needing attention</h2>
           <ul className="mt-3 space-y-2">
             {atRisk.map(({ account, health }) => (
               <li key={account.id} className="flex items-center justify-between text-sm">
@@ -67,7 +67,7 @@ export default function BlockersPage() {
       <div className="space-y-6">
         {categories.map(([category, blockers]) => (
           <Card key={category}>
-            <h2 className="text-lg font-semibold">{categoryLabel[category]}</h2>
+            <h2 className="text-title font-semibold">{categoryLabel[category]}</h2>
             <ul className="mt-4 space-y-4">
               {blockers.map((b) => (
                 <li

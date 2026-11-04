@@ -9,6 +9,7 @@ export function ExportButton({ filter = {}, asOf }: { filter?: AccountFilter; as
     <a
       href={portfolioCsvHref(filter, asOf)}
       download
+      data-print="hide"
       className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-focus transition-colors"
       title="Export portfolio accounts as CSV"
     >

@@ -54,7 +54,7 @@ export function AdoptionTrendTable({ metrics, headingLevel = 4 }: { metrics: Ser
   return (
     <div className="rounded-lg border border-gray-200">
       <div className="border-b border-gray-100 bg-gray-50 px-3 py-2">
-        <Title className="text-sm font-semibold text-gray-900">
+        <Title className="text-label font-semibold text-gray-900">
           {series.workflowName} · {series.practiceGroup}
         </Title>
         <p className="mt-0.5 text-xs text-gray-600">

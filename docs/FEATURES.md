@@ -231,12 +231,39 @@ Implementation:
 4. `data/feedback.json`
 5. `docs/product-feedback-notes.md`
 
+## Practice-group benchmarks
+
+`/benchmarks` compares practice groups across accounts with internal medians. A group with
+fewer than 10 active users is named with the reason and its figures are suppressed, and left
+out of the medians, because a small cross-account group could single out the people in it.
+With fewer than three measured groups no group is banded or compared with the median. The
+synthetic Employment group (8 active users) is suppressed.
+
+Implementation:
+
+1. `lib/benchmarking.ts`
+2. `app/benchmarks/page.tsx`
+
+## Print and PDF
+
+Any page prints cleanly, and the browser's "Save as PDF" makes the leadership PDF: navigation,
+filters and download buttons drop out, tables print in full, and every printed page carries
+"Synthetic data. Draft for account-owner review; not legal advice." with a page number. The
+customer review says how. No PDF library. See [ADR 0004](adr/0004-exports.md).
+
+Implementation:
+
+1. `app/globals.css` (`@media print`)
+2. `lib/print.test.ts`
+
 ## App shell
 
 A sidebar grouped by job (Portfolio, Adoption signals, Product loop) from the `lg`
 breakpoint, a skip link, and pages for errors and unknown addresses (the latter still
 returns HTTP 404). Colours are
-semantic tokens (`muted`, `link`, `focus`, `chart`, `unknown`) that pass WCAG AA. See
+semantic tokens (`muted`, `link`, `focus`, `chart`, `unknown`) that pass WCAG AA. Headings
+take one of six type-scale steps (display, figure, title, heading, label, eyebrow) by role,
+and no text is smaller than 12px. See
 [ADR 0002](adr/0002-navigation.md) and the [competitive research](research/adaptation-plan.md)
 behind these changes.
 

@@ -27,6 +27,24 @@
   --color-unknown: var(--color-gray-500); /* Unknown is always grey */
 }
 
+/* Type scale (plan item D3). Headings take a role, not a raw size, so one size means one
+   level everywhere; lib/type-scale.test.ts fails if a heading uses a raw size class. The
+   smallest step is 12px: the 10px badge text it replaces was below a comfortable minimum. */
+@theme {
+  --text-display: 1.5rem; /* the page title, h1 */
+  --text-display--line-height: 2rem;
+  --text-figure: 1.5rem; /* a headline number in a stat tile */
+  --text-figure--line-height: 2rem;
+  --text-title: 1.125rem; /* a section on the page */
+  --text-title--line-height: 1.75rem;
+  --text-heading: 1rem; /* a card or sub-section */
+  --text-heading--line-height: 1.5rem;
+  --text-label: 0.875rem; /* a heading inside a card, table or panel */
+  --text-label--line-height: 1.25rem;
+  --text-eyebrow: 0.75rem; /* an uppercase kicker above a heading */
+  --text-eyebrow--line-height: 1rem;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -36,4 +54,75 @@ body {
 /* Figures line up in columns. */
 table {
   font-variant-numeric: tabular-nums;
+}
+
+/* Print, and so PDF through the browser's print dialog (docs/adr/0004-exports.md, option 1).
+   Navigation, forms and download buttons drop out; the synthetic and review-gate notices stay
+   on the page, and every printed page carries the same line in its bottom margin (page
+   margin boxes; browsers without them still print the on-page notices). Print stays light. */
+@media print {
+  @page {
+    margin: 16mm 14mm 20mm;
+    @bottom-center {
+      content: "Synthetic data. Draft for account-owner review; not legal advice.";
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 8pt;
+      color: #4a5565;
+    }
+    @bottom-right {
+      content: counter(page) " / " counter(pages);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 8pt;
+      color: #4a5565;
+    }
+  }
+
+  html,
+  body {
+    background: #ffffff;
+  }
+
+  body {
+    display: block;
+    font-size: 10.5pt;
+  }
+
+  nav[aria-label="Main"],
+  a[href="#content"],
+  form,
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  main {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Scrolling table wrappers would clip on paper. */
+  .overflow-x-auto {
+    overflow: visible !important;
+  }
+
+  .shadow-sm {
+    box-shadow: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  tr,
+  figure,
+  aside,
+  li {
+    break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
 }

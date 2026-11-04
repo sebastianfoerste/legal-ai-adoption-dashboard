@@ -8,6 +8,11 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Added
 
+- Print and PDF: a print stylesheet drops navigation and controls and puts the synthetic-data
+  and review notice on every printed page. ([ADR 0004](docs/adr/0004-exports.md), accepted
+  for PDF)
+- A six-step type scale for headings and figures; no text below 12px.
+
 - The window and lag of every count, stated beside it on `/`, the account pages and
   `/benchmarks`, in the reports and in both CSVs. Where the data states no window it reads
   "window not captured"; no lag is recorded, so lag reads "not captured", never 0.
@@ -35,6 +40,10 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Changed
 
+- `/benchmarks` suppresses a practice group with fewer than 10 active users instead of
+  flagging it, leaves it out of the medians, and bands no group when fewer than three are
+  measured. Owner decisions on the design system, dark mode, PDF, small groups and a
+  synthetic comparison group are recorded in the plan.
 - Colours are semantic tokens. Secondary text moves from gray-400 to gray-500, which clears
   every axe colour-contrast violation; links, focus rings and bars share the violet accent.
 - Tables use tabular numerals; horizontally scrolling tables are keyboard-focusable.

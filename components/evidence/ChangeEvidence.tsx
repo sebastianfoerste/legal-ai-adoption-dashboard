@@ -96,7 +96,7 @@ export function ChangeEvidenceSummary({ view }: { view: ChangeView }) {
 function Step({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="grid gap-1 border-t border-gray-100 px-4 py-3 md:grid-cols-[11rem_1fr] md:gap-4">
-      <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500">{label}</h4>
+      <h4 className="text-eyebrow font-bold uppercase tracking-wider text-gray-500">{label}</h4>
       {/* min-w-0: a grid cell otherwise grows to the comparison table's minimum width. */}
       <div className="min-w-0 text-sm text-gray-700">{children}</div>
     </div>
@@ -182,7 +182,7 @@ export function ChangeChain({ view }: { view: ChangeView }) {
   return (
     <article id={change.id} className="scroll-mt-6 rounded-xl border border-gray-200">
       <header className="flex flex-wrap items-start justify-between gap-2 bg-gray-50 px-4 py-3">
-        <h3 className="text-base font-semibold text-gray-900">
+        <h3 className="text-heading font-semibold text-gray-900">
           <span className="mr-2 font-mono text-xs text-gray-500">{change.id}</span>
           {change.title}
         </h3>
