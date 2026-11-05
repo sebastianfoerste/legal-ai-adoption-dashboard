@@ -9,26 +9,31 @@ import { SeverityTag } from "@/components/SeverityTag";
 import { PageHeader } from "@/components/PageHeader";
 import { Card } from "@/components/Card";
 import type { Blocker, Severity } from "@/lib/schema";
+import { ListFilters } from "@/components/ListFilters";
+import { resolveAsOf } from "@/lib/engagement/as-of";
+import { blockerCategoryLabel, filterFields, listHref, matchesBlocker, parseListFilter } from "@/lib/list-filters";
+import { getSavedViews } from "@/lib/views";
 
 const severityWeight: Record<Severity, number> = { low: 1, medium: 2, high: 3 };
 
-const categoryLabel: Record<Blocker["category"], string> = {
-  trust_in_output: "Trust in output",
-  workflow_fit: "Workflow fit",
-  training_gap: "Training gap",
-  integration: "Integration",
-  change_management: "Change management",
-  pricing_value: "Pricing & value",
-};
+const categoryLabel = blockerCategoryLabel;
 
 const weightOf = (blockers: Blocker[]) =>
   blockers.reduce((sum, b) => sum + severityWeight[b.severity], 0);
 
-export default function BlockersPage() {
+export default async function BlockersPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const query = (await searchParams) ?? {};
+  const asOfState = resolveAsOf(query.asOf);
   const accounts = getAccounts();
   const accountName = (id: string) => accounts.find((a) => a.id === id)?.name ?? id;
+  const fields = filterFields("/blockers", accounts);
+  const parsed = parseListFilter("/blockers", query, accounts);
 
-  const open = getBlockers().filter((b) => b.status !== "resolved");
+  const open = getBlockers().filter((b) => b.status !== "resolved" && matchesBlocker(b, parsed.values));
 
   const byCategory = new Map<Blocker["category"], Blocker[]>();
   for (const b of open) {
@@ -64,7 +69,20 @@ export default function BlockersPage() {
         </section>
       )}
 
+      <ListFilters
+        path="/blockers"
+        fields={fields}
+        parsed={parsed}
+        views={getSavedViews("/blockers")}
+        currentHref={listHref("/blockers", parsed.values)}
+        asOf={asOfState.source === "query" ? asOfState.date : undefined}
+        note="Filters apply to the open blockers below; the accounts needing attention are always shown."
+      />
+
       <div className="space-y-6">
+        {categories.length === 0 && (
+          <p className="text-sm italic text-muted">No open blocker matches these filters.</p>
+        )}
         {categories.map(([category, blockers]) => (
           <Card key={category}>
             <h2 className="text-title font-semibold">{categoryLabel[category]}</h2>

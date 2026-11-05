@@ -58,7 +58,7 @@ fails. Effort S, M or L. Evidence is the strongest tag behind the pattern.
 | F2 | Health-score explainability (H7) | 4 | pass (4, 11) | S | Claimed | Differentiator | Built |
 | F3 | Per-practice-group usage CSV (H8) | 4 | pass (1, 3) | S | Claimed | Table stakes | Built |
 | C4 | Feedback themes with account and persona counts (H6) | 3 | pass (6) | S | Claimed | Differentiator | Built in a follow-up (2026-10-30) |
-| C5 | Saved views and filters on every list (H4) | 3 | pass | M | Claimed | Table stakes | Not built: budget |
+| C5 | Saved views and filters on every list (H4) | 3 | pass | M | Claimed | Table stakes | Built in a follow-up (2026-11-02) |
 | C6 | Adopters vs non-adopters, cohort curves (H5) | 3 | pass only with a labelled synthetic comparison group (1) | M | Claimed | Table stakes | Not built (owner decision 6) |
 | C7 | Unused and inactive seat counts per account | 3 | pass (3) for idle-seat counts; the never-used versus lapsed split needs last-activity dates the data lacks | S | Observed | Table stakes | Built in a follow-up (2026-11-02), idle counts only |
 | C8 | Window and lag stated beside every count | 3 | pass (3) | S | Claimed | Differentiator | Built (follow-up) |
@@ -224,10 +224,14 @@ admin consoles would firm it up.
   captured", never a guessed window or a lag of 0. Recording a lag would need a capture or
   refresh timestamp per source.
 
-### C5. Saved views (not built: budget)
+### C5. Saved views (built in a follow-up, 2026-11-02)
 
-- GET filters on `/blockers`, `/feedback` and `/interventions` like `/`, and named views as a
-  committed `data/views.json` of query strings. ADR: [0005](../adr/0005-saved-views.md).
+- GET filters on `/blockers`, `/feedback` and `/interventions`, read on the server
+  (`lib/list-filters.ts`), and six named views in a committed, validated `data/views.json`
+  (`lib/views.ts`), shown as links on their page and on `/`. Unknown filter values are shown as
+  ignored. No filter or view can sort, or select by owner or specialist; a health-band view
+  cannot be presented as an expansion or renewal list. ADR:
+  [0005](../adr/0005-saved-views.md), now accepted.
 
 ### C7. Seat use (built in a follow-up, 2026-11-02)
 
@@ -250,7 +254,7 @@ admin consoles would firm it up.
 | H1 | **Confirmed, built (F1).** Recharts 3 is about 155 KB gzipped as a full bundle (Observed; tree-shaken estimate 90 to 130 KB, Inferred); Tremor on Recharts 2 about 150 to 200 KB (Inferred). Neither ships a hidden table. | npm tarballs measured; library source |
 | H2 | **Confirmed, built (D2), modified.** A sidebar, not a command palette. | Baseline: two nav rows at 1280px |
 | H3 | **Modified.** Tokens built (D1); dark mode ADR only, now with an owner decision on the shared design system. | axe baseline; ADR 0003 |
-| H4 | **Parked.** Fits; not built in this budget. | Vercel, Legora, Linear (Claimed) |
+| H4 | **Confirmed, built in a follow-up (C5).** URL filters and committed presets; no per-person storage. | Vercel, Legora, Linear (Claimed) |
 | H5 | **Modified.** Activation and repeat-use curves per period are built into F1; adopters versus non-adopters needs a synthetic comparison group, which is an owner decision. | Cortex, Jellyfish (Claimed) |
 | H6 | **Confirmed, built in a follow-up (C4).** No schema change was needed; the `duplicate` status is not built. | Canny, Linear, Productboard (Claimed) |
 | H7 | **Confirmed, built (F2).** | Vitally, Gainsight, Planhat (Claimed) |
@@ -319,7 +323,7 @@ admin consoles would firm it up.
 
 ## Not built: budget
 
-C5 saved views.
+None.
 
 ## Owner decisions
 

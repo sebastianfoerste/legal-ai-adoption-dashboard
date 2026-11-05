@@ -17,6 +17,13 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
   `/benchmarks`, in the reports and in both CSVs. Where the data states no window it reads
   "window not captured"; no lag is recorded, so lag reads "not captured", never 0.
 
+- Filters and saved views:
+  - GET filters on `/blockers`, `/feedback` and `/interventions`.
+  - Six named views in `data/views.json`, shown as links on their page and on `/`.
+  - Unknown filter values are reported as ignored.
+  - No filter or view can rank or select people.
+  ([ADR 0005](docs/adr/0005-saved-views.md))
+
 - Seat use on each account: seats without an active user in the latest and first week of the
   series, per practice group, as counts with their seat totals. The never-used versus lapsed
   split reads Unknown because no per-seat last-activity date is captured.

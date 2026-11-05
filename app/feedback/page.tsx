@@ -12,15 +12,11 @@ import { ChangeEvidenceSummary } from "@/components/evidence/ChangeEvidence";
 import { FeedbackThemes } from "@/components/FeedbackThemes";
 import { summarizeThemes } from "@/lib/feedback-themes";
 import { personaSchema } from "@/lib/schema";
+import { ListFilters } from "@/components/ListFilters";
+import { filterFields, listHref, matchesFeedback, parseListFilter, productAreaLabel } from "@/lib/list-filters";
+import { getSavedViews } from "@/lib/views";
 
-const areaLabel: Record<FeedbackItem["productArea"], string> = {
-  drafting: "Drafting",
-  review: "Review",
-  research: "Research",
-  knowledge: "Knowledge",
-  integrations: "Integrations",
-  admin: "Admin & analytics",
-};
+const areaLabel = productAreaLabel;
 
 const statusOrder: FeedbackItem["status"][] = ["new", "triaged", "shared_with_product"];
 const statusLabel: Record<FeedbackItem["status"], string> = {
@@ -53,7 +49,8 @@ export default async function FeedbackPage({
 }: {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const asOfState = resolveAsOf((await searchParams)?.asOf);
+  const query = (await searchParams) ?? {};
+  const asOfState = resolveAsOf(query.asOf);
   const evidence = viewChanges(getEvidenceStore(), asOfState.date);
   const accounts = getAccounts();
   const accountName = (id: string) => accounts.find((a) => a.id === id)?.name ?? id;
@@ -64,8 +61,12 @@ export default async function FeedbackPage({
     personaRoles: personaSchema.shape.role.options.length,
   });
 
+  const fields = filterFields("/feedback", accounts);
+  const parsed = parseListFilter("/feedback", query, accounts);
+  const shown = feedback.filter((f) => matchesFeedback(f, parsed.values));
+
   const byArea = new Map<FeedbackItem["productArea"], FeedbackItem[]>();
-  for (const f of feedback) {
+  for (const f of shown) {
     const list = byArea.get(f.productArea) ?? [];
     list.push(f);
     byArea.set(f.productArea, list);
@@ -103,8 +104,18 @@ export default async function FeedbackPage({
 
       <FeedbackThemes themes={themes} accountName={accountName} />
 
+      <ListFilters
+        path="/feedback"
+        fields={fields}
+        parsed={parsed}
+        views={getSavedViews("/feedback")}
+        currentHref={listHref("/feedback", parsed.values)}
+        asOf={asOfState.source === "query" ? asOfState.date : undefined}
+        note={`Showing ${shown.length} of ${feedback.length} items. The themes table and routing counts above cover all feedback.`}
+      />
       <h2 className="mb-4 text-title font-semibold text-gray-900">Items by product area</h2>
       <div className="space-y-6">
+        {shown.length === 0 && <p className="text-sm italic text-muted">No feedback item matches these filters.</p>}
         {[...byArea.entries()].map(([area, items]) => (
           <Card key={area}>
             <div className="flex items-center justify-between">

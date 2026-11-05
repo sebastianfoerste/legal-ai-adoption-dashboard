@@ -43,6 +43,9 @@ or personal data.
   `/accounts.csv` (the portfolio export; takes the `/` filters) and `/accounts/[id]/usage.csv`.
 - `components/` — presentational Server Components; `components/engagement/` holds the
   panels for the manager layer; `components/charts/` holds the SVG charts (no chart library).
+  `ListFilters` and `SavedViewLinks` render the list filters and the named views in
+  `data/views.json`; `lib/list-filters.ts` and `lib/views.ts` define and validate them. A view
+  filters and never ranks people: no owner, specialist or sort parameter.
   `NavLinks` and `app/error.tsx` are the only client components; `lib/client-boundary.test.ts`
   fails if a client component imports the data layer (`ExportButton` is a Server Component
   linking to `/accounts.csv`).
