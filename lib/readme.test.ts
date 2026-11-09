@@ -108,10 +108,15 @@ describe("README", () => {
 
 // Every tracked Markdown file outside workshop-kit/, which has its own link checker
 // (workshop-kit/scripts/link_checker.py). Read from git so an untracked draft is not checked.
-const trackedMarkdown = (): string[] =>
-  execFileSync("git", ["ls-files", "-z", "--", "*.md", "**/*.md"], { cwd: ROOT, encoding: "utf8" })
-    .split("\0")
-    .filter((file) => file.endsWith(".md") && !file.startsWith("workshop-kit/"));
+// During an unresolved merge git lists a conflicted file once per stage, which repeated its
+// tests and inflated the suite's count, so the list is de-duplicated.
+const trackedMarkdown = (): string[] => [
+  ...new Set(
+    execFileSync("git", ["ls-files", "-z", "--", "*.md", "**/*.md"], { cwd: ROOT, encoding: "utf8" })
+      .split("\0")
+      .filter((file) => file.endsWith(".md") && !file.startsWith("workshop-kit/")),
+  ),
+];
 
 describe("every tracked Markdown file outside workshop-kit/", () => {
   const files = trackedMarkdown();

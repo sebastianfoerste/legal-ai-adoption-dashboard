@@ -32,9 +32,9 @@ export default async function BenchmarksPage({
       <Card>
         <h2 className="text-label font-semibold text-gray-900">Internal peer median</h2>
         <dl className="mt-4 grid gap-4 sm:grid-cols-3">
-          <Metric label="Workflow runs" value={benchmark.internalMedian.workflowRuns.toFixed(0)} />
-          <Metric label="Active users" value={benchmark.internalMedian.activeUsers.toFixed(0)} />
-          <Metric label="Verified outputs" value={`${(benchmark.internalMedian.verifiedShare * 100).toFixed(0)}%`} />
+          <Metric label="Workflow runs" value={num(benchmark.internalMedian.workflowRuns)} />
+          <Metric label="Active users" value={num(benchmark.internalMedian.activeUsers)} />
+          <Metric label="Verified outputs" value={share(benchmark.internalMedian.verifiedShare)} />
         </dl>
         <CountWindows
           panel="practiceGroupBenchmarks"
@@ -60,8 +60,8 @@ export default async function BenchmarksPage({
             <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-4">
               <Metric label="Runs" value={String(row.workflowRuns)} />
               <Metric label="Active users" value={String(row.activeUsers)} />
-              <Metric label="Verified" value={`${(row.verifiedShare * 100).toFixed(0)}%`} />
-              <Metric label="WAU trend (latest minus first week)" value={row.trendDelta >= 0 ? `+${row.trendDelta}` : String(row.trendDelta)} />
+              <Metric label="Verified" value={share(row.verifiedShare)} />
+              <Metric label="WAU trend (latest minus first week)" value={trend(row.trendDelta)} />
             </dl>
             {row.insights.length > 0 && <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-gray-600">{row.insights.map(insight => <li key={insight}>{insight}</li>)}</ul>}
           </Card>
@@ -79,6 +79,11 @@ export default async function BenchmarksPage({
     </main>
   );
 }
+
+// A value that was not captured reads Unknown, never 0.
+const num = (value: number | null) => (value === null ? "Unknown" : value.toFixed(0));
+const share = (value: number | null) => (value === null ? "Unknown" : `${(value * 100).toFixed(0)}%`);
+const trend = (value: number | null) => (value === null ? "Unknown" : value >= 0 ? `+${value}` : String(value));
 
 function Metric({ label, value }: { label: string; value: string }) {
   return <div><dt className="text-xs uppercase tracking-wide text-muted">{label}</dt><dd className="mt-1 font-semibold text-gray-900">{value}</dd></div>;

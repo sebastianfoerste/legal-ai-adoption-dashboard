@@ -51,14 +51,33 @@ describe("practice group benchmarking", () => {
     expect(report.rows.every(row => row.band === null)).toBe(true);
     expect(report.rows.flatMap(row => row.insights).join(" ")).not.toContain("median");
   });
+  it("leaves a group with no outputs unbanded and out of the verified median", () => {
+    const report = buildPracticeGroupBenchmark({
+      usage: [
+        usage({ practiceGroup: "Corporate", verifiedOutputs: 90, draftOutputs: 5, blockedOutputs: 5 }),
+        usage({ practiceGroup: "Litigation", verifiedOutputs: 30, draftOutputs: 60, blockedOutputs: 10 }),
+        usage({ practiceGroup: "Finance", verifiedOutputs: 60, draftOutputs: 30, blockedOutputs: 10 }),
+        usage({ practiceGroup: "Employment", verifiedOutputs: 0, draftOutputs: 0, blockedOutputs: 0 }),
+      ],
+      trends,
+    });
+    const empty = report.rows.find(row => row.practiceGroup === "Employment")!;
+    expect(empty.verifiedShare).toBeNull();
+    expect(empty.band).toBeNull();
+    expect(empty.insights.join(" ")).not.toContain("median");
+    expect(report.internalMedian.verifiedShare).toBe(0.6);
+    expect(report.rows.find(row => row.practiceGroup === "Corporate")?.band).not.toBeNull();
+  });
   it("suppresses the synthetic Employment group, which has 8 active users", () => {
     const report = buildPracticeGroupBenchmark({ usage: adoptionCockpitReport().practiceGroupUsage, trends: [] });
     expect(report.suppressed.map(s => s.practiceGroup)).toEqual(["Employment"]);
     expect(report.rows.every(row => row.activeUsers >= 10)).toBe(true);
   });
   it("handles empty input and zero denominators", () => {
-    expect(buildPracticeGroupBenchmark({ usage: [], trends: [] }).internalMedian).toEqual({ workflowRuns: 0, activeUsers: 0, verifiedShare: 0 });
+    // Nothing measured: the medians are unknown, not 0.
+    expect(buildPracticeGroupBenchmark({ usage: [], trends: [] }).internalMedian).toEqual({ workflowRuns: null, activeUsers: null, verifiedShare: null });
     const zeroed = buildPracticeGroupBenchmark({ usage: [usage({ practiceGroup: "Finance", verifiedOutputs: 0, draftOutputs: 0, blockedOutputs: 0 })], trends: [] });
-    expect(zeroed.rows[0].verifiedShare).toBe(0);
+    expect(zeroed.rows[0].verifiedShare).toBeNull();
+    expect(zeroed.rows[0].trendDelta).toBeNull();
   });
 });
