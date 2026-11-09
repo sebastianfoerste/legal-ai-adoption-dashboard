@@ -57,6 +57,12 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Fixed
 
+- `/benchmarks` read a missing value as 0: a practice group with no outputs showed "Verified
+  0%", one with no weekly series a "+0" trend, and an empty set a median of 0. Each now reads
+  Unknown, and a group with an unknown comparison is not banded.
+- The suite's test count (`CASE_STUDY.md`) is 393. `lib/readme.test.ts` listed a conflicted
+  file once per merge stage during an unresolved merge, which inflated earlier counts; the
+  list is now de-duplicated.
 - The portfolio CSV wrote `0.0000` utilisation for an account without seats; it is now empty.
 - `/benchmarks` peer-median metrics sit in a description list (axe `dlitem`).
 - Review of the first draft: unknown accounts answer 404 again (a root `loading.tsx` had
