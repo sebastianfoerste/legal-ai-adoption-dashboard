@@ -21,8 +21,6 @@ account where expansion is inappropriate.
 
 **Public-safety posture:** synthetic account data only, source provenance for dashboard inputs, review-gated legal outputs, and no legal advice.
 
-**Live demo** (an earlier build; the footer shows its commit): https://legal-ai-adoption-dashboard.vercel.app
-
 **Run locally:** `pnpm install && pnpm dev`.
 
 > **What workflow does this improve?** Post-sales adoption of legal AI across a firm or in-house team.
