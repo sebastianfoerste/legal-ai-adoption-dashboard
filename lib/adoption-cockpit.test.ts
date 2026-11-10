@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { adoptionCockpitReport } from "./adoption-cockpit";
+import { adoptionCockpitReport, formatRate } from "./adoption-cockpit";
 
 describe("adoption cockpit report", () => {
   it("builds a synthetic aggregate report with review-gated output metrics", () => {
@@ -67,5 +67,21 @@ describe("adoption cockpit report", () => {
     expect(report.adoptionControls.wordExportPackage.externalActionAllowed).toBe(false);
     expect(report.adoptionControls.adoptionSignals.deckPackageReady).toBe(true);
     expect(report.adoptionControls.reviewNotice).toContain("Local synthetic Adoption Cockpit evidence");
+  });
+});
+
+describe("verification rate", () => {
+  it("formats a fraction as a whole percentage and a missing rate as Unknown", () => {
+    expect(formatRate(0.7827)).toBe("78%");
+    expect(formatRate(null)).toBe("Unknown");
+  });
+
+  it("states the synthetic rate as a percentage everywhere it is written", () => {
+    const report = adoptionCockpitReport();
+    const text = JSON.stringify(report);
+    expect(report.verificationRate).not.toBeNull();
+    // The rate is a fraction; printing it with a % sign read "0.78...%" before.
+    expect(text).not.toMatch(/0\.\d{3,}%/);
+    expect(text).toContain(`${formatRate(report.verificationRate)} verified output rate`);
   });
 });

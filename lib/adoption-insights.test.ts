@@ -61,3 +61,13 @@ describe("adoption insights", () => {
     expect(await response.text()).toContain("# Synthetic Legal AI Adoption Insights Report");
   });
 });
+
+describe("verification rate in the insights", () => {
+  it("reads as a whole percentage, not a raw fraction with a % sign", () => {
+    const report = adoptionCockpitReport();
+    const answer = answerAdoptionInsightsQuestion(report, "What is the verification rate?");
+    expect(JSON.stringify(answer)).not.toMatch(/0\.\d{3,}%/);
+    expect(JSON.stringify(buildAdoptionInsightsReport(report))).not.toMatch(/0\.\d{3,}%/);
+    expect(answer.answer).toMatch(/verification rate is \d{1,3}%/);
+  });
+});

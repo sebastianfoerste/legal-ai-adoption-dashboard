@@ -108,7 +108,7 @@ weights are rescaled. Expansion readiness is now a separate evidence model.
 
 ## Verification
 
-393 Vitest tests cover denominators, missing evidence, intervention states, health
+396 Vitest tests cover denominators, missing evidence, intervention states, health
 scoring, the value verdict, expansion decisions, manager ordering, the report, the
 charts' Unknown gaps, the health-score explanation, the usage export, the feedback
 themes, seat use, the window and lag of each count, small-group suppression on the

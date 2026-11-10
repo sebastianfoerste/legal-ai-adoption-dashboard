@@ -41,9 +41,10 @@ export type PracticeGroupUsageSummary = {
 
 export type BenchmarkInsight = {
   metric: string;
-  firmValue: number;
+  /** null when the firm's value is not captured; then the status is "unknown", never a guess. */
+  firmValue: number | null;
   peerMedian: number;
-  status: "ahead" | "near_peer" | "behind";
+  status: "ahead" | "near_peer" | "behind" | "unknown";
   action: string;
 };
 
@@ -199,7 +200,7 @@ export type AdoptionCockpitReport = {
   draftOutputs: number;
   verifiedOutputs: number;
   blockedOutputs: number;
-  verificationRate: number;
+  verificationRate: number | null;
   productUsage: ProductUsageSummary[];
   practiceGroupUsage: PracticeGroupUsageSummary[];
   powerUserGroups: PowerUserGroup[];
@@ -266,7 +267,9 @@ export function adoptionCockpitReport(): AdoptionCockpitReport {
 
   const activeUsers = accounts.reduce((total, account) => total + account.activeUsers, 0);
   const reviewTables = workflows.reduce((total, workflow) => total + workflow.reviewTables, 0);
-  const verificationRate = draftOutputs === 0 ? 0 : verifiedOutputs / draftOutputs;
+  // Verified share of draft outputs, as a fraction. No drafts means no rate: null, shown as
+  // Unknown (formatRate), never 0.
+  const verificationRate = draftOutputs === 0 ? null : verifiedOutputs / draftOutputs;
   const productUsage = [...productMap.values()].sort((a, b) => b.runs - a.runs);
   const practiceGroupUsage = buildPracticeGroupUsage(workflows);
   const powerUserGroups = workflows
@@ -448,6 +451,10 @@ function buildPromptReadiness({
     .slice(0, 6);
 }
 
+/** A fraction as a whole percentage, e.g. 0.78 -> "78%"; a missing rate reads "Unknown". */
+export const formatRate = (rate: number | null): string =>
+  rate === null ? "Unknown" : `${Math.round(rate * 100)}%`;
+
 function benchmarkStatus(value: number, peerMedian: number, higherIsBetter = true): BenchmarkInsight["status"] {
   const ratio = peerMedian === 0 ? 1 : value / peerMedian;
   if (higherIsBetter) {
@@ -470,26 +477,26 @@ function buildBenchmarks({
   activeUsers: number;
   workflowRuns: number;
   reviewTables: number;
-  verificationRate: number;
+  verificationRate: number | null;
   blockedOutputs: number;
 }): BenchmarkInsight[] {
-  const valueByMetric = new Map([
+  const valueByMetric = new Map<string, number | null>([
     ["Active users", activeUsers],
     ["Workflow runs", workflowRuns],
     ["Review tables", reviewTables],
-    ["Verified output rate", Math.round(verificationRate * 100)],
+    ["Verified output rate", verificationRate === null ? null : Math.round(verificationRate * 100)],
     ["Blocked outputs", blockedOutputs],
   ]);
   const rows = getBenchmarkRows().map((row) => ({
     ...row,
-    firmValue: valueByMetric.get(row.metric) ?? 0,
+    firmValue: valueByMetric.get(row.metric) ?? null,
   }));
 
   return rows.map((row) => ({
     metric: row.metric,
     firmValue: row.firmValue,
     peerMedian: row.peerMedian,
-    status: benchmarkStatus(row.firmValue, row.peerMedian, row.higherIsBetter ?? true),
+    status: row.firmValue === null ? "unknown" : benchmarkStatus(row.firmValue, row.peerMedian, row.higherIsBetter ?? true),
     action: row.action,
   }));
 }
@@ -548,7 +555,7 @@ function buildLeadershipBrief({
   recommendedActions,
   releaseActions,
 }: {
-  verificationRate: number;
+  verificationRate: number | null;
   powerUserGroups: PowerUserGroup[];
   recommendedActions: string[];
   releaseActions: ReleaseAction[];
@@ -556,7 +563,7 @@ function buildLeadershipBrief({
   const pilotCount = releaseActions.filter((action) => action.status === "pilot").length;
   return {
     title: "Synthetic leadership report",
-    headline: `${Math.round(verificationRate * 100)}% of draft outputs are verified, with ${pilotCount} release pilot(s) ready for owner review.`,
+    headline: `${formatRate(verificationRate)} of draft outputs are verified, with ${pilotCount} release pilot(s) ready for owner review.`,
 	    slides: [
       `Power users: ${powerUserGroups.slice(0, 2).map((group) => `${group.accountName} ${group.practiceGroup}`).join("; ")}`,
       `Priority risks: ${recommendedActions.slice(0, 2).join("; ")}`,
@@ -581,7 +588,7 @@ function buildPresentationDeck({
   promptReadiness,
 }: {
   leadershipBrief: LeadershipBrief;
-  verificationRate: number;
+  verificationRate: number | null;
   productUsage: ProductUsageSummary[];
   benchmarks: BenchmarkInsight[];
   powerUserGroups: PowerUserGroup[];
@@ -609,7 +616,7 @@ function buildPresentationDeck({
         title: "Executive signal",
         takeaway: leadershipBrief.headline,
         evidence: [
-          `${Math.round(verificationRate * 100)}% verified output rate`,
+          `${formatRate(verificationRate)} verified output rate`,
           `${pilotReleases.length} release pilot(s) ready for owner review`,
         ],
         reviewGate,
@@ -649,7 +656,7 @@ function buildPresentationDeck({
       },
     ],
     evidenceList: [
-      `Verification rate: ${Math.round(verificationRate * 100)}%`,
+      `Verification rate: ${formatRate(verificationRate)}`,
       `Top product: ${topProduct?.product ?? "none"} with ${topProduct?.runs ?? 0} run(s)`,
       `Blocked-output benchmark: ${blockedBenchmark?.status ?? "not_available"}`,
       `Pilot releases: ${pilotReleases.map((release) => release.release).join(", ") || "none"}`,
@@ -682,7 +689,7 @@ export function renderAdoptionCockpitMarkdown({
   promptReadiness,
 }: {
   leadershipBrief: LeadershipBrief;
-  verificationRate: number;
+  verificationRate: number | null;
   productUsage: ProductUsageSummary[];
   benchmarks: BenchmarkInsight[];
   powerUserGroups: PowerUserGroup[];
@@ -695,7 +702,7 @@ export function renderAdoptionCockpitMarkdown({
     "",
     leadershipBrief.headline,
     "",
-    `Verified output rate: ${Math.round(verificationRate * 100)}%.`,
+    `Verified output rate: ${formatRate(verificationRate)}.`,
     "",
     "## Product Usage",
     ...productUsage.slice(0, 5).map((item) => `- ${item.product}: ${item.runs} run(s), ${item.reviewTables} table(s)`),
@@ -703,7 +710,7 @@ export function renderAdoptionCockpitMarkdown({
     describeCounts(PANEL_COUNTS.workflowUsage, countWindowContext()),
     "",
     "## Benchmarks",
-    ...benchmarks.map((item) => `- ${item.metric}: ${item.firmValue} vs peer ${item.peerMedian}, ${item.status}`),
+    ...benchmarks.map((item) => `- ${item.metric}: ${item.firmValue ?? "Unknown"} vs peer ${item.peerMedian}, ${item.status}`),
     "",
     describeCounts(PANEL_COUNTS.peerBenchmarks, countWindowContext()),
     "",
@@ -798,7 +805,7 @@ function buildAdoptionControls({
   draftOutputs: number;
   verifiedOutputs: number;
   blockedOutputs: number;
-  verificationRate: number;
+  verificationRate: number | null;
   productUsage: ProductUsageSummary[];
   practiceGroupUsage: PracticeGroupUsageSummary[];
   powerUserGroups: PowerUserGroup[];
@@ -977,7 +984,7 @@ function buildAdoptionControls({
       status: "draft_only",
       draftOutputs,
       verifiedOutputs,
-      verificationRate: Math.round(verificationRate * 100),
+      verificationRate: formatRate(verificationRate),
       approvalRequired: true,
     },
     wordExportPackage: {
