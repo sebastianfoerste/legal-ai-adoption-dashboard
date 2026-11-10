@@ -11,8 +11,6 @@ feedback.
 
 The adopted legal-AI product gates every output behind a named lawyer's review; this dashboard tracks adoption, not output, and surfaces expansion and renewal moves as signals for the account owner, never auto-actioned.
 
-**Live demo** (an earlier build; the footer shows its commit): https://legal-ai-adoption-dashboard.vercel.app
-
 ![Top of the Account Health page: navigation, framing questions, filters and the portfolio status strip](docs/demo.png)
 
 *Screenshot of the running app (`pnpm build && pnpm start`), Account Health page (`/`), synthetic data.*
