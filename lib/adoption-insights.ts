@@ -1,4 +1,4 @@
-import { adoptionCockpitReport, type AdoptionCockpitReport } from "./adoption-cockpit";
+import { adoptionCockpitReport, formatRate, type AdoptionCockpitReport } from "./adoption-cockpit";
 import { getAccounts } from "./data";
 import { formatDate } from "./engagement/as-of";
 import { getEngagement, specialistLabel } from "./engagement/data";
@@ -58,9 +58,9 @@ export function answerAdoptionInsightsQuestion(
   if (normalized.includes("verification") || normalized.includes("verified")) {
     return answer(
       question,
-      `The synthetic verification rate is ${report.verificationRate}%. ${report.blockedOutputs} outputs remain blocked.`,
+      `The synthetic verification rate is ${formatRate(report.verificationRate)}. ${report.blockedOutputs} outputs remain blocked.`,
       [
-        { metric: "Verification rate", value: `${report.verificationRate}%`, sourceRef: "data/workflows.json" },
+        { metric: "Verification rate", value: formatRate(report.verificationRate), sourceRef: "data/workflows.json" },
         { metric: "Blocked outputs", value: String(report.blockedOutputs), sourceRef: "data/workflows.json" },
       ],
     );
@@ -146,7 +146,7 @@ export function recommendCapabilities(report: AdoptionCockpitReport): Capability
       capability: `Improve ${benchmark.metric}`,
       audience: "Practice groups below the synthetic peer median",
       reason: benchmark.action,
-      evidence: [`Firm: ${benchmark.firmValue}`, `Peer median: ${benchmark.peerMedian}`],
+      evidence: [`Firm: ${benchmark.firmValue ?? "Unknown"}`, `Peer median: ${benchmark.peerMedian}`],
       action: "Run a targeted workflow clinic and measure the same metric in the next reporting period.",
       gate: "Account owner approval required before training or account action.",
     });
@@ -176,7 +176,7 @@ export function buildAdoptionInsightsReport(
   const sections = [
     {
       heading: "Executive summary",
-      takeaway: `${report.activeUsers} active users, ${report.workflowRuns} workflow runs and a ${report.verificationRate}% verification rate in synthetic data.`,
+      takeaway: `${report.activeUsers} active users, ${report.workflowRuns} workflow runs and a ${formatRate(report.verificationRate)} verification rate in synthetic data.`,
       evidence: [`${report.blockedOutputs} blocked outputs`, `${report.reviewTables} review tables`],
     },
     {

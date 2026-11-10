@@ -57,6 +57,10 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Fixed
 
+- `/insights` and the leadership report printed the verification rate as a raw fraction
+  with a % sign ("0.7827298050139275% verification rate"); it now reads "78%". With no draft
+  outputs the rate is Unknown, not 0, and a benchmark whose firm value is not captured reads
+  Unknown, in grey, instead of a status.
 - `/benchmarks` read a missing value as 0: a practice group with no outputs showed "Verified
   0%", one with no weekly series a "+0" trend, and an empty set a median of 0. Each now reads
   Unknown, and a group with an unknown comparison is not banded.

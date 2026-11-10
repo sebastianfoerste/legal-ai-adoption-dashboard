@@ -325,7 +325,7 @@ export default async function AccountHealthPage({
                 {adoptionCockpit.benchmarks.map((benchmark) => (
                   <tr key={benchmark.metric}>
                     <td className="px-3 py-3 font-medium text-gray-900">{benchmark.metric}</td>
-                    <td className="px-3 py-3 font-mono text-gray-700">{benchmark.firmValue}</td>
+                    <td className="px-3 py-3 font-mono text-gray-700">{benchmark.firmValue ?? "Unknown"}</td>
                     <td className="px-3 py-3 font-mono text-gray-700">{benchmark.peerMedian}</td>
                     <td className="px-3 py-3">
                       <span className={`rounded border px-2 py-1 text-xs ${commandStatusClass(benchmark.status)}`}>
@@ -737,6 +737,10 @@ function CommandList({ title, values }: { title: string; values: string[] }) {
 }
 
 function commandStatusClass(status: string) {
+  // Unknown is always grey, never a red, amber or green status.
+  if (status === "unknown") {
+    return "border-dashed border-unknown bg-white text-muted";
+  }
   if (status === "ahead" || status === "enabled" || status === "ready") {
     return "border-emerald-200 bg-emerald-50 text-emerald-700";
   }
