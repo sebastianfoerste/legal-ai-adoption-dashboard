@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { NavLinks } from "@/components/NavLinks";
 import { buildStamp } from "@/lib/build-info";
+import { PRINT_NOTICE } from "@/lib/print";
 import "./globals.css";
 
 // No next/font/google: it downloads the font at build time, so the build failed without
@@ -45,7 +46,12 @@ export default function RootLayout({
             <NavLinks />
           </div>
         </nav>
-        <div className="flex min-h-full min-w-0 flex-1 flex-col">
+        <div className="print-frame flex min-h-full min-w-0 flex-1 flex-col">
+          {/* Print only: repeated at the foot of every printed page in Firefox (see the print rules in
+              globals.css). Hidden on screen, where the synthetic notices are on the page. */}
+          <div className="print-notice hidden" aria-hidden="true">
+            <span>{PRINT_NOTICE}</span>
+          </div>
           <div id="content" tabIndex={-1} className="flex-1 focus:outline-none">
             {children}
           </div>

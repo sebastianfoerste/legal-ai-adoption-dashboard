@@ -19,10 +19,19 @@
   account-owner review. A download, not an API.
 - **Built (2026-11-03).** `@media print` in `app/globals.css`: navigation, forms and elements
   marked `data-print="hide"` (download buttons, back links) drop out; scrolling tables print
-  in full; rows, figures and notices do not split across pages; every page's bottom margin
-  carries "Synthetic data. Draft for account-owner review; not legal advice." and a page
-  number. The on-page synthetic and review notices stay. `lib/print.test.ts` pins these rules.
-  Checked in Chromium only, where the margin boxes print; a second engine is still to be
-  checked. A browser without margin boxes still prints the on-page notices.
-- **Consequences.** PDF output depends on the reader's browser; page breaks need testing in
-  at least two engines.
+  in full; rows, figures and notices do not split across pages; every printed page carries
+  "Synthetic data. Draft for account-owner review; not legal advice." The on-page synthetic
+  and review notices stay. `lib/print.test.ts` pins these rules.
+- **Checked in two engines (2026-11-17).** Chromium (Playwright's build 1194) and Firefox
+  160 (headless, through geckodriver's print command) printed the account page, the customer
+  review, `/insights`, `/benchmarks` and a filtered `/blockers`. Firefox ignores page margin
+  boxes, so the first version left pages without the notice there (pages 2 to 4 of a
+  six-page account print). The notice now comes by two routes: the `@bottom-center` margin
+  box, which Chromium prints, and a print-only table footer group in the layout
+  (`.print-notice`, text in `lib/print.ts`), which Firefox repeats on every page and Chromium
+  prints once at the end. Result: the notice on every page in both engines, the line twice
+  on Chromium's last page, no navigation or download control in either, no table clipped.
+  Page numbers print in Chromium only.
+- **Consequences.** PDF output depends on the reader's browser; page breaks were tested in
+  Chromium and Firefox and should be re-checked in both after layout changes. Safari is not
+  checked.
