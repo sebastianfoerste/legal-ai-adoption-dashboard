@@ -268,13 +268,15 @@ Implementation:
 
 Any page prints cleanly, and the browser's "Save as PDF" makes the leadership PDF: navigation,
 filters and download buttons drop out, tables print in full, and every printed page carries
-"Synthetic data. Draft for account-owner review; not legal advice." with a page number. The
-customer review says how. No PDF library. See [ADR 0004](adr/0004-exports.md).
+"Synthetic data. Draft for account-owner review; not legal advice." Checked in Chromium and
+Firefox; page numbers print in Chromium only. The customer review says how. No PDF library.
+See [ADR 0004](adr/0004-exports.md).
 
 Implementation:
 
 1. `app/globals.css` (`@media print`)
-2. `lib/print.test.ts`
+2. `app/layout.tsx` (the print-only notice) and `lib/print.ts`
+3. `lib/print.test.ts`
 
 ## App shell
 

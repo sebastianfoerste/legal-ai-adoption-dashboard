@@ -57,6 +57,10 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Fixed
 
+- Printing from Firefox left the synthetic-data and review notice off most pages: Firefox
+  ignores the page margin box that carried it. The layout now also prints the line as a
+  footer that Firefox repeats on every page, so both Chromium and Firefox carry it on every
+  printed page. ([ADR 0004](docs/adr/0004-exports.md))
 - `/insights` and the leadership report printed the verification rate as a raw fraction
   with a % sign ("0.7827298050139275% verification rate"); it now reads "78%". With no draft
   outputs the rate is Unknown, not 0, and a benchmark whose firm value is not captured reads

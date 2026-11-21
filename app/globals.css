@@ -58,8 +58,12 @@ table {
 
 /* Print, and so PDF through the browser's print dialog (docs/adr/0004-exports.md, option 1).
    Navigation, forms and download buttons drop out; the synthetic and review-gate notices stay
-   on the page, and every printed page carries the same line in its bottom margin (page
-   margin boxes; browsers without them still print the on-page notices). Print stays light. */
+   on the page. Every printed page carries the notice line, by two routes because no single
+   one works in both engines (checked 2026-11-17): Chromium prints page margin boxes
+   (@bottom-center, and the page number) but repeats a footer group only for real <table>
+   markup; Firefox ignores margin boxes but repeats the layout's .print-notice, a CSS table
+   footer group, on every page. Chromium's last page therefore shows the line twice. Print
+   stays light. */
 @media print {
   @page {
     margin: 16mm 14mm 20mm;
@@ -85,6 +89,23 @@ table {
   body {
     display: block;
     font-size: 10.5pt;
+  }
+
+  /* The content column becomes a table so that its footer group repeats on every page. */
+  .print-frame {
+    display: table !important;
+    width: 100%;
+  }
+
+  .print-notice {
+    display: table-footer-group !important;
+    font-size: 8pt;
+    color: #4a5565;
+  }
+
+  .print-notice > span {
+    display: block;
+    padding-top: 4mm;
   }
 
   nav[aria-label="Main"],
