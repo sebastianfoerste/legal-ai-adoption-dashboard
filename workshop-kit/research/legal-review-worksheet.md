@@ -29,6 +29,15 @@ changed and what did not.
 | Section 201 of the German Criminal Code (StGB) | [gesetze-im-internet.de](https://www.gesetze-im-internet.de/stgb/__201.html) | Still reads as summarised above: subsection 1 no. 1 covers whoever, without authority, records another person's non-public spoken word on a sound carrier. |
 | Section 43a(2) of the Federal Lawyers' Act (BRAO) | [gesetze-im-internet.de](https://www.gesetze-im-internet.de/brao/__43a.html) | Still reads as summarised above: the duty covers everything that became known in the course of practice (sentence 2); obvious facts and facts that need no secrecy are excepted (sentence 3). |
 
+**Re-checked 2026-11-22.** The two tables above are kept as they stood. This table records
+what the later check found; EUR-Lex again returned an empty page, so the Official Journal
+texts were read through the EU Publications Office (`publications.europa.eu/resource/celex/`).
+
+| Source | Where | Result on 2026-11-22 |
+|---|---|---|
+| Regulation (EU) 2016/679 (GDPR) | European Parliament's Legislative Observatory | Neither pending proposal has been adopted. COM(2025) 501 (procedure 2025/0130(COD)): status still "Awaiting Parliament's position in 1st reading"; the Legislative Observatory now forecasts the plenary vote for 24 November 2026, so this entry needs a fresh check after that date ([OEIL 2025/0130(COD)](https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2025/0130(COD))). COM(2025) 837 (procedure 2025/0360(COD)): status still "Awaiting committee decision"; a JURI committee opinion is dated 11 November 2026 ([OEIL 2025/0360(COD)](https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2025/0360(COD))). |
+| Regulation (EU) 2025/2518 | Official Journal text, CELEX 32025R2518 | Regulation of 26 November 2025 "laying down additional procedural rules on the enforcement of Regulation (EU) 2016/679", published on 12 December 2025; it applies from 2 April 2027 (Article 37(2)). |
+
 Not checked: the Federal Data Protection Act, state data protection law, professional rules
 for in-house counsel, and the law of any other country a participant may sit in.
 
