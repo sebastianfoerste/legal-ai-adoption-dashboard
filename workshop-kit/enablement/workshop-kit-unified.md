@@ -93,30 +93,13 @@ This is the legal-AI rollout reviewer path:
 
 [`research/`](#readme) prepares a first qualitative study round on the contract-review handoff with four to eight practitioners. It is preparation only: no invitation has been sent and no session has been held. Predictive statements elsewhere in the kit are worded as hypotheses that the study and later adoption data can check.
 
-## Regulatory context (as of 30 October 2026)
+## Regulatory context (as of 22 November 2026)
 
-Orientation only, not legal advice. Each point was read on 31 October 2026 at the source
-linked; the firm's own professional-conduct review decides what applies to its rollout.
+Orientation only, not legal advice. Each point was last read on 21 or 22 November 2026 at the source linked; the firm's own professional-conduct review decides what applies to its rollout.
 
-- **AI literacy, Article 4 of the AI Act.** Article 4 of Regulation (EU) 2024/1689, as
-  amended by Regulation (EU) 2026/1744 (the Digital Omnibus on AI), requires providers and
-  deployers of AI systems to take measures to support the development of AI literacy. The
-  AI-literacy obligation has applied since 2 February 2025; the amending regulation entered
-  into force on 27 July 2026 ([Commission, AI Act timeline](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai);
-  [Commission, AI Omnibus enters into force](https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force);
-  amended wording as reproduced at [artificialintelligenceact.eu](https://artificialintelligenceact.eu/article/4/),
-  the Official Journal text at EUR-Lex `OJ:L_202601744` was not readable in that check). A
-  firm that deploys a legal-AI tool can document the sessions in this kit as such measures.
-- **Germany: KI-MIG.** The "KI-Marktüberwachungs-und-Innovationsförderungs-Gesetz vom
-  22. Juli 2026 (BGBl. 2026 I Nr. 223)" has been in force since 29 July 2026. Under § 2
-  Abs. 1 the Bundesnetzagentur is the market-surveillance authority for compliance with
-  Regulation (EU) 2024/1689 ([gesetze-im-internet.de](https://www.gesetze-im-internet.de/ki-mig/BJNR0DF0B0026.html)).
-- **Germany: BRAK guidance.** The Bundesrechtsanwaltskammer's "Hinweise zum Einsatz von
-  künstlicher Intelligenz (KI)" are dated 12/2024; brak.de listed no newer version on
-  31 October 2026 ([BRAK, Handlungshinweise und Leitfäden](https://www.brak.de/publikationen/handlungshinweise/)).
-  The CCBE adopted a guide for lawyers on generative AI in October 2025
-  ([BRAK newsletter 18/2025 of 24 October 2025](https://www.brak.de/newsroom/newsletter/nachrichten-aus-bruessel/2025/ausgabe-18-2025-v-24102025/leitfaden-fuer-die-anwaltschaft-zum-umgang-mit-generativer-kuenstlicher-intelligenz-ccbe/)).
-  Check both for updates before a session.
+- **AI literacy, Article 4 of the AI Act.** Article 4(1) of Regulation (EU) 2024/1689, as amended by [Regulation (EU) 2026/1744](https://eur-lex.europa.eu/eli/reg/2026/1744/oj) (the Digital Omnibus on AI), requires providers and deployers of AI systems to "take measures to support the development of AI literacy" of their staff and of others who operate or use AI systems on their behalf, and adds that this "does not require providers or deployers to guarantee any specific level of AI literacy of any individual". The AI-literacy obligation has applied since 2 February 2025; the amending regulation was published in the Official Journal on 24 July 2026 and entered into force on 27 July 2026 (Official Journal text, CELEX 32026R1744; [Commission, AI Omnibus enters into force](https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force)). A firm that deploys a legal-AI tool can document the sessions in this kit as such measures.
+- **Germany: KI-MIG.** The KI-Marktüberwachungs-und-Innovationsförderungs-Gesetz (KI-MIG), enacted as Article 1 of the Gesetz zur Durchführung der Verordnung über künstliche Intelligenz vom 22. Juli 2026 (BGBl. 2026 I Nr. 223), has been in force since 29 July 2026, the day after its promulgation. Under § 2 Abs. 1 the Bundesnetzagentur is the market-surveillance authority for compliance with Regulation (EU) 2024/1689, "soweit in diesem Gesetz nichts anderes bestimmt ist": § 2 Abs. 2 keeps the sector authorities for AI systems linked to products under Annex I, Section A, of that Regulation, and § 2 Abs. 3 makes BaFin competent for AI systems directly connected with a regulated financial activity of the firms it supervises ([BGBl. 2026 I Nr. 223](https://www.recht.bund.de/bgbl/1/2026/223/VO.html)).
+- **Germany: BRAK guidance.** The Bundesrechtsanwaltskammer's "Hinweise zum Einsatz von künstlicher Intelligenz (KI)", Stand: Oktober 2026, replace the version of December 2024: "Aufgrund aktueller Entwicklungen wurde der KI-Leitfaden aus Dezember 2024 im Oktober 2026 angepasst und erweitert." ([BRAK, KI-Leitfaden, Stand 10/2026](https://www.brak.de/fileadmin/service/publikationen/Handlungshinweise/BRAK_Leitfaden_mit_Hinweisen_zum_KI-Einsatz_Stand_10_2026.pdf); [BRAK, Handlungshinweise und Leitfäden](https://www.brak.de/publikationen/handlungshinweise/)). The CCBE's Standing Committee adopted a guide for lawyers on generative AI in early October 2025 ([BRAK newsletter 18/2025 of 24 October 2025](https://www.brak.de/newsroom/newsletter/nachrichten-aus-bruessel/2025/ausgabe-18-2025-v-24102025/leitfaden-fuer-die-anwaltschaft-zum-umgang-mit-generativer-kuenstlicher-intelligenz-ccbe/)). Check both for updates before a session.
 
 ## Data statement
 
@@ -662,7 +645,7 @@ carries the judgment. The tool changes who produces the draft, not who is respon
 
 Answer the two questions a partner always has, before they ask:
 
-- **Confidentiality.** Client data reaches a provider only on the lawful disclosure path: as far as the service requires it, under a written confidentiality contract, with comparable protection where the service is performed abroad, and with the client's consent where the service directly serves a single matter (for a German firm, §§ 43a and 43e BRAO and § 203 StGB; the [German briefing](#sessions-30-min-partner-briefing-de) sets this out). Until that path is approved, every workshop and the pilot run on synthetic documents modelled on the firm's matters. Spell out the data path in one sentence: which environment, which contract, where the data is stored, in which country.
+- **Confidentiality.** Client data reaches a provider only on the lawful disclosure path: as far as the service requires it, under a confidentiality contract in at least text form, with comparable protection where the service is performed abroad, and with the client's consent where the service directly serves a single matter (for a German firm, §§ 43a and 43e BRAO and § 203 StGB; the [German briefing](#sessions-30-min-partner-briefing-de) sets this out). Until that path is approved, every workshop and the pilot run on synthetic documents modelled on the firm's matters. Spell out the data path in one sentence: which environment, which contract, where the data is stored, in which country.
 - **Reliability.** Every output passes a human-review gate before reliance. The tool produces a first pass; a named lawyer checks each claim against its source and signs off. A wrong citation is caught at review, not at filing.
 
 If the firm has a professional-responsibility or risk committee, name that this rollout is
@@ -1030,8 +1013,9 @@ The tool produces a first pass; it does not get the last word.
 ## 2. "Our client data cannot go into these systems."
 Agreed: nothing enters a system until the data path is approved. Every workshop and the
 pilot run on synthetic documents modelled on your matters. Client data reaches a provider
-only on the lawful disclosure path: as far as the service requires it, under a written
-confidentiality contract, with comparable protection where the service is performed abroad,
+only on the lawful disclosure path: as far as the service requires it, under a
+confidentiality contract in at least text form, with comparable protection where the
+service is performed abroad,
 and with the client's consent where the service directly serves a single matter (for a
 German firm, §§ 43a and 43e BRAO and § 203 StGB; the
 [German briefing](#sessions-30-min-partner-briefing-de) sets this out). The data path
