@@ -115,6 +115,25 @@ None of this enters the UI, the data or the exports.
     at [EUR-Lex OJ:L_202601744](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202601744)
     returned an empty page in this run, so the amended articles were not read in the primary
     source. The tag above is left as written.
+  - **Re-checked 2026-11-22 against the Official Journal text.** EUR-Lex again returned an
+    empty page; the text was read through the EU Publications Office (CELEX 32026R1744).
+    Regulation (EU) 2026/1744 of 8 July 2026 (Digital Omnibus on AI) was published on
+    24 July 2026 and enters into force on the third day following its publication
+    (Article 4), so on 27 July 2026. Article 4(1) of Regulation (EU) 2024/1689 now begins
+    "Providers and deployers of AI systems shall take measures to support the development of
+    AI literacy of their staff and other persons dealing with the operation and use of AI
+    systems on their behalf" and adds "This obligation does not require providers or
+    deployers to guarantee any specific level of AI literacy of any individual." The two new
+    prohibitions are Article 5(1), first subparagraph, points (ba) (non-consensual intimate
+    or sexually explicit material of an identifiable person) and (bb) (child sexual abuse
+    material within the meaning of Directive 2011/93/EU). Article 5(1a) limits them: placing
+    such a system on the market is prohibited only where that output is its intended purpose,
+    or a reasonably foreseeable and reproducible outcome without adequate safeguards, and use
+    only where the deployer uses the system for that purpose. Article 113, third paragraph,
+    as amended: those provisions apply from 2 December 2026; the high-risk rules of
+    Chapter III, Sections 1 to 3, apply from 2 December 2027 for Annex III systems and from
+    2 August 2028 for Annex I systems. The Claimed and Unverified tags above are left as
+    written; this entry supersedes them.
 - **Legal Tech Monitor 2026.** Reported on 17 September 2026: about 73% of in-house lawyers
   would consolidate mandates with firms that demonstrate AI savings, and nearly 40% already
   ask advisers for evidence of AI use (Claimed:
@@ -125,7 +144,8 @@ None of this enters the UI, the data or the exports.
     beck-aktuell article dated 17 September 2026 reports "73%" of the surveyed in-house
     lawyers and "fast 40%"
     ([beck-aktuell](https://www.beck-aktuell.de/rechtsbranche/anwaltschaft/legal-tech-monitor-2026-ki-tools-2026-09-17)).
-    The Claimed tag above is left as written.
+    The Claimed tag above is left as written. Re-checked 2026-11-21: the article still reads
+    "Stattliche 73%" and "fast 40%", from a survey of "knapp 360 Personen".
 
 ## Top findings
 
