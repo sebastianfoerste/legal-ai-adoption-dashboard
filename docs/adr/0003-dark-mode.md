@@ -1,6 +1,7 @@
 # 0003. Dark mode, only after the tokens pass in both themes
 
-- **Status:** Proposed, 2026-10-20. Needs owner decision.
+- **Status:** Deferred, 2026-11-03 (owner decision 2 in the adaptation plan). Proposed
+  2026-10-20. Not built; the page stays light. Reopen together with the shared design system.
 - **Context.** `app/globals.css` forces a light scheme because components were styled with raw
   palette steps that do not survive a dark background. Commit "semantic colour tokens" moved
   the app onto roles. Measured contrast of each role's light value (rendered colour, WCAG
@@ -18,7 +19,7 @@
 
   Against the track, the chart fill is about 4.7:1 and the capacity warning fill (amber-700)
   about 4:1. The owner's shared design system defines two-theme tokens with a different
-  accent; see [Needs owner decision](../research/adaptation-plan.md#needs-owner-decision).
+  accent; see [Owner decisions](../research/adaptation-plan.md#owner-decisions).
 - **Proposal.** Give every role a dark value, apply it under `prefers-color-scheme: dark` and
   an explicit `data-theme` override, and move the remaining raw steps (band badges, card
   borders, `text-gray-900` headings) onto roles first. Ship only when every text role is 4.5:1

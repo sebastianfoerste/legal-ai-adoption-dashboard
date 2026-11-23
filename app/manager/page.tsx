@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+
+export const metadata: Metadata = { title: "Manager Decisions" };
 import { Meter } from "@/components/charts/Meter";
 import { getAccounts } from "@/lib/data";
 import { accountHealth } from "@/lib/aggregate";
@@ -55,7 +59,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
       </PageHeader>
 
       <section className="mb-10" aria-labelledby="attention-heading">
-        <h2 id="attention-heading" className="text-lg font-semibold text-gray-900">
+        <h2 id="attention-heading" className="text-title font-semibold text-gray-900">
           Why each account receives attention
         </h2>
         <p className="mt-1 text-sm text-gray-600">
@@ -69,7 +73,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
               <Card key={account.accountId} className="!p-5">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <h3 className="font-semibold text-gray-900 hover:text-violet-600">
+                    <h3 className="text-heading font-semibold text-gray-900 hover:text-violet-600">
                       <Link href={`/accounts/${account.accountId}`}>{account.accountName}</Link>
                     </h3>
                     <p className="mt-0.5 text-xs text-gray-500">
@@ -118,7 +122,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
       </section>
 
       <section className="mb-10" aria-labelledby="capacity-heading">
-        <h2 id="capacity-heading" className="text-lg font-semibold text-gray-900">
+        <h2 id="capacity-heading" className="text-title font-semibold text-gray-900">
           Specialist assignments and capacity
         </h2>
         <p className="mt-1 text-sm text-gray-600">
@@ -135,7 +139,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
             );
             return (
               <Card key={workload.specialist.id} className="!p-5">
-                <h3 className="font-semibold text-gray-900">{workload.specialist.label}</h3>
+                <h3 className="text-heading font-semibold text-gray-900">{workload.specialist.label}</h3>
                 <p className="text-xs text-gray-500">{workload.specialist.region}</p>
                 <p className="mt-3 text-sm text-gray-700">
                   <span className="font-semibold text-gray-900">
@@ -201,7 +205,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
 
       <section className="mb-10 grid gap-6 lg:grid-cols-2">
         <Card className="!p-5">
-          <h2 className="font-semibold text-gray-900">Overdue commitments</h2>
+          <h2 className="text-heading font-semibold text-gray-900">Overdue commitments</h2>
           {overdue.length === 0 ? (
             <p className="mt-3 text-sm text-gray-500">None.</p>
           ) : (
@@ -230,7 +234,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
         </Card>
 
         <Card className="!p-5">
-          <h2 className="font-semibold text-gray-900">Open escalations</h2>
+          <h2 className="text-heading font-semibold text-gray-900">Open escalations</h2>
           {escalations.length === 0 ? (
             <p className="mt-3 text-sm text-gray-500">None.</p>
           ) : (
@@ -262,7 +266,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
       </section>
 
       <section className="mb-10" aria-labelledby="coaching-heading">
-        <h2 id="coaching-heading" className="text-lg font-semibold text-gray-900">
+        <h2 id="coaching-heading" className="text-title font-semibold text-gray-900">
           Coaching actions
         </h2>
         <p className="mt-1 text-sm text-gray-600">
@@ -273,7 +277,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
           {coaching.map((action) => (
             <Card key={action.id} className="!p-5">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="font-semibold text-gray-900">{specialistLabel(action.specialistId)}</h3>
+                <h3 className="text-heading font-semibold text-gray-900">{specialistLabel(action.specialistId)}</h3>
                 <Link
                   href={`/interventions#${action.evidenceRef}`}
                   className="font-mono text-xs text-violet-600 hover:text-violet-700"
@@ -297,7 +301,7 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
       </section>
 
       <section aria-labelledby="expansion-heading">
-        <h2 id="expansion-heading" className="text-lg font-semibold text-gray-900">
+        <h2 id="expansion-heading" className="text-title font-semibold text-gray-900">
           Expansion readiness across accounts
         </h2>
         <p className="mt-1 text-sm text-gray-600">
@@ -306,15 +310,16 @@ export default async function ManagerPage({ searchParams }: { searchParams?: Pro
         </p>
         <div tabIndex={0} className="mt-4 overflow-x-auto rounded-lg border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <table className="w-full min-w-[760px] text-sm">
+            <caption className="sr-only">Expansion readiness per account: six evidence criteria</caption>
             <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
               <tr>
-                <th className="px-3 py-2 font-medium">Account</th>
-                <th className="px-3 py-2 font-medium">Adoption health</th>
-                <th className="px-3 py-2 font-medium">Recommendation</th>
-                <th className="px-3 py-2 font-medium">Met</th>
-                <th className="px-3 py-2 font-medium">Not met</th>
-                <th className="px-3 py-2 font-medium">Unknown</th>
-                <th className="px-3 py-2 font-medium">Evidence missing</th>
+                <th scope="col" className="px-3 py-2 font-medium">Account</th>
+                <th scope="col" className="px-3 py-2 font-medium">Adoption health</th>
+                <th scope="col" className="px-3 py-2 font-medium">Recommendation</th>
+                <th scope="col" className="px-3 py-2 font-medium">Met</th>
+                <th scope="col" className="px-3 py-2 font-medium">Not met</th>
+                <th scope="col" className="px-3 py-2 font-medium">Unknown</th>
+                <th scope="col" className="px-3 py-2 font-medium">Evidence missing</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">

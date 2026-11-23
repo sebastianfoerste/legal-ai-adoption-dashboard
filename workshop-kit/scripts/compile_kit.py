@@ -36,6 +36,33 @@ def slugify_path(path):
         name = name[:-3]
     return name.lower()
 
+def slugify_heading(text):
+    """A valid HTML id fragment for a heading, as GitHub builds its anchors: lowercase,
+    whitespace becomes "-", and only letters, digits, "-" and "_" survive. Markdown links
+    written as `file.md#formula-a-weekly-time-saved-hours` then resolve to
+    `file--formula-a-weekly-time-saved-hours`."""
+    text = re.sub(r"`([^`]*)`", r"\1", text)          # inline code
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)  # links keep their text
+    text = re.sub(r"[*_]{1,2}(?=\S)|(?<=\S)[*_]{1,2}", "", text)  # emphasis markers
+    text = text.strip().lower()
+    text = re.sub(r"\s+", "-", text)
+    return re.sub(r"[^\w-]", "", text, flags=re.UNICODE)
+
+def latex_to_text(formula):
+    """A readable, plain-text form of the kit's display formulas ($$...$$). The source
+    Markdown keeps the LaTeX; the HTML shows the formula as text instead of raw markup."""
+    text = formula.strip()
+    for _ in range(4):  # nested \text{} and \frac{}{}
+        text = re.sub(r"\\text\{([^{}]*)\}", r"\1", text)
+        text = re.sub(r"\\frac\{([^{}]*)\}\{([^{}]*)\}", r"(\1) / (\2)", text)
+    replacements = [
+        (r"\\times", "×"), (r"\\cdot", "·"), (r"\\left\(", "("), (r"\\right\)", ")"),
+        (r"\\%", "%"), (r"\\\$", "$"), (r"\\,|\\;|\\ ", " "), (r"\\\\", " "),
+    ]
+    for pattern, repl in replacements:
+        text = re.sub(pattern, repl, text)
+    return re.sub(r"\s+", " ", text).strip()
+
 def clean_title(title):
     return title.strip("# \t\r\n")
 
@@ -88,7 +115,21 @@ def parse_inline(text, slug_map):
         return f'<a href="{url}" target="_blank" rel="noopener noreferrer">{link_text}</a>'
         
     text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', link_repl, text)
+
+    # A Markdown-escaped dollar sign is a plain dollar sign in HTML.
+    text = text.replace("\\$", "$")
     return text
+
+FORMULA_BLOCK = re.compile(r"\$\$(.+?)\$\$", re.DOTALL)
+
+def formula_paragraph_to_html(para_text):
+    """A paragraph made only of $$...$$ blocks: one <pre class="formula"> per formula."""
+    formulas = FORMULA_BLOCK.findall(para_text)
+    html = []
+    for formula in formulas:
+        plain = latex_to_text(formula).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        html.append(f'<pre class="formula"><code>{plain}</code></pre>')
+    return "\n".join(html)
 
 def parse_markdown_to_html(md_text, slug_map, file_slug):
     lines = md_text.splitlines()
@@ -232,7 +273,7 @@ def parse_markdown_to_html(md_text, slug_map, file_slug):
             level = len(header_match.group(1))
             header_text = header_match.group(2)
             # Create a section-specific header ID to avoid conflicts in the unified doc
-            header_slug = slugify_path(header_text)
+            header_slug = slugify_heading(header_text)
             header_id = f"{file_slug}--{header_slug}"
             
             # If it's a h1 (title) and we are wrapping it in a section, we can make it styled nicely
@@ -259,7 +300,10 @@ def parse_markdown_to_html(md_text, slug_map, file_slug):
                     para_lines.append(lines[i].strip())
                     i += 1
                 para_text = " ".join(para_lines)
-                html_out.append(f'<p>{parse_inline(para_text, slug_map)}</p>')
+                if FORMULA_BLOCK.sub("", para_text).strip() == "" and FORMULA_BLOCK.search(para_text):
+                    html_out.append(formula_paragraph_to_html(para_text))
+                else:
+                    html_out.append(f'<p>{parse_inline(para_text, slug_map)}</p>')
                 continue
         i += 1
         
@@ -376,8 +420,9 @@ def compile_kit():
         --accent-success: #10b981;
         --accent-warning: #f59e0b;
         --accent-danger: #ef4444;
-        --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        --heading-font: 'Outfit', sans-serif;
+        /* System font stacks, as the main app: the page requests nothing from a third party. */
+        --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        --heading-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     * {
@@ -603,6 +648,16 @@ def compile_kit():
         font-weight: 600;
         font-family: var(--heading-font);
     }
+    pre.formula {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        margin: 1rem 0;
+        white-space: pre-wrap;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.95em;
+    }
     tr:last-child td {
         border-bottom: none;
     }
@@ -739,9 +794,6 @@ def compile_kit():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legal AI Workshop Kit Playbook</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
     <style>
         {css_styles}
     </style>

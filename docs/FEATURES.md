@@ -111,6 +111,19 @@ Implementation:
 2. `components/charts/BarChart.tsx`
 3. `components/charts/Meter.tsx`
 
+## Seat use
+
+On `/accounts/[id]`, a table counts the seats without an active user in the latest week and in
+the first week of the series, per practice group and for the account ("32 of 40 seats").
+Whether an idle seat was never used or has lapsed needs a last-activity date per seat, which
+is not captured, so that column reads Unknown. Idle seats are context for the account owner,
+not a seat-removal recommendation and not an input to expansion or renewal.
+
+Implementation:
+
+1. `lib/seat-use.ts`
+2. `components/SeatUse.tsx`
+
 ## Practice-group usage export
 
 `/accounts/<id>/usage.csv` downloads one row per practice group: seats, active users, seat
@@ -123,6 +136,20 @@ Implementation:
 
 1. `lib/exports/practice-group-usage.ts`
 2. `app/accounts/[id]/usage.csv/route.ts`
+
+## Window and lag
+
+Beside each panel of counts, one line says which window the counts cover and how late they
+arrive: active users are the week ending on the as-of date, the weekly trend is the series
+ending then, workflow runs total that series and persona adoption covers 30 days. Counts the
+data states without a window read "window not captured". No capture delay is recorded, so
+the lag reads "not captured", never 0. The CSVs carry the active-user week and an empty lag
+column.
+
+Implementation:
+
+1. `lib/count-windows.ts`
+2. `components/CountWindows.tsx`
 
 ## Customer value
 
@@ -189,20 +216,76 @@ Implementation:
 
 ## Product Feedback Queue
 
-Synthetic user friction routed to product areas and product requirements.
+Synthetic user friction routed to product areas and product requirements. A Themes table
+groups the items: each theme shows how many distinct accounts and persona roles raised it,
+out of every account and role in the portfolio ("2 of 5 accounts"). Themes are listed by name,
+never ranked by count. Routing is shown as triage only; delivery and outcome come from the
+change records whose problems cite the theme's items, and a theme without one reads
+"No change record: delivery unknown".
 
 Implementation:
 
 1. `app/feedback/page.tsx`
-2. `data/feedback.json`
-3. `docs/product-feedback-notes.md`
+2. `lib/feedback-themes.ts`
+3. `components/FeedbackThemes.tsx`
+4. `data/feedback.json`
+5. `docs/product-feedback-notes.md`
+
+## Filters and saved views
+
+`/blockers`, `/feedback` and `/interventions` have GET filters, read on the server:
+- `/blockers`: account, severity and category.
+- `/feedback`: account, severity, product area and routing.
+- `/interventions`: account and stage.
+
+A filtered list is a URL, so it can be bookmarked or shared. A value that is not one of a
+filter's options is reported as ignored, not matched to an empty list. Filters apply to the
+list; summary panels stay portfolio-wide, and each page says so. Named views from
+`data/views.json` appear as links on their page and on `/`. There is no owner, specialist or
+sort filter, and a health-band view cannot be presented as an expansion list. See
+[ADR 0005](adr/0005-saved-views.md).
+
+Implementation:
+
+1. `lib/list-filters.ts`
+2. `lib/views.ts` and `data/views.json`
+3. `components/ListFilters.tsx` and `components/SavedViewLinks.tsx`
+
+## Practice-group benchmarks
+
+`/benchmarks` compares practice groups across accounts with internal medians. A group with
+fewer than 10 active users is named with the reason and its figures are suppressed, and left
+out of the medians, because a small cross-account group could single out the people in it.
+With fewer than three measured groups no group is banded or compared with the median. The
+synthetic Employment group (8 active users) is suppressed.
+
+Implementation:
+
+1. `lib/benchmarking.ts`
+2. `app/benchmarks/page.tsx`
+
+## Print and PDF
+
+Any page prints cleanly, and the browser's "Save as PDF" makes the leadership PDF: navigation,
+filters and download buttons drop out, tables print in full, and every printed page carries
+"Synthetic data. Draft for account-owner review; not legal advice." Checked in Chromium and
+Firefox; page numbers print in Chromium only. The customer review says how. No PDF library.
+See [ADR 0004](adr/0004-exports.md).
+
+Implementation:
+
+1. `app/globals.css` (`@media print`)
+2. `app/layout.tsx` (the print-only notice) and `lib/print.ts`
+3. `lib/print.test.ts`
 
 ## App shell
 
 A sidebar grouped by job (Portfolio, Adoption signals, Product loop) from the `lg`
 breakpoint, a skip link, and pages for errors and unknown addresses (the latter still
 returns HTTP 404). Colours are
-semantic tokens (`muted`, `link`, `focus`, `chart`, `unknown`) that pass WCAG AA. See
+semantic tokens (`muted`, `link`, `focus`, `chart`, `unknown`) that pass WCAG AA. Headings
+take one of six type-scale steps (display, figure, title, heading, label, eyebrow) by role,
+and no text is smaller than 12px. See
 [ADR 0002](adr/0002-navigation.md) and the [competitive research](research/adaptation-plan.md)
 behind these changes.
 

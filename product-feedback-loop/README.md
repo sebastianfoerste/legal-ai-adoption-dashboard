@@ -10,7 +10,7 @@ Part of `legal-ai-adoption-dashboard`. Not legal advice; all data is synthetic.
 
 ```bash
 cd product-feedback-loop
-make test     # 27 unit tests, standard library only
+make test     # 33 unit tests, standard library only
 make demo     # writes examples/prioritized-backlog.md, .json and product-memo.md
 make check    # tests, and the committed examples must equal the generated output
 ```

@@ -28,6 +28,9 @@ describe("practiceGroupUsageCsv", () => {
     const corporate = rows.find((r) => r[2] === "Corporate")!;
     expect(corporate.slice(8, 13)).toEqual(["10", "12", "14", "16", "17"]);
     expect(rows.every((r) => r[0] === "synthetic" && r.at(-1) === REVIEW_NOTE)).toBe(true);
+    expect(header.slice(13, 15)).toEqual(["active_users_window", "lag_days"]);
+    // Active users are the latest week; no lag is recorded, so the cell is empty, never 0.
+    expect(rows.every((r) => r[13] === "week ending 2026-07-31" && r[14] === "")).toBe(true);
   });
 
   it("leaves a missing value empty, never 0", () => {
@@ -50,6 +53,24 @@ describe("practiceGroupUsageCsv", () => {
     expect(csvCell('Tax, "Private"')).toBe('"Tax, ""Private"""');
     expect(csvCell(null)).toBe("");
     expect(csvCell(0)).toBe("0");
+  });
+
+  it("neutralises a string cell that starts like a spreadsheet formula (OWASP)", () => {
+    expect(csvCell("=SUM(A1:A9)")).toBe("\"'=SUM(A1:A9)\"");
+    expect(csvCell("+1")).toBe("\"'+1\"");
+    expect(csvCell("-x")).toBe("\"'-x\"");
+    expect(csvCell("@cmd")).toBe("\"'@cmd\"");
+    expect(csvCell("\tlead")).toBe("\"'\tlead\"");
+    expect(csvCell("\rlead")).toBe("\"'\rlead\"");
+    expect(csvCell("\nlead")).toBe("\"'\nlead\"");
+    expect(csvCell("=a,\"b\"")).toBe("\"'=a,\"\"b\"\"\"");
+  });
+
+  it("passes numbers through unchanged, negative ones included", () => {
+    expect(csvCell(-5)).toBe("-5");
+    expect(csvCell(0.25)).toBe("0.25");
+    expect(csvCell("plain text")).toBe("plain text");
+    expect(csvCell("2026-07-31")).toBe("2026-07-31");
   });
 
   it("puts each group's latest count in the latest column", () => {

@@ -172,7 +172,7 @@ summaries listed in the matrix.
 | Live products, demo videos | Not used: no login, trial or demo request is allowed | 2026-10-20 |
 
 `sebastianfoerste/legal-ai-design-system` was reachable read-only. It is the owner's shared
-token set; see [Needs owner decision](adaptation-plan.md#needs-owner-decision).
+token set; see [Owner decisions](adaptation-plan.md#owner-decisions).
 
 ## Coverage against the targets
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAccounts, getBlockers, getFeedback } from "@/lib/data";
@@ -9,9 +10,12 @@ import { buildCustomerReview } from "@/lib/engagement/customer-review";
 import { specialistLabel, getEngagement } from "@/lib/engagement/data";
 import { assessComplexity } from "@/lib/engagement/capacity";
 import { AsOfNote } from "@/components/AsOfNote";
+import { SeatUseTable } from "@/components/SeatUse";
 import { HealthExplanation } from "@/components/HealthExplanation";
 import { usageWindowWeeks } from "@/lib/exports/practice-group-usage";
 import { HealthBadge } from "@/components/HealthBadge";
+import { CountWindows } from "@/components/CountWindows";
+import { commonWeeks } from "@/lib/count-windows";
 import { TrendBar } from "@/components/TrendBar";
 import { PageHeader } from "@/components/PageHeader";
 import { Card } from "@/components/Card";
@@ -30,6 +34,12 @@ function Unknown({ children }: { children: React.ReactNode }) {
       Unknown: {children}
     </p>
   );
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const account = getAccounts().find((a) => a.id === id);
+  return { title: account ? account.name : "Not found" };
 }
 
 export default async function AccountDetailPage({
@@ -69,7 +79,7 @@ export default async function AccountDetailPage({
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-10">
-      <div className="mb-6">
+      <div className="mb-6" data-print="hide">
         <Link href="/" className="text-sm font-medium text-violet-600 hover:text-violet-700">
           ← Back to portfolio
         </Link>
@@ -77,11 +87,11 @@ export default async function AccountDetailPage({
 
       <PageHeader
         title={account.name}
-        subtitle={`${account.type === "law_firm" ? "Law firm" : "In-house team"} · ${account.activeUsers}/${account.seats} licensed seats active (${pct(utilization)})`}
+        subtitle={`${account.type === "law_firm" ? "Law firm" : "In-house team"} · ${account.activeUsers}/${account.seats} licensed seats active in the week ending ${formatDate(asOf)} (${pct(utilization)})`}
       >
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <HealthBadge health={health} breakdown={health.breakdown} />
-          <span className={`inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] font-semibold ${deltaClass}`}>
+          <span className={`inline-flex items-center rounded border px-1.5 py-0.5 text-xs font-semibold ${deltaClass}`}>
             {deltaText}
           </span>
           <span className="text-sm text-gray-500">Renewal: {formatDate(account.renewalDate)}</span>
@@ -93,7 +103,7 @@ export default async function AccountDetailPage({
           {formatDate(engagement.nextReviewDate)}
         </p>
         <AsOfNote asOf={asOfState} />
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-2" data-print="hide">
           <Link
             href={`/accounts/${account.id}/review`}
             className="inline-flex items-center rounded-lg bg-violet-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-focus"
@@ -123,10 +133,10 @@ export default async function AccountDetailPage({
             <div className="rounded-lg border border-violet-100 bg-violet-50/50 p-4">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <h3 id="recommended-action-title" className="text-xs font-bold uppercase tracking-wider text-violet-600">
+                  <h2 id="recommended-action-title" className="text-eyebrow font-bold uppercase tracking-wider text-violet-600">
                     Recommended Next Play
-                  </h3>
-                  <h4 className="mt-1 text-base font-bold text-gray-900">{action.title}</h4>
+                  </h2>
+                  <h3 className="mt-1 text-heading font-bold text-gray-900">{action.title}</h3>
                   <p className="mt-1 text-sm text-gray-600">{action.description}</p>
                 </div>
                 <div>
@@ -140,7 +150,7 @@ export default async function AccountDetailPage({
         </section>
 
         <section aria-labelledby="expansion-title">
-          <h3 id="expansion-title" className="text-base font-semibold text-gray-900">
+          <h3 id="expansion-title" className="text-heading font-semibold text-gray-900">
             Expansion readiness
           </h3>
           <p className="mb-4 mt-1 text-sm text-gray-600">
@@ -151,14 +161,14 @@ export default async function AccountDetailPage({
         </section>
 
         <section aria-labelledby="renewal-title">
-          <h3 id="renewal-title" className="mb-4 text-base font-semibold text-gray-900">
+          <h3 id="renewal-title" className="mb-4 text-heading font-semibold text-gray-900">
             Renewal decision aid
           </h3>
           <RenewalAidPanel aid={review.renewal} />
         </section>
 
         <section aria-labelledby="adoption-title">
-          <h3 id="adoption-title" className="text-base font-semibold text-gray-900">
+          <h3 id="adoption-title" className="text-heading font-semibold text-gray-900">
             Adoption over time
           </h3>
           <p className="mb-4 mt-1 text-sm text-gray-600">
@@ -181,7 +191,7 @@ export default async function AccountDetailPage({
         </section>
 
         <section aria-labelledby="value-title">
-          <h3 id="value-title" className="text-base font-semibold text-gray-900">
+          <h3 id="value-title" className="text-heading font-semibold text-gray-900">
             Customer value
           </h3>
           <p className="mb-4 mt-1 text-sm text-gray-600">
@@ -200,7 +210,7 @@ export default async function AccountDetailPage({
         </section>
 
         <section aria-labelledby="interventions-title">
-          <h3 id="interventions-title" className="mb-4 text-base font-semibold text-gray-900">
+          <h3 id="interventions-title" className="mb-4 text-heading font-semibold text-gray-900">
             Interventions
           </h3>
           {review.interventions.length === 0 ? (
@@ -217,8 +227,9 @@ export default async function AccountDetailPage({
         {/* Practice Group Usage Grid */}
         <section aria-labelledby="pg-title">
           <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h3 id="pg-title" className="text-base font-semibold text-gray-900">Practice Groups</h3>
+            <h3 id="pg-title" className="text-heading font-semibold text-gray-900">Practice Groups</h3>
             <a
+              data-print="hide"
               href={`/accounts/${account.id}/usage.csv${asOfState.source === "query" ? `?asOf=${asOf}` : ""}`}
               className="text-xs font-semibold text-link underline hover:text-link-hover focus:outline-none focus:ring-2 focus:ring-focus"
             >
@@ -253,15 +264,22 @@ export default async function AccountDetailPage({
               );
             })}
           </div>
+          <CountWindows
+            panel="accountUsage"
+            asOf={asOf}
+            weeks={commonWeeks([account.weeklyActiveUsers, ...account.practiceGroups.map((g) => g.weeklyActiveUsers)])}
+          />
           <p className="mt-2 text-xs text-gray-500">
             Group scores use licence use and trend only. Reviewed output is not captured per group,
             so that component is unknown and left out.
           </p>
         </section>
 
+        <SeatUseTable account={account} asOf={asOf} />
+
         {/* Blockers */}
         <section aria-labelledby="blockers-title">
-          <h3 id="blockers-title" className="mb-4 text-base font-semibold text-gray-900">Blockers & Re-engagement</h3>
+          <h3 id="blockers-title" className="mb-4 text-heading font-semibold text-gray-900">Blockers & Re-engagement</h3>
           {blockers.length === 0 ? (
             <Card><p className="text-sm text-gray-500">No blockers reported for this account.</p></Card>
           ) : (
@@ -275,7 +293,7 @@ export default async function AccountDetailPage({
                           {b.category.replaceAll("_", " ")}
                         </span>
                         <SeverityTag severity={b.severity} />
-                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
+                        <span className={`rounded-full px-2 py-0.5 text-xs font-semibold uppercase tracking-wider ${
                           b.status === "resolved"
                             ? "bg-emerald-50 text-emerald-700"
                             : b.status === "in_progress"
@@ -304,7 +322,7 @@ export default async function AccountDetailPage({
 
         {/* Product Feedback */}
         <section aria-labelledby="feedback-title">
-          <h3 id="feedback-title" className="text-base font-semibold text-gray-900">Feedback Log</h3>
+          <h3 id="feedback-title" className="text-heading font-semibold text-gray-900">Feedback Log</h3>
           <p className="mb-4 mt-1 text-sm text-gray-600">{review.expansion.feedbackNote}</p>
           {feedback.length === 0 ? (
             <Card><p className="text-sm text-gray-500">No user feedback logged yet.</p></Card>

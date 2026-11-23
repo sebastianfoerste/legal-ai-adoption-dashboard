@@ -1,3 +1,4 @@
+import { RECORDED_LAG_DAYS } from "../count-windows";
 import type { Account } from "../schema";
 
 /**
@@ -11,11 +12,19 @@ import type { Account } from "../schema";
 
 export const REVIEW_NOTE = "Draft for account-owner review; synthetic data";
 
+/**
+ * One CSV cell. A string that a spreadsheet would read as a formula (it starts with =, +, -,
+ * @, tab, CR or LF) is prefixed with a single quote inside a quoted field, as OWASP
+ * recommends against CSV injection; numbers pass through unchanged.
+ */
 export const csvCell = (value: string | number | null | undefined): string => {
   if (value === null || value === undefined) return "";
-  const text = String(value);
-  return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+  if (typeof value === "number") return String(value);
+  const text = FORMULA_START.test(value) ? `'${value}` : value;
+  return /[",\n\r]/.test(text) || text !== value ? `"${text.replace(/"/g, '""')}"` : text;
 };
+
+const FORMULA_START = /^[=+\-@\t\r\n]/;
 
 /** The window, in weeks, that the export and the link to it both state. */
 export const usageWindowWeeks = (account: Account): number =>
@@ -53,6 +62,8 @@ export function practiceGroupUsageCsv(account: Account, asOf: string): UsageExpo
     "seat_utilisation",
     "queries_per_week",
     ...weekHeaders,
+    "active_users_window",
+    "lag_days",
     "review_status",
   ];
   const rows = account.practiceGroups.map((g) => [
@@ -66,6 +77,9 @@ export function practiceGroupUsageCsv(account: Account, asOf: string): UsageExpo
     g.seats > 0 ? (g.activeUsers / g.seats).toFixed(4) : null,
     g.queriesPerWeek,
     ...alignToLatest(g.weeklyActiveUsers, weeks),
+    `week ending ${asOf}`,
+    // No capture or refresh delay is recorded: an empty cell, never 0.
+    RECORDED_LAG_DAYS,
     REVIEW_NOTE,
   ]);
   const csv = [header, ...rows].map((row) => row.map(csvCell).join(",")).join("\r\n") + "\r\n";

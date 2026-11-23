@@ -108,9 +108,11 @@ weights are rescaled. Expansion readiness is now a separate evidence model.
 
 ## Verification
 
-269 Vitest tests cover denominators, missing evidence, intervention states, health
+396 Vitest tests cover denominators, missing evidence, intervention states, health
 scoring, the value verdict, expansion decisions, manager ordering, the report, the
-charts' Unknown gaps, the health-score explanation and the usage export. A
+charts' Unknown gaps, the health-score explanation, the usage export, the feedback
+themes, seat use, the window and lag of each count, small-group suppression on the
+benchmarks, the print rules, the type scale and the saved views. A
 mutation spot-check broke seven rules one at a time (for example, counting unknown
 evidence as met, or dividing repeat use by active users) and the suite failed each time.
 The rendered pages were inspected at 1280 and 375 pixels.
@@ -130,7 +132,9 @@ The rendered pages were inspected at 1280 and 375 pixels.
 - The decision rule is fixed and simple. It orders evidence for a human decision and has
   not been compared with real expansion or renewal outcomes.
 - No specialist team has used the manager view and no customer has seen a report.
-- There is no persistence, authentication or multi-tenancy, and one fixed as-of date.
+- There is no persistence, authentication or multi-tenancy. The as-of date is a demo
+  default (31 July 2026) that `?asOf=YYYY-MM-DD` or `ADOPTION_AS_OF` overrides
+  (`lib/engagement/as-of.ts`); nothing advances it on its own.
 
 ## Next steps
 

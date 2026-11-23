@@ -7,7 +7,7 @@ export type Severity = z.infer<typeof severitySchema>;
 export const personaSchema = z.object({
   role: z.enum(["Partner", "Associate", "PSL", "Innovation Lead", "In-house Counsel"]),
   count: z.number().int().nonnegative(),
-  adoptionRate: z.number().min(0).max(1), // share of this persona active in last 30d
+  adoptionRate: z.number().min(0).max(1).describe("share of this persona active in the last 30 days"),
 });
 export type Persona = z.infer<typeof personaSchema>;
 

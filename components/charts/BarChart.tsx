@@ -82,7 +82,7 @@ export function BarChart({
                 x={bar.x + bar.width / 2}
                 y={height + 11}
                 textAnchor="middle"
-                className="fill-gray-600 text-[10px]"
+                className="fill-gray-600 text-xs"
               >
                 {ticks[bar.index]}
               </text>

@@ -8,6 +8,30 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Added
 
+- Print and PDF: a print stylesheet drops navigation and controls and puts the synthetic-data
+  and review notice on every printed page. ([ADR 0004](docs/adr/0004-exports.md), accepted
+  for PDF)
+- A six-step type scale for headings and figures; no text below 12px.
+
+- The window and lag of every count, stated beside it on `/`, the account pages and
+  `/benchmarks`, in the reports and in both CSVs. Where the data states no window it reads
+  "window not captured"; no lag is recorded, so lag reads "not captured", never 0.
+
+- Filters and saved views:
+  - GET filters on `/blockers`, `/feedback` and `/interventions`.
+  - Six named views in `data/views.json`, shown as links on their page and on `/`.
+  - Unknown filter values are reported as ignored.
+  - No filter or view can rank or select people.
+  ([ADR 0005](docs/adr/0005-saved-views.md))
+
+- Seat use on each account: seats without an active user in the latest and first week of the
+  series, per practice group, as counts with their seat totals. The never-used versus lapsed
+  split reads Unknown because no per-seat last-activity date is captured.
+
+- Feedback themes on `/feedback`: per theme, the accounts and persona roles that raised it
+  as counts with their denominators, listed by name and never ranked; routing kept as triage;
+  delivery and outcome read only from linked change records.
+
 - Accessible SVG charts with no client JavaScript: a missing value is a dashed grey Unknown
   gap, never a zero bar, and every chart has a title, a description and a hidden data table.
   Activation and repeat use now show as bars per reporting period.
@@ -23,15 +47,100 @@ From the October 2026 competitive research ([plan](docs/research/adaptation-plan
 
 ### Changed
 
+- `/benchmarks` suppresses a practice group with fewer than 10 active users instead of
+  flagging it, leaves it out of the medians, and bands no group when fewer than three are
+  measured. Owner decisions on the design system, dark mode, PDF, small groups and a
+  synthetic comparison group are recorded in the plan.
 - Colours are semantic tokens. Secondary text moves from gray-400 to gray-500, which clears
   every axe colour-contrast violation; links, focus rings and bars share the violet accent.
 - Tables use tabular numerals; horizontally scrolling tables are keyboard-focusable.
 
 ### Fixed
 
+- Printing from Firefox left the synthetic-data and review notice off most pages: Firefox
+  ignores the page margin box that carried it. The layout now also prints the line as a
+  footer that Firefox repeats on every page, so both Chromium and Firefox carry it on every
+  printed page. ([ADR 0004](docs/adr/0004-exports.md))
+- `/insights` and the leadership report printed the verification rate as a raw fraction
+  with a % sign ("0.7827298050139275% verification rate"); it now reads "78%". With no draft
+  outputs the rate is Unknown, not 0, and a benchmark whose firm value is not captured reads
+  Unknown, in grey, instead of a status.
+- `/benchmarks` read a missing value as 0: a practice group with no outputs showed "Verified
+  0%", one with no weekly series a "+0" trend, and an empty set a median of 0. Each now reads
+  Unknown, and a group with an unknown comparison is not banded.
+- The suite's test count (`CASE_STUDY.md`) is 393. `lib/readme.test.ts` listed a conflicted
+  file once per merge stage during an unresolved merge, which inflated earlier counts; the
+  list is now de-duplicated.
 - The portfolio CSV wrote `0.0000` utilisation for an account without seats; it is now empty.
 - `/benchmarks` peer-median metrics sit in a description list (axe `dlitem`).
 - Review of the first draft: unknown accounts answer 404 again (a root `loading.tsx` had
   turned them into a streamed 200, so it is removed); the score explanation reconciles its
   rounded points with the score; only Unknown is dashed and grey in charts; shorter weekly
   series line up with the as-of week in the usage CSV; the portfolio CSV builder is tested.
+
+### Security (2026-10-30 round)
+
+- Next.js 16.2.9 → 16.4.3, which clears the critical advisories of the 16.2 line and the
+  postcss and sharp high advisories; zod ^4.6.6; transitive dev-tooling packages pinned to
+  patched lines so that `pnpm audit --audit-level=high` is clean and gates CI.
+- `poweredByHeader: false`, `images.unoptimized: true` (the `/_next/image` endpoint answers
+  404; the app renders no `next/image`) and response headers on every route: a static
+  Content-Security-Policy with `frame-ancestors 'none'`, X-Content-Type-Options,
+  Referrer-Policy, X-Frame-Options and Permissions-Policy, pinned by `lib/next-config.test.ts`.
+- CI: read-only token, actions pinned to commit SHAs of their current majors,
+  `persist-credentials: false`, concurrency and timeouts, a zizmor job, and Dependabot for npm
+  and GitHub Actions (grouped minor and patch updates, no auto-merge).
+- The portfolio CSV is built on the server (`/accounts.csv`); the data layer no longer ships
+  to the browser (a test guards every client component). CSV cells that a spreadsheet would
+  read as a formula are neutralised; both CSV routes end lines with CRLF.
+
+### Accessibility (2026-10-30 round)
+
+- Every page has its own `<title>`; heading levels no longer skip; tables on the manager,
+  insights, research and customer-review pages have captions and column scopes.
+- An axe-core gate (`pnpm test:a11y`, Playwright) visits every HTML route at 1280 px and
+  375 px and runs in CI: WCAG 2.0/2.1/2.2 A and AA, heading order, one h1 per page, titles
+  unique per route.
+- The compiled workshop-kit HTML loads no third-party font, has valid heading ids and shows
+  its formulas as readable text.
+
+### Changed (2026-10-30 round)
+
+- The footer shows the commit and date a build was made from, linked to GitHub.
+- The README states the current floors (Node.js 22, pnpm 11, Python 3.11) and names the
+  Vercel demo an earlier build. `product-feedback-loop` declares PEP 639 licence metadata,
+  `requires-python >= 3.11` and classifiers, and CI tests that floor.
+- `vitest.config.ts` → `vitest.config.mts`, which removes Vite's CJS warning. The README link
+  test now checks every tracked Markdown file outside `workshop-kit/`.
+
+## Merged after 0.1.0, before the Unreleased work
+
+Pull requests on `main` between the tag and the October 2026 adaptation, by merge date.
+
+| PR | Merged | Title |
+|---|---|---|
+| #1 | 2026-07-13 | feat: add workflow governance analytics |
+| #2 | 2026-07-13 | fix: complete Collaboration-inspired programme verification |
+| #3 | 2026-07-13 | Remediate workflow governance review findings |
+| #5 | 2026-09-24 | refactor: rename command center to adoption insights |
+| #4 | 2026-10-12 | feat: add practice-group cohort benchmarking |
+| #6 | 2026-10-12 | feat: land the adoption cockpit stack and sync the workshop kit |
+| #7 | 2026-10-12 | docs: record that the private research store exists |
+| #8 | 2026-10-18 | fix: replace a real utility's name and tidy the public surface |
+| #9 | 2026-10-19 | docs: trim the README to 347 words and move detail into docs |
+
+PR #10 (merged 2026-10-28, "Competitive research and adaptation: accessible charts, score
+explanation, usage CSV, app shell") is the Unreleased work above.
+
+## 0.1.0 - 2026-07-03
+
+First tagged release (`v0.1.0`, commit `cd65d51`, "Initial clean public portfolio
+snapshot"). From the release notes: a synthetic legal AI adoption cockpit with governance
+metrics, review gates, benchmark data and presentation-ready reports; deterministic tests
+cover health scoring, cockpit analytics and synthetic data contracts.
+
+- Next.js App Router dashboard with the Account Health, Adoption Blockers and Product
+  Feedback Queue views over synthetic JSON data validated by Zod.
+- The transparent adoption health score (`lib/health.ts`) with unit tests.
+- Repository hygiene from the first commit: CI workflow, `AGENTS.md`, `CASE_STUDY.md`,
+  `PRIVACY.md`, `SECURITY.md`, MIT licence.

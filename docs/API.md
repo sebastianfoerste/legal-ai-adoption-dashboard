@@ -18,8 +18,9 @@ side effects.
 `synthetic-practice-group-usage-<id>-<asOf>.csv`, or 404 (plain text) for an unknown
 account. Columns: `data_class` (always `synthetic`), `account_id`, `practice_group`,
 `window`, `seats`, `active_users`, `seat_utilisation` (four decimals), `queries_per_week`,
-one `weekly_active_users_week_<n>` column per week from `_oldest` to `_latest`, and
-`review_status` (a draft for account-owner review).
+one `weekly_active_users_week_<n>` column per week from `_oldest` to `_latest`,
+`active_users_window` (`week ending <asOf>`), `lag_days` (always empty: no capture delay is
+recorded) and `review_status` (a draft for account-owner review).
 
 - **Window.** The synthetic weekly counts are undated, so the window is the N weeks ending
   on the as-of date, stated in every row as `<N> weeks ending <asOf> (oldest first)`, never
@@ -33,6 +34,31 @@ one `weekly_active_users_week_<n>` column per week from `_oldest` to `_latest`, 
 The builder is `practiceGroupUsageCsv` in `lib/exports/practice-group-usage.ts`. The route
 reads bundled JSON and has no side effects. It is a download, like the report route, not
 an API.
+
+## Portfolio export route
+
+`GET /accounts.csv` returns the account portfolio as
+`synthetic_legal_ai_adoption_accounts_export.csv`, the file behind the Export CSV button on
+`/`. It accepts the page's filters, `?search=`, `?type=` and `?band=`, and applies them the
+way the page does (`filterAccounts` in `lib/portfolio-filter.ts`), so the file matches what
+is shown, and `?asOf=` for the week it states. Columns: `Account ID`, `Account Name`, `Account Type`, `Total Seats`,
+`Active Users`, `Utilization Rate` (four decimals; empty, never 0, for an account without
+seats), `Health Score`, `Health Band`, `Renewal Date`, `Active Users Window` (`week ending <asOf>`),
+`Lag Days` (always empty: no capture delay is recorded), `Data Class` (always `synthetic`).
+
+Both CSV routes end lines with CRLF (RFC 4180) and neutralise cells a spreadsheet would read
+as a formula: a string that starts with `=`, `+`, `-`, `@`, tab, CR or LF is prefixed with a
+single quote inside a quoted field (`csvCell` in `lib/exports/practice-group-usage.ts`);
+numbers pass through unchanged. The builder is `portfolioCsv` in `lib/exports/portfolio.ts`.
+The route reads bundled JSON, has no side effects and is a download, not an API.
+
+## Backlog route
+
+`GET /research/backlog` returns the evidence-linked backlog as
+`synthetic-evidence-linked-backlog.md`, the same document as `docs/evidence-backlog.md`
+rendered for the requested as-of date (`?asOf=YYYY-MM-DD`; an invalid value is ignored, as
+on the pages). The renderer is `renderEvidenceBacklogMarkdown` in `lib/evidence/backlog.ts`.
+Delivery status comes only from `data/evidence-loop.json`; a release is not an outcome.
 
 ## Customer Review
 

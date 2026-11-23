@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+
+export const metadata: Metadata = { title: "Interventions" };
 import { getAccounts } from "@/lib/data";
 import { formatDate, resolveAsOf } from "@/lib/engagement/as-of";
 import { getInterventions } from "@/lib/engagement/data";
@@ -13,6 +17,9 @@ import { InterventionCard } from "@/components/engagement/InterventionCard";
 import { AsOfNote } from "@/components/AsOfNote";
 import { PageHeader } from "@/components/PageHeader";
 import { SyntheticNotice } from "@/components/SyntheticNotice";
+import { ListFilters } from "@/components/ListFilters";
+import { filterFields, listHref, matchesIntervention, parseListFilter } from "@/lib/list-filters";
+import { getSavedViews } from "@/lib/views";
 
 const stageMeaning: Record<InterventionStage, string> = {
   proposed: "A problem, its evidence and a hypothesis are recorded. Nothing has started.",
@@ -24,12 +31,17 @@ const stageMeaning: Record<InterventionStage, string> = {
 };
 
 export default async function InterventionsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
-  const asOfState = resolveAsOf((await searchParams)?.asOf);
+  const query = (await searchParams) ?? {};
+  const asOfState = resolveAsOf(query.asOf);
   const asOf = asOfState.date;
   const interventions = getInterventions();
   const summary = summarizeInterventions(interventions, asOf);
   const accounts = getAccounts();
   const accountName = (id: string) => accounts.find((a) => a.id === id)?.name ?? id;
+  const fields = filterFields("/interventions", accounts);
+  const parsed = parseListFilter("/interventions", query, accounts);
+  const stages = INTERVENTION_STAGES.filter((stage) => !parsed.values.stage || parsed.values.stage === stage);
+  const shown = interventions.filter((i) => matchesIntervention(i, interventionStage(i), parsed.values));
 
   const stats: { label: string; value: number; tone: string }[] = [
     { label: "Proposed", value: summary.byStage.proposed, tone: "text-gray-900" },
@@ -59,24 +71,36 @@ export default async function InterventionsPage({ searchParams }: { searchParams
       >
         {stats.map((s) => (
           <div key={s.label} className="rounded-lg border border-gray-200 p-3 text-center">
-            <div className={`text-2xl font-semibold ${s.tone}`}>{s.value}</div>
+            <div className={`text-figure font-semibold ${s.tone}`}>{s.value}</div>
             <div className="mt-0.5 text-xs text-gray-500">{s.label}</div>
           </div>
         ))}
       </section>
 
+      <ListFilters
+        path="/interventions"
+        fields={fields}
+        parsed={parsed}
+        views={getSavedViews("/interventions")}
+        currentHref={listHref("/interventions", parsed.values)}
+        asOf={asOfState.source === "query" ? asOfState.date : undefined}
+        note={`Showing ${shown.length} of ${interventions.length} interventions. The totals above cover every intervention.`}
+      />
+
       <div className="space-y-10">
-        {INTERVENTION_STAGES.map((stage) => {
-          const inStage = interventions.filter((i) => interventionStage(i) === stage);
+        {stages.map((stage) => {
+          const inStage = shown.filter((i) => interventionStage(i) === stage);
           return (
             <section key={stage} aria-labelledby={`stage-${stage}`}>
-              <h2 id={`stage-${stage}`} className="text-lg font-semibold text-gray-900">
+              <h2 id={`stage-${stage}`} className="text-title font-semibold text-gray-900">
                 {stageLabel[stage]} <span className="font-normal text-muted">({inStage.length})</span>
               </h2>
               <p className="mt-1 text-sm text-gray-600">{stageMeaning[stage]}</p>
               <div className="mt-4 space-y-4">
                 {inStage.length === 0 && (
-                  <p className="text-sm italic text-muted">No intervention in this stage.</p>
+                  <p className="text-sm italic text-muted">
+                    {parsed.values.account ? "No intervention in this stage matches these filters." : "No intervention in this stage."}
+                  </p>
                 )}
                 {inStage.map((intervention) => (
                   <div key={intervention.id}>

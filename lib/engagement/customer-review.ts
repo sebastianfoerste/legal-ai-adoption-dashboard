@@ -1,3 +1,4 @@
+import { LAG_SENTENCE } from "../count-windows";
 import { getAccounts, getBlockers } from "../data";
 import { REVIEW_AS_OF, formatDate } from "./as-of";
 import {
@@ -332,7 +333,8 @@ export function renderCustomerReviewMarkdown(review: Omit<CustomerReview, "markd
       `### ${metrics.series.workflowName} (${metrics.series.practiceGroup})`,
       "",
       "Four-week reporting periods. Activation and repeat use: share of eligible users. Completion: share of started workflows. Drop-off: share of the training cohort with no run in the period." +
-        (cohort ? ` Training cohort: ${cohort.size} users, trained ${formatDate(cohort.trainedOn)}.` : ""),
+        (cohort ? ` Training cohort: ${cohort.size} users, trained ${formatDate(cohort.trainedOn)}.` : "") +
+        ` ${LAG_SENTENCE}`,
       "",
       "| Period | Licensed | Eligible | Active | Activation | Repeat use | Completed | Drop-off after training |",
       "| --- | --- | --- | --- | --- | --- | --- | --- |",

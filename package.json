@@ -2,12 +2,17 @@
   "name": "legal-ai-adoption-dashboard",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.28.10",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
+    "test:a11y": "playwright test",
     "verify:quick": "tsc --noEmit && vitest run",
     "telemetry:validate": "node scripts/validate-telemetry.mjs",
     "contract:test": "vitest run packages/legal-workflow-contract/src/index.test.ts",
@@ -15,20 +20,22 @@
     "evidence:backlog": "UPDATE_EVIDENCE_BACKLOG=1 vitest run lib/evidence/backlog.test.ts"
   },
   "dependencies": {
-    "next": "16.2.9",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "zod": "^4.4.3"
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "^4.6.6"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.0",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9",
+    "eslint-config-next": "16.4.5",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "vitest": "^4.1.9"
+    "typescript": "^6",
+    "vitest": "^5.1.0"
   }
 }

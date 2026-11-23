@@ -11,7 +11,7 @@ export default function RouteError({
 }) {
   return (
     <main className="mx-auto max-w-5xl px-6 py-10">
-      <h1 className="text-2xl font-semibold tracking-tight">This page could not be shown</h1>
+      <h1 className="text-display font-semibold tracking-tight">This page could not be shown</h1>
       <p className="mt-1 text-sm text-gray-600">
         Nothing was changed: the dashboard only reads synthetic data. A data file that fails
         validation is the usual cause; the server log names the file.

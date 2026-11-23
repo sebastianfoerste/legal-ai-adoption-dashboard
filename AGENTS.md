@@ -14,6 +14,8 @@ or personal data.
 - `data/*.json` — synthetic accounts, blockers, feedback. Validated by Zod at load.
 - `lib/schema.ts` — Zod schemas and inferred types (single source of truth for shapes).
 - `lib/health.ts` — the adoption health score. Pure, transparent formula. Unit-tested.
+- `lib/count-windows.ts` — the window and lag stated beside every count. A window the data
+  does not state, and every lag, reads "not captured", never 0 or a guess.
 - `lib/data.ts` / `lib/aggregate.ts` — typed data access and per-account aggregation.
 - `lib/engagement/` — the manager layer, one small module per concern: `schema.ts` (strict
   Zod, every record `synthetic: true`), `interventions.ts`, `adoption-trend.ts`, `value.ts`,
@@ -35,12 +37,18 @@ or personal data.
   denylist kept in the private store (`PRIVATE_RESEARCH_DENYLIST`); never copy that list,
   or anything from the private store, into this repository.
 - `app/` — Server-Component routes: `/`, `/accounts/[id]`, `/accounts/[id]/review`,
-  `/blockers`, `/feedback`, `/research` (and the Markdown route `/research/backlog`), `/interventions`, `/manager`, `/insights`, and the
-  Markdown route `/insights/report` (`?account=<id>` for a customer review), and the CSV route
-  `/accounts/[id]/usage.csv`.
+  `/blockers`, `/feedback`, `/research` (and the Markdown route `/research/backlog`),
+  `/interventions`, `/manager`, `/insights`, `/benchmarks`, the Markdown route
+  `/insights/report` (`?account=<id>` for a customer review), and the CSV routes
+  `/accounts.csv` (the portfolio export; takes the `/` filters) and `/accounts/[id]/usage.csv`.
 - `components/` — presentational Server Components; `components/engagement/` holds the
   panels for the manager layer; `components/charts/` holds the SVG charts (no chart library).
-  `ExportButton`, `NavLinks` and `app/error.tsx` are the only client components.
+  `ListFilters` and `SavedViewLinks` render the list filters and the named views in
+  `data/views.json`; `lib/list-filters.ts` and `lib/views.ts` define and validate them. A view
+  filters and never ranks people: no owner, specialist or sort parameter.
+  `NavLinks` and `app/error.tsx` are the only client components; `lib/client-boundary.test.ts`
+  fails if a client component imports the data layer (`ExportButton` is a Server Component
+  linking to `/accounts.csv`).
 
 ## Conventions
 - TypeScript strict. Any `any` needs an inline justification.

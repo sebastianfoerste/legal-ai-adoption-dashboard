@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import { formatDate, resolveAsOf } from "@/lib/engagement/as-of";
+
+
+export const metadata: Metadata = { title: "Research to Change" };
 import { EVIDENCE_SOURCE_FILE, getEvidenceStore, practitionerEvidence } from "@/lib/evidence/data";
 import { evidenceTypeLabel, summarizeLoop, viewChanges } from "@/lib/evidence/loop";
 import { AsOfNote } from "@/components/AsOfNote";
@@ -58,7 +62,7 @@ export default async function ResearchPage({
       </PageHeader>
 
       <section aria-labelledby="study-title" className="mb-10">
-        <h2 id="study-title" className="mb-3 text-lg font-semibold text-gray-900">
+        <h2 id="study-title" className="mb-3 text-title font-semibold text-gray-900">
           Practitioner study: {study.workflow}
         </h2>
         <div className="rounded-xl border border-gray-200 p-5">
@@ -101,7 +105,7 @@ export default async function ResearchPage({
       </section>
 
       <section aria-labelledby="chain-title">
-        <h2 id="chain-title" className="mb-3 text-lg font-semibold text-gray-900">
+        <h2 id="chain-title" className="mb-3 text-title font-semibold text-gray-900">
           Synthetic demonstration cases
         </h2>
         <SyntheticNotice label="Synthetic demonstration cases">{store.notice}</SyntheticNotice>
@@ -109,7 +113,7 @@ export default async function ResearchPage({
           {stats.map((stat) => (
             <div key={stat.label} className="rounded-lg border border-gray-200 px-3 py-2">
               <dt className="text-xs text-gray-500">{stat.label}</dt>
-              <dd className={`text-xl font-semibold ${stat.tone}`}>{stat.value}</dd>
+              <dd className={`text-figure font-semibold ${stat.tone}`}>{stat.value}</dd>
             </div>
           ))}
         </dl>
@@ -121,7 +125,7 @@ export default async function ResearchPage({
       </section>
 
       <section aria-labelledby="sources-title" className="mt-10">
-        <h2 id="sources-title" className="mb-1 text-lg font-semibold text-gray-900">
+        <h2 id="sources-title" className="mb-1 text-title font-semibold text-gray-900">
           Sources
         </h2>
         <p className="mb-3 text-sm text-gray-600">
@@ -130,13 +134,14 @@ export default async function ResearchPage({
         </p>
         <div tabIndex={0} className="overflow-x-auto rounded-lg border border-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus">
           <table className="w-full min-w-[760px] text-sm">
+            <caption className="sr-only">Every observation with its session, question and evidence type</caption>
             <thead className="bg-gray-50 text-left text-xs uppercase tracking-wide text-muted">
               <tr>
-                <th className="px-3 py-2 font-medium">Observation</th>
-                <th className="px-3 py-2 font-medium">Session</th>
-                <th className="px-3 py-2 font-medium">Question</th>
-                <th className="px-3 py-2 font-medium">Evidence type</th>
-                <th className="px-3 py-2 font-medium">Observed</th>
+                <th scope="col" className="px-3 py-2 font-medium">Observation</th>
+                <th scope="col" className="px-3 py-2 font-medium">Session</th>
+                <th scope="col" className="px-3 py-2 font-medium">Question</th>
+                <th scope="col" className="px-3 py-2 font-medium">Evidence type</th>
+                <th scope="col" className="px-3 py-2 font-medium">Observed</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
