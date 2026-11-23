@@ -13,8 +13,9 @@ The tool produces a first pass; it does not get the last word.
 ## 2. "Our client data cannot go into these systems."
 Agreed: nothing enters a system until the data path is approved. Every workshop and the
 pilot run on synthetic documents modelled on your matters. Client data reaches a provider
-only on the lawful disclosure path: as far as the service requires it, under a written
-confidentiality contract, with comparable protection where the service is performed abroad,
+only on the lawful disclosure path: as far as the service requires it, under a
+confidentiality contract in at least text form, with comparable protection where the
+service is performed abroad,
 and with the client's consent where the service directly serves a single matter (for a
 German firm, §§ 43a and 43e BRAO and § 203 StGB; the
 [German briefing](../sessions/30-min-partner-briefing-de.md) sets this out). The data path
