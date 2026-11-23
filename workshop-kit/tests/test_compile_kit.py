@@ -87,9 +87,25 @@ class CompiledHtmlTest(unittest.TestCase):
         cls.tmp.cleanup()
 
     def test_no_third_party_request(self):
+        """Opening the page loads nothing from another site: no external stylesheet, font,
+        script, image, frame or media file (PRIVACY.md). A link to a source is not a load."""
         self.assertNotIn("fonts.googleapis.com", self.html)
         self.assertNotIn("fonts.gstatic.com", self.html)
-        self.assertNotRegex(self.html, r'(href|src)="https?://')
+        for loads_on_open in (
+            r'<link\b[^>]*\bhref="(?:https?:)?//',  # stylesheets, fonts, preconnects, icons
+            r'\b(?:src|srcset|poster|data)="(?:https?:)?//',  # scripts, images, frames, media
+            r'url\(\s*["\']?(?:https?:)?//',  # CSS backgrounds and fonts
+            r"@import\b",  # CSS imports
+        ):
+            self.assertNotRegex(self.html, loads_on_open)
+
+    def test_an_external_link_opens_only_when_clicked_and_sends_no_referrer(self):
+        self.assertEqual(
+            parse_inline("[source](https://example.org/a)", {}),
+            '<a href="https://example.org/a" target="_blank" rel="noopener noreferrer">source</a>',
+        )
+        for tag in re.findall(r'<a\b[^>]*\bhref="https?://[^"]*"[^>]*>', self.html):
+            self.assertIn('rel="noopener noreferrer"', tag)
 
     def test_no_whitespace_inside_any_id(self):
         ids = re.findall(r'id="([^"]*)"', self.html)

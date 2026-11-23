@@ -43,14 +43,17 @@ den Entwurf bleibt beim Anwalt.
 
 Beantworte die beiden Fragen, die jeder Partner hat, bevor er sie stellt.
 
-- **Verschwiegenheit.** Der Rechtsanwalt ist zur Verschwiegenheit verpflichtet (§ 43a Abs. 2 BRAO). Er darf einem Dienstleister den Zugang zu Mandatsgeheimnissen eröffnen, soweit dies für die Inanspruchnahme der Dienstleistung erforderlich ist (§ 43e Abs. 1 BRAO). Der Vertrag mit dem Dienstleister bedarf der Textform (§ 43e Abs. 3 BRAO). Strafrechtlich knüpft § 203 Abs. 3 Satz 2 StGB an dieselbe Erforderlichkeit an. Beschreibe den Weg der Daten in einem Satz: welche Umgebung, welcher Vertrag, welcher Speicherort. Die Workshops arbeiten ausschließlich mit synthetischen Dokumenten.
+- **Verschwiegenheit.** Der Rechtsanwalt ist zur Verschwiegenheit verpflichtet (§ 43a Abs. 2 BRAO). Er darf einem Dienstleister den Zugang zu Mandatsgeheimnissen eröffnen, soweit dies für die Inanspruchnahme der Dienstleistung erforderlich ist (§ 43e Abs. 1 BRAO). Der Vertrag mit dem Dienstleister bedarf der Textform (§ 43e Abs. 3 BRAO). Strafrechtlich knüpft § 203 Abs. 3 Satz 2 StGB an dieselbe Erforderlichkeit an. Der Rechtsanwalt muss den Dienstleister sorgfältig auswählen und die Zusammenarbeit unverzüglich beenden, wenn die Einhaltung der Vorgaben nach § 43e Abs. 3 BRAO nicht gewährleistet ist (§ 43e Abs. 2 BRAO). Wird die Dienstleistung im Ausland erbracht, darf er den Zugang zu fremden Geheimnissen nur eröffnen, wenn der dortige Schutz dem inländischen vergleichbar ist, es sei denn, der Schutz der Geheimnisse gebietet dies nicht (§ 43e Abs. 4 BRAO). Dient die Dienstleistung unmittelbar einem einzelnen Mandat, ist vor dem Zugang die Einwilligung des Mandanten erforderlich (§ 43e Abs. 5 BRAO). Die Vorschriften zum Schutz personenbezogener Daten bleiben unberührt (§ 43e Abs. 8 BRAO). Beschreibe den Weg der Daten in einem Satz: welche Umgebung, welcher Vertrag, welcher Speicherort, welcher Staat. Die Workshops arbeiten ausschließlich mit synthetischen Dokumenten.
 - **Verlässlichkeit.** Auf ein Ergebnis darf sich niemand stützen, bevor ein namentlich benannter Anwalt es geprüft hat. Das Werkzeug liefert eine Erstdurchsicht. Der Anwalt gleicht jede Aussage mit ihrer Fundstelle ab und gibt sie frei. Ein falsches Zitat fällt so bei der Prüfung auf und nicht erst im Schriftsatz.
 
 Hat die Kanzlei einen Berufsrechts- oder Risikoausschuss, sage, ob das Vorhaben mit dessen
 Vorgaben vereinbar ist. Andernfalls kündige an, dass Du es dort zuerst vorlegst.
 
-Dieser Abschnitt gibt den Gesetzeswortlaut verkürzt wieder und ersetzt keine berufsrechtliche
-Prüfung der konkreten Einführung.
+Dieser Abschnitt gibt den Gesetzeswortlaut verkürzt wieder (Stand der Lektüre auf
+gesetze-im-internet.de: 31. Oktober 2026) und ersetzt keine berufsrechtliche Prüfung der
+konkreten Einführung. Ob ein bestimmtes KI-Werkzeug unmittelbar einem einzelnen Mandat dient
+und ob der Schutz im Sitzstaat des Anbieters dem inländischen vergleichbar ist, entscheidet
+diese Prüfung, nicht dieses Briefing.
 
 ## 0:24 bis 0:30: Die Entscheidung
 

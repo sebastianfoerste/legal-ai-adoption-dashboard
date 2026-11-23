@@ -12,7 +12,9 @@ Python scripts.
 - The HTML version of the unified kit (`enablement/workshop-kit-unified.html`) loads nothing
   from a third party: it uses system fonts and contains no external stylesheet, script or
   image, so opening it in a browser sends no request anywhere (checked by
-  `tests/test_compile_kit.py`).
+  `tests/test_compile_kit.py`). Its links to external sources, such as the regulatory
+  context in `README.md`, contact that site only when the reader clicks one, and send no
+  referrer.
 
 The kit itself teaches a privacy-first rollout: no client data into untrusted systems,
 workshops run on synthetic documents, and a human-review gate on every output. It describes
